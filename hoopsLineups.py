@@ -1,18 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 26 16:01:50 2023
-
-@author: ntruppel
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  2 14:11:40 2022
-
-@author: ntrup
-"""
-
 from bs4 import BeautifulSoup as Soup
 import requests
 import numpy as np
@@ -37,7 +22,6 @@ def get_pbp_table(table):
     df = df.replace('None', np.nan)
     return df
 
-
 def get_subs(df,team):
     if team == 'visitor': play,score,n_play,n_score = 'visitor_play','visitor_score','home_play','home_score'
     else: n_play,n_score,play,score = 'visitor_play','visitor_score','home_play','home_score'
@@ -52,7 +36,6 @@ def get_subs(df,team):
 
 
 def get_shots(df,team):
-    
     searchfor = ['GOOD', 'MISS', 'REBOUND', 'FOUL', 'TURNOVER', 'ASSIST']    
     if team == 'visitor': play,score,n_play,n_score = 'visitor_play','visitor_score','home_play','home_score'
     else: n_play,n_score,play,score = 'visitor_play','visitor_score','home_play','home_score'
