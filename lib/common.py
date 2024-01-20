@@ -33,19 +33,6 @@ def parse_th_row(row):
     return [str(x.string) for x in row.find_all(text=True)]
 
 def createTweet(status,filenames):
-    client = tweepy.Client(
-        consumer_key='UQFEflfOzx4lDj6kaZrlB135G',
-        consumer_secret='Ir5ok2lyHijQuhinrFOBw48wvwK88OepUIo6gJYgHEda0OgAAQ',
-        access_token='1350197647018176513-KomgwjYEEPIIJl1pvE2o4hG9oJEd3K',
-        access_token_secret='QrkmTSjDA2MNBpElTlpcdZRQljD0wU4PfkSGC2QpeY7Qq')
-    
-    
-    twitter_keys = {
-            'consumer_key':        'UQFEflfOzx4lDj6kaZrlB135G',
-            'consumer_secret':     'Ir5ok2lyHijQuhinrFOBw48wvwK88OepUIo6gJYgHEda0OgAAQ',
-            'access_token_key':    '1350197647018176513-KomgwjYEEPIIJl1pvE2o4hG9oJEd3K',
-            'access_token_secret': 'QrkmTSjDA2MNBpElTlpcdZRQljD0wU4PfkSGC2QpeY7Qq'
-        }
     
     auth = tweepy.OAuthHandler(twitter_keys['consumer_key'], twitter_keys['consumer_secret'])
     auth.set_access_token(twitter_keys['access_token_key'], twitter_keys['access_token_secret'])
