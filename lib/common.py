@@ -43,6 +43,6 @@ def createTweet(status,filenames):
         res = api.media_upload(filename)
         media_ids.append(res.media_id)
         
-    response = client.create_tweet(text=status,media_ids=media_ids)
+    #response = client.create_tweet(text=status,media_ids=media_ids)
     
-    print(response)
+    #print(response)

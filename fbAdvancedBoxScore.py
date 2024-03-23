@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 11 20:29:38 2021
-
-@author: ntrup
-"""
-
+import boto3
 import cfbd
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,8 +19,7 @@ def find_win_expectancy(game_id):
 
     adv_box = api_instance.get_advanced_box_score(game_id=game_id)
     box = api_instance.get_team_game_stats(2023, game_id=game_id)
-    
-    
+     
     if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
         tech = 0; oppo = 1
     else:
@@ -138,7 +132,7 @@ def find_win_expectancy(game_id):
     
     return oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts 
 
-def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, code, platform):
+def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, code):
 
     colors = ["#002F8B",'#'+code]
     
@@ -221,18 +215,11 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     ax[3,1].text(0,-0.1,"{:.2%}".format(win_prob), color="white", fontsize="80", ha="center", fontweight="bold")
     
-    if platform == 'Windows':
-        fig_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\Coding\\out_files\\adv_box.png'
-    elif platform == 'Chrome':
-        fig_path = '/mnt/chromeos/GoogleDrive/MyDrive/GTPDD/Code/out_files/fbAdvancedBoxScore.png'
-        backgroundPath = '/mnt/chromeos/GoogleDrive/MyDrive/GTPDD/Code/in_files/fbAdvancedBoxScoreBackground.png'
-    elif platform == 'AWS':
-        fig_path = '/tmp/fbAdvancedBoxScore.png'
+    fig_path = '/tmp/fbAdvancedBoxScore.png'
         
-        import boto3
-        s3 = boto3.client('s3')
-        backgroundPath = '/tmp/fbAdvancedBoxScoreBackground.png'
-        s3.download_file('gtpdd', 'fbAdvancedBoxScoreBackground.png', '/tmp/fbAdvancedBoxScoreBackground.png')
+    s3 = boto3.client('s3')
+    backgroundPath = '/tmp/fbAdvancedBoxScoreBackground.png'
+    s3.download_file('gtpdd-public-files', 'fbAdvancedBoxScoreBackground.png', '/tmp/fbAdvancedBoxScoreBackground.png')
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=120, transparent = True)
     
     img = Image.open(fig_path, 'r')
@@ -242,18 +229,18 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
     background.paste(img, offset, img)
     background.save(fig_path)
-    
+
+    s3.upload_file('/tmp/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
     
     status = "Advanced box score from Tech's game against "+ oppo + ". Based on the stats from the game, Tech would have won this game "+"{:.2%}".format(win_prob)+ " of the time."
-    createTweet(status, [fig_path])
+    #createTweet(status, [fig_path])
     print(status)
     return 0                                                                                                                                                             
 
 
-
-def fbAdvancedBoxScore(platform, gameId, teamId):
+def fbAdvancedBoxScore(gameId, teamId):
     oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts = find_win_expectancy(gameId)
     name, color1, color2 = getTeamInfo(teamId)
-    create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1, platform)
+    create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('Chrome', '401520345', '166')
+fbAdvancedBoxScore('401520345', '166')
