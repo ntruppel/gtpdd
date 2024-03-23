@@ -13,15 +13,15 @@ import tweepy
 from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
-from lib.bsbFunctions import pbpLineByLine, getBoxScore
+from lib.bsbCommon import pbpLineByLine, getBoxScore
 from lib.common import parseRowStringTextTrue,parseRowStringTdA
+import boto3
 
 #####
 # Get PbP Data
 ####
 
 ## Get list of all previous game box scores
-platform = 'Windows'
 games_soup = Soup((requests.get('https://latechsports.com/sports/baseball/schedule')).text, features="lxml")
 box_scores = []
 lis = games_soup.find_all('li', {"class":"sidearm-schedule-game-links-boxscore"})
@@ -35,7 +35,7 @@ box_score = box_scores[-1]
 awayName,homeName, \
 date,startTime,elapsedTime,attendance,location,weather, \
 away_df,away_pitcher_df,away_bat,away_runs,away_hits,away_errors,away_lob, \
-home_df,home_pitcher_df,home_bat,home_runs,home_hits,home_errors,home_lob = getBoxScore(box_score,platform,'full')
+home_df,home_pitcher_df,home_bat,home_runs,home_hits,home_errors,home_lob = getBoxScore(box_score,'full')
 
 
 ####
@@ -217,7 +217,8 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
                 
             ## Record play
             # Calculate the width and height of the text to be drawn, given font size
-            w, h = card.textsize(row['Play'], font=play_font)
+            w = card.textlength(row['Play'], font=play_font)
+            h = 35
 
             # Calculate the mid points and offset by the upper left corner of the bounding box
             x1 = playWidth1+colDelta*(currentInning-1)
@@ -418,8 +419,8 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
     card.text((930 + (14 - len(homeName))*4.5, 224), homeName, font=title_font,fill=textColor)
     
     ## Paste logos on card
-    away_logo = Image.open('C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\' + awayName + '.png')
-    home_logo = Image.open('C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\' + homeName + '.png')
+    away_logo = Image.open('/tmp/' + awayName + '.png')
+    home_logo = Image.open('/tmp/' + homeName + '.png')
     
     away_logo = away_logo.resize((100,100))
     home_logo = home_logo.resize((100,100))

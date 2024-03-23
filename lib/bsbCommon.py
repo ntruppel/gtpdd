@@ -41,6 +41,8 @@ def getBoxScore(box_score, returnType):
     list_of_parsed_rows = [str(i)[2:-2] for i in list_of_parsed_rows]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'Winner' not in i]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'TECH' != i]
+    list_of_parsed_rows = [i for i in list_of_parsed_rows if 'LATECH' != i]
+
     
     if len(list_of_parsed_rows) == 3:
         lens = []
