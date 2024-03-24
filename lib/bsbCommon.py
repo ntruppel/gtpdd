@@ -14,15 +14,7 @@ from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
 import boto3
-
-def parse_row(row):
-    return [str(x.string) for x in row.find_all(string=True)]
-
-def parse_row_0(row):
-    return [str(x.string) for x in row.find_all(string=True)][0]
-
-def parse_tda_row(row):
-    return [str(x.string) for x in row.find_all(['td','a'])]
+from common import parseRowStringTextTrue,parseRowStringTextTrue0,parseRowStringTdA
 
 def getBoxScore(box_score, returnType):
     box_url = 'https://latechsports.com' + str(box_score)
@@ -76,7 +68,7 @@ def getBoxScore(box_score, returnType):
     dls = box_soup.find_all('dl', {"class": "special-stats emphasize inline text-right"})
     info_dl = box_soup.find_all('dl')[1]
     rows = info_dl.find_all('dd')
-    list_of_parsed_rows = [parse_row_0(row) for row in rows]
+    list_of_parsed_rows = [parseRowStringTextTrue0(row) for row in rows]
     
     date = list_of_parsed_rows[0]
     startTime = list_of_parsed_rows[1]
@@ -135,7 +127,7 @@ def getBoxScore(box_score, returnType):
     for dl in home_dls:
         try:
             rows = dl.find_all('dd')
-            list_of_parsed_rows = [parse_row_0(row) for row in rows]
+            list_of_parsed_rows = [parseRowStringTextTrue0(row) for row in rows]
             home_runs.append(int(list_of_parsed_rows[0]))
             home_hits.append(int(list_of_parsed_rows[1]))
             home_errors.append(int(list_of_parsed_rows[2]))
@@ -145,7 +137,7 @@ def getBoxScore(box_score, returnType):
     for dl in away_dls:
         try:
             rows = dl.find_all('dd')
-            list_of_parsed_rows = [parse_row_0(row) for row in rows]
+            list_of_parsed_rows = [parseRowStringTextTrue0(row) for row in rows]
             away_runs.append(int(list_of_parsed_rows[0]))
             away_hits.append(int(list_of_parsed_rows[1]))
             away_errors.append(int(list_of_parsed_rows[2]))
@@ -158,12 +150,12 @@ def getBoxScore(box_score, returnType):
     
     for table in home_tables:
         rows = table.find_all('tr')
-        list_of_parsed_rows = [parse_tda_row(row) for row in rows[1:]]
+        list_of_parsed_rows = [parseRowStringTdA(row) for row in rows[1:]]
         try:home_dfs.append(DataFrame(list_of_parsed_rows)[0])
         except:0
     for table in away_tables:
         rows = table.find_all('tr')
-        list_of_parsed_rows = [parse_tda_row(row) for row in rows[1:]]
+        list_of_parsed_rows = [parseRowStringTdA(row) for row in rows[1:]]
         away_dfs.append(DataFrame(list_of_parsed_rows)[0])
         
     ## Go line-by-line through dfs
