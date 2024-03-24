@@ -34,7 +34,6 @@ def statLookup(statName,adv_df):
     return s_list
 
 def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
-    '''
     api_instance = cfbd.StatsApi(cfbd.ApiClient(configuration))
     api = api_instance.get_advanced_team_season_stats(year=2022)
     dicts = []
@@ -47,9 +46,7 @@ def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
     adv_df.loc['Min'] = adv_df.min()
     adv_df.loc['Max'] = adv_df.max()
     adv_df = adv_df.loc[[team1, team2, "Average", "Min", "Max"]]
-    adv_df.to_csv(r'out_files/temp.csv')
-    '''
-    adv_df = pd.read_csv(r'out_files/temp.csv')
+
     adv_df = adv_df.set_index('team')
     print(adv_df)
     
@@ -105,7 +102,7 @@ def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
 team1 = 'Louisiana Tech'
 t1c1 = '#002F8B'
 t1c2 = '#E31B23'
-team2 = 'Florida International'
+team2 = 'Florida Internationalpr'
 t2c1 = '#081E3F'
 t2c2='#B6862C'
 
