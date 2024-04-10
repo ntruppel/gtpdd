@@ -9,13 +9,19 @@ import matplotlib
 import matplotlib.pyplot as plt
 import six
 import csv
-import tweepy
 from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
 from lib.bsbCommon import pbpLineByLine, getBoxScore
 from lib.common import parseRowStringTextTrue,parseRowStringTdA
 import boto3
+
+
+#####
+# Determine which boxscore to get (-1 for most recent)
+####
+gameNum = -1
+
 
 #####
 # Get PbP Data
@@ -30,7 +36,9 @@ for li in lis:
 box_scores = list(dict.fromkeys(box_scores))
 
 ## Pull down raw data
-box_score = box_scores[-1]
+box_score = box_scores[gameNum]
+if gameNum < 0:
+    gameNum = len(box_scores) + gameNum + 1
 
 awayName,homeName, \
 date,startTime,elapsedTime,attendance,location,weather, \
@@ -527,12 +535,13 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
     card.text((673 + 126*7 - 5, p_template_height), 'WP', font=title_font,fill=textColor)
     card.text((1635, p_template_height), 'Pitches Thrown', font=title_font,fill=textColor)
     
+print(date)
     
 printScorecard(card1,away_df, away_bat, away_runs, away_hits, away_errors, away_lob, homeName, awayName, 'away', away_pitcher_df)
-img1.save('/tmp/bsbScorecardAway.png')
+img1.save('img/bsbScorecard' + str(gameNum) + 'Away.png')
 printScorecard(card2,home_df, home_bat, home_runs, home_hits, home_errors, home_lob, homeName, awayName, 'home', home_pitcher_df)
-img2.save('/tmp/bsbScorecardHome.png')
+img2.save('img/bsbScorecard' + str(gameNum) + 'Home.png')
 
-s3.upload_file('/tmp/bsbScorecardAway.png', 'gtpdd', 'bsbScorecardAway.png')
-s3.upload_file('/tmp/bsbScorecardHome.png', 'gtpdd', 'bsbScorecardHome.png')
+#s3.upload_file('/tmp/bsbScorecardAway.png', 'gtpdd', 'bsbScorecardAway.png')
+#s3.upload_file('/tmp/bsbScorecardHome.png', 'gtpdd', 'bsbScorecardHome.png')
 

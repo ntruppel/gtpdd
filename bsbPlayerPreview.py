@@ -98,7 +98,7 @@ def getTeamPitching(url, minStarts, minBF):
     df_r = df_r[['Number','Name','ERA', 'IP', 'H%', 'BB%', 'OUT%', '1B%', '2B%', '3B%', 'HR%']]
     return df_s, df_r
 
-def generateBattingReport(df, long_team, minPA, num):
+def generateBattingReport(df, long_team, minPA, teamName):
     fig, ax = plt.subplots(7,3, figsize=(30,45))
     i = 0
     for index, row in df.iterrows():
@@ -188,10 +188,10 @@ def generateBattingReport(df, long_team, minPA, num):
     
     fig.figimage(im, -60, 8)
 
-    fig_path = 'out/bsbPlayerPreviewBatting' + num + '.png'
+    fig_path = 'out/bsbPlayerPreviewBatting' + teamName + '.png'
     plt.savefig(fig_path, dpi=71, bbox_inches='tight', facecolor = 'aliceblue', pad_inches = 0)
 
-def generateStartingPitchingReport(df, long_team, numStarters, num):    
+def generateStartingPitchingReport(df, long_team, numStarters, teamName):    
     fig, ax = plt.subplots(numStarters,3, figsize=(30,45))
     i = 0
     for index, row in df.iterrows():
@@ -284,10 +284,10 @@ def generateStartingPitchingReport(df, long_team, numStarters, num):
     
     fig.figimage(im, -60, 8)
     
-    fig_path = 'out/bsbPlayerPreviewStartingPitching' + num + '.png'
+    fig_path = 'out/bsbPlayerPreviewStartingPitching' + teamName + '.png'
     plt.savefig(fig_path, dpi=71, bbox_inches='tight', facecolor = 'aliceblue', pad_inches = 0)
 
-def generateReliefPitchingReport(df, long_team, numRelievers, minBF, num):    
+def generateReliefPitchingReport(df, long_team, numRelievers, minBF, teamName):    
     fig, ax = plt.subplots(numRelievers,3, figsize=(30,45))
     i = 0
     for index, row in df.iterrows():
@@ -380,7 +380,7 @@ def generateReliefPitchingReport(df, long_team, numRelievers, minBF, num):
     
     fig.figimage(im, -60, 8)
     
-    fig_path = 'out/bsbPlayerPreviewReliefPitching' + num + '.png'
+    fig_path = 'out/bsbPlayerPreviewReliefPitching' + teamName + '.png'
     plt.savefig(fig_path, dpi=71, bbox_inches='tight', facecolor = 'aliceblue', pad_inches = 0)
     
 def saveImages(team1, team2):
@@ -395,7 +395,11 @@ def saveImages(team1, team2):
 
 
 team1 = 'Louisiana Tech'
-team2 = 'ULM'
+team2 = 'Arizona'
+
+team1Short = team1.replace(" ","")
+team2Short = team2.replace(" ","")
+
 
 minPA = 10
 minStarts = 2
@@ -415,17 +419,17 @@ team1Short = team1.replace(' ','')
 team2Short = team2.replace(' ','')
 
 df = getTeamBatting(team1URL, minPA)
-generateBattingReport(df, team1, minPA,'1')
+generateBattingReport(df, team1, minPA,team1Short)
 
 df = getTeamBatting(team2URL, minPA)
-generateBattingReport(df, team2, minPA,'2')
+generateBattingReport(df, team2, minPA,team2Short)
 
 df_s, df_r = getTeamPitching(team1URL, minStarts, minBF)
-generateStartingPitchingReport(df_s, team1, numStarters,'1')
-generateReliefPitchingReport(df_r, team1, numRelievers, minBF,'1')
+generateStartingPitchingReport(df_s, team1, numStarters,team1Short)
+generateReliefPitchingReport(df_r, team1, numRelievers, minBF,team1Short)
 
 df_s, df_r = getTeamPitching(team2URL, minStarts, minBF)
-generateStartingPitchingReport(df_s, team2, numStarters,'2')
-generateReliefPitchingReport(df_r, team2, numRelievers, minBF,'2')
+generateStartingPitchingReport(df_s, team2, numStarters,team2Short)
+generateReliefPitchingReport(df_r, team2, numRelievers, minBF,team2Short)
     
 #saveImages(team2Short, team1Short)

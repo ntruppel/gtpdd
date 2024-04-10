@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
 import boto3
-from common import parseRowStringTextTrue,parseRowStringTextTrue0,parseRowStringTdA
+from .common import parseRowStringTextTrue,parseRowStringTextTrue0,parseRowStringTdA
 
 def getBoxScore(box_score, returnType):
     box_url = 'https://latechsports.com' + str(box_score)
@@ -28,7 +28,7 @@ def getBoxScore(box_score, returnType):
     awayPitch = tables[4]
     homePitch = tables[5]
     team_names = tables[0].find_all('span')
-    list_of_parsed_rows = [parse_row(row) for row in team_names[1:]]
+    list_of_parsed_rows = [parseRowStringTextTrue(row) for row in team_names[1:]]
     
     list_of_parsed_rows = [str(i)[2:-2] for i in list_of_parsed_rows]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'Winner' not in i]
@@ -48,9 +48,7 @@ def getBoxScore(box_score, returnType):
     print(awayName,homeName)
     
     ## Download Team Logos
-    s3 = boto3.client('s3')
-    s3.download_file('gtpdd', 'espnTeamIDs.csv', '/tmp/espnTeamIDs.csv')
-    color_csv = csv.reader(open('/tmp/espnTeamIDs.csv', 'r'), delimiter = ',', quotechar="\"")
+    color_csv = csv.reader(open('csv/espnTeamIDs.csv', 'r'), delimiter = ',', quotechar="\"")
     
     for row in color_csv:
         if row[0] == awayName: awayCode = row[1]
@@ -101,7 +99,7 @@ def getBoxScore(box_score, returnType):
     ## Get pitcher stats
     def getPitcherStats(pitch):
         pitchstat_rows = pitch.find_all('tr')
-        list_of_parsed_rows = [parse_row(row) for row in pitchstat_rows[1:]]
+        list_of_parsed_rows = [parseRowStringTextTrue(row) for row in pitchstat_rows[1:]]
         pitcher_df = DataFrame(list_of_parsed_rows)
         pitcher_df = pitcher_df.replace(r'\r','',regex=True)
         pitcher_df = pitcher_df.replace(r'\n','',regex=True)

@@ -32,6 +32,7 @@ def get_hitting_stats(score):
     list_of_parsed_span_rows = [str(i)[2:-2] for i in list_of_parsed_span_rows]
     list_of_parsed_span_rows = [i for i in list_of_parsed_span_rows if 'Winner' not in i]
     list_of_parsed_span_rows = [i for i in list_of_parsed_span_rows if 'TECH' != i]
+    list_of_parsed_span_rows = [i for i in list_of_parsed_span_rows if 'LATECH' != i]
     if len(list_of_parsed_span_rows) == 3:
         lens = []
         for row in list_of_parsed_span_rows:
@@ -303,17 +304,20 @@ pbp_df = pd.concat(pbp_dfs)
 pbp_df = pbp_df.reset_index(drop=True)
 pbp_df['Name'] = pbp_df['Name'].str.split('-').str[0]
 pbp_df['Name'] = pbp_df['Name'].str.split(',').str[0]
-print(pbp_df.loc[pbp_df['Name'] == 'Furr'])
+print(pbp_df.loc[pbp_df['Name'] == 'Ballard'])
 
 
 ## Grab the individual pbp dfs for each player, in order of OPS (from weekend_df)
 names = []
 indv_dfs = []
 for index,row in weekend_df.iterrows():
-    name = str(index)#.upper()
-    print(name)
+    name = str(index).rstrip()#.upper()
     names.append(name)
     indv_dfs.append(pbp_df.loc[pbp_df['Name'] == name])
+print(names[0])
+print(len(names[0]))
+
+print(indv_dfs[0])
 
 
 ###
@@ -338,7 +342,7 @@ card_draw = ImageDraw.Draw(card)
 r = 0
 start_w = l_gap
 start_h = t_gap
-colors = ['pinstripe','white','blue']
+colors = ['pinstripe','gray','sky']
 
 ## Print title info
 card_draw.text((l_gap,5),'Baseball Series Recap', font=large_title_font)
@@ -408,7 +412,7 @@ for r in range(0,players):
 
             
     ## We need to run it one more time to get the last square    
-    #generateScorecardSquare(card,card_draw,color,play_list,w,h,sw,sh)
+    generateScorecardSquare(card,card_draw,color,play_list,w,h,sw,sh)
 
-card.save('/tmp/bsbWeeklyRecap.png')
-s3.upload_file('/tmp/bsbWeeklyRecap.png', 'gtpdd', 'bsbWeeklyRecap.png')
+card.save('img/bsbWeeklyRecap.png')
+#s3.upload_file('/tmp/bsbWeeklyRecap.png', 'gtpdd', 'bsbWeeklyRecap.png')
