@@ -220,8 +220,12 @@ lis = games_soup.find_all('li', {"class":"sidearm-schedule-game-links-boxscore"}
 for li in lis:
     box_scores.append(li.a.get("href"))
     box_dates.append(li.a.get("aria-label"))
+
 box_scores = list(dict.fromkeys(box_scores))
 box_dates = list(dict.fromkeys(box_dates))
+
+#del box_scores [-1]
+#del box_dates [-1]
 
 ## Find the last box score
 last_box = box_scores[-1]
@@ -235,7 +239,7 @@ last_date = (last_date.split(' on '))[1].split(' at')[0]
 today = datetime.now()
 last_datetime = datetime.strptime(last_date, "%B %d, %Y")
 time_dif = today - last_datetime
-if time_dif.days > 5:
+if time_dif.days > 4:
     quit()
 
 ## Reverse the order of the list
@@ -251,7 +255,7 @@ for box_date in box_dates:
     date = (box_date.split(' on '))[1].split(' at')[0]
     date_datetime = datetime.strptime(date, "%B %d, %Y")
     time_dif = today - date_datetime
-    if time_dif.days < 5:
+    if time_dif.days < 4:
         last_scores.append(box_scores[i])
     i = i + 1
     

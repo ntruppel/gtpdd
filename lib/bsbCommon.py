@@ -29,13 +29,14 @@ def getBoxScore(box_score, returnType):
     homePitch = tables[5]
     team_names = tables[0].find_all('span')
     list_of_parsed_rows = [parseRowStringTextTrue(row) for row in team_names[1:]]
+    print(list_of_parsed_rows)
     
     list_of_parsed_rows = [str(i)[2:-2] for i in list_of_parsed_rows]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'Winner' not in i]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'TECH' != i]
     list_of_parsed_rows = [i for i in list_of_parsed_rows if 'LATECH' != i]
 
-    
+    print(list_of_parsed_rows)
     if len(list_of_parsed_rows) == 3:
         lens = []
         for row in list_of_parsed_rows:
@@ -44,6 +45,9 @@ def getBoxScore(box_score, returnType):
     
     awayName = str(list_of_parsed_rows[0])
     homeName = str(list_of_parsed_rows[1])
+
+    #awayName = 'LA TECH'
+    #homeName = "DBU"
     
     print(awayName,homeName)
     
@@ -66,7 +70,10 @@ def getBoxScore(box_score, returnType):
     dls = box_soup.find_all('dl', {"class": "special-stats emphasize inline text-right"})
     info_dl = box_soup.find_all('dl')[1]
     rows = info_dl.find_all('dd')
-    list_of_parsed_rows = [parseRowStringTextTrue0(row) for row in rows]
+    print(rows)
+    try: list_of_parsed_rows = [parseRowStringTextTrue(row) for row in rows]
+    except: list_of_parsed_rows = [parseRowStringTextTrue0(row) for row in rows]
+
     
     date = list_of_parsed_rows[0]
     startTime = list_of_parsed_rows[1]

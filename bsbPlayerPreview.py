@@ -395,7 +395,7 @@ def saveImages(team1, team2):
 
 
 team1 = 'Louisiana Tech'
-team2 = 'Arizona'
+team2 = 'DBU'
 
 team1Short = team1.replace(" ","")
 team2Short = team2.replace(" ","")

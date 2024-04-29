@@ -20,7 +20,7 @@ import boto3
 #####
 # Determine which boxscore to get (-1 for most recent)
 ####
-gameNum = -1
+gameNum = -3
 
 
 #####
