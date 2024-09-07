@@ -140,21 +140,18 @@ def fbScorigami(platform):
         fullPath = r'out_files/fbScorigami.png'
         basicPath = r'out_files/fbScorigamiBasic.png'
     elif platform == 'AWS':
-        import boto3
-        s3 = boto3.client('s3')
-        s3.download_file('gtpdd', 'fbScorigamiGames.csv', '/tmp/fbScorigamiGames.csv')
-        df = pd.read_csv('/tmp/fbScorigamiGames.csv')
-        fullPath = '/tmp/fbScorigami.png'
-        basicPath = '/tmp/fbScorigamiBasic.png' 
+        df = pd.read_csv('csv/fbScorigamiGames.csv')
+        fullPath = 'out/fbScorigami.png'
+        basicPath = 'out/fbScorigamiBasic.png' 
 
     
     df_new = df
     configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = 'ewyV1mOvaDm0BKhMQws/AVlhq7SpG74ein739I0cYF1Jc3GO+/miuCy6zfCmYEpz'
+    configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
     configuration.api_key_prefix['Authorization'] = 'Bearer'
     
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
-    api_response = api_instance.get_games(2023, team='Louisiana Tech')
+    api_response = api_instance.get_games(2024, team='Louisiana Tech')
     
     if 1==1:
         dates = []
@@ -248,5 +245,10 @@ def fbScorigami(platform):
     
     print(message)
     #createTweet(message,[fullPath])
+
+    if platform == 'AWS':
+        import boto3
+        s3 = boto3.resource("s3")
+        s3.meta.client.upload_file(fullPath, 'gtpdd-public-files', 'fbScorigami.png')
     
-fbScorigami('Windows')
+fbScorigami('AWS')

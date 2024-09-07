@@ -1,1 +1,3 @@
-out/*.png
+out/*
+.env
+btb/*

@@ -132,7 +132,9 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
         elif row['Play'].startswith('pinch ran'):
             words = row['Play'].split()
             try: o = batters.index(words[-1][:-1])
-            except: o = batters.index(words[-1])
+            except: 
+                try: o = batters.index(words[-1])
+                except: o = batters.index(words[-2] + '-' + words[-1][:-1])
             batters[o] = row['Name']
             p_counter_list[o] = p_counter_list[o] + 39
             if row['Inning'] > 3:
@@ -529,10 +531,10 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
     
     
 printScorecard(card1,away_df, away_bat, away_runs, away_hits, away_errors, away_lob, homeName, awayName, 'away', away_pitcher_df)
-img1.save('/tmp/bsbScorecardAway.png')
+img1.save('out/bsbScorecardAway.png')
 printScorecard(card2,home_df, home_bat, home_runs, home_hits, home_errors, home_lob, homeName, awayName, 'home', home_pitcher_df)
-img2.save('/tmp/bsbScorecardHome.png')
+img2.save('out/bsbScorecardHome.png')
 
-s3.upload_file('/tmp/bsbScorecardAway.png', 'gtpdd', 'bsbScorecardAway.png')
-s3.upload_file('/tmp/bsbScorecardHome.png', 'gtpdd', 'bsbScorecardHome.png')
+s3.upload_file('out/bsbScorecardAway.png', 'gtpdd', 'bsbScorecardAway.png')
+s3.upload_file('out/bsbScorecardHome.png', 'gtpdd', 'bsbScorecardHome.png')
 

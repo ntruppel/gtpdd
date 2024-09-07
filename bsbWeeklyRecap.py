@@ -253,6 +253,8 @@ for box_date in box_dates:
     if time_dif.days < 5:
         last_scores.append(box_scores[i])
     i = i + 1
+
+last_scores.pop(0)
     
 ###
 # GET DATA FROM BOXSCORES
@@ -410,5 +412,5 @@ for r in range(0,players):
     ## We need to run it one more time to get the last square    
     #generateScorecardSquare(card,card_draw,color,play_list,w,h,sw,sh)
 
-card.save('/tmp/bsbWeeklyRecap.png')
-s3.upload_file('/tmp/bsbWeeklyRecap.png', 'gtpdd', 'bsbWeeklyRecap.png')
+card.save('out/bsbWeeklyRecap.png')
+#s3.upload_file('/tmp/bsbWeeklyRecap.png', 'gtpdd', 'bsbWeeklyRecap.png')

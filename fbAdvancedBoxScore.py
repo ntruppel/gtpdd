@@ -12,13 +12,13 @@ from lib.common import createTweet
 def find_win_expectancy(game_id):
     
     configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = 'ewyV1mOvaDm0BKhMQws/AVlhq7SpG74ein739I0cYF1Jc3GO+/miuCy6zfCmYEpz'
+    configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
     configuration.api_key_prefix['Authorization'] = 'Bearer'
     
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
 
     adv_box = api_instance.get_advanced_box_score(game_id=game_id)
-    box = api_instance.get_team_game_stats(2023, game_id=game_id)
+    box = api_instance.get_team_game_stats(2024, game_id=game_id)
      
     if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
         tech = 0; oppo = 1
@@ -115,7 +115,8 @@ def find_win_expectancy(game_id):
         result = "L"
     
     win_prob = (0.86*exp + 0.83*eff + 0.75*so + 0.72*fp + 0.73*to)/3.89
-    api_response = api_instance.get_games(2023, team='Louisiana Tech')
+    win_prob = 0
+    api_response = api_instance.get_games(2024, team='Louisiana Tech')
     for game in api_response:
         temp = game.away_points
         if temp:
@@ -215,7 +216,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     ax[3,1].text(0,-0.1,"{:.2%}".format(win_prob), color="white", fontsize="80", ha="center", fontweight="bold")
     
-    fig_path = '/tmp/fbAdvancedBoxScore.png'
+    fig_path = 'out/fbAdvancedBoxScore.png'
         
     s3 = boto3.client('s3')
     backgroundPath = '/tmp/fbAdvancedBoxScoreBackground.png'
@@ -230,7 +231,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     background.paste(img, offset, img)
     background.save(fig_path)
 
-    s3.upload_file('/tmp/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
+    s3.upload_file('out/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
     
     status = "Advanced box score from Tech's game against "+ oppo + ". Based on the stats from the game, Tech would have won this game "+"{:.2%}".format(win_prob)+ " of the time."
     #createTweet(status, [fig_path])
@@ -243,4 +244,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401520345', '166')
+fbAdvancedBoxScore('401641007', '2447')

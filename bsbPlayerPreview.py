@@ -394,8 +394,8 @@ def saveImages(team1, team2):
     s3.upload_file('/tmp/' + team2 + '_relief_pitching.png', 'gtpdd', 'bsb_team2_relief_pitching.png')
 
 
-team1 = 'Louisiana Tech'
-team2 = 'ULM'
+team1 = 'Little Rock'
+team2 = 'FIU'
 
 minPA = 10
 minStarts = 2

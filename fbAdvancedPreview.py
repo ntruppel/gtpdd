@@ -15,6 +15,8 @@ import csv
 import cfbd
 from pandas import json_normalize 
 import json 
+import os
+from dotenv import load_dotenv
 
 def statLookup(statName,adv_df):
     s_list = [
@@ -42,16 +44,16 @@ def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
         except:0
     adv_df = pd.json_normalize(dicts)
     adv_df = adv_df.set_index('team')
+    adv_df.drop(columns=['conference'], inplace=True)
     adv_df.loc['Average'] = adv_df.mean()
     adv_df.loc['Min'] = adv_df.min()
     adv_df.loc['Max'] = adv_df.max()
     adv_df = adv_df.loc[[team1, team2, "Average", "Min", "Max"]]
 
-    adv_df = adv_df.set_index('team')
-    print(adv_df)
+    adv_df.to_csv('out/temp.csv')
     
     stat_list = ['explosiveness','ppa','successRate','pointsPerOpportunity','fieldPosition.averagePredictedPoints','havoc.db','lineYards','openFieldYards','powerSuccess','secondLevelYards','stuffRate','havoc.frontSeven','rushingPlays.explosiveness','rushingPlays.ppa','rushingPlays.successRate','passingPlays.explosiveness','passingPlays.ppa','passingPlays.successRate','standardDowns.explosiveness','standardDowns.ppa','standardDowns.successRate','passingDowns.explosiveness','passingDowns.ppa','passingDowns.successRate',]
-    
+    print(len(stat_list))
     aa_list = []
     for stat in stat_list:
         try: aa_list.append(statLookup(stat, adv_df))
@@ -61,9 +63,12 @@ def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
     fig2,ax2 = plt.subplots(6,4)
     fig1.set_size_inches(20, 10)
     fig2.set_size_inches(20, 10)
+
+    print(aa_list)
     
     i = 0; j = 0
-    for k in range(0,24):
+    for k in range(0,23):
+        print(i,j,k)
         if i>5: i=0;j=j+1
         ax1[i][j].set_title(aa_list[k][0], fontsize=8)
         
@@ -102,12 +107,14 @@ def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
 team1 = 'Louisiana Tech'
 t1c1 = '#002F8B'
 t1c2 = '#E31B23'
-team2 = 'Florida Internationalpr'
+team2 = 'Florida International'
 t2c1 = '#081E3F'
 t2c2='#B6862C'
 
+load_dotenv()
+
 configuration = cfbd.Configuration()
-configuration.api_key['Authorization'] = 'ewyV1mOvaDm0BKhMQws/AVlhq7SpG74ein739I0cYF1Jc3GO+/miuCy6zfCmYEpz'
+configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
 configuration.api_key_prefix['Authorization'] = 'Bearer'
 generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2)
 

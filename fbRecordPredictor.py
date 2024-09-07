@@ -5,6 +5,7 @@ Created on Wed Sep  1 15:41:33 2021
 @author: ntrup
 """
 import requests
+import datetime
 import numpy as np
 from datetime import datetime, timezone
 import matplotlib.pyplot as plt
@@ -28,6 +29,14 @@ def fbRecordPredictor(platform):
     if platform == 'Windows':
         figPath = r'out_files/fbRecordPredictor.png'
         backgroundPath = r'in_files\backgrounds\fbRecordPredictor.png'
+
+    elif platform == 'AWS':
+        figPath = 'out/fbRecordPredictor.png'
+        
+        import boto3
+        s3 = boto3.client('s3')
+        backgroundPath = '/tmp/fbRecordPredictorBackground.png'
+        s3.download_file('gtpdd', 'fb_record_predictor_background.png', '/tmp/fbRecordPredictorBackground.png')
     
     
     present = datetime.now(timezone.utc)
@@ -43,14 +52,15 @@ def fbRecordPredictor(platform):
         predictions.append(0)
     
     ## When ESPN finally updates their API for 2023, this will work
-    #for index,row in schedule_df.iterrows():
-    #    if present < row['date']:    
-    #        predictions.append(getPrediction(row['gameID'], teamID))
+    for index,row in schedule_df.iterrows():
+        if present < row['date']:    
+            predictions.append(getPrediction(row['gameID'], teamID))
+    print(predictions)
     
     ## For now, stuck doing it manually. Remove this when ESPN API updates
-    gameIDs = ['401520146','401520172','401520197','401520229','401520263','401520278','401520295','401520313','401520345','401520366','401520387','401520407']
-    for gameID in gameIDs:
-        predictions.append(getPrediction(gameID, teamID))
+    #gameIDs = ['401641007','401635546','401641008','401640981','401641009','401641010','401641011','401641012','401641004','401641013','401628427','401641014'] 
+    #for gameID in gameIDs:
+        #predictions.append(getPrediction(gameID, teamID))
         
     predictions = [round(float(x)/100,3) for x in predictions]
     print(predictions)
@@ -219,7 +229,9 @@ def fbRecordPredictor(platform):
         
     ax.set_ylim([0,max(wins)+0.05])
     ax.axis('off')
-    ax.set_title("Using ESPN's FPI", fontsize = 30, color = 'white')
+    now = datetime.now()
+    datestring = now.strftime("%B %-d, %Y")
+    ax.set_title("Using ESPN's FPI | " +str(datestring), fontsize = 30, color = 'white')
     plt.suptitle('Tech Record Predictor', fontsize = 45, color = 'white', fontweight = 'bold')
     fig.savefig(figPath, bbox_inches='tight', pad_inches = 0, dpi=100, transparent = True)
     
@@ -241,4 +253,6 @@ def fbRecordPredictor(platform):
     print(status)
     
     
-    createTweet(status,[figPath])
+    #createTweet(status,[figPath])
+
+fbRecordPredictor("AWS")
