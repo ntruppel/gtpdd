@@ -1,0 +1,7 @@
+{
+    "run": "lightcoral", 
+    "pass": "darkred",
+    "penalty": "gold",
+    "sack": "silver",
+    "int": "black"
+}

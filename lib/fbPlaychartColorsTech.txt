@@ -1,0 +1,7 @@
+{
+    "run": "cornflowerblue", 
+    "pass": "mediumblue",
+    "penalty": "gold",
+    "sack": "silver",
+    "int": "black"
+}
