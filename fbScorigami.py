@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import cfbd
 from lib.common import createTweet
+import os
+from dotenv import load_dotenv
+load_dotenv()
     
 def generateScorigamiTable(df):
     win_scores = []
@@ -146,8 +149,9 @@ def fbScorigami(platform):
 
     
     df_new = df
+
     configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
+    configuration.api_key['Authorization'] = os.environ['cfbdAuth']
     configuration.api_key_prefix['Authorization'] = 'Bearer'
     
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))

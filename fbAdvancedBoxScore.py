@@ -8,6 +8,9 @@ import json
 from lib.fbCommon import getTeamInfo
 from PIL import Image
 from lib.common import createTweet
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def find_win_expectancy(game_id):
     
@@ -139,7 +142,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     fig,ax = plt.subplots(4,2, figsize=(30,45))
     
-    limitsList = [[1,1.5],[0.3,0.6],[0,7],[18,40],[0,5]]
+    limitsList = [[1,2],[0.3,0.6],[0,7],[18,40],[0,5]]
     
     j=0
     for i in range(1,4):
@@ -180,7 +183,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
         ax[i,0].axis('off')
         ax[i,1].axis('off')
     
-    exp_limits = [1,1.8]
+    exp_limits = [1,2]
     eff_limits = [0.2,0.6]
     df_limits = [0,7]
     fp_limits = [18,45]
@@ -244,4 +247,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401641007', '2447')
+fbAdvancedBoxScore('401635546', '152')
