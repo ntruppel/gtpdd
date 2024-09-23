@@ -7,7 +7,6 @@ import csv
 import json
 from lib.fbCommon import getTeamInfo
 from PIL import Image
-from lib.common import createTweet
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,40 +21,77 @@ def find_win_expectancy(game_id):
 
     adv_box = api_instance.get_advanced_box_score(game_id=game_id)
     box = api_instance.get_team_game_stats(2024, game_id=game_id)
-     
-    if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
-        tech = 0; oppo = 1
-    else:
-        tech = 1; oppo = 0
-            
-    tech_explosiveness = adv_box.teams.explosiveness[tech].overall.total
-    tech_fp = adv_box.teams.field_position[tech].average_start
-    tech_fp = 100-31.1
+    print(adv_box.teams.keys())
+    print(adv_box.teams['fieldPosition'])
 
-    tech_so = adv_box.teams.scoring_opportunities[tech].points_per_opportunity
-    tech_eff = adv_box.teams.success_rates[tech].overall.total
-    
-    oppo_explosiveness = adv_box.teams.explosiveness[oppo].overall.total
-    oppo_fp = adv_box.teams.field_position[oppo].average_start
-    oppo_fp = 100-29.9
-    oppo_so = adv_box.teams.scoring_opportunities[oppo].points_per_opportunity
-    oppo_eff = adv_box.teams.success_rates[oppo].overall.total
+    try: 
+        if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
+            tech = 0; oppo = 1
+        else:
+            tech = 1; oppo = 0
+                
+        tech_explosiveness = adv_box.teams.explosiveness[tech].overall.total
+        tech_fp = adv_box.teams.field_position[tech].average_start
+
+        tech_so = adv_box.teams.scoring_opportunities[tech].points_per_opportunity
+        tech_eff = adv_box.teams.success_rates[tech].overall.total
         
-    if box[0].teams[0].school == 'Louisiana Tech':
-        tech = 0; oppo = 1
-    else:
-        tech = 1; oppo = 0
+        oppo_explosiveness = adv_box.teams.explosiveness[oppo].overall.total
+        oppo_fp = adv_box.teams.field_position[oppo].average_start
+        oppo_so = adv_box.teams.scoring_opportunities[oppo].points_per_opportunity
+        oppo_eff = adv_box.teams.success_rates[oppo].overall.total
+            
+        if box[0].teams[0].school == 'Louisiana Tech':
+            tech = 0; oppo = 1
+        else:
+            tech = 1; oppo = 0
+        
+        tech_pts = box[0].teams[tech].points
+        oppo_pts = box[0].teams[oppo].points
     
-    tech_pts = box[0].teams[tech].points
-    oppo_pts = box[0].teams[oppo].points
-   
-    for pair in box[0].teams[tech].stats:
-        if 'turnovers' in pair.category:
-            tech_to = pair.stat
-           
-    for pair in box[0].teams[oppo].stats:
-        if 'turnovers' in pair.category:
-            oppo_to = pair.stat
+        for pair in box[0].teams[tech].stats:
+            if 'turnovers' in pair.category:
+                tech_to = pair.stat
+            
+        for pair in box[0].teams[oppo].stats:
+            if 'turnovers' in pair.category:
+                oppo_to = pair.stat
+    
+    except:
+        print('except')
+        if adv_box.teams['explosiveness'][0]['team'] == 'Louisiana Tech':
+            tech = 0; oppo = 1
+        else:
+            tech = 1; oppo = 0
+                
+        tech_explosiveness = adv_box.teams['explosiveness'][tech]['overall']['total']
+        print(adv_box.teams)
+        print(adv_box.teams.keys())
+        tech_fp = adv_box.teams['fieldPosition'][tech]['averageStart']
+
+        tech_so = adv_box.teams['scoringOpportunities'][tech]['pointsPerOpportunity']
+        tech_eff = adv_box.teams['successRates'][tech]['overall']['total']
+        
+        oppo_explosiveness = adv_box.teams['explosiveness'][oppo]['overall']['total']
+        oppo_fp = adv_box.teams['fieldPosition'][oppo]['averageStart']
+        oppo_so = adv_box.teams['scoringOpportunities'][oppo]['pointsPerOpportunity']
+        oppo_eff = adv_box.teams['successRates'][oppo]['overall']['total']
+            
+        if box[0].teams[0]['school'] == 'Louisiana Tech':
+            tech = 0; oppo = 1
+        else:
+            tech = 1; oppo = 0
+        
+        tech_pts = box[0].teams[tech]['points']
+        oppo_pts = box[0].teams[oppo]['points']
+    
+        for pair in box[0].teams[tech]['stats']:
+            if 'turnovers' in pair['category']:
+                tech_to = pair['stat']
+            
+        for pair in box[0].teams[oppo]['stats']:
+            if 'turnovers' in pair['category']:
+                oppo_to = pair['stat']
        
     
     print("")
@@ -222,8 +258,8 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     fig_path = 'out/fbAdvancedBoxScore.png'
         
     s3 = boto3.client('s3')
-    backgroundPath = '/tmp/fbAdvancedBoxScoreBackground.png'
-    s3.download_file('gtpdd-public-files', 'fbAdvancedBoxScoreBackground.png', '/tmp/fbAdvancedBoxScoreBackground.png')
+    backgroundPath = 'img/fbAdvancedBoxScoreBackground.png'
+    s3.download_file('gtpdd-public-files', 'fbAdvancedBoxScoreBackground.png', 'img/fbAdvancedBoxScoreBackground.png')
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=120, transparent = True)
     
     img = Image.open(fig_path, 'r')
@@ -237,7 +273,6 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     s3.upload_file('out/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
     
     status = "Advanced box score from Tech's game against "+ oppo + ". Based on the stats from the game, Tech would have won this game "+"{:.2%}".format(win_prob)+ " of the time."
-    #createTweet(status, [fig_path])
     print(status)
     return 0                                                                                                                                                             
 
@@ -247,4 +282,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401635546', '152')
+fbAdvancedBoxScore('401641008', '202')

@@ -11,7 +11,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import cfbd
-from lib.common import createTweet
 import os
 from dotenv import load_dotenv
 load_dotenv()

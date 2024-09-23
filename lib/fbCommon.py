@@ -43,4 +43,4 @@ def getTeamInfo(teamID):
     color1 = x['team']['color']
     color2 = x['team']['alternateColor']
     
-    return name, color1, color2
+    return name, color2, color1
