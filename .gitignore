@@ -1,3 +1,7 @@
-out/*
 .env
 btb/*
+*.ini
+csv/*.ini
+img/*.ini
+lib/*.ini
+out/*.ini
