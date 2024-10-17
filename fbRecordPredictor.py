@@ -10,7 +10,6 @@ import numpy as np
 from datetime import datetime, timezone
 import matplotlib.pyplot as plt
 from PIL import Image
-from lib.common import createTweet
 from lib.fbCommon import getFBSchedule, getTeamInfo
 
 
@@ -35,8 +34,8 @@ def fbRecordPredictor(platform):
         
         import boto3
         s3 = boto3.client('s3')
-        backgroundPath = '/tmp/fbRecordPredictorBackground.png'
-        s3.download_file('gtpdd', 'fb_record_predictor_background.png', '/tmp/fbRecordPredictorBackground.png')
+        backgroundPath = 'img/fbRecordPredictorBackground.png'
+        s3.download_file('gtpdd', 'fb_record_predictor_background.png', 'img/fbRecordPredictorBackground.png')
     
     
     present = datetime.now(timezone.utc)
@@ -230,7 +229,7 @@ def fbRecordPredictor(platform):
     ax.set_ylim([0,max(wins)+0.05])
     ax.axis('off')
     now = datetime.now()
-    datestring = now.strftime("%B %-d, %Y")
+    datestring = now.strftime("%B %d, %Y")
     ax.set_title("Using ESPN's FPI | " +str(datestring), fontsize = 30, color = 'white')
     plt.suptitle('Tech Record Predictor', fontsize = 45, color = 'white', fontweight = 'bold')
     fig.savefig(figPath, bbox_inches='tight', pad_inches = 0, dpi=100, transparent = True)
