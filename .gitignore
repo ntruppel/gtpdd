@@ -1,10 +1,11 @@
-.env
-btb/*
-*.ini
-csv/*.ini
-img/*.ini
-lib/*.ini
-out/*.ini
-fbTest.py
+# Remove output and temp folders
+out/*
 tmp/*
+
+# Remove files with key info
+.env
+
+# Remove Google Drive ini files
 **/*.ini
+
+fbTest.py
