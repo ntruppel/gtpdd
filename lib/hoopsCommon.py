@@ -57,19 +57,13 @@ def getESPNAPI(platform, gameId):
     hlogo = x['boxscore']['teams'][1]['team']['logo']
     hlogo_r = r = requests.get(hlogo)
     
-    if platform == 'Windows':
-        if visitor not in ['Rice', 'Florida International']:
-            open( 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\' + visitor + '.png', 'wb').write(vlogo_r.content)
-        if home not in ['Rice', 'Florida International']:
-            open( 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\' + home + '.png', 'wb').write(hlogo_r.content)
-    
-    elif platform == 'AWS':
+    if platform == 'AWS':
         open( '/tmp/' + visitor + '.png', 'wb').write(vlogo_r.content)
         open( '/tmp/' + home + '.png', 'wb').write(hlogo_r.content)
-        
-    elif platform == 'Chrome':
-        open( 'in_files/' + visitor + '.png', 'wb').write(vlogo_r.content)
-        open( 'in_files/' + home + '.png', 'wb').write(hlogo_r.content)
+    
+    else:
+        open( 'logo/' + visitor + '.png', 'wb').write(vlogo_r.content)
+        open( 'logo/' + home + '.png', 'wb').write(hlogo_r.content)        
         
     ## Get scores over time
     plays = x['plays']

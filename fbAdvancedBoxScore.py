@@ -219,7 +219,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
         ax[i,0].axis('off')
         ax[i,1].axis('off')
     
-    exp_limits = [1,2]
+    exp_limits = [0,2]
     eff_limits = [0.2,0.6]
     df_limits = [0,7]
     fp_limits = [18,45]
@@ -282,4 +282,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401640981', '2229')
+fbAdvancedBoxScore('401641012', '2534')

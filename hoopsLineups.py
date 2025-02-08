@@ -7,19 +7,20 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mc
 import colorsys
 from PIL import Image
-from lib.common import parse_th_row, parse_mod_th_row, parse_td_row, parse_mod_td_row, createTweet
+from lib.common import parse_th_row, parse_mod_th_row, parse_td_row, parse_mod_td_row
 from lib.hoopsCommon import getESPNAPI
     
 def get_pbp_table(table):
-    stat_rows = table.find_all('tr')
-    list_of_parsed_stat_rows = [parse_td_row(row) for row in stat_rows[1:]]
-    stat_df = DataFrame(list_of_parsed_stat_rows)
-    stat_df = stat_df.drop(columns=[2,6,7,8])
-    stat_df.columns = ['time','visitor_play','visitor_score','home_score','home_play']
-    df = stat_df.replace('--', np.nan)
-    df = df.replace(r'^\s*$', np.nan, regex=True)
-    df = df.fillna(method='ffill')
-    df = df.replace('None', np.nan)
+    with pd.option_context('future.no_silent_downcasting', True):
+        stat_rows = table.find_all('tr')
+        list_of_parsed_stat_rows = [parse_td_row(row) for row in stat_rows[1:]]
+        stat_df = DataFrame(list_of_parsed_stat_rows)
+        stat_df = stat_df.drop(columns=[2,6,7,8])
+        stat_df.columns = ['time','visitor_play','visitor_score','home_score','home_play']
+        df = stat_df.replace('--', np.nan)
+        df = df.replace(r'^\s*$', np.nan, regex=True)
+        df = df.ffill()
+        df = df.replace('None', np.nan)
     return df
 
 def get_subs(df,team):
@@ -59,13 +60,21 @@ def get_shots(df,team):
         
     return shots_df
 
-def get_lineup(subs_df, lineups_df):
+def get_lineup(subs_df, lineups_df, startTime):
     # Create empty row with 20:00
-    lineup = [['20:00',np.nan,np.nan,np.nan,np.nan,np.nan]]
+    lineup = [[startTime,np.nan,np.nan,np.nan,np.nan,np.nan]]
     lineup_df = pd.DataFrame(lineup, columns = ['Time','P1','P2','P3','P4','P5'])
     lineup_df = lineup_df.set_index('Time')
+    lineup_df['P1'] = lineup_df['P1'].astype('object')
+    lineup_df['P2'] = lineup_df['P2'].astype('object')
+    lineup_df['P3'] = lineup_df['P3'].astype('object')
+    lineup_df['P4'] = lineup_df['P4'].astype('object')
+    lineup_df['P5'] = lineup_df['P5'].astype('object')
+
+
     
     for index, row in subs_df.iterrows(): lineup_df.loc[row['time']] = [np.nan,np.nan,np.nan,np.nan,np.nan]
+
     subs_df = subs_df.sort_values(by=['time','action'], ascending=False)
         
     # Go line-by-line through vsubs
@@ -74,21 +83,21 @@ def get_lineup(subs_df, lineups_df):
             
             def fillLoop(pNum):
                 lineup_df.loc[row['time'],pNum] = row['player']
-                lineup_df[pNum].fillna(method='ffill', inplace=True)
+                lineup_df[pNum] = lineup_df[pNum].ffill()
             
             if pd.isnull(lineup_df.loc[row['time'],'P1']): fillLoop('P1')
             elif pd.isnull(lineup_df.loc[row['time'],'P2']): fillLoop('P2')
             elif pd.isnull(lineup_df.loc[row['time'],'P3']): fillLoop('P3')
             elif pd.isnull(lineup_df.loc[row['time'],'P4']): fillLoop('P4')
             elif pd.isnull(lineup_df.loc[row['time'],'P5']): fillLoop('P5')
-        
-        if row['action'] == 'SUB OUT ' and row['time'] != '20:00':
+
+        if row['action'] == 'SUB OUT ' and row['time'] != startTime:
             
             def subOutLoop(pNum):
                 lineup_df.loc[row['time']:,pNum] = np.nan
                 
             def startPlayers(pNum):
-                lineup_df.loc['20:00',pNum] = row['player']
+                lineup_df.loc[startTime,pNum] = row['player']
 
             if lineup_df.loc[row['time'],'P1'] == row['player']: subOutLoop('P1')
             elif lineup_df.loc[row['time'],'P2'] == row['player']: subOutLoop('P2')
@@ -96,11 +105,11 @@ def get_lineup(subs_df, lineups_df):
             elif lineup_df.loc[row['time'],'P4'] == row['player']: subOutLoop('P4')
             elif lineup_df.loc[row['time'],'P5'] == row['player']: subOutLoop('P5')
                 
-            elif pd.isnull(lineup_df.loc['20:00','P1']): startPlayers('P1')
-            elif pd.isnull(lineup_df.loc['20:00','P2']): startPlayers('P2')
-            elif pd.isnull(lineup_df.loc['20:00','P3']): startPlayers('P3')
-            elif pd.isnull(lineup_df.loc['20:00','P4']): startPlayers('P4')
-            elif pd.isnull(lineup_df.loc['20:00','P5']): startPlayers('P5')
+            elif pd.isnull(lineup_df.loc[startTime,'P1']): startPlayers('P1')
+            elif pd.isnull(lineup_df.loc[startTime,'P2']): startPlayers('P2')
+            elif pd.isnull(lineup_df.loc[startTime,'P3']): startPlayers('P3')
+            elif pd.isnull(lineup_df.loc[startTime,'P4']): startPlayers('P4')
+            elif pd.isnull(lineup_df.loc[startTime,'P5']): startPlayers('P5')
                 
     if(lineup_df['P5'].isnull().all()):
         nosubs = []
@@ -124,9 +133,9 @@ def get_lineup(subs_df, lineups_df):
         ## Get list of players who played 20 minutes
         ## FUTURE: I think starters have a * in column 2
         for index, row in df.iterrows():
-            if row['minutes'] > '30':
+            if row['minutes'] > '21':
                 nosubs.append(row['name'])
-        
+        nosubs = [x for x in nosubs if str(x) != 'nan']
         ## Sometimes the names are hyperlinks, so we have to extract the actual name
         try:
             i=0
@@ -169,27 +178,10 @@ def get_lineup(subs_df, lineups_df):
     for pNum in ['P1','P2','P3','P4','P5']:
         lineup_df[pNum] = lineup_df[pNum].str.title()
     
-    lineup_df = lineup_df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    lineup_df = lineup_df.map(lambda x: x.strip() if isinstance(x, str) else x)
     lineup_df = lineup_df.transpose()
     lineup_df = lineup_df.apply(lambda x: x.sort_values().values)
     lineup_df = lineup_df.transpose()
-    
-    ##Makes sure duplicated names are in the same column
-    real_cols = ['P1','P2','P3','P4','P5']
-    lineup_df['temp'] = lineup_df['P1']==lineup_df['P2'].shift(1)
-    lineup_df.loc[lineup_df['temp'] == True, 'temp'] = lineup_df['P2']
-    lineup_df.loc[lineup_df['temp'] != False, 'P2'] = lineup_df['P1']
-    lineup_df.loc[lineup_df['temp'] != False, 'P1'] = lineup_df['temp']
-    lineup_df = lineup_df.drop(columns=['temp'])
- 
-    for i in range(0,len(lineup_df.index)):
-        for check_col in real_cols:
-            for col in real_cols:
-                lineup_df['temp'] = lineup_df[check_col]==lineup_df[col].shift(1)
-                lineup_df.loc[lineup_df['temp'] == True, 'temp'] = lineup_df[col]
-                lineup_df.loc[lineup_df['temp'] != False, col] = lineup_df[check_col]
-                lineup_df.loc[lineup_df['temp'] != False, check_col] = lineup_df['temp']
-                lineup_df = lineup_df.drop(columns=['temp'])
                 
     ## Change timestamp in Time column to seconds
     lineup_df = lineup_df.reset_index(level=0)
@@ -199,11 +191,11 @@ def get_lineup(subs_df, lineups_df):
     return lineup_df
 
 
-def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2, filename, platform):
+def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2, filename, maxTime, platform):
     lineup_df = lineup_df.set_index('Time')
     
     ## Get list of starters and add 'gaps' for STARTERS and BENCH text
-    starters = lineup_df.loc[2400.0].tolist()
+    starters = lineup_df.loc[maxTime].tolist()
     starters.insert(0,"")
     starters.append(" ")
     
@@ -237,13 +229,13 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     times = list(lineup_df.index.values)
     
     diff_secs = [i-j for i, j in zip(times[:-1], times[1:])]
-    diff_secs.append(2400-sum(diff_secs))
+    diff_secs.append(int(maxTime)-sum(diff_secs))
     
     ## (So, I'm dumb and did the master list backwards. So rather than fix that logic, I'm just transposing the list of lists because I'm lazy)
     t_master_list = list(map(list, zip(*master_list)))
     
     ## Setup chart
-    #plt.rcParams["font.family"] = "Century Gothic"
+    plt.rcParams["font.family"] = "Century Gothic"
     fig, ax = plt.subplots(figsize=(10, 4), dpi=200)
     
     ## Create bars
@@ -264,56 +256,55 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
         player_shots = shots_df.loc[shots_df['player'] == player]
         for k, (index,row) in enumerate(player_shots.iterrows()):
             if ft_flag == 1:
-                if 'GOOD FT' in row['action'] and ft_time == row['time']:
+                if 'GOOD FT' in row['action'] and ft_time <= row['time']+2 and ft_time >= row['time']-2:
                     ft_num = ft_num + 1
                     ft_den = ft_den + 1
-                elif 'MISS FT' in row['action'] and ft_time == row['time']:
+                elif 'MISS FT' in row['action'] and ft_time <= row['time']+2 and ft_time >= row['time']-2:
                     ft_den = ft_den + 1
                 else:
                     ## See if this was a shooting foul (Need to check the second before the FT since box scores are weird sometimes)
                     searchfor = ['GOOD', 'MISS']
                     player_shot_attempts = player_shots[player_shots['action'].str.contains('|'.join(searchfor),na = False)]
-                    times_num = len(player_shot_attempts[player_shot_attempts['time'] == ft_time]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 1]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 2])
+                    times_num = len(player_shot_attempts[player_shot_attempts['time'] == ft_time]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 1]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 2]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time - 1]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time - 2])
                                                                                                          
                     if times_num == ft_den:
-                        ax.text(2400 - int(ft_time),i, str(ft_num) + "/" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center')
+                        ax.text(int(maxTime) - int(ft_time),i, str(ft_num) + "\n" + "—" + "\n" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center', linespacing=0.5)
                     else:
-                        ax.text(2400 - int(ft_time),i, "\n\n+" + str(ft_num), fontsize=4, color='white', weight='bold', va='center', ha='center')
-                        
+                        ax.text(int(maxTime) - int(ft_time),i, "\n\n+" + str(ft_num), fontsize=4, color='white', weight='bold', va='center', ha='center')
                     
                     ft_flag = 0
                     
                 ## Need to go ahead and print if this is the player's last shot
                 if k == len(player_shots) - 1:
-                    ax.text(2400 - int(ft_time),i, str(ft_num) + "/" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center')
+                    ax.text(int(maxTime) - int(ft_time),i, str(ft_num) + "\n" + "—" + "\n" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center', linespacing=0.5)
                     ft_flag = 0
                     
             if 'GOOD 3PTR' in row['action']:
-                ax.text(2400 - int(row['time']),i,"3", fontsize=10, color='lime', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"3", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'MISS 3PTR' in row['action']:
-                ax.text(2400 - int(row['time']),i,"3", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"3", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
             elif 'GOOD JUMPER' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'GOOD LAYUP' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'GOOD DUNK' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'MISS JUMPER' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
             elif 'MISS LAYUP' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
             elif 'MISS DUNK' in row['action']:
-                ax.text(2400 - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
             elif 'REBOUND' in row['action']:
-                ax.text(2400 - int(row['time']),i,"R", fontsize=6, color='yellow', weight='heavy', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='darkorange', weight='heavy', va='center', ha='center')
             elif 'TURNOVER' in row['action']:
-                ax.text(2400 - int(row['time']),i,"T", fontsize=6, color='orange', weight='heavy', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='lightpink', weight='heavy', va='center', ha='center')
             elif 'ASSIST' in row['action']:
-                ax.text(2400 - int(row['time']),i,"A", fontsize=6, color='yellow', weight='heavy', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='green', weight='heavy', va='center', ha='center')
             elif 'FOUL' in row['action']:
                 foul_count[i] = foul_count[i] + 1
-                ax.text(2400 - int(row['time']),i,"|", fontsize=14, color='#FF3131', weight='bold', va='center', ha='center')
-                ax.text(2400 - int(row['time']),i+0.4,"  " + str(foul_count[i]), fontsize=4, color='#FF3131', weight='bold', va='top', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='#FF3131', weight='bold', va='center', ha='center')
+                ax.text(int(maxTime) - int(row['time']),i+0.4,"  " + str(foul_count[i]), fontsize=4, color='#FF3131', weight='bold', va='top', ha='center')
             elif 'FT' in row['action'] and ft_flag == 0:
                 ft_flag = 1
                 ft_num = 0
@@ -330,9 +321,19 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     ax.text(1200,6,"BENCH", fontsize=10, color=color_code, weight='bold', va='center', ha='center')
 
     ## Finalize Chart
-    ax.set_xlim(0,2400)
-    ax.set_xticks([0,600,1200,1800,2400])
-    ax.set_xticklabels(['Start','10:00 1H','Halftime','10:00 2H','End of Regulation'])
+    ax.set_xlim(0,int(maxTime))
+    xticks = [0,240,480,720,960,1200,1440,1680,1920,2160,2400]
+    xticklabels = ['Start','16:00\n1H','12:00\n1H','8:00\n1H','4:00\n1H','Halftime','16:00\n2H','12:00\n2H','8:00\n2H','4:00\n2H','End of\nRegulation']
+
+    if maxTime == 2700:
+        xticks.append(2700)
+        xticklabels.append('End of\nOT')
+        plt.axvline(x=2400, color='white', linewidth=1.5)
+
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(xticklabels)
+
+    plt.axvline(x=1200, color='white', linewidth=1.5)
     ax.grid(axis="x", color="white", alpha=.5, linewidth=.5)
     plt.gca().invert_yaxis()
     ax.text(0,-5," ")
@@ -344,25 +345,17 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     ax.set_facecolor(color2)
  
 
-    if platform == "Windows":
-        fig_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\out_files\\out.png'
-        team_logo_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\'+team+'.png'
-        oppo_logo_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\'+oppo+'.png'
-        out_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\out_files\\' + filename + '.png'
-        
-    
-    elif platform == 'Chrome':
-        fig_path = 'out_files/out.png'
-        team_logo_path = 'in_files/'+team+'.png'
-        oppo_logo_path = 'in_files/'+oppo+'.png'
-        out_path = 'out_files/' + filename + '.png'
-         
-    elif platform == 'AWS':
+    if platform == "AWS":
         fig_path = '/tmp/out.png'
         team_logo_path = '/tmp/'+team+'.png'
         oppo_logo_path = '/tmp/'+oppo+'.png'
-        out_path = '/tmp/' + filename + '.png'
-        
+        out_path = '/tmp/' + filename + '.png'     
+    
+    else:
+        fig_path = 'tmp/hoopsLineupsTemp.png'
+        team_logo_path = 'logo/'+team+'.png'
+        oppo_logo_path = 'logo/'+oppo+'.png'
+        out_path = 'out/' + filename + '.png'        
         
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
     
@@ -423,7 +416,7 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
 
     scores_df = scores_df.sort_values(by = ['Time'], ascending = False)
     scores_df = scores_df.reset_index(drop=True)
-    scores_df = scores_df.fillna(method="ffill")
+    scores_df = scores_df.ffill()
     scores_df = scores_df.fillna(value=0)
         
     
@@ -437,10 +430,10 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
         ## Get point diff for each sub period
         if hFlag == 0:
             score_dif = (int(v_score[k+1]) -int(v_score[k])) - (int(h_score[k+1]) - int(h_score[k]))
-            filename='visitor'
+            filename='hoopsPlusMinusVisitor'
         else:
             score_dif = (int(h_score[k+1]) -int(h_score[k])) - (int(v_score[k+1]) - int(v_score[k]))
-            filename='home'
+            filename='hoopsPlusMinusHome'
                 
         ## For each timestamp, go player by player and add the pointdiff to their total
         lineup_df_list = lineup_df.values.tolist()
@@ -481,31 +474,23 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
     plt.axvline(x=0, color=color)
     ax.text(0,-4,' ')
     
-    if platform == "Windows":
-        fig_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\Coding\\out_files\\out.png'
-        team_logo_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\'+team+'.png'
-        oppo_logo_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\team_logos\\'+oppo+'.png'
-        at_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\\\Coding\\in_files\\plusminus.png'
-        out_path = 'C:\\Users\\ntrup\\Google Drive\\GTPDD\\Coding\\out_files\\' + filename + '_plusminus.png'
-        
-    
-    elif platform == 'Chrome':
-        fig_path = 'out_files/out.png'
-        team_logo_path = 'in_files/'+team+'.png'
-        oppo_logo_path = 'in_files//'+oppo+'.png'
-        at_path = 'in_files/plusminus.png'
-        out_path = 'out_files/' + filename + '_plusminus.png'
-         
-    elif platform == 'AWS':
+    if platform == "AWS":
         fig_path = '/tmp/out.png'
         team_logo_path = '/tmp/'+team+'.png'
         oppo_logo_path = '/tmp/'+oppo+'.png'
         at_path = '/tmp/plusminus.png'
         out_path = '/tmp/' + filename + '_plusminus.png'
-        
+
         import boto3
         s3 = boto3.client('s3')
         s3.download_file('gtpdd', 'plusminus.png', '/tmp/plusminus.png')
+    
+    else:
+        fig_path = 'tmp/hoopsLineupsTemp.png'
+        team_logo_path = 'logo/'+team+'.png'
+        oppo_logo_path = 'logo/'+oppo+'.png'
+        at_path = 'img/plusminus.png'
+        out_path = 'out/' + filename + '.png'
         
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
     
@@ -545,25 +530,21 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
  
 def hoopsLineups(platform, gameId, gameNum):
     x,visitorId,homeId,visitor,home,v_color,v_color2,h_color,h_color2,scores_df = getESPNAPI(platform, gameId)
+    otFlag = 1
     
     def getBackgroundColors(color,color2):
-        if color > color2:
-            temp = color
-            color = color2
-            color2 = temp  
-        try:
-            c = mc.cnames[color2]
-        except:
-            c = color2
-            c = colorsys.rgb_to_hls(*mc.to_rgb(c))
-            color2 = colorsys.hls_to_rgb(c[0], 1 - 0.3 * (1 - c[1]), c[2])
+        if color == "#002d65":
+            color2 = "lightgray"
+        else:
+            color = "black"
+            color2 = "lightgray"
         return color,color2
     v_color, v_color2 = getBackgroundColors(v_color,v_color2)
     h_color, h_color2 = getBackgroundColors(h_color,h_color2)
     
     print(visitor,home,h_color,v_color)
     
-    home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text)
+    home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text, features="lxml")
     box_scores = []
     lis = home_soup.find_all('li', {"class":"sidearm-schedule-game-links-boxscore"})
     for li in lis:
@@ -572,54 +553,100 @@ def hoopsLineups(platform, gameId, gameNum):
     
     
     box_url = 'https://latechsports.com' + str(box_scores[gameNum])
-    box_soup = Soup((requests.get(box_url)).text)
+    box_soup = Soup((requests.get(box_url)).text, features="lxml")
     tables = box_soup.find_all('table')
     
-    first_half_visitor_table = tables[1]
-    first_half_home_table = tables[4]
-    second_half_visitor_table = tables[1]
-    second_half_home_table = tables[4]
+    visitorStatTable = tables[1]
+    homeStatTable = tables[4]
+    half1PBP = tables[7]
+    half2PBP = tables[8]
+
+    half1_df = get_pbp_table(half1PBP)
+    half2_df = get_pbp_table(half2PBP)
+
+    if otFlag:
+        half3PBP = tables[9]
+        half3_df = get_pbp_table(half3PBP)
+
+
+
+    def generateDataframes(half1_df,half2_df,statTable,label):
+        shots1_df = get_shots(half1_df,label)
+        shots2_df = get_shots(half2_df,label)
+        shots1_df['time'] = shots1_df['time'].astype(int) + 1200
+        shots_df = pd.concat([shots1_df,shots2_df])
+        
+        subs1_df = get_subs(half1_df,label)
+        subs2_df = get_subs(half2_df,label)
+
+        lineup1_df = get_lineup(subs1_df, statTable)
+        lineup2_df = get_lineup(subs2_df, statTable)
+        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1200
+        lineup_df= pd.concat([lineup1_df,lineup2_df])
+        return lineup_df, shots_df
     
-    first_half_pbp = tables[7]
-    second_half_pbp = tables[8]
+    def generateDataframesOT(half1_df,half2_df,half3_df,statTable,label):
+        shots1_df = get_shots(half1_df,label)
+        shots2_df = get_shots(half2_df,label)
+        shots3_df = get_shots(half3_df,label)
+        shots1_df['time'] = shots1_df['time'].astype(int) + 1500
+        shots2_df['time'] = shots2_df['time'].astype(int) + 300
+        shots_df = pd.concat([shots1_df,shots2_df,shots3_df])
+        
+        subs1_df = get_subs(half1_df,label)
+        subs2_df = get_subs(half2_df,label)
+        subs3_df = get_subs(half3_df,label)
 
-    h1_df = get_pbp_table(first_half_pbp)
-    h2_df = get_pbp_table(second_half_pbp)
+        lineup1_df = get_lineup(subs1_df, statTable, '20:00')
+        lineup2_df = get_lineup(subs2_df, statTable, '20:00')
+        lineup3_df = get_lineup(subs3_df, statTable, '05:00')
+        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1500
+        lineup2_df['Time'] = lineup2_df['Time'].astype(int) + 300
+        lineup_df= pd.concat([lineup1_df,lineup2_df,lineup3_df])
+        return lineup_df, shots_df
 
-    v1shots_df = get_shots(h1_df,'visitor')
-    v1shots_df.to_csv('temp3.csv')
-    v2shots_df = get_shots(h2_df,'visitor')
-    v1shots_df['time'] = v1shots_df['time'].astype(int) + 1200
-    vshots_df = pd.concat([v1shots_df,v2shots_df])
-    vshots_df.to_csv('temp4.csv')
-    h1shots_df = get_shots(h1_df,'home')
-    h2shots_df = get_shots(h2_df,'home')
-    h1shots_df['time'] = h1shots_df['time'].astype(int) + 1200
-    hshots_df = pd.concat([h1shots_df,h2shots_df])
+    if otFlag:
+        vlineup_df,vshots_df = generateDataframesOT(half1_df,half2_df,half3_df,visitorStatTable,'visitor')
+        hlineup_df,hshots_df = generateDataframesOT(half1_df,half2_df,half3_df,homeStatTable,'home')
+        maxTime=2700
+    else:
+        vlineup_df,vshots_df = generateDataframes(half1_df,half2_df,visitorStatTable,'visitor')
+        hlineup_df,hshots_df = generateDataframes(half1_df,half2_df,homeStatTable,'home')
+        maxTime=2400
 
-    v1subs_df = get_subs(h1_df,'visitor')
-    v2subs_df = get_subs(h2_df,'visitor')
-    h1subs_df = get_subs(h1_df,'home')
-    h2subs_df = get_subs(h2_df,'home')
 
-    v1lineup_df = get_lineup(v1subs_df, first_half_visitor_table)
-    v2lineup_df = get_lineup(v2subs_df, second_half_visitor_table)
-    v1lineup_df['Time'] = v1lineup_df['Time'].astype(int) + 1200
-    vlineup_df= pd.concat([v1lineup_df,v2lineup_df])
-                
-    h1lineup_df = get_lineup(h1subs_df, first_half_home_table)
-    h2lineup_df = get_lineup(h2subs_df, second_half_home_table)
-    h1lineup_df['Time'] = h1lineup_df['Time'].astype(int) + 1200
-    hlineup_df= pd.concat([h1lineup_df,h2lineup_df])
+
 
     
-    vpm_df = get_plus_minus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
-    hpm_df = get_plus_minus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)    
+    #vpm_df = get_plus_minus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
+    #hpm_df = get_plus_minus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)    
     
-    render_full_lineup_chart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'vlineup',platform)
-    render_full_lineup_chart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hlineup',platform)
+    render_full_lineup_chart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitor',maxTime,platform)
+    render_full_lineup_chart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hoopsLineupsHome',maxTime,platform)
     
-    df = pd.read_csv('plusminus.csv')
+    '''
+    if otFlag:
+        ot_pbp = tables[9]
+        ot_df = get_pbp_table(ot_pbp)
+        v3shots_df = get_shots(ot_df,'visitor')
+        h3shots_df = get_shots(ot_df,'home')
+        v3subs_df = get_subs(ot_df,'visitor')
+        h3subs_df = get_subs(ot_df,'home')
+        print(v3subs_df)
+        v3lineup_df = get_lineup(v3subs_df, first_half_visitor_table)
+        h3lineup_df = get_lineup(h3subs_df, first_half_visitor_table)
+
+        render_full_lineup_chart(v3lineup_df,v3shots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitorOT',platform)
+    '''
+
+
+
+
+
+
+    
+    '''
+    df = pd.read_csv('tmp/plusminus.csv')
     df = df.set_index('Player')
     if visitorId == '2348':
         pm_df = vpm_df
@@ -636,10 +663,7 @@ def hoopsLineups(platform, gameId, gameNum):
     except: df_master = df
     
     print(df_master)
-    df_master.to_csv('plusminus.csv')
-    
-    
-    #tweetGraphic(visitor,home,platform)
-    #tweetPlusMinus(platform,visitor,home,vpm_df,hpm_df)
+    df_master.to_csv('tmp/plusminus.csv')
+    '''
 
-hoopsLineups('Chrome', '401573591', -1)      
+hoopsLineups('Chrome', '401700216', -1)      
