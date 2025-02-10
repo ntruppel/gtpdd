@@ -8,7 +8,7 @@ import matplotlib.colors as mc
 import colorsys
 from PIL import Image
 from lib.common import parse_th_row, parse_mod_th_row, parse_td_row, parse_mod_td_row
-from lib.hoopsCommon import getESPNAPI
+from lib.hoopsCommon import getESPNAPI, getESPNGameID
     
 def get_pbp_table(table):
     with pd.option_context('future.no_silent_downcasting', True):
@@ -319,6 +319,9 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     ## Add text to chart
     ax.text(1200,0,"STARTERS", fontsize=10, color=color_code, weight='bold', va='center', ha='center')
     ax.text(1200,6,"BENCH", fontsize=10, color=color_code, weight='bold', va='center', ha='center')
+    ax.text(1200,-1.5,"vs " + oppo, fontsize=10, color='black', va='center', ha='center')
+
+
 
     ## Finalize Chart
     ax.set_xlim(0,int(maxTime))
@@ -337,7 +340,6 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     ax.grid(axis="x", color="white", alpha=.5, linewidth=.5)
     plt.gca().invert_yaxis()
     ax.text(0,-5," ")
-    ax.set_title('at\n\n ')
     ax.tick_params(axis=u'y', which=u'both',length=0)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -354,32 +356,19 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     else:
         fig_path = 'tmp/hoopsLineupsTemp.png'
         team_logo_path = 'logo/'+team+'.png'
-        oppo_logo_path = 'logo/'+oppo+'.png'
         out_path = 'out/' + filename + '.png'        
         
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
     
     img = Image.open(fig_path)
     team_logo = Image.open(team_logo_path)
-    oppo_logo = Image.open(oppo_logo_path)
-    logo_size = 250
-    
+    if team == 'Louisiana Tech': logo_size=350
+    else: logo_size = 250
     team_logo = team_logo.resize((logo_size,logo_size))
-    oppo_logo = oppo_logo.resize((logo_size,logo_size))
     
     img_w, img_h = img.size
-    v_offset = ((img_w - logo_size) -1390 , 10)
-    h_offset = ((img_w) -1290 , 10)
-    
-
-    if filename == 'vlineup':
-        img.paste(team_logo, v_offset, team_logo)
-        img.paste(oppo_logo.convert('L'), h_offset, oppo_logo)
-        
-    else:
-        img.paste(team_logo, h_offset, team_logo)
-        img.paste(oppo_logo.convert('L'), v_offset, oppo_logo)
-    
+    offset = (int(img_w-1271-(logo_size//2)), 2)
+    img.paste(team_logo, offset, team_logo)
     img.save(out_path)
     
     
@@ -494,7 +483,25 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
         
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
     
+
     img = Image.open(fig_path)
+    
+    if filename == 'visitor':
+        logo_path = oppo_logo_path
+
+    else:
+        logo_path = team_logo_path
+        
+    team_logo = Image.open(logo_path)
+    logo_size = 250
+    team_logo = team_logo.resize((logo_size,logo_size))
+    oppo_logo = oppo_logo.resize((logo_size,logo_size))
+    img_w, img_h = img.size
+    v_offset = (int(img_w/2 - logo_size - 40) , -2)
+    h_offset = (int(img_w/2) + 40 , -2)
+    img.paste(team_logo, v_offset, team_logo)
+
+    '''
     team_logo = Image.open(team_logo_path)
     oppo_logo = Image.open(oppo_logo_path)
     at = Image.open(at_path)
@@ -503,9 +510,7 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
     team_logo = team_logo.resize((logo_size,logo_size))
     oppo_logo = oppo_logo.resize((logo_size,logo_size))
     
-    img_w, img_h = img.size
-    v_offset = (int(img_w/2 - logo_size - 40) , -2)
-    h_offset = (int(img_w/2) + 40 , -2)
+    
     at_offset = (int(img_w/2)-40, 95)
     
 
@@ -518,7 +523,7 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
         img.paste(team_logo, h_offset, team_logo)
         img.paste(at, at_offset, at)
         img.paste(oppo_logo.convert('L'), v_offset, oppo_logo)
-        
+    '''    
     img.save(out_path)
     
     if platform == 'AWS':
@@ -528,21 +533,8 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
 
     return df
  
-def hoopsLineups(platform, gameId, gameNum):
-    x,visitorId,homeId,visitor,home,v_color,v_color2,h_color,h_color2,scores_df = getESPNAPI(platform, gameId)
-    otFlag = 1
-    
-    def getBackgroundColors(color,color2):
-        if color == "#002d65":
-            color2 = "lightgray"
-        else:
-            color = "black"
-            color2 = "lightgray"
-        return color,color2
-    v_color, v_color2 = getBackgroundColors(v_color,v_color2)
-    h_color, h_color2 = getBackgroundColors(h_color,h_color2)
-    
-    print(visitor,home,h_color,v_color)
+def hoopsLineups(team, gameNum, platform):
+    otFlag = 0
     
     home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text, features="lxml")
     box_scores = []
@@ -550,7 +542,6 @@ def hoopsLineups(platform, gameId, gameNum):
     for li in lis:
         box_scores.append(li.a.get("href"))
     box_scores = list(dict.fromkeys(box_scores))
-    
     
     box_url = 'https://latechsports.com' + str(box_scores[gameNum])
     box_soup = Soup((requests.get(box_url)).text, features="lxml")
@@ -568,8 +559,6 @@ def hoopsLineups(platform, gameId, gameNum):
         half3PBP = tables[9]
         half3_df = get_pbp_table(half3PBP)
 
-
-
     def generateDataframes(half1_df,half2_df,statTable,label):
         shots1_df = get_shots(half1_df,label)
         shots2_df = get_shots(half2_df,label)
@@ -579,8 +568,8 @@ def hoopsLineups(platform, gameId, gameNum):
         subs1_df = get_subs(half1_df,label)
         subs2_df = get_subs(half2_df,label)
 
-        lineup1_df = get_lineup(subs1_df, statTable)
-        lineup2_df = get_lineup(subs2_df, statTable)
+        lineup1_df = get_lineup(subs1_df, statTable, '20:00')
+        lineup2_df = get_lineup(subs2_df, statTable, '20:00')
         lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1200
         lineup_df= pd.concat([lineup1_df,lineup2_df])
         return lineup_df, shots_df
@@ -613,38 +602,30 @@ def hoopsLineups(platform, gameId, gameNum):
         vlineup_df,vshots_df = generateDataframes(half1_df,half2_df,visitorStatTable,'visitor')
         hlineup_df,hshots_df = generateDataframes(half1_df,half2_df,homeStatTable,'home')
         maxTime=2400
-
-
-
-
     
     #vpm_df = get_plus_minus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
-    #hpm_df = get_plus_minus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)    
+    #hpm_df = get_plus_minus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)   
+
+    if gameNum == -1:
+        gamesPlayed = len(box_scores)
+        gameNum = gamesPlayed - 1
+
+    gameId = getESPNGameID(team,gameNum)
+    x,visitorId,homeId,visitor,home,v_color,v_color2,h_color,h_color2,scores_df = getESPNAPI(platform, gameId)
+    def getBackgroundColors(color,color2):
+        if color == "#002d65":
+            color2 = "lightgray"
+        else:
+            color = "black"
+            color2 = "lightgray"
+        return color,color2
+    v_color, v_color2 = getBackgroundColors(v_color,v_color2)
+    h_color, h_color2 = getBackgroundColors(h_color,h_color2)
+    print(visitor,home,h_color,v_color) 
     
     render_full_lineup_chart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitor',maxTime,platform)
     render_full_lineup_chart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hoopsLineupsHome',maxTime,platform)
-    
-    '''
-    if otFlag:
-        ot_pbp = tables[9]
-        ot_df = get_pbp_table(ot_pbp)
-        v3shots_df = get_shots(ot_df,'visitor')
-        h3shots_df = get_shots(ot_df,'home')
-        v3subs_df = get_subs(ot_df,'visitor')
-        h3subs_df = get_subs(ot_df,'home')
-        print(v3subs_df)
-        v3lineup_df = get_lineup(v3subs_df, first_half_visitor_table)
-        h3lineup_df = get_lineup(h3subs_df, first_half_visitor_table)
 
-        render_full_lineup_chart(v3lineup_df,v3shots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitorOT',platform)
-    '''
-
-
-
-
-
-
-    
     '''
     df = pd.read_csv('tmp/plusminus.csv')
     df = df.set_index('Player')
@@ -666,4 +647,4 @@ def hoopsLineups(platform, gameId, gameNum):
     df_master.to_csv('tmp/plusminus.csv')
     '''
 
-hoopsLineups('Chrome', '401700216', -1)      
+hoopsLineups('latech', -1, '')      

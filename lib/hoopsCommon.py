@@ -35,6 +35,15 @@ def getHoopsSchedule():
     df = pd.DataFrame({'gameID': gameIDs,'date': dates, 'away':away, 'home':home})
     return df, record
 
+def getESPNGameID(team, gameNum):
+    url = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams/' + team + '/schedule'
+    r = requests.get(url)
+    x = r.json()
+
+    y = x['events'][gameNum]['id']
+    return(y)
+
+
 def getESPNAPI(platform, gameId):
     url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary?event=' + gameId
     r = requests.get(url)
