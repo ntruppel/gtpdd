@@ -29,14 +29,19 @@ def get_subs(df,team):
     subs_df = df[df[play].str.contains('SUB',na = False)]
     subs_df = subs_df.drop(columns=[score,n_score,n_play])
     subs_df['action'] = np.nan
-    subs_df[['action','player']] = subs_df[play].str.split("b", n=2, expand=True)
-    subs_df['player'] = subs_df['player'].str[2:]
-    subs_df = subs_df.drop(columns=play)
-    subs_df['player'] = subs_df['player'].str.split(',').str[::-1].str.join(' ')
+    
+    ## Needed to wrap this in a try/except because there may be a half (or probably an OT) where no subs were made
+    try:
+        subs_df[['action','player']] = subs_df[play].str.split("b", n=2, expand=True)
+        subs_df['player'] = subs_df['player'].str[2:]
+        subs_df = subs_df.drop(columns=play)
+        subs_df['player'] = subs_df['player'].str.split(',').str[::-1].str.join(' ')
+    except:
+        0
     return subs_df
 
 
-def get_shots(df,team):
+def getShots(df,team):
     searchfor = ['GOOD', 'MISS', 'REBOUND', 'FOUL', 'TURNOVER', 'ASSIST']    
     if team == 'visitor': play,score,n_play,n_score = 'visitor_play','visitor_score','home_play','home_score'
     else: n_play,n_score,play,score = 'visitor_play','visitor_score','home_play','home_score'
@@ -60,138 +65,71 @@ def get_shots(df,team):
         
     return shots_df
 
-def get_lineup(subs_df, lineups_df, startTime):
-    # Create empty row with 20:00
-    lineup = [[startTime,np.nan,np.nan,np.nan,np.nan,np.nan]]
+def getLineup(subs_df, statTable, startTime, endSubs):
+
+    ### For the first half, we need to grab the starters to see who's on the court at the beginning of the game
+    ### This is done by grabbing the box score table and grabbing the first 5 players
+    ### As far as I've seen, these are always the starters, but it may be worth grabbing the players with a * instead in the future
+    def getStarters():
+        name_rows = statTable.find_all('tr')
+        list_of_parsed_name_rows = [parse_mod_td_row(row) for row in name_rows[1:]]
+        
+        name_df = DataFrame(list_of_parsed_name_rows)
+        name_df[1] = name_df[1].str.replace('</a>', '')
+        name_df[1] = name_df[1].str.split('</td>').str[0]
+        name_df[1] = name_df[1].str.rsplit('>').str[-1]
+        name_df[1] = name_df[1].str.upper()
+        name_df[1] = name_df[1].str.strip()
+        name_df = name_df[[1]]
+        name_df = name_df.head(5)
+
+        name_df[1] = name_df[1].str.split(',').str[1] + ' ' + name_df[1].str.split(',').str[0]
+        nameList = name_df[1].to_list()  
+        return nameList  
+    
+    ## Create a df with rows for each sub time, filled with the starters. They will be removed as they are subbed out
+    ## TODO: No reason to do the first iterrows here, just grab unique time values from subs_df
+    if len(endSubs):
+        lineup = [[startTime, endSubs['P1'].upper(), endSubs['P2'].upper(), endSubs['P3'].upper(), endSubs['P4'].upper(), endSubs['P5'].upper()]]
+    else:
+        nameList = getStarters()
+        lineup = [[startTime,nameList[0].strip(),nameList[1].strip(),nameList[2].strip(),nameList[3].strip(),nameList[4].strip()]]
     lineup_df = pd.DataFrame(lineup, columns = ['Time','P1','P2','P3','P4','P5'])
     lineup_df = lineup_df.set_index('Time')
-    lineup_df['P1'] = lineup_df['P1'].astype('object')
-    lineup_df['P2'] = lineup_df['P2'].astype('object')
-    lineup_df['P3'] = lineup_df['P3'].astype('object')
-    lineup_df['P4'] = lineup_df['P4'].astype('object')
-    lineup_df['P5'] = lineup_df['P5'].astype('object')
+    for index, row in subs_df.iterrows(): 
+        if row['time'] != startTime: lineup_df.loc[row['time']] = [np.nan,np.nan,np.nan,np.nan,np.nan]
+    lineup_df = lineup_df.ffill()
 
-
-    
-    for index, row in subs_df.iterrows(): lineup_df.loc[row['time']] = [np.nan,np.nan,np.nan,np.nan,np.nan]
-
-    subs_df = subs_df.sort_values(by=['time','action'], ascending=False)
-        
-    # Go line-by-line through vsubs
+    ## Go through each sub action
+    i=0
     for index, row in subs_df.iterrows():
-        if row['action'] == 'SUB IN ':
-            
-            def fillLoop(pNum):
-                lineup_df.loc[row['time'],pNum] = row['player']
-                lineup_df[pNum] = lineup_df[pNum].ffill()
-            
-            if pd.isnull(lineup_df.loc[row['time'],'P1']): fillLoop('P1')
-            elif pd.isnull(lineup_df.loc[row['time'],'P2']): fillLoop('P2')
-            elif pd.isnull(lineup_df.loc[row['time'],'P3']): fillLoop('P3')
-            elif pd.isnull(lineup_df.loc[row['time'],'P4']): fillLoop('P4')
-            elif pd.isnull(lineup_df.loc[row['time'],'P5']): fillLoop('P5')
+        if row['action'] == 'SUB OUT ':
+            for pNum in ['P1', 'P2', 'P3', 'P4', 'P5']:
+                if lineup_df.loc[row['time'],pNum] == row['player']:
+                    lineup_df.loc[row['time']:,pNum] = np.nan
+                    break          
 
-        if row['action'] == 'SUB OUT ' and row['time'] != startTime:
-            
-            def subOutLoop(pNum):
-                lineup_df.loc[row['time']:,pNum] = np.nan
-                
-            def startPlayers(pNum):
-                lineup_df.loc[startTime,pNum] = row['player']
-
-            if lineup_df.loc[row['time'],'P1'] == row['player']: subOutLoop('P1')
-            elif lineup_df.loc[row['time'],'P2'] == row['player']: subOutLoop('P2')
-            elif lineup_df.loc[row['time'],'P3'] == row['player']: subOutLoop('P3')
-            elif lineup_df.loc[row['time'],'P4'] == row['player']: subOutLoop('P4')
-            elif lineup_df.loc[row['time'],'P5'] == row['player']: subOutLoop('P5')
-                
-            elif pd.isnull(lineup_df.loc[startTime,'P1']): startPlayers('P1')
-            elif pd.isnull(lineup_df.loc[startTime,'P2']): startPlayers('P2')
-            elif pd.isnull(lineup_df.loc[startTime,'P3']): startPlayers('P3')
-            elif pd.isnull(lineup_df.loc[startTime,'P4']): startPlayers('P4')
-            elif pd.isnull(lineup_df.loc[startTime,'P5']): startPlayers('P5')
-                
-    if(lineup_df['P5'].isnull().all()):
-        nosubs = []
-        name_rows = lineups_df.find_all('tr')
-        list_of_parsed_name_rows = [parse_mod_td_row(row) for row in name_rows[1:]]
-        name_df = DataFrame(list_of_parsed_name_rows)
-        name_df[1] = name_df[1].str.split('</span>').str[1]
-        name_df[1] = name_df[1].str.split('</td>').str[0]
-        name_df = name_df.drop(columns=[0,2,3,4,5,6,7,8,9,10,11,12,13,14])
-        
-        box_rows = lineups_df.find_all('tr')
-        list_of_parsed_box_rows = [parse_td_row(row) for row in box_rows[1:]]
-        box_df = DataFrame(list_of_parsed_box_rows)        
-        box_df = box_df.drop(columns=[0,1,2,4,5,6,7,8,9,10,11,12,13,14])
-        box_df.columns = ['minutes']
-        name_df.columns = ['name']
-                
-        minutes = box_df['minutes']
-        df = name_df.join(minutes)
+        elif row['action'] == 'SUB IN ':
+            for pNum in ['P1', 'P2', 'P3', 'P4', 'P5']:
+                if pd.isnull(lineup_df.loc[row['time'],pNum]):
+                    lineup_df.loc[row['time'],pNum] = row['player']
+                    lineup_df[pNum] = lineup_df[pNum].ffill()  
+                    break  
     
-        ## Get list of players who played 20 minutes
-        ## FUTURE: I think starters have a * in column 2
-        for index, row in df.iterrows():
-            if row['minutes'] > '21':
-                nosubs.append(row['name'])
-        nosubs = [x for x in nosubs if str(x) != 'nan']
-        ## Sometimes the names are hyperlinks, so we have to extract the actual name
-        try:
-            i=0
-            for nosub in nosubs:
-                nosubs[i] = nosub.split('>')[1].split('</a')[0]
-                i = i+1
-        except: 0
-            
-        ## Change from LAST,FIRST to FIRST LAST
-        i = 0
-        for nosub in nosubs:
-            nosubs[i] = nosub.split(',')[1].strip() + ' ' + nosub.split(',')[0].strip()
-            i = i + 1
-        
-        ## Get the names already in the lineup
-        lineup_list = lineup_df.values.tolist()[0]
-        
-        ## Convert the names from allcaps
-        i=0
-        for lineup in lineup_list:
-            lineup_list[i] = str(lineup).title()
-            i=i+1
-        
-        ## Remove names from nosubs if they are already on the lineup
-        nosubs2 = []
-        for nosub in nosubs:
-            if nosub.strip() not in lineup_list:
-                nosubs2.append(nosub)
-        if nosubs2:
-            nosubs = nosubs2
-
-        lineup_df['P5'] = nosubs[0]
-    
-    i=1
-    for pNum in ['P4','P3','P2','P1']:
-        if(lineup_df[pNum].isnull().all()):
-            lineup_df[pNum] = nosubs[i]
-        i = i+1
-    
-    for pNum in ['P1','P2','P3','P4','P5']:
-        lineup_df[pNum] = lineup_df[pNum].str.title()
-    
-    lineup_df = lineup_df.map(lambda x: x.strip() if isinstance(x, str) else x)
-    lineup_df = lineup_df.transpose()
-    lineup_df = lineup_df.apply(lambda x: x.sort_values().values)
-    lineup_df = lineup_df.transpose()
-                
     ## Change timestamp in Time column to seconds
     lineup_df = lineup_df.reset_index(level=0)
     lineup_df[['Minutes','Seconds']] = lineup_df['Time'].str.split(':', expand=True)# + int(lineup_df['Time'].str.split(':').str[1])
     lineup_df['Time'] = lineup_df['Minutes'].astype(int)*60 + lineup_df['Seconds'].astype(int)
     lineup_df = lineup_df.drop(columns=['Minutes','Seconds'])
+
+    for col in lineup_df.columns:
+        if lineup_df[col].dtype == 'object':
+            lineup_df[col] = lineup_df[col].str.title()
+
     return lineup_df
 
 
-def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2, filename, maxTime, platform):
+def renderLineupChart(lineup_df, shots_df, team, oppo, color_code, color2, filename, maxTime, platform):
     lineup_df = lineup_df.set_index('Time')
     
     ## Get list of starters and add 'gaps' for STARTERS and BENCH text
@@ -201,9 +139,10 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     
     ## Get list of all players who played in the game (without duplicates)
     player_list = lineup_df.values.tolist()
-    player_list = list(np.concatenate(player_list).flat)
+    player_list = np.concatenate(player_list).tolist()
     player_list = list(set(player_list))
     player_list.sort()
+
     
     ## Seperate out the starters at the top of the chart
     player_list_temp = starters + player_list
@@ -328,10 +267,15 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     xticks = [0,240,480,720,960,1200,1440,1680,1920,2160,2400]
     xticklabels = ['Start','16:00\n1H','12:00\n1H','8:00\n1H','4:00\n1H','Halftime','16:00\n2H','12:00\n2H','8:00\n2H','4:00\n2H','End of\nRegulation']
 
-    if maxTime == 2700:
+    if maxTime >= 2700:
         xticks.append(2700)
-        xticklabels.append('End of\nOT')
+        xticklabels.append('End of\nOT1')
         plt.axvline(x=2400, color='white', linewidth=1.5)
+
+    if maxTime >= 3000:
+        xticks.append(3000)
+        xticklabels.append('End of\nOT2')
+        plt.axvline(x=3000, color='white', linewidth=1.5)
 
     ax.set_xticks(xticks)
     ax.set_xticklabels(xticklabels)
@@ -380,7 +324,7 @@ def render_full_lineup_chart(lineup_df, shots_df, team, oppo, color_code, color2
     return 0
 
 
-def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform): 
+def getPlusMinus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform): 
     ## Get list of all players who played in the game (without duplicates)
     lineup_df2 = lineup_df.drop(columns=['Time'])
     player_list = lineup_df2.values.tolist()
@@ -436,7 +380,6 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
     df = pd.DataFrame({'Player': player_list, '+/-': pm_list})
     df = df.sort_values(by=['+/-'], ascending=False)
     df = df.reset_index(drop=True)
-    print(df)
     
     fig, ax = plt.subplots(dpi=200)
     ax.barh(df['Player'], df['+/-'], align='center', color=color)
@@ -534,7 +477,9 @@ def get_plus_minus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform
     return df
  
 def hoopsLineups(team, gameNum, platform):
-    otFlag = 0
+    ## TODO: Try/except with the pbp tables to detect an OT/2OT game
+    otFlag = 1
+    ot2Flag = 1
     
     home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text, features="lxml")
     box_scores = []
@@ -559,25 +504,30 @@ def hoopsLineups(team, gameNum, platform):
         half3PBP = tables[9]
         half3_df = get_pbp_table(half3PBP)
 
+    if ot2Flag:
+        half4PBP = tables[10]
+        half4_df = get_pbp_table(half4PBP)
+
+    ## TODO: Combine these three functions. Too much repeated
     def generateDataframes(half1_df,half2_df,statTable,label):
-        shots1_df = get_shots(half1_df,label)
-        shots2_df = get_shots(half2_df,label)
+        shots1_df = getShots(half1_df,label)
+        shots2_df = getShots(half2_df,label)
         shots1_df['time'] = shots1_df['time'].astype(int) + 1200
         shots_df = pd.concat([shots1_df,shots2_df])
         
         subs1_df = get_subs(half1_df,label)
         subs2_df = get_subs(half2_df,label)
 
-        lineup1_df = get_lineup(subs1_df, statTable, '20:00')
-        lineup2_df = get_lineup(subs2_df, statTable, '20:00')
+        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
+        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
         lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1200
         lineup_df= pd.concat([lineup1_df,lineup2_df])
         return lineup_df, shots_df
     
     def generateDataframesOT(half1_df,half2_df,half3_df,statTable,label):
-        shots1_df = get_shots(half1_df,label)
-        shots2_df = get_shots(half2_df,label)
-        shots3_df = get_shots(half3_df,label)
+        shots1_df = getShots(half1_df,label)
+        shots2_df = getShots(half2_df,label)
+        shots3_df = getShots(half3_df,label)
         shots1_df['time'] = shots1_df['time'].astype(int) + 1500
         shots2_df['time'] = shots2_df['time'].astype(int) + 300
         shots_df = pd.concat([shots1_df,shots2_df,shots3_df])
@@ -586,15 +536,44 @@ def hoopsLineups(team, gameNum, platform):
         subs2_df = get_subs(half2_df,label)
         subs3_df = get_subs(half3_df,label)
 
-        lineup1_df = get_lineup(subs1_df, statTable, '20:00')
-        lineup2_df = get_lineup(subs2_df, statTable, '20:00')
-        lineup3_df = get_lineup(subs3_df, statTable, '05:00')
+        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
+        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
+        lineup3_df = getLineup(subs3_df, statTable, '05:00', lineup2_df.iloc[-1])
         lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1500
         lineup2_df['Time'] = lineup2_df['Time'].astype(int) + 300
         lineup_df= pd.concat([lineup1_df,lineup2_df,lineup3_df])
         return lineup_df, shots_df
+    
+    def generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,statTable,label):
+        shots1_df = getShots(half1_df,label)
+        shots2_df = getShots(half2_df,label)
+        shots3_df = getShots(half3_df,label)
+        shots4_df = getShots(half4_df,label)
+        shots1_df['time'] = shots1_df['time'].astype(int) + 1800
+        shots2_df['time'] = shots2_df['time'].astype(int) + 600
+        shots3_df['time'] = shots3_df['time'].astype(int) + 300
+        shots_df = pd.concat([shots1_df,shots2_df,shots3_df,shots4_df])
+        
+        subs1_df = get_subs(half1_df,label)
+        subs2_df = get_subs(half2_df,label)
+        subs3_df = get_subs(half3_df,label)
+        subs4_df = get_subs(half4_df,label)
 
-    if otFlag:
+        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
+        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
+        lineup3_df = getLineup(subs3_df, statTable, '05:00', lineup2_df.iloc[-1])
+        lineup4_df = getLineup(subs4_df, statTable, '05:00', lineup3_df.iloc[-1])
+        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1800
+        lineup2_df['Time'] = lineup2_df['Time'].astype(int) + 600
+        lineup3_df['Time'] = lineup3_df['Time'].astype(int) + 300
+        lineup_df= pd.concat([lineup1_df,lineup2_df,lineup3_df,lineup4_df])
+        return lineup_df, shots_df
+
+    if ot2Flag:
+        vlineup_df,vshots_df = generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,visitorStatTable,'visitor')
+        hlineup_df,hshots_df = generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,homeStatTable,'home')
+        maxTime=3000
+    elif otFlag:
         vlineup_df,vshots_df = generateDataframesOT(half1_df,half2_df,half3_df,visitorStatTable,'visitor')
         hlineup_df,hshots_df = generateDataframesOT(half1_df,half2_df,half3_df,homeStatTable,'home')
         maxTime=2700
@@ -603,14 +582,15 @@ def hoopsLineups(team, gameNum, platform):
         hlineup_df,hshots_df = generateDataframes(half1_df,half2_df,homeStatTable,'home')
         maxTime=2400
     
-    #vpm_df = get_plus_minus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
-    #hpm_df = get_plus_minus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)   
+    #vpm_df = getPlusMinus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
+    #hpm_df = getPlusMinus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)   
 
-    if gameNum == -1:
+    if gameNum < 0:
         gamesPlayed = len(box_scores)
-        gameNum = gamesPlayed - 1
+        gameNum = gamesPlayed + gameNum
 
     gameId = getESPNGameID(team,gameNum)
+    print(gameId)
     x,visitorId,homeId,visitor,home,v_color,v_color2,h_color,h_color2,scores_df = getESPNAPI(platform, gameId)
     def getBackgroundColors(color,color2):
         if color == "#002d65":
@@ -623,8 +603,8 @@ def hoopsLineups(team, gameNum, platform):
     h_color, h_color2 = getBackgroundColors(h_color,h_color2)
     print(visitor,home,h_color,v_color) 
     
-    render_full_lineup_chart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitor',maxTime,platform)
-    render_full_lineup_chart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hoopsLineupsHome',maxTime,platform)
+    renderLineupChart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitor',maxTime,platform)
+    renderLineupChart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hoopsLineupsHome',maxTime,platform)
 
     '''
     df = pd.read_csv('tmp/plusminus.csv')

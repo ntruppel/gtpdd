@@ -9,3 +9,4 @@ tmp/*
 **/*.ini
 
 fbTest.py
+output.txt
