@@ -1,6 +1,7 @@
 # Remove output and temp folders
 out/*
 tmp/*
+logo/*
 
 # Remove files with key info
 .env

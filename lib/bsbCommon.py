@@ -9,7 +9,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import six
 import csv
-import tweepy
 from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
@@ -18,7 +17,7 @@ from lib.common import parseRowStringTextTrue,parseRowStringTextTrue0,parseRowSt
 
 def getBoxScore(box_score, returnType):
     box_url = 'https://latechsports.com' + str(box_score)
-    oppo = box_score.split('2024/')[1].split('/boxscore')[0]
+    oppo = box_score.split('2025/')[1].split('/boxscore')[0]
     box_soup = Soup((requests.get(box_url)).text, features="lxml")
     tables = box_soup.find_all('table')
     
@@ -48,9 +47,7 @@ def getBoxScore(box_score, returnType):
     print(awayName,homeName)
     
     ## Download Team Logos
-    s3 = boto3.client('s3')
-    s3.download_file('gtpdd', 'espnTeamIDs.csv', '/tmp/espnTeamIDs.csv')
-    color_csv = csv.reader(open('/tmp/espnTeamIDs.csv', 'r'), delimiter = ',', quotechar="\"")
+    color_csv = csv.reader(open('csv/espnTeamIDs.csv', 'r'), delimiter = ',', quotechar="\"")
     
     for row in color_csv:
         if row[0] == awayName: awayCode = row[1]
@@ -61,8 +58,8 @@ def getBoxScore(box_score, returnType):
     hlogo = 'https://a.espncdn.com/i/teamlogos/ncaa/500/' + homeCode + '.png'
     hlogo_r = r = requests.get(hlogo)
     
-    open( '/tmp/' + awayName + '.png', 'wb').write(vlogo_r.content)
-    open( '/tmp/' + homeName + '.png', 'wb').write(hlogo_r.content)
+    open( 'logo/' + awayName + '.png', 'wb').write(vlogo_r.content)
+    open( 'logo/' + homeName + '.png', 'wb').write(hlogo_r.content)
     
     ## Get game info
     dls = box_soup.find_all('dl', {"class": "special-stats emphasize inline text-right"})
@@ -310,6 +307,7 @@ def pbpLineByLine(dfs):
     df = df.replace(to_replace ='lined into double play ss to 1b.*', value = '6-3', regex = True)
     df = df.replace(to_replace ='out at first 2b to p.*', value = '4-1', regex = True)
     df = df.replace(to_replace ='out at first 1b to p.*', value = '3-1', regex = True)
+    df = df.replace(to_replace ='out at first ss to 2b.*', value = '5-4', regex = True)
     df = df.replace(to_replace ='out at first.*bunt.*', value = 'SH', regex = True)
     df = df.replace(to_replace ="out on batter's interference.*", value = 'BI', regex = True)
     df = df.replace(to_replace ="reached on catcher's interference.*", value = 'E2', regex = True)

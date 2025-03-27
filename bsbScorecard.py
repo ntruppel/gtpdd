@@ -9,14 +9,11 @@ import matplotlib
 import matplotlib.pyplot as plt
 import six
 import csv
-import tweepy
 from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw, ImageColor
 import re
 from lib.bsbCommon import pbpLineByLine, getBoxScore
 from lib.common import parseRowStringTextTrue,parseRowStringTdA
-import boto3
-
 #####
 # Get PbP Data
 ####
@@ -60,24 +57,19 @@ diamond3 = [401,410]
 
 ## Open scorecard
 ## TODO: Get number of innings and open correct scorecard file
-s3 = boto3.client('s3')
-s3.download_file('gtpdd', 'bsbScorecardTemplate.jpg', '/tmp/bsbScorecardTemplate.jpg')
-s3.download_file('gtpdd', 'fontCassetteTapes.ttf', '/tmp/fontCassetteTapes.ttf')
-s3.download_file('gtpdd', 'fontOswald.ttf', '/tmp/fontOswald.ttf')
 
-img1 = Image.open('/tmp/bsbScorecardTemplate.jpg')
+img1 = Image.open('img/bsbScorecardBlank9Innings.jpg')
 card1 = ImageDraw.Draw(img1)
-img2 = Image.open('/tmp/bsbScorecardTemplate.jpg')
+img2 = Image.open('img/bsbScorecardBlank9Innings.jpg')
 card2 = ImageDraw.Draw(img2)
-font_path = '/tmp/fontCassetteTapes.ttf'
-font2_path = '/tmp/fontOswald.ttf'
+font_path = 'lib/font/fontCassetteTapes.ttf'
+font2_path = 'lib/font/fontOswald.ttf'
 name_font = ImageFont.truetype(font_path, 40)
 play_font = ImageFont.truetype(font_path, 35)
 bs_font = ImageFont.truetype(font_path, 30)
 title_font = ImageFont.truetype(font2_path, 18)
 
 def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, homeAway, pitcher_df):
-    print(df)
     order = 0
     batters = []
     p_counter_list = [0]*9
@@ -195,8 +187,7 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
             orderVar = order
     
             ## Check Name
-            ## FUTURE: Find a way to include defensive subs that don't bat
-            print(row['Name'],order)
+            ## TODO: Find a way to include defensive subs that don't bat
             if row['Name'] not in batters:
                 name = row['Name'].split('-')[0]
                 if len(batters) < 9:
@@ -421,8 +412,8 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
     card.text((930 + (14 - len(homeName))*4.5, 224), homeName, font=title_font,fill=textColor)
     
     ## Paste logos on card
-    away_logo = Image.open('/tmp/' + awayName + '.png')
-    home_logo = Image.open('/tmp/' + homeName + '.png')
+    away_logo = Image.open('logo/' + awayName + '.png')
+    home_logo = Image.open('logo/' + homeName + '.png')
     
     away_logo = away_logo.resize((100,100))
     home_logo = home_logo.resize((100,100))
@@ -534,7 +525,3 @@ printScorecard(card1,away_df, away_bat, away_runs, away_hits, away_errors, away_
 img1.save('out/bsbScorecardAway.png')
 printScorecard(card2,home_df, home_bat, home_runs, home_hits, home_errors, home_lob, homeName, awayName, 'home', home_pitcher_df)
 img2.save('out/bsbScorecardHome.png')
-
-s3.upload_file('out/bsbScorecardAway.png', 'gtpdd', 'bsbScorecardAway.png')
-s3.upload_file('out/bsbScorecardHome.png', 'gtpdd', 'bsbScorecardHome.png')
-
