@@ -5,6 +5,8 @@ Created on Wed Nov  2 18:06:08 2022
 @author: ntrup
 """
 
+## TODO: This still needs a lot of work
+
 
 import cfbd
 import pandas as pd
@@ -19,9 +21,7 @@ import json
 
 def getPBPData():
     ## CFBD Configuration
-    configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
-    configuration.api_key_prefix['Authorization'] = 'Bearer'
+    configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
     api_instance = cfbd.PlaysApi(cfbd.ApiClient(configuration))
 
     ## Get the particular game we are interested in

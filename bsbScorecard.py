@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
+####
+# Script Setup
+####
 
+## Imports
 from bs4 import BeautifulSoup as Soup
 import requests
-import numpy as np
-import pandas as pd
 from pandas import DataFrame
-import matplotlib
-import matplotlib.pyplot as plt
-import six
-import csv
-from datetime import datetime, timedelta
-from PIL import Image, ImageFont, ImageDraw, ImageColor
+from PIL import Image, ImageFont, ImageDraw
 import re
-from lib.bsbCommon import pbpLineByLine, getBoxScore
+from lib.bsbCommon import getBoxScore
 from lib.common import parseRowStringTextTrue,parseRowStringTdA
+
+## User Set Variables
+gameNum = -1
+
+
 #####
 # Get PbP Data
 ####
@@ -27,7 +29,8 @@ for li in lis:
 box_scores = list(dict.fromkeys(box_scores))
 
 ## Pull down raw data
-box_score = box_scores[-1]
+box_score = box_scores[gameNum]
+print(box_score)
 
 awayName,homeName, \
 date,startTime,elapsedTime,attendance,location,weather, \
@@ -72,8 +75,7 @@ title_font = ImageFont.truetype(font2_path, 18)
 def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, homeAway, pitcher_df):
     order = 0
     batters = []
-    p_counter_list = [0]*9
-    ## FUTURE: Replace the 9 with the number of innings
+    p_counter_list = [0]*9                  ## TODO: Replace the 9 with the number of innings
     inning_batter_counter = [0]*20
     bat_around_index = 100
     ## List plays that reach bases
@@ -88,7 +90,7 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
             orderVar = batters.index(row['Name'])
             
             ## If we hit around later in the inning, need to make sure baserunning is reported in right frame
-            ## FUTURE: Right now this only cheks if the batter is the one to first bat around. This logic needs to be improved
+            ## TODO: Right now this only cheks if the batter is the one to first bat around. This logic needs to be improved
             if orderVar != bat_around_index:
                 currentInning = row['Inning']
                 
@@ -113,7 +115,7 @@ def printScorecard(card,df,bat, runs, hits, errors, lobs, homeName, awayName, ho
                 
         elif row['Play'].startswith('SB'): orderVar = batters.index(row['Name'])
         
-        ## FUTURE: Remove pitching substitutions earlier        
+        ## TODO: Remove pitching substitutions earlier        
         elif row['Play'].startswith('to'):
             print(row)
             

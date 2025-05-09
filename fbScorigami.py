@@ -149,10 +149,7 @@ def fbScorigami(platform):
     
     df_new = df
 
-    configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = os.environ['cfbdAuth']
-    configuration.api_key_prefix['Authorization'] = 'Bearer'
-    
+    configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
     api_response = api_instance.get_games(2024, team='Louisiana Tech')
     
@@ -178,7 +175,7 @@ def fbScorigami(platform):
                     oppoScore = awayScore
                     oppo = awayTeam
                 
-                dates.append(game.start_date[0:10])
+                dates.append(game.start_date)
                 techs.append('Louisiana Tech')
                 tech_scores.append(techScore)
                 oppos.append(oppo)

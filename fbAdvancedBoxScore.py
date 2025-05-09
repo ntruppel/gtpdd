@@ -11,18 +11,15 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+## TODO: Opponent Team ID and Game ID are still being passed manually. Need to infer Team ID from Game ID and default to most recent game.
+
 def find_win_expectancy(game_id):
     
-    configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
-    configuration.api_key_prefix['Authorization'] = 'Bearer'
-    
+    configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
 
-    adv_box = api_instance.get_advanced_box_score(game_id=game_id)
-    box = api_instance.get_team_game_stats(2024, game_id=game_id)
-    print(adv_box.teams.keys())
-    print(adv_box.teams['fieldPosition'])
+    adv_box = api_instance.get_advanced_box_score(int(game_id))
+    box = api_instance.get_game_team_stats(year=2024, id=int(game_id), team='Louisiana Tech')
 
     try: 
         if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
@@ -41,7 +38,7 @@ def find_win_expectancy(game_id):
         oppo_so = adv_box.teams.scoring_opportunities[oppo].points_per_opportunity
         oppo_eff = adv_box.teams.success_rates[oppo].overall.total
             
-        if box[0].teams[0].school == 'Louisiana Tech':
+        if box[0].teams[0].team == 'Louisiana Tech':
             tech = 0; oppo = 1
         else:
             tech = 1; oppo = 0
@@ -157,12 +154,13 @@ def find_win_expectancy(game_id):
     win_prob = 0
     api_response = api_instance.get_games(2024, team='Louisiana Tech')
     for game in api_response:
+        print(game)
         temp = game.away_points
         if temp:
             if game.home_team == 'Louisiana Tech':
-                win_prob = game.home_post_win_prob
+                win_prob = game.home_postgame_win_probability
             else:
-                win_prob = game.away_post_win_prob
+                win_prob = game.away_postgame_win_probability
 
     print("Win Probability : " + "{:.1%}".format(win_prob))
     print("Actual Score : " + str(tech_pts) + " - " + str(oppo_pts))
@@ -282,4 +280,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401641012', '2534')
+fbAdvancedBoxScore('401677100', '349')

@@ -36,7 +36,7 @@ def statLookup(statName,adv_df):
     return s_list
 
 def generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2):
-    api_instance = cfbd.StatsApi(cfbd.ApiClient(configuration))
+    api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
     api = api_instance.get_advanced_team_season_stats(year=2022)
     dicts = []
     for api_team in api:
@@ -113,9 +113,7 @@ t2c2='#B6862C'
 
 load_dotenv()
 
-configuration = cfbd.Configuration()
-configuration.api_key['Authorization'] = os.environ["cfbdAuth"]
-configuration.api_key_prefix['Authorization'] = 'Bearer'
+configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
 generateAdvancedPreview(team1,team2,t1c1,t1c2,t2c1,t2c2)
 
 
