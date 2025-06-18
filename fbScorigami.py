@@ -18,31 +18,33 @@ load_dotenv()
 def generateScorigamiTable(df):
     win_scores = []
     lose_scores = []
-    
-    print(df[['Tech Score','Opponent Score']])
-        
-    for index,row in df.iterrows():
-        if row['Tech Score'] > row['Opponent Score']:
-            win_scores.append(row['Tech Score'])
-            lose_scores.append(row['Opponent Score'])
-        else:
-            win_scores.append(row['Opponent Score'])
-            lose_scores.append(row['Tech Score'])
-            
-    score_df = pd.DataFrame()
-    score_df['Win'] = win_scores
-    score_df['Lose'] = lose_scores
+
+    df['Win'] = df[["Tech Score", "Opponent Score"]].max(axis=1)
+    df['Lose'] = df[["Tech Score", "Opponent Score"]].min(axis=1)
+
+    df = df[['Win','Lose','Opponent','Date']]
+    df = df.reset_index()
+    print(df)
+
+    ## Right now, this is only getting the most recent game and putting it in lastWin
+    # Need to add a column on the df that is a 1 if Tech won or a 0 if Tech lost
+    # Then filter on that column, then select the last of that filter
+    # Then also account for if Tech only won all or lost all of that score
         
     isGami = []
+    lastWin = []
+    lastLoss = []
     for i in range(0,101):
         for j in range(0,72):
-            filter = score_df[(score_df['Win'] == i) & (score_df['Lose'] == j)]
+            filter = df[(df['Win'] == i) & (df['Lose'] == j)]
             if filter.empty:
                 isGami.append(0)
+                lastWin.append('')
             else:
                 isGami.append(len(filter))
+                lastWin.append(str(filter['Date'].values[-1]) + ": " + str(filter['Opponent'].values[-1]))
     
-    df = pd.DataFrame({'Win':np.repeat([*range(0,101)],72), 'Lose':[*range(0,72)]*101, 'isGami':isGami})
+    df = pd.DataFrame({'Win':np.repeat([*range(0,101)],72), 'Lose':[*range(0,72)]*101, 'isGami':isGami, 'lastWin':lastWin})
     return df
 
 def generateScorigamiChart(df, df_wl, ext, win_score, lose_score, fullPath, basicPath):
@@ -136,6 +138,47 @@ def generateScorigamiChart(df, df_wl, ext, win_score, lose_score, fullPath, basi
     
     return 0
     
+def checkIfScorigami(df, techScore, oppoScore):
+    forwardGames, forwardLastOppo, forwardLastDate = 0,0,0
+    backwardGames, backwardLastOppo, backwardLastDate = 0,0,0
+    forward_df = df[(df['Tech Score'] == techScore) & (df['Opponent Score'] == oppoScore)]
+    backward_df = df[(df['Tech Score'] == oppoScore) & (df['Opponent Score'] == techScore)]
+    
+    ## If forward and backward
+    if not forward_df.empty and not backward_df.empty:
+        forwardGames = len(forward_df)
+        forwardLastOppo = forward_df.iloc[-1]['Opponent']
+        forwardLastDate = forward_df.iloc[-1]['Date']
+        
+        backwardGames = len(backward_df)
+        backwardLastOppo = backward_df.iloc[-1]['Opponent']
+        backwardLastDate = backward_df.iloc[-1]['Date']
+        
+        totalGames = forwardGames + backwardGames
+        message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nThe last time Tech was the team with " + str(techScore) + ", it was on " + forwardLastDate + " against " + forwardLastOppo + ".\nThe last time Tech scored " + str(oppoScore) + "instead, it was on " + backwardLastDate + " against " + backwardLastOppo    
+
+    ## If just forward
+    elif not forward_df.empty and backward_df.empty:
+        totalGames = len(forward_df)
+        lastOppo = forward_df.iloc[-1]['Opponent']
+        lastDate = forward_df.iloc[-1]['Date']
+        if totalGames > 1:
+            message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nMost recently, on " + lastDate + ", the final was Tech " + str(techScore) + " - " + lastOppo + " " + str(oppoScore)    
+        else:    
+            message = "Saturday's game was not a scorigami.\n\nBut this was only the second time in school history a game ended with this score.\nThe other time was on " + lastDate + ", and the final was Tech " + str(techScore) + " - " + lastOppo + " " + str(oppoScore)
+    
+    elif forward_df.empty and not backward_df.empty:
+        totalGames = len(backward_df)
+        lastOppo = backward_df.iloc[-1]['Opponent']
+        lastDate = backward_df.iloc[-1]['Date']
+        if totalGames > 1:
+            message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nBut never has Tech been the team with " + str(techScore) + " points.\nMost recently, on " + lastDate + ", the final was Tech " + str(oppoScore) + " - " + lastOppo + " " + str(techScore)    
+        else:    
+            message = "Saturday's game was not a scorigami.\n\nBut this was only the second time in school history a game ended with this score.\nThat time, Tech was the team with " + str(oppoScore) + " points.\nIt was on " + lastDate + ", and the final was Tech " + str(oppoScore) + " - " + lastOppo + " " + str(techScore)
+    
+    else:
+        message = "Saturday's game was a scorigami!!\n\nNever before has game ended with the final score of " + str(techScore) + " to " + str(oppoScore) + " in the 120 year history of Louisiana Tech football"
+
 def fbScorigami(platform):
     if platform == 'Windows':
         df = pd.read_csv(r'in_files/fbScorigamiGames.csv')
@@ -145,110 +188,67 @@ def fbScorigami(platform):
         df = pd.read_csv('csv/fbScorigamiGames.csv')
         fullPath = 'out/fbScorigami.png'
         basicPath = 'out/fbScorigamiBasic.png' 
+    
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = df['Date'].dt.strftime('%B %d, %Y')
 
     
-    df_new = df
-
     configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
     api_response = api_instance.get_games(2024, team='Louisiana Tech')
     
-    if 1==1:
-        dates = []
-        techs = []
-        tech_scores = []
-        oppos = []
-        oppo_scores = []
-        for game in api_response:
-            temp = game.away_points
-            if temp:
-                awayTeam = game.away_team
-                awayScore = game.away_points
-                homeTeam = game.home_team
-                homeScore = game.home_points
-                if awayTeam == 'Louisiana Tech':
-                    techScore = awayScore
-                    oppoScore = homeScore
-                    oppo = homeTeam
-                else:
-                    techScore = homeScore
-                    oppoScore = awayScore
-                    oppo = awayTeam
-                
-                dates.append(game.start_date)
-                techs.append('Louisiana Tech')
-                tech_scores.append(techScore)
-                oppos.append(oppo)
-                oppo_scores.append(oppoScore)
-                
-        
-        print(awayTeam, awayScore, homeTeam, homeScore)
-        
-        df2 = pd.DataFrame({"Date":dates, "Tech":techs, "Tech Score": tech_scores, "Opponent":oppos, "Opponent Score":oppo_scores})
-        df = pd.concat([df, df2])
-        df_new = df
-        df = df[:-1]
-        forwardGames, forwardLastOppo, forwardLastDate = 0,0,0
-        backwardGames, backwardLastOppo, backwardLastDate = 0,0,0
-        forward_df = df[(df['Tech Score'] == techScore) & (df['Opponent Score'] == oppoScore)]
-        backward_df = df[(df['Tech Score'] == oppoScore) & (df['Opponent Score'] == techScore)]
-        
-        ## If forward and backward
-        if not forward_df.empty and not backward_df.empty:
-            forwardGames = len(forward_df)
-            forwardLastOppo = forward_df.iloc[-1]['Opponent']
-            forwardLastDate = forward_df.iloc[-1]['Date']
+    dates = []
+    techs = []
+    tech_scores = []
+    oppos = []
+    oppo_scores = []
+    for game in api_response:
+        temp = game.away_points
+        if temp:
+            awayTeam = game.away_team
+            awayScore = game.away_points
+            homeTeam = game.home_team
+            homeScore = game.home_points
+            if awayTeam == 'Louisiana Tech':
+                techScore = awayScore
+                oppoScore = homeScore
+                oppo = homeTeam
+            else:
+                techScore = homeScore
+                oppoScore = awayScore
+                oppo = awayTeam
             
-            backwardGames = len(backward_df)
-            backwardLastOppo = backward_df.iloc[-1]['Opponent']
-            backwardLastDate = backward_df.iloc[-1]['Date']
-            
-            totalGames = forwardGames + backwardGames
-            message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nThe last time Tech was the team with " + str(techScore) + ", it was on " + forwardLastDate + " against " + forwardLastOppo + ".\nThe last time Tech scored " + str(oppoScore) + "instead, it was on " + backwardLastDate + " against " + backwardLastOppo    
-
-        ## If just forward
-        elif not forward_df.empty and backward_df.empty:
-            totalGames = len(forward_df)
-            lastOppo = forward_df.iloc[-1]['Opponent']
-            lastDate = forward_df.iloc[-1]['Date']
-            if totalGames > 1:
-                message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nMost recently, on " + lastDate + ", the final was Tech " + str(techScore) + " - " + lastOppo + " " + str(oppoScore)    
-            else:    
-                message = "Saturday's game was not a scorigami.\n\nBut this was only the second time in school history a game ended with this score.\nThe other time was on " + lastDate + ", and the final was Tech " + str(techScore) + " - " + lastOppo + " " + str(oppoScore)
-        
-        elif forward_df.empty and not backward_df.empty:
-            totalGames = len(backward_df)
-            lastOppo = backward_df.iloc[-1]['Opponent']
-            lastDate = backward_df.iloc[-1]['Date']
-            if totalGames > 1:
-                message = "Saturday's game was not a scorigami.\n\nThis exact score has happened " +  str(totalGames) + " times before in school history.\nBut never has Tech been the team with " + str(techScore) + " points.\nMost recently, on " + lastDate + ", the final was Tech " + str(oppoScore) + " - " + lastOppo + " " + str(techScore)    
-            else:    
-                message = "Saturday's game was not a scorigami.\n\nBut this was only the second time in school history a game ended with this score.\nThat time, Tech was the team with " + str(oppoScore) + " points.\nIt was on " + lastDate + ", and the final was Tech " + str(oppoScore) + " - " + lastOppo + " " + str(techScore)
-        
-        else:
-            message = "Saturday's game was a scorigami!!\n\nNever before has game ended with the final score of " + str(techScore) + " to " + str(oppoScore) + " in the 120 year history of Louisiana Tech football"
-        
-        
-        if techScore > oppoScore:
-            winScore = techScore
-            loseScore = oppoScore
-            
-        else:
-            winScore = oppoScore
-            loseScore = techScore
-    else:
-        print('Failed')
-        
-    df_s = generateScorigamiTable(df_new)
-    try:generateScorigamiChart(df_s, df_new, 1, winScore, loseScore, fullPath, basicPath)
-    except:generateScorigamiChart(df_s, df_new, 1, 101, 100, fullPath, basicPath)
+            dates.append(game.start_date)
+            techs.append('Louisiana Tech')
+            tech_scores.append(techScore)
+            oppos.append(oppo)
+            oppo_scores.append(oppoScore)
+            print(awayTeam, awayScore, homeTeam, homeScore)
     
-    print(message)
+    
+    df2 = pd.DataFrame({"Date":dates, "Tech":techs, "Tech Score": tech_scores, "Opponent":oppos, "Opponent Score":oppo_scores})
+    df2['Date'] = df2['Date'].dt.tz_convert('US/Central')
+    df2['Date'] = df2['Date'].dt.strftime('%B %d, %Y')
+    df = pd.concat([df, df2])
+
+
+        
+    df.to_csv('out/fbScorigamiDataAlt.csv', index=False)
+    df_s = generateScorigamiTable(df)
+    df_s.to_csv('out/fbScorigamiData.csv', index=False)
+
+    #df = df[:-1]      
+    #checkIfScorigami(df, techScore, oppoScore)  
+
+    #try:generateScorigamiChart(df_s, df_new, 1, winScore, loseScore, fullPath, basicPath)
+    #except:generateScorigamiChart(df_s, df_new, 1, 101, 100, fullPath, basicPath)
+    
+    #print(message)
     #createTweet(message,[fullPath])
 
-    if platform == 'AWS':
-        import boto3
-        s3 = boto3.resource("s3")
-        s3.meta.client.upload_file(fullPath, 'gtpdd-public-files', 'fbScorigami.png')
+    #if platform == 'AWS':
+    #    import boto3
+    #    s3 = boto3.resource("s3")
+    #    s3.meta.client.upload_file(fullPath, 'gtpdd-public-files', 'fbScorigami.png')
     
 fbScorigami('AWS')

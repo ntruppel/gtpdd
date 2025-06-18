@@ -1,14 +1,11 @@
 from bs4 import BeautifulSoup as Soup
-import lxml
 import requests
 import numpy as np
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 from PIL import Image
-import tweepy
 import csv
 import boto3
-from datetime import datetime, timedelta
 from lib.common import parseRowStringTd, parseRowStringTextTrue
 
 def getURL(team):
