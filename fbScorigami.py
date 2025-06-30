@@ -19,32 +19,40 @@ def generateScorigamiTable(df):
     win_scores = []
     lose_scores = []
 
-    df['Win'] = df[["Tech Score", "Opponent Score"]].max(axis=1)
-    df['Lose'] = df[["Tech Score", "Opponent Score"]].min(axis=1)
+    df['winScore'] = df[["Tech Score", "Opponent Score"]].max(axis=1)
+    df['lossScore'] = df[["Tech Score", "Opponent Score"]].min(axis=1)
 
-    df = df[['Win','Lose','Opponent','Date']]
+    df['TechWin'] = np.where(df["Tech Score"] > df["Opponent Score"], True, False)
+
+
+    df = df[['winScore','lossScore','Opponent','Date','TechWin']]
     df = df.reset_index()
     print(df)
-
-    ## Right now, this is only getting the most recent game and putting it in lastWin
-    # Need to add a column on the df that is a 1 if Tech won or a 0 if Tech lost
-    # Then filter on that column, then select the last of that filter
-    # Then also account for if Tech only won all or lost all of that score
         
-    isGami = []
+    numGames = []
     lastWin = []
     lastLoss = []
     for i in range(0,101):
         for j in range(0,72):
-            filter = df[(df['Win'] == i) & (df['Lose'] == j)]
+            filter = df[(df['winScore'] == i) & (df['lossScore'] == j)]
             if filter.empty:
-                isGami.append(0)
+                numGames.append(0)
                 lastWin.append('')
+                lastLoss.append('')
+            
             else:
-                isGami.append(len(filter))
-                lastWin.append(str(filter['Date'].values[-1]) + ": " + str(filter['Opponent'].values[-1]))
+                numGames.append(len(filter))
+
+                winFilter = filter[(filter['TechWin'] == True)]
+                try: lastWin.append(str(winFilter['Date'].values[-1]) + ": " + str(winFilter['Opponent'].values[-1]))
+                except: lastWin.append('')
+
+                lossFilter = filter[(filter['TechWin'] == False)]
+                try: lastLoss.append(str(lossFilter['Date'].values[-1]) + ": " + str(lossFilter['Opponent'].values[-1]))
+                except: lastLoss.append('')
     
-    df = pd.DataFrame({'Win':np.repeat([*range(0,101)],72), 'Lose':[*range(0,72)]*101, 'isGami':isGami, 'lastWin':lastWin})
+    df = pd.DataFrame({'winScore':np.repeat([*range(0,101)],72), 'lossScore':[*range(0,72)]*101, 'numGames':numGames, 'lastWin':lastWin, 'lastLoss':lastLoss})
+    df = df[(df['winScore'] >= df['lossScore']) & (df['numGames'] > 0)]
     return df
 
 def generateScorigamiChart(df, df_wl, ext, win_score, lose_score, fullPath, basicPath):
@@ -203,8 +211,10 @@ def fbScorigami(platform):
     oppos = []
     oppo_scores = []
     for game in api_response:
-        temp = game.away_points
-        if temp:
+        h_temp = game.home_points
+        a_temp = game.away_points
+
+        if h_temp or a_temp:
             awayTeam = game.away_team
             awayScore = game.away_points
             homeTeam = game.home_team
@@ -236,6 +246,18 @@ def fbScorigami(platform):
     df.to_csv('out/fbScorigamiDataAlt.csv', index=False)
     df_s = generateScorigamiTable(df)
     df_s.to_csv('out/fbScorigamiData.csv', index=False)
+
+    jsonString='{"results": '
+    jsonString += df_s.to_json(index=False, orient="records")
+    jsonString += ',"updated": "June 18th, 2025"}'
+    print(jsonString)
+    print(jsonString,  file=open('out/fbScorigamiData.json', 'w'))
+
+    import boto3
+    s3 = boto3.resource("s3")
+    s3.meta.client.upload_file('out/fbScorigamiData.json', 'gtpdd-public-files', 'fbScorigamiData.json')
+
+    #df_s.to_json('out/fbScorigamiData.json', index=False, orient="records")
 
     #df = df[:-1]      
     #checkIfScorigami(df, techScore, oppoScore)  
