@@ -1,0 +1,64 @@
+h1, h2, h3, h4 {
+    text-align: center;
+    position: sticky;
+  }
+  
+  th, td {
+    border: 2px solid;
+    text-align: center;
+    table-layout: fixed;
+    font-size: 0.6em;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+  }
+  
+  thead tr {
+    background-color: lightgray;
+    color: black;
+  }
+  
+  table {
+    border-collapse: collapse;
+    table-layout: 'fixed';
+    width: '80%';
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  td:hover {
+    border-color: black;
+    border-style: solid;
+    background-color: black;
+  }
+  
+  body {
+    background-color: floralwhite;
+  }
+  
+  *[id] {
+      position: relative;
+  }
+  
+  *[id]::after {
+      content: attr(id);
+      display: inline-block;
+      white-space: pre;
+      position: absolute;
+      top: -40px;
+      right: 20px;
+      pointer-events: none;
+      opacity: 0;
+      font-size: 12px;
+      line-height: 16px;
+      background: black;
+      padding: 2px 2px;
+      box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
+  }
+  
+  *[id]:hover::after {
+      opacity: 1;
+  }
