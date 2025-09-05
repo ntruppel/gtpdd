@@ -9,6 +9,7 @@ import datetime
 import numpy as np
 from datetime import datetime, timezone
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 from PIL import Image
 from lib.fbCommon import getFBSchedule, getTeamInfo
 
@@ -31,12 +32,7 @@ def fbRecordPredictor(platform):
 
     elif platform == 'AWS':
         figPath = 'out/fbRecordPredictor.png'
-        
-        import boto3
-        s3 = boto3.client('s3')
-        backgroundPath = 'img/fbRecordPredictorBackground.png'
-        s3.download_file('gtpdd', 'fb_record_predictor_background.png', 'img/fbRecordPredictorBackground.png')
-    
+        backgroundPath = 'img/fbRecordPredictorBackground.png'    
     
     present = datetime.now(timezone.utc)
     teamID = "2348"
@@ -222,16 +218,20 @@ def fbRecordPredictor(platform):
     fig,ax = plt.subplots()
     fig.set_size_inches(20, 10)
     for i in range(0,len(wins)):
-        ax.bar(i,wins[i], color='#' + color1)
-        ax.text(i,wins[i]+0.005,"{:.2%}".format(wins[i]), ha = 'center', fontsize=20, color = 'white')
-        ax.text(i,-0.005,records[i], ha = 'center', va = 'top', fontsize = 20, color = 'white')
+        ax.bar(i,wins[i], color='#' + color1, edgecolor='#' + color2, linewidth=3, hatch='x' )
+        #ax.text(i,wins[i]+0.005,"{:.1%}".format(wins[i]), ha = 'center', fontsize=20, color = 'white', path_effects=[pe.withStroke(linewidth=2, foreground='black')])
+        if wins[i] > .01:
+            ax.text(i,wins[i]-0.012,"{:.1%}".format(wins[i]), ha = 'center', fontsize=19, color = 'white', path_effects=[pe.withStroke(linewidth=2, foreground='black')])
+        else:
+            ax.text(i,wins[i]+0.005,"{:.1%}".format(wins[i]), ha = 'center', fontsize=19, color = 'white', path_effects=[pe.withStroke(linewidth=2, foreground='black')])
+        ax.text(i,-0.005,records[i], ha = 'center', va = 'top', fontsize = 20, color = 'white', path_effects=[pe.withStroke(linewidth=2, foreground='black')])
         
     ax.set_ylim([0,max(wins)+0.05])
     ax.axis('off')
     now = datetime.now()
     datestring = now.strftime("%B %d, %Y")
-    ax.set_title("Using ESPN's FPI | " +str(datestring), fontsize = 30, color = 'white')
-    plt.suptitle('Tech Record Predictor', fontsize = 45, color = 'white', fontweight = 'bold')
+    ax.set_title("Using ESPN's FPI | " +str(datestring), fontsize = 30, color = 'black')
+    plt.suptitle('Tech Record Predictor', fontsize = 45, color = 'black', fontweight = 'bold')
     fig.savefig(figPath, bbox_inches='tight', pad_inches = 0, dpi=100, transparent = True)
     
     

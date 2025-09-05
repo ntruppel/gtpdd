@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import cfbd
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
     
@@ -203,7 +204,7 @@ def fbScorigami(platform):
     
     configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
-    api_response = api_instance.get_games(2024, team='Louisiana Tech')
+    api_response = api_instance.get_games(2025, team='Louisiana Tech')
     
     dates = []
     techs = []
@@ -247,15 +248,19 @@ def fbScorigami(platform):
     df_s = generateScorigamiTable(df)
     df_s.to_csv('out/fbScorigamiData.csv', index=False)
 
-    jsonString='{"results": '
+    jsonString = "const json = '"
+    jsonString += '{"results": '
     jsonString += df_s.to_json(index=False, orient="records")
-    jsonString += ',"updated": "June 18th, 2025"}'
+    dateString = datetime.today().strftime('%B %d, %Y')
+    jsonString += ',"updated": "' + dateString + '"}' + "';\nexport default json;\n"
     print(jsonString)
-    print(jsonString,  file=open('out/fbScorigamiData.json', 'w'))
+    print(jsonString,  file=open('html/fbScorigami/json.js', 'w'))
 
     import boto3
     s3 = boto3.resource("s3")
-    s3.meta.client.upload_file('out/fbScorigamiData.json', 'gtpdd-public-files', 'fbScorigamiData.json')
+    s3.meta.client.upload_file('html/fbScorigami/json.js', 'amazon-cloudfront-secure-static-site--s3bucketroot-zadkhrqvgyxq', 'json.js',
+    ExtraArgs={
+        'ContentType': 'application/javascript',})
 
     #df_s.to_json('out/fbScorigamiData.json', index=False, orient="records")
 

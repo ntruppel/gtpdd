@@ -44,31 +44,33 @@ for (const u of winScore) {
     td.innerHTML = ud.numGames;
     var backgroundColor = new String();
     var color = new String();
-    let textCaption = u + " - " + d + " \n"
+    let textCaption = u + " - " + d
     let onlySwitch = new String();
+    let sSwitch = new String();
+    let esSwitch = new String();
         
-    if (ud.numGames == 1){ onlySwitch = "Only"; }
-    else {onlySwitch = "Last";}
+    if (ud.numGames == 1){ onlySwitch = "Only"; sSwitch = ""; esSwitch = "";}
+    else {onlySwitch = "Last"; sSwitch = "s"; esSwitch = "es";}
 
     if (ud.lastWin) {
         if (ud.lastLoss) {
           backgroundColor = "midnightblue";
           color = "white";
-          textCaption = textCaption + onlySwitch + " Tech Win: " + ud.lastWin + "\n" + onlySwitch +" Tech Loss: " + ud.lastLoss
+          textCaption = textCaption + " (" + ud.numGames + " Game" + sSwitch + ")\n" + onlySwitch + " Tech Win: " + ud.lastWin + "\n" + onlySwitch +" Tech Loss: " + ud.lastLoss
         } else {
           backgroundColor = "dodgerblue";
           color = "white";
-          textCaption = textCaption + onlySwitch + " Game: " + ud.lastWin
+          textCaption = textCaption + " (" + ud.numGames + " Win" + sSwitch + ")\n"  + onlySwitch + " Game: " + ud.lastWin
         }
       } else if (ud.lastLoss) {
         if (u == d) {
           backgroundColor = "midnightblue"
           color = "white";
-          textCaption =  textCaption + onlySwitch + " Game: " + ud.lastLoss
+          textCaption =  textCaption + " (" + ud.numGames + " Tie" + sSwitch + ")\n"  + onlySwitch + " Game: " + ud.lastLoss
         } else {
           backgroundColor = "firebrick";
           color = "white";
-          textCaption =  textCaption + onlySwitch + " Game: " + ud.lastLoss
+          textCaption =  textCaption + " (" + ud.numGames + " Loss" + esSwitch + ")\n"  + onlySwitch + " Game: " + ud.lastLoss
         }
       }
       td.style.backgroundColor = backgroundColor;

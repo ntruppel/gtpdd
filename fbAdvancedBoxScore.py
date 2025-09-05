@@ -19,7 +19,7 @@ def find_win_expectancy(game_id):
     api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
 
     adv_box = api_instance.get_advanced_box_score(int(game_id))
-    box = api_instance.get_game_team_stats(year=2024, id=int(game_id), team='Louisiana Tech')
+    box = api_instance.get_game_team_stats(year=2025, id=int(game_id), team='Louisiana Tech')
 
     try: 
         if adv_box.teams.explosiveness[0].team == 'Louisiana Tech':
@@ -152,11 +152,13 @@ def find_win_expectancy(game_id):
     
     win_prob = (0.86*exp + 0.83*eff + 0.75*so + 0.72*fp + 0.73*to)/3.89
     win_prob = 0
-    api_response = api_instance.get_games(2024, team='Louisiana Tech')
+    api_response = api_instance.get_games(2025, team='Louisiana Tech')
     for game in api_response:
         print(game)
-        temp = game.away_points
-        if temp:
+        temp_away = game.away_points
+        temp_home = game.home_points
+
+        if temp_away or temp_home:
             if game.home_team == 'Louisiana Tech':
                 win_prob = game.home_postgame_win_probability
             else:
@@ -165,8 +167,8 @@ def find_win_expectancy(game_id):
     print("Win Probability : " + "{:.1%}".format(win_prob))
     print("Actual Score : " + str(tech_pts) + " - " + str(oppo_pts))
     
-    tech_list = [tech_explosiveness, tech_eff, tech_so, round(100-tech_fp,2), tech_to]
-    oppo_list = [oppo_explosiveness, oppo_eff, oppo_so, round(100-oppo_fp,2), oppo_to]
+    tech_list = [tech_explosiveness, tech_eff, max(tech_so,0), round(100-tech_fp,2), tech_to]
+    oppo_list = [oppo_explosiveness, oppo_eff, max(oppo_so,0), round(100-oppo_fp,2), oppo_to]
     
     return oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts 
 
@@ -255,9 +257,9 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     fig_path = 'out/fbAdvancedBoxScore.png'
         
-    s3 = boto3.client('s3')
+    #s3 = boto3.client('s3')
     backgroundPath = 'img/fbAdvancedBoxScoreBackground.png'
-    s3.download_file('gtpdd-public-files', 'fbAdvancedBoxScoreBackground.png', 'img/fbAdvancedBoxScoreBackground.png')
+    #s3.download_file('gtpdd-public-files', 'fbAdvancedBoxScoreBackground.png', 'img/fbAdvancedBoxScoreBackground.png')
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=120, transparent = True)
     
     img = Image.open(fig_path, 'r')
@@ -268,7 +270,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     background.paste(img, offset, img)
     background.save(fig_path)
 
-    s3.upload_file('out/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
+    #s3.upload_file('out/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
     
     status = "Advanced box score from Tech's game against "+ oppo + ". Based on the stats from the game, Tech would have won this game "+"{:.2%}".format(win_prob)+ " of the time."
     print(status)
@@ -280,4 +282,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
     
-fbAdvancedBoxScore('401677100', '349')
+fbAdvancedBoxScore('401757221', '2545')

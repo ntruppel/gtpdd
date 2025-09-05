@@ -769,20 +769,20 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 10/21/1989,Louisiana Tech,40,Arkansas State,37,,,,,,,,,77
 10/28/1989,Louisiana Tech,34,Tulsa,31,,,,,,,,,65
 11/4/1989,Louisiana Tech,24,Louisiana-Monroe,6,,,,,,,,,30
-11/11/1989,Louisiana Tech,23,None,38,,,,,,,,,61
+11/11/1989,Louisiana Tech,23,Auburn,38,,,,,,,,,61
 9/1/1990,Louisiana Tech,17,East Carolina,27,,,,,,,,,44
 9/8/1990,Louisiana Tech,51,McNeese State,3,,,,,,,,,54
 9/15/1990,Louisiana Tech,21,Western Michigan,27,,,,,,,,,48
 9/22/1990,Louisiana Tech,40,Arkansas State,7,,,,,,,,,47
 9/29/1990,Louisiana Tech,24,Louisiana-Lafayette,10,,,,,,,,,34
-10/6/1990,Louisiana Tech,14,None,16,,,,,,,,,30
+10/6/1990,Louisiana Tech,14,Auburn,16,,,,,,,,,30
 10/13/1990,Louisiana Tech,35,Tulsa,21,,,,,,,,,56
 10/27/1990,Louisiana Tech,31,Stephen F. Austin,22,,,,,,,,,53
 11/3/1990,Louisiana Tech,31,Louisiana-Monroe,7,,,,,,,,,38
 11/10/1990,Louisiana Tech,36,Akron,15,,,,,,,,,51
 11/17/1990,Louisiana Tech,31,Colorado State,30,,,,,,,,,61
 12/15/1990,Louisiana Tech,34,Maryland,34,,,,,,,,,68
-8/31/1991,Louisiana Tech,3,None,73,,,,,,,,,76
+8/31/1991,Louisiana Tech,3,Houston,73,,,,,,,,,76
 9/14/1991,Louisiana Tech,21,Montana,11,,,,,,,,,32
 9/21/1991,Louisiana Tech,17,Eastern Michigan,14,,,,,,,,,31
 9/28/1991,Louisiana Tech,42,Arkansas State,10,,,,,,,,,52
@@ -796,7 +796,7 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 9/5/1992,Louisiana Tech,10,Baylor,9,,,,,,,,,19
 9/12/1992,Louisiana Tech,31,Eastern Michigan,17,,,,,,,,,48
 9/19/1992,Louisiana Tech,13,Southern Mississippi,16,,,,,,,,,29
-9/26/1992,Louisiana Tech,0,None,13,,,,,,,,,13
+9/26/1992,Louisiana Tech,0,Alabama,13,,,,,,,,,13
 10/3/1992,Louisiana Tech,14,Fresno State,48,,,,,,,,,62
 10/10/1992,Louisiana Tech,21,Louisiana-Lafayette,7,,,,,,,,,28
 10/17/1992,Louisiana Tech,65,East Tennessee State,7,,,,,,,,,72
@@ -804,9 +804,9 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/7/1992,Louisiana Tech,13,South Carolina,14,,,,,,,,,27
 11/14/1992,Louisiana Tech,6,Ole Miss,13,,,,,,,,,19
 11/21/1992,Louisiana Tech,3,West Virginia,23,,,,,,,,,26
-9/4/1993,Louisiana Tech,0,None,50,,,,,,,,,50
+9/4/1993,Louisiana Tech,0,Tennessee,50,,,,,,,,,50
 9/18/1993,Louisiana Tech,3,South Carolina,34,,,,,,,,,37
-9/25/1993,Louisiana Tech,3,None,56,,,,,,,,,59
+9/25/1993,Louisiana Tech,3,Alabama,56,,,,,,,,,59
 10/2/1993,Louisiana Tech,17,Arkansas State,3,,,,,,,,,20
 10/16/1993,Louisiana Tech,28,East Carolina,31,,,,,,,,,59
 10/23/1993,Louisiana Tech,6,San Jose State,31,,,,,,,,,37
@@ -853,15 +853,15 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 9/20/1997,Louisiana Tech,56,Central Michigan,28,,,,,,,,,84
 9/27/1997,Louisiana Tech,13,Arkansas,17,,,,,,,,,30
 10/4/1997,Louisiana Tech,41,California,34,,,,,,,,,75
-10/11/1997,Louisiana Tech,13,None,49,,,,,,,,,62
+10/11/1997,Louisiana Tech,13,Auburn,49,,,,,,,,,62
 10/18/1997,Louisiana Tech,42,Arkansas State,14,,,,,,,,,56
 10/25/1997,Louisiana Tech,31,Boise State,27,,,,,,,,,58
 11/1/1997,Louisiana Tech,26,Alabama,20,,,,,,,,,46
 11/8/1997,Louisiana Tech,32,UAB,29,,,,,,,,,61
 11/15/1997,Louisiana Tech,63,Louisiana-Lafayette,24,,,,,,,,,87
-8/29/1998,Louisiana Tech,27,None,56,,,,,,,,,83
+8/29/1998,Louisiana Tech,27,Nebraska,56,,,,,,,,,83
 9/5/1998,Louisiana Tech,30,UCF,64,,,,,,,,,94
-9/12/1998,Louisiana Tech,7,None,28,,,,,,,,,35
+9/12/1998,Louisiana Tech,7,Texas A&M,28,,,,,,,,,35
 9/19/1998,Louisiana Tech,77,Louisiana-Lafayette,14,,,,,,,,,91
 9/26/1998,Louisiana Tech,19,Wyoming,31,,,,,,,,,50
 10/3/1998,Louisiana Tech,63,Boise State,28,,,,,,,,,91
@@ -870,11 +870,11 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 10/24/1998,Louisiana Tech,17,Auburn,32,,,,,,,,,49
 10/31/1998,Louisiana Tech,56,Nicholls State,28,,,,,,,,,84
 11/7/1998,Louisiana Tech,69,Arkansas State,21,,,,,,,,,90
-11/26/1998,Louisiana Tech,30,None,63,,,,,,,,,93
-8/28/1999,Louisiana Tech,7,None,41,,,,,,,,,48
-9/4/1999,Louisiana Tech,17,None,37,,,,,,,,,54
+11/26/1998,Louisiana Tech,30,Tulane,63,,,,,,,,,93
+8/28/1999,Louisiana Tech,7,Florida State,41,,,,,,,,,48
+9/4/1999,Louisiana Tech,17,Texas A&M,37,,,,,,,,,54
 9/11/1999,Louisiana Tech,55,Sam Houston State,17,,,,,,,,,72
-9/18/1999,Louisiana Tech,29,None,28,,,,,,,,,57
+9/18/1999,Louisiana Tech,29,Alabama,28,,,,,,,,,57
 10/2/1999,Louisiana Tech,41,Louisiana-Lafayette,31,,,,,,,,,72
 10/16/1999,Louisiana Tech,42,Middle Tennessee State,18,,,,,,,,,60
 10/23/1999,Louisiana Tech,46,UCF,35,,,,,,,,,81
@@ -883,23 +883,23 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/13/1999,Louisiana Tech,41,UAB,20,,,,,,,,,61
 11/26/1999,Louisiana Tech,19,USC,45,,,,,,,,,64
 8/26/2000,Louisiana Tech,63,Mississippi Valley State,10,,,,,,,,,73
-9/2/2000,Louisiana Tech,10,None,54,,,,,,,,,64
+9/2/2000,Louisiana Tech,10,Kansas State,54,,,,,,,,,64
 9/9/2000,Louisiana Tech,7,Penn State,67,,,,,,,,,74
 9/16/2000,Louisiana Tech,31,Stephen F. Austin,34,,,,,,,,,65
 9/23/2000,Louisiana Tech,10,Tulsa,22,,,,,,,,,32
 10/7/2000,Louisiana Tech,21,Middle Tennessee State,49,,,,,,,,,70
 10/14/2000,Louisiana Tech,48,Louisiana-Lafayette,14,,,,,,,,,62
 10/21/2000,Louisiana Tech,28,Auburn,38,,,,,,,,,66
-10/28/2000,Louisiana Tech,31,None,42,,,,,,,,,73
+10/28/2000,Louisiana Tech,31,Miami,42,,,,,,,,,73
 11/4/2000,Louisiana Tech,16,UCF,20,,,,,,,,,36
 11/11/2000,Louisiana Tech,42,Louisiana-Monroe,19,,,,,,,,,61
 11/18/2000,Louisiana Tech,10,Hawaii,27,,,,,,,,,37
 9/1/2001,Louisiana Tech,36,SMU,6,,,,,,,,,42
 9/8/2001,Louisiana Tech,23,Oklahoma State,30,,,,,,,,,53
-9/29/2001,Louisiana Tech,28,None,38,,,,,,,,,66
+9/29/2001,Louisiana Tech,28,Fresno State,38,,,,,,,,,66
 10/6/2001,Louisiana Tech,41,San Jose State,20,,,,,,,,,61
 10/13/2001,Louisiana Tech,45,Nevada,42,,,,,,,,,87
-10/20/2001,Louisiana Tech,41,None,48,,,,,,,,,89
+10/20/2001,Louisiana Tech,41,Auburn,48,,,,,,,,,89
 10/27/2001,Louisiana Tech,41,Rice,38,,,,,,,,,79
 11/3/2001,Louisiana Tech,48,Boise State,42,,,,,,,,,90
 11/10/2001,Louisiana Tech,53,UTEP,30,,,,,,,,,83
@@ -909,8 +909,8 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 8/31/2002,Louisiana Tech,39,Oklahoma State,36,,,,,,,,,75
 9/7/2002,Louisiana Tech,13,Clemson,33,,,,,,,,,46
 9/14/2002,Louisiana Tech,53,Tulsa,9,,,,,,,,,62
-9/21/2002,Louisiana Tech,17,None,49,,,,,,,,,66
-9/28/2002,Louisiana Tech,3,None,31,,,,,,,,,34
+9/21/2002,Louisiana Tech,17,Penn State,49,,,,,,,,,66
+9/28/2002,Louisiana Tech,3,Texas A&M,31,,,,,,,,,34
 10/5/2002,Louisiana Tech,20,Rice,37,,,,,,,,,57
 10/19/2002,Louisiana Tech,34,SMU,37,,,,,,,,,71
 10/26/2002,Louisiana Tech,50,Nevada,47,,,,,,,,,97
@@ -918,7 +918,7 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/16/2002,Louisiana Tech,10,Boise State,36,,,,,,,,,46
 11/23/2002,Louisiana Tech,38,UTEP,24,,,,,,,,,62
 12/5/2002,Louisiana Tech,13,Fresno State,45,,,,,,,,,58
-8/28/2003,Louisiana Tech,9,None,48,,,,,,,,,57
+8/28/2003,Louisiana Tech,9,Miami,48,,,,,,,,,57
 9/6/2003,Louisiana Tech,34,Louisiana-Lafayette,3,,,,,,,,,37
 9/13/2003,Louisiana Tech,20,Michigan State,19,,,,,,,,,39
 9/20/2003,Louisiana Tech,6,Fresno State,16,,,,,,,,,22
@@ -926,23 +926,23 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 10/11/2003,Louisiana Tech,38,UTEP,35,,,,,,,,,73
 10/18/2003,Louisiana Tech,41,Hawaii,44,,,,,,,,,85
 10/25/2003,Louisiana Tech,42,Nevada,34,,,,,,,,,76
-11/1/2003,Louisiana Tech,10,None,49,,,,,,,,,59
+11/1/2003,Louisiana Tech,10,LSU,49,,,,,,,,,59
 11/8/2003,Louisiana Tech,41,SMU,6,,,,,,,,,47
 11/15/2003,Louisiana Tech,18,Tulsa,48,,,,,,,,,66
 11/29/2003,Louisiana Tech,14,Rice,49,,,,,,,,,63
 9/6/2004,Louisiana Tech,38,Nevada,21,,,,,,,,,59
 9/11/2004,Louisiana Tech,24,Louisiana-Lafayette,20,,,,,,,,,44
-9/18/2004,Louisiana Tech,0,None,48,,,,,,,,,48
-9/25/2004,Louisiana Tech,17,None,42,,,,,,,,,59
-10/2/2004,Louisiana Tech,28,None,21,,,,,,,,,49
-10/9/2004,Louisiana Tech,7,None,52,,,,,,,,,59
+9/18/2004,Louisiana Tech,0,Miami,48,,,,,,,,,48
+9/25/2004,Louisiana Tech,17,Tennessee,42,,,,,,,,,59
+10/2/2004,Louisiana Tech,28,Fresno State,21,,,,,,,,,49
+10/9/2004,Louisiana Tech,7,Auburn,52,,,,,,,,,59
 10/16/2004,Louisiana Tech,41,SMU,10,,,,,,,,,51
 10/23/2004,Louisiana Tech,27,UTEP,44,,,,,,,,,71
 11/6/2004,Louisiana Tech,23,Hawaii,34,,,,,,,,,57
 11/13/2004,Louisiana Tech,38,Tulsa,21,,,,,,,,,59
-11/20/2004,Louisiana Tech,14,None,55,,,,,,,,,69
+11/20/2004,Louisiana Tech,14,Boise State,55,,,,,,,,,69
 11/29/2004,Louisiana Tech,51,Rice,14,,,,,,,,,65
-9/10/2005,Louisiana Tech,3,None,41,,,,,,,,,44
+9/10/2005,Louisiana Tech,3,Florida,41,,,,,,,,,44
 9/17/2005,Louisiana Tech,14,Kansas,34,,,,,,,,,48
 10/1/2005,Louisiana Tech,34,New Mexico State,14,,,,,,,,,48
 10/8/2005,Louisiana Tech,46,Hawaii,14,,,,,,,,,60
@@ -952,12 +952,12 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/5/2005,Louisiana Tech,27,Utah State,17,,,,,,,,,44
 11/12/2005,Louisiana Tech,41,Idaho,38,,,,,,,,,79
 11/26/2005,Louisiana Tech,13,Boise State,30,,,,,,,,,43
-12/2/2005,Louisiana Tech,40,None,28,,,,,,,,,68
-9/2/2006,Louisiana Tech,10,None,49,,,,,,,,,59
+12/2/2005,Louisiana Tech,40,Fresno State,28,,,,,,,,,68
+9/2/2006,Louisiana Tech,10,Nebraska,49,,,,,,,,,59
 9/16/2006,Louisiana Tech,31,Nicholls State,21,,,,,,,,,52
 9/23/2006,Louisiana Tech,14,Texas A&M,45,,,,,,,,,59
 9/30/2006,Louisiana Tech,0,Clemson,51,,,,,,,,,51
-10/7/2006,Louisiana Tech,14,None,55,,,,,,,,,69
+10/7/2006,Louisiana Tech,14,Boise State,55,,,,,,,,,69
 10/14/2006,Louisiana Tech,14,Idaho,24,,,,,,,,,38
 10/21/2006,Louisiana Tech,48,Utah State,35,,,,,,,,,83
 10/28/2006,Louisiana Tech,10,San Jose State,44,,,,,,,,,54
@@ -967,21 +967,21 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/24/2006,Louisiana Tech,27,Fresno State,34,,,,,,,,,61
 12/2/2006,Louisiana Tech,23,New Mexico State,50,,,,,,,,,73
 9/1/2007,Louisiana Tech,28,Central Arkansas,7,,,,,,,,,35
-9/8/2007,Louisiana Tech,44,None,45,,,,,,,,,89
-9/15/2007,Louisiana Tech,12,None,42,,,,,,,,,54
+9/8/2007,Louisiana Tech,44,Hawaii,45,,,,,,,,,89
+9/15/2007,Louisiana Tech,12,California,42,,,,,,,,,54
 9/29/2007,Louisiana Tech,6,Fresno State,17,,,,,,,,,23
 10/6/2007,Louisiana Tech,0,Ole Miss,24,,,,,,,,,24
 10/13/2007,Louisiana Tech,22,New Mexico State,21,,,,,,,,,43
 10/20/2007,Louisiana Tech,31,Boise State,45,,,,,,,,,76
 10/27/2007,Louisiana Tech,31,Utah State,21,,,,,,,,,52
 11/3/2007,Louisiana Tech,28,Idaho,16,,,,,,,,,44
-11/10/2007,Louisiana Tech,10,None,58,,,,,,,,,68
+11/10/2007,Louisiana Tech,10,LSU,58,,,,,,,,,68
 11/17/2007,Louisiana Tech,27,San Jose State,23,,,,,,,,,50
 12/1/2007,Louisiana Tech,10,Nevada,49,,,,,,,,,59
 8/30/2008,Louisiana Tech,22,Mississippi State,14,,,,,,,,,
-9/6/2008,Louisiana Tech,0,None,29,,,,,,,,,
+9/6/2008,Louisiana Tech,0,Kansas,29,,,,,,,,,
 9/20/2008,Louisiana Tech,41,Southeastern Louisiana,26,,,,,,,,,
-10/1/2008,Louisiana Tech,3,None,38,,,,,,,,,
+10/1/2008,Louisiana Tech,3,Boise State,38,,,,,,,,,
 10/11/2008,Louisiana Tech,14,Hawaii,24,,,,,,,,,
 10/18/2008,Louisiana Tech,46,Idaho,14,,,,,,,,,
 10/25/2008,Louisiana Tech,7,Army,14,,,,,,,,,
@@ -999,8 +999,8 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 10/17/2009,Louisiana Tech,45,New Mexico State,7,,,,,,,,,
 10/24/2009,Louisiana Tech,21,Utah State,23,,,,,,,,,
 10/31/2009,Louisiana Tech,34,Idaho,35,,,,,,,,,
-11/6/2009,Louisiana Tech,35,None,45,,,,,,,,,
-11/14/2009,Louisiana Tech,16,None,24,,,,,,,,,
+11/6/2009,Louisiana Tech,35,Boise State,45,,,,,,,,,
+11/14/2009,Louisiana Tech,16,LSU,24,,,,,,,,,
 11/21/2009,Louisiana Tech,28,Fresno State,30,,,,,,,,,
 12/5/2009,Louisiana Tech,55,San Jose State,20,,,,,,,,,
 9/4/2010,Louisiana Tech,20,Grambling State,6,,,,,,,,,
@@ -1010,11 +1010,11 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 10/2/2010,Louisiana Tech,21,Hawaii,41,,,,,,,,,
 10/9/2010,Louisiana Tech,24,Utah State,6,,,,,,,,,
 10/16/2010,Louisiana Tech,48,Idaho,35,,,,,,,,,
-10/26/2010,Louisiana Tech,20,None,49,,,,,,,,,
+10/26/2010,Louisiana Tech,20,Boise State,49,,,,,,,,,
 11/6/2010,Louisiana Tech,34,Fresno State,40,,,,,,,,,
 11/13/2010,Louisiana Tech,41,New Mexico State,20,,,,,,,,,
 11/27/2010,Louisiana Tech,45,San Jose State,38,,,,,,,,,
-12/4/2010,Louisiana Tech,17,None,35,,,,,,,,,
+12/4/2010,Louisiana Tech,17,Nevada,35,,,,,,,,,
 9/3/2011,Louisiana Tech,17,Southern Mississippi,19,,,,,,,,,
 9/10/2011,Louisiana Tech,48,Central Arkansas,42,,,,,,,,,
 9/17/2011,Louisiana Tech,34,Houston,35,,,,,,,,,
@@ -1027,13 +1027,13 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/12/2011,Louisiana Tech,27,Ole Miss,7,,,,,,,,,
 11/19/2011,Louisiana Tech,24,Nevada,20,,,,,,,,,
 11/26/2011,Louisiana Tech,44,New Mexico State,0,,,,,,,,,
-12/21/2011,Louisiana Tech,24,None,31,,,,,,,,,
+12/21/2011,Louisiana Tech,24,TCU,31,,,,,,,,,
 9/8/2012,Louisiana Tech,56,Houston,49,,,,,,,,,
 9/15/2012,Louisiana Tech,56,Rice,37,,,,,,,,,
 9/22/2012,Louisiana Tech,52,Illinois,24,,,,,,,,,
 9/29/2012,Louisiana Tech,44,Virginia,38,,,,,,,,,
 10/6/2012,Louisiana Tech,58,Nevada-Las Vegas,31,,,,,,,,,
-10/13/2012,Louisiana Tech,57,None,59,,,,,,,,,
+10/13/2012,Louisiana Tech,57,Texas A&M,59,,,,,,,,,
 10/20/2012,Louisiana Tech,70,Idaho,28,,,,,,,,,
 10/27/2012,Louisiana Tech,28,New Mexico State,14,,,,,,,,,
 11/3/2012,Louisiana Tech,51,UTSA,27,,,,,,,,,
@@ -1052,11 +1052,11 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/16/2013,Louisiana Tech,14,Rice,52,,,,,,,,,
 11/23/2013,Louisiana Tech,14,Tulsa,24,,,,,,,,,
 11/30/2013,Louisiana Tech,10,UTSA,30,,,,,,,,,
-8/30/2014,Louisiana Tech,16,None,48,,,,,,,,,
+8/30/2014,Louisiana Tech,16,Oklahoma,48,,,,,,,,,
 9/6/2014,Louisiana Tech,48,Louisiana-Lafayette,20,,,,,,,,,
 9/11/2014,Louisiana Tech,42,North Texas,21,,,,,,,,,
 9/20/2014,Louisiana Tech,27,Northwestern State,30,,,,,,,,,
-9/27/2014,Louisiana Tech,17,None,45,,,,,,,,,
+9/27/2014,Louisiana Tech,17,Auburn,45,,,,,,,,,
 10/4/2014,Louisiana Tech,55,UTEP,3,,,,,,,,,
 10/18/2014,Louisiana Tech,27,UTSA,20,,,,,,,,,
 10/25/2014,Louisiana Tech,31,Southern Mississippi,20,,,,,,,,,
@@ -1108,18 +1108,18 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 12/20/2017,Louisiana Tech,51,SMU,10,,,,,,,,,
 9/1/2018,Louisiana Tech,30,South Alabama,26,,,,,,,,,
 9/8/2018,Louisiana Tech,54,Southern,17,,,,,,,,,
-9/22/2018,Louisiana Tech,21,None,38,,,,,,,,,
+9/22/2018,Louisiana Tech,21,LSU,38,,,,,,,,,
 9/29/2018,Louisiana Tech,29,North Texas,27,,,,,,,,,
 10/6/2018,Louisiana Tech,7,UAB,28,,,,,,,,,
 10/13/2018,Louisiana Tech,31,UTSA,3,,,,,,,,,
 10/20/2018,Louisiana Tech,31,UTEP,24,,,,,,,,,
 10/26/2018,Louisiana Tech,21,Florida Atlantic,13,,,,,,,,,
-11/3/2018,Louisiana Tech,3,None,45,,,,,,,,,
+11/3/2018,Louisiana Tech,3,Mississippi State,45,,,,,,,,,
 11/10/2018,Louisiana Tech,28,Rice,13,,,,,,,,,
 11/17/2018,Louisiana Tech,20,Southern Mississippi,21,,,,,,,,,
 11/24/2018,Louisiana Tech,15,Western Kentucky,30,,,,,,,,,
 12/22/2018,Louisiana Tech,31,Hawaii,14,,,,,,,,,
-8/31/2019,Louisiana Tech,14,None,45,,,,,,,,,
+8/31/2019,Louisiana Tech,14,Texas,45,,,,,,,,,
 9/7/2019,Louisiana Tech,20,Grambling State,14,,,,,,,,,
 9/14/2019,Louisiana Tech,35,Bowling Green,7,,,,,,,,,
 9/20/2019,Louisiana Tech,43,Florida International,31,,,,,,,,,
@@ -1134,7 +1134,7 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 12/26/2019,Louisiana Tech,14,Miami (FL),0,,,,,,,,,
 9/19/2020,Louisiana Tech,31,Southern Mississippi,30,,,,,,,,,
 9/26/2020,Louisiana Tech,66,Houston Baptist,38,,,,,,,,,
-10/2/2020,Louisiana Tech,14,None,45,,,,,,,,,
+10/2/2020,Louisiana Tech,14,BYU,45,,,,,,,,,
 10/10/2020,Louisiana Tech,21,UTEP,17,,,,,,,,,
 10/17/2020,Louisiana Tech,17,Marshall,35,,,,,,,,,
 10/24/2020,Louisiana Tech,26,UTSA,27,,,,,,,,,
@@ -1146,9 +1146,9 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 9/11/2021,Louisiana Tech,45,Southeastern Louisiana,42,,,,,,,,,
 9/18/2021,Louisiana Tech,37,SMU,39,,,,,,,,,
 9/25/2021,Louisiana Tech,24,North Texas,17,,,,,,,,,
-10/2/2021,Louisiana Tech,27,None,34,,,,,,,,,
+10/2/2021,Louisiana Tech,27,NC State,34,,,,,,,,,
 10/16/2021,Louisiana Tech,3,UTEP,19,,,,,,,,,
-10/23/2021,Louisiana Tech,16,None,45,,,,,,,,,
+10/23/2021,Louisiana Tech,16,UTSA,45,,,,,,,,,
 10/30/2021,Louisiana Tech,20,Old Dominion,23,,,,,,,,,
 11/6/2021,Louisiana Tech,38,UAB,52,,,,,,,,,
 11/13/2021,Louisiana Tech,42,Charlotte,32,,,,,,,,,
@@ -1179,3 +1179,16 @@ Date,Tech,Tech Score,Opponent,Opponent Score,W/L/T,City,State,Notes,,,,,Total po
 11/4/2023,Louisiana Tech,30,Liberty,56,,,,,,,,,
 11/11/2023,Louisiana Tech,27,Sam Houston,42,,,,,,,,,
 11/18/2023,Louisiana Tech,17,Jacksonville State,56,,,,,,,,,
+8/31/2024,Louisiana Tech,25,Nicholls,17,,,,,,,,,
+9/14/2024,Louisiana Tech,20,NC State,30,,,,,,,,,
+9/21/2024,Louisiana Tech,20,Tulsa,23,,,,,,,,,
+9/28/2024,Louisiana Tech,10,FIU,17,,,,,,,,,
+10/10/2024,Louisiana Tech,48,Middle Tennessee State,21,,,,,,,,,
+10/15/2024,Louisiana Tech,30,New Mexico State,33,,,,,,,,,
+10/22/2024,Louisiana Tech,14,UTEP,10,,,,,,,,,
+10/29/2024,Louisiana Tech,3,Sam Houston,9,,,,,,,,,
+11/9/2024,Louisiana Tech,37,Jacksonville State,44,,,,,,,,,
+11/16/2024,Louisiana Tech,12,Western Kentucky,7,,,,,,,,,
+11/23/2024,Louisiana Tech,14,Arkansas,35,,,,,,,,,
+11/30/2024,Louisiana Tech,33,Kennesaw State,0,,,,,,,,,
+12/28/2024,Louisiana Tech,6,Army,27,,,,,,,,,
