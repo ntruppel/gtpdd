@@ -2,6 +2,7 @@
 import boto3
 import cfbd
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import csv
 import json
@@ -9,7 +10,12 @@ from lib.fbCommon import getTeamInfo
 from PIL import Image
 import os
 from dotenv import load_dotenv
+import matplotlib.patheffects as pe
+
 load_dotenv()
+
+mpl.rcParams['hatch.linewidth'] = 0.9  # previous pdf hatch linewidth is 0.1
+mpl.rcParams['hatch.linewidth'] = 9.0  # previous svg hatch linewidth is 1.0
 
 ## TODO: Opponent Team ID and Game ID are still being passed manually. Need to infer Team ID from Game ID and default to most recent game.
 
@@ -172,9 +178,10 @@ def find_win_expectancy(game_id):
     
     return oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts 
 
-def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, code):
+def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, code, code2):
 
     colors = ["#002F8B",'#'+code]
+    colors2 = ["#E31B23",'#'+code2]
     
     fig,ax = plt.subplots(4,2, figsize=(30,45))
     
@@ -182,36 +189,23 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     j=0
     for i in range(1,4):
-        ax[i,0].barh(0,float(tech_list[j]),color=colors[0])
-        ax[i,0].barh(1,float(oppo_list[j]),color=colors[1])
+        ax[i,0].barh(0,float(tech_list[j]),color=colors2[0],edgecolor=colors[0], linewidth=10, hatch='/')
+        ax[i,0].barh(1,float(oppo_list[j]),color=colors2[1],edgecolor=colors[1], linewidth=10, hatch='/')
         
         placementLimit = limitsList[j][0]+((limitsList[j][1] - limitsList[j][0])/10)
 
-        if float(tech_list[j]) > placementLimit:
-            ax[i,0].text(float(tech_list[j]), -0.1, str(tech_list[j]), ha="right", color="white", fontsize=60)
-        else:
-           ax[i,0].text(float(tech_list[j]), -0.1, ' '+str(tech_list[j]), ha="left", color="black", fontsize=60)     
-        
-        if float(oppo_list[j]) > placementLimit:
-            ax[i,0].text(float(oppo_list[j]), 0.9, str(oppo_list[j]), ha="right", color="white", fontsize=60)
-        else:
-            ax[i,0].text(float(oppo_list[j]), 0.9, ' '+str(oppo_list[j]), ha="left", color="black", fontsize=60)
+        ax[i,0].text(float(tech_list[j]), -0.1, ' '+str(tech_list[j]), ha="left", color="black", fontsize=60) 
+        ax[i,0].text(float(oppo_list[j]), 0.9, ' '+str(oppo_list[j]), ha="left", color="black", fontsize=60)
     
         j = j+1
         if j < 4:
             placementLimit = limitsList[j][0]+((limitsList[j][1] - limitsList[j][0])/10)
-            ax[i,1].barh(0,float(tech_list[j]),color=colors[0])
-            ax[i,1].barh(1,float(oppo_list[j]),color=colors[1])
+            ax[i,1].barh(0,float(tech_list[j]),color=colors2[0],edgecolor=colors[0], linewidth=10, hatch='/')
+            ax[i,1].barh(1,float(oppo_list[j]),color=colors2[1],edgecolor=colors[1], linewidth=10, hatch='/')
             
-            if float(tech_list[j]) > placementLimit:
-                ax[i,1].text(float(tech_list[j]), -0.1, str(tech_list[j]), ha="right", color="white", fontsize=60)
-            else:
-                ax[i,1].text(float(tech_list[j]), -0.1, ' '+str(tech_list[j]), ha="left", color="black", fontsize=60)
-            
-            if float(oppo_list[j]) > placementLimit:
-                ax[i,1].text(float(oppo_list[j]), 0.9, str(oppo_list[j]), ha="right", color="white", fontsize=60)
-            else:
-                ax[i,1].text(float(oppo_list[j]), 0.9, ' '+str(oppo_list[j]), ha="left", color="black", fontsize=60)
+
+            ax[i,1].text(float(tech_list[j]), -0.1, ' '+str(tech_list[j]), ha="left", color="black", fontsize=60)
+            ax[i,1].text(float(oppo_list[j]), 0.9, ' '+str(oppo_list[j]), ha="left", color="black", fontsize=60)
 
         j = j+1
         
@@ -244,16 +238,25 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     ax[2,1].set_xlim(fp_limits)
     ax[3,0].set_xlim(to_limits)
     
+
+    ax[0,0].text(1,0.7,"Advanced Box Score", fontsize=100, ha="center",fontweight='bold')
     ax[0,0].text(0.5,0.5,"Louisiana Tech", fontsize=80, ha="center")
-    ax[0,0].text(0.5,0.25, str(tech_pts), fontsize=100, fontweight='bold', ha="center", color=colors[0])    
+    ax[0,0].text(0.5,0.25, str(tech_pts), fontsize=100, fontweight='bold', ha="center", color=colors[0], path_effects=[pe.withStroke(linewidth=6, foreground=colors2[0])])    
     
     ax[0,1].text(0.5,0.5, str(oppo), fontsize=80, ha="center")
-    ax[0,1].text(0.5,0.25, str(oppo_pts), fontsize=100, fontweight='bold', ha="center", color=colors[1])  
+    ax[0,1].text(0.5,0.25, str(oppo_pts), fontsize=100, fontweight='bold', ha="center", color=colors[1], path_effects=[pe.withStroke(linewidth=6, foreground=colors2[1])])  
     
-    slices = [win_prob, 1-win_prob]
-    ax[3,1].pie(slices, colors=colors)
+    wedges, *_ = ax[3,1].pie(x=[win_prob, 1-win_prob])
+
+    i=0
+    for pie_wedge in wedges:
+        pie_wedge.set_edgecolor(colors[i])
+        pie_wedge.set_facecolor(colors2[i])
+        pie_wedge.set_hatch('/')
+        pie_wedge.set_linewidth(10)
+        i = i+1
     
-    ax[3,1].text(0,-0.1,"{:.2%}".format(win_prob), color="white", fontsize="80", ha="center", fontweight="bold")
+    ax[3,1].text(0,-0.1,"{:.2%}".format(win_prob), color="white", fontsize="80", ha="center", fontweight="bold", path_effects=[pe.withStroke(linewidth=10, foreground='black')])
     
     fig_path = 'out/fbAdvancedBoxScore.png'
         
@@ -280,6 +283,6 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
 def fbAdvancedBoxScore(gameId, teamId):
     oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts = find_win_expectancy(gameId)
     name, color1, color2 = getTeamInfo(teamId)
-    create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1)
+    create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1, color2)
     
-fbAdvancedBoxScore('401757221', '2545')
+fbAdvancedBoxScore('401752687', '99')
