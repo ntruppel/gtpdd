@@ -42,6 +42,7 @@ def find_win_expectancy(game_id):
         oppo_explosiveness = adv_box.teams.explosiveness[oppo].overall.total
         oppo_fp = adv_box.teams.field_position[oppo].average_start
         oppo_so = adv_box.teams.scoring_opportunities[oppo].points_per_opportunity
+        oppo_so = 1.4
         oppo_eff = adv_box.teams.success_rates[oppo].overall.total
             
         if box[0].teams[0].team == 'Louisiana Tech':
@@ -180,8 +181,11 @@ def find_win_expectancy(game_id):
 
 def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, code, code2):
 
-    colors = ["#002F8B",'#'+code]
-    colors2 = ["#E31B23",'#'+code2]
+    #colors = ["#002F8B",'#'+code]
+    #colors2 = ["#E31B23",'black']
+
+    colors = ["#E31B23",'#'+code]
+    colors2 = ["#002F8B",'black']
     
     fig,ax = plt.subplots(4,2, figsize=(30,45))
     
@@ -189,8 +193,8 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     
     j=0
     for i in range(1,4):
-        ax[i,0].barh(0,float(tech_list[j]),color=colors2[0],edgecolor=colors[0], linewidth=10, hatch='/')
-        ax[i,0].barh(1,float(oppo_list[j]),color=colors2[1],edgecolor=colors[1], linewidth=10, hatch='/')
+        ax[i,0].barh(0,float(tech_list[j]),color=colors[0],edgecolor=colors2[0], linewidth=10)
+        ax[i,0].barh(1,float(oppo_list[j]),color=colors[1],edgecolor=colors2[1], linewidth=10)
         
         placementLimit = limitsList[j][0]+((limitsList[j][1] - limitsList[j][0])/10)
 
@@ -200,8 +204,8 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
         j = j+1
         if j < 4:
             placementLimit = limitsList[j][0]+((limitsList[j][1] - limitsList[j][0])/10)
-            ax[i,1].barh(0,float(tech_list[j]),color=colors2[0],edgecolor=colors[0], linewidth=10, hatch='/')
-            ax[i,1].barh(1,float(oppo_list[j]),color=colors2[1],edgecolor=colors[1], linewidth=10, hatch='/')
+            ax[i,1].barh(0,float(tech_list[j]),color=colors[0],edgecolor=colors2[0], linewidth=10)
+            ax[i,1].barh(1,float(oppo_list[j]),color=colors[1],edgecolor=colors2[1], linewidth=10)
             
 
             ax[i,1].text(float(tech_list[j]), -0.1, ' '+str(tech_list[j]), ha="left", color="black", fontsize=60)
@@ -214,7 +218,7 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
         ax[i,1].axis('off')
     
     exp_limits = [0,2]
-    eff_limits = [0.2,0.6]
+    eff_limits = [0.35,0.75]
     df_limits = [0,7]
     fp_limits = [18,45]
     to_limits = [0,5]
@@ -250,15 +254,16 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
 
     i=0
     for pie_wedge in wedges:
-        pie_wedge.set_edgecolor(colors[i])
-        pie_wedge.set_facecolor(colors2[i])
-        pie_wedge.set_hatch('/')
+        pie_wedge.set_edgecolor(colors2[i])
+        pie_wedge.set_facecolor(colors[i])
         pie_wedge.set_linewidth(10)
         i = i+1
     
     ax[3,1].text(0,-0.1,"{:.2%}".format(win_prob), color="white", fontsize="80", ha="center", fontweight="bold", path_effects=[pe.withStroke(linewidth=10, foreground='black')])
     
     fig_path = 'out/fbAdvancedBoxScore.png'
+    fig_path2 = 'out/fbAdvancedBoxScore2.png'
+
         
     #s3 = boto3.client('s3')
     backgroundPath = 'img/fbAdvancedBoxScoreBackground.png'
@@ -266,12 +271,16 @@ def create_graphic(oppo, result, win_prob, tech_list, oppo_list, tech_pts, oppo_
     plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=120, transparent = True)
     
     img = Image.open(fig_path, 'r')
+    wpercent = (2800 / float(img.size[0]))
+    hsize = int((float(img.size[1]) * float(wpercent)))
+    img = img.resize((2800, hsize), Image.Resampling.LANCZOS)
+
     img_w, img_h = img.size
     background = Image.open(backgroundPath, 'r')
     bg_w, bg_h = background.size
     offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
     background.paste(img, offset, img)
-    background.save(fig_path)
+    background.save(fig_path2)
 
     #s3.upload_file('out/fbAdvancedBoxScore.png', 'gtpdd-public-files', 'fbAdvancedBoxScore.png')
     
@@ -285,4 +294,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1, color2)
     
-fbAdvancedBoxScore('401752687', '99')
+fbAdvancedBoxScore('401757295', '48')

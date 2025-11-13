@@ -188,6 +188,8 @@ def checkIfScorigami(df, techScore, oppoScore):
     else:
         message = "Saturday's game was a scorigami!!\n\nNever before has game ended with the final score of " + str(techScore) + " to " + str(oppoScore) + " in the 120 year history of Louisiana Tech football"
 
+    print(message)
+
 def fbScorigami(platform):
     if platform == 'Windows':
         df = pd.read_csv(r'in_files/fbScorigamiGames.csv')
@@ -265,7 +267,7 @@ def fbScorigami(platform):
     #df_s.to_json('out/fbScorigamiData.json', index=False, orient="records")
 
     #df = df[:-1]      
-    #checkIfScorigami(df, techScore, oppoScore)  
+    checkIfScorigami(df, techScore, oppoScore)  
 
     #try:generateScorigamiChart(df_s, df_new, 1, winScore, loseScore, fullPath, basicPath)
     #except:generateScorigamiChart(df_s, df_new, 1, 101, 100, fullPath, basicPath)

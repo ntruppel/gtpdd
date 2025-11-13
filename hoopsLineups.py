@@ -224,6 +224,8 @@ def renderLineupChart(lineup_df, shots_df, team, oppo, color_code, color2, filen
                 ax.text(int(maxTime) - int(row['time']),i,"3", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
             elif 'GOOD JUMPER' in row['action']:
                 ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
+            elif 'GOOD TIPIN' in row['action']:
+                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'GOOD LAYUP' in row['action']:
                 ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
             elif 'GOOD DUNK' in row['action']:
@@ -306,7 +308,7 @@ def renderLineupChart(lineup_df, shots_df, team, oppo, color_code, color2, filen
     
     img = Image.open(fig_path)
     team_logo = Image.open(team_logo_path)
-    if team == 'Louisiana Tech': logo_size=350
+    if team == 'Louisiana Tech': logo_size=300
     else: logo_size = 250
     team_logo = team_logo.resize((logo_size,logo_size))
     
@@ -478,8 +480,8 @@ def getPlusMinus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform):
  
 def hoopsLineups(team, gameNum, platform):
     ## TODO: Try/except with the pbp tables to detect an OT/2OT game
-    otFlag = 1
-    ot2Flag = 1
+    otFlag = 0
+    ot2Flag = 0
     
     home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text, features="lxml")
     box_scores = []

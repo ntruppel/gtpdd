@@ -56,12 +56,18 @@ def getESPNAPI(platform, gameId):
     home = x['boxscore']['teams'][1]['team']['location']
     
     v_color = '#' + x['boxscore']['teams'][0]['team']['color']
-    v_color2 = '#' + x['boxscore']['teams'][0]['team']['alternateColor']
+    try:
+        v_color2 = '#' + x['boxscore']['teams'][0]['team']['alternateColor']
+    except:
+        v_color2 = '#000000'
     h_color = "#" + x['boxscore']['teams'][1]['team']['color']
     h_color2 = '#' + x['boxscore']['teams'][1]['team']['alternateColor']
     
     ## Download Team Logos
-    vlogo = x['boxscore']['teams'][0]['team']['logo']
+    try:
+        vlogo = x['boxscore']['teams'][0]['team']['logo']
+    except:
+        vlogo = 'https://latechsports.com/images/logos/Lyon.png'
     vlogo_r = r = requests.get(vlogo)
     hlogo = x['boxscore']['teams'][1]['team']['logo']
     hlogo_r = r = requests.get(hlogo)
