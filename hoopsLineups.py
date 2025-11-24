@@ -82,9 +82,15 @@ def getLineup(subs_df, statTable, startTime, endSubs):
         name_df[1] = name_df[1].str.strip()
         name_df = name_df[[1]]
         name_df = name_df.head(5)
+        print(name_df)
 
         name_df[1] = name_df[1].str.split(',').str[1] + ' ' + name_df[1].str.split(',').str[0]
-        nameList = name_df[1].to_list()  
+        name_df[1] = name_df[1].str.strip()
+        nameList = name_df[1].to_list() 
+        nameList = ["SCOOTER WILLIAMS JR." if item == "SCOOTER WILLIAMS" else item for item in nameList]
+
+
+        print(nameList)
         return nameList  
     
     ## Create a df with rows for each sub time, filled with the starters. They will be removed as they are subbed out

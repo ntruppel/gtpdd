@@ -6,3 +6,5 @@ python-dotenv
 boto3
 awscli
 requests
+bs4
+lxml
