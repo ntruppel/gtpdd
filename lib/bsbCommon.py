@@ -17,7 +17,7 @@ from lib.common import parseRowStringTextTrue,parseRowStringTextTrue0,parseRowSt
 
 def getBoxScore(box_score, returnType):
     box_url = 'https://latechsports.com' + str(box_score)
-    oppo = box_score.split('2025/')[1].split('/boxscore')[0]
+    oppo = box_score.split('2026/')[1].split('/boxscore')[0]
     box_soup = Soup((requests.get(box_url)).text, features="lxml")
     tables = box_soup.find_all('table')
     

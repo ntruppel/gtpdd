@@ -294,4 +294,4 @@ def fbAdvancedBoxScore(gameId, teamId):
     name, color1, color2 = getTeamInfo(teamId)
     create_graphic(name, result, win_prob, tech_list, oppo_list, tech_pts, oppo_pts, color1, color2)
     
-fbAdvancedBoxScore('401757295', '48')
+fbAdvancedBoxScore('401757314', '2623')

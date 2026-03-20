@@ -8,7 +8,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import six
 import csv
-import tweepy
 from datetime import datetime, timedelta
 from PIL import Image, ImageFont, ImageDraw
 from lib.bsbCommon import getBoxScore
@@ -227,14 +226,14 @@ last_box = box_scores[-1]
 last_date = box_dates[-1]
 
 ## Get the team and date listed in the most recent game
-last_team = (last_box.split('2024/'))[1].split('/boxscore')[0]
+last_team = (last_box.split('2026/'))[1].split('/boxscore')[0]
 last_date = (last_date.split(' on '))[1].split(' at')[0]
 
 ## Make sure the last game played was from this past weekend
 today = datetime.now()
 last_datetime = datetime.strptime(last_date, "%B %d, %Y")
 time_dif = today - last_datetime
-if time_dif.days > 5:
+if time_dif.days > 7:
     quit()
 
 ## Reverse the order of the list
@@ -250,11 +249,11 @@ for box_date in box_dates:
     date = (box_date.split(' on '))[1].split(' at')[0]
     date_datetime = datetime.strptime(date, "%B %d, %Y")
     time_dif = today - date_datetime
-    if time_dif.days < 5:
+    if time_dif.days < 7:
         last_scores.append(box_scores[i])
     i = i + 1
 
-last_scores.pop(0)
+#last_scores.pop(0)
     
 ###
 # GET DATA FROM BOXSCORES
@@ -296,6 +295,7 @@ weekend_df['OPS'] = weekend_df['OPS'].map('{:,.3f}'.format)
 weekend_df = weekend_df.astype({"AB": int, "H": int, "BB": int, "2B": int, "3B": int, "HR": int, "RBI": int})
 weekend_df = weekend_df[['OPS','PA','AB','H','BB','2B','3B','HR','RBI','AVG','OBP','SLG',]]
 weekend_df = weekend_df.sort_values(by='OPS', ascending=False)
+weekend_df.to_csv('out/bsbWeekend.csv')
 
 ## Combine the pbp dataframes into one for the series
 for i in range(0,len(pbp_dfs)):
@@ -349,7 +349,7 @@ card_draw.text((l_gap,80),'Scorecard Abomination', font=large_name_font)
 ## Print Team Logo
 box = [(950, 28), (950+111, 28+111)] 
 card_draw.rectangle(box, fill ='black', outline ="white", width=5)
-logo = Image.open('/tmp/' + opponent + '.png')
+logo = Image.open('logo/' + opponent + '.png')
 logo = logo.resize((111,111))
 card.paste(logo, (950,28),logo)
 card_draw.text((948,144),'GAMES AGAINST', font=title_font)
