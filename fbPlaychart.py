@@ -7,169 +7,238 @@ Created on Wed Nov  2 18:06:08 2022
 
 ## TODO: This still needs a lot of work
 
+import json
+import os
 
 import cfbd
-import pandas as pd
-import matplotlib
 import matplotlib.pyplot as plt
-import re
-import os
+import matplotlib.ticker as mticker
+import pandas as pd
 from dotenv import load_dotenv
-load_dotenv()
-from pandas import json_normalize
-import json
 
-def getPBPData():
+load_dotenv()
+
+BACKGROUND_COLOR = '#d6e8cf'  # muted light green
+
+PLAY_COLOR_KEYS = {
+    'Pass Reception': 'pass',
+    'Passing Touchdown': 'pass',
+    'Pass Incompletion': 'pass',
+    'Rush': 'run',
+    'Rushing Touchdown': 'run',
+    'Penalty': 'penalty',
+    'Sack': 'sack',
+    'Interception Return Touchdown': 'int',
+    'Safety': 'safety'
+}
+
+
+def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     ## CFBD Configuration
-    configuration = cfbd.Configuration( access_token = os.environ["cfbdAuth"] )
+    configuration = cfbd.Configuration(access_token=os.environ["cfbdAuth"])
     api_instance = cfbd.PlaysApi(cfbd.ApiClient(configuration))
 
-    ## Get the particular game we are interested in
     ## TODO: Grab the most recent game automatically
-    api_response = api_instance.get_plays(2024, week=1, team='Louisiana Tech')
+    api_response = api_instance.get_plays(year, week=week, team=team)
 
     dictList = []
     for play in api_response:
-        playDict = {}
-        playDict ['offense'] = play.offense
-        playDict['clock'] = "Q" + str(play.period) + " " + str(play.clock.minutes) + ":" + str(play.clock.seconds)
-        playDict['down'] = play.down
-        playDict['distance'] = play.distance
-        playDict['type'] = play.play_type
-        playDict['start'] = play.yard_line
-        playDict['gained'] = play.gained
-        dictList.append(playDict)
+        dictList.append({
+            'offense': play.offense,
+            'clock': f"Q{play.period} {play.clock.minutes}:{play.clock.seconds}",
+            'down': play.down,
+            'distance': play.distance,
+            'type': play.play_type,
+            'start': play.yard_line,
+            'gained': play.gained,
+        })
 
     df = pd.DataFrame(dictList)
-    df.to_csv('csv/fbPlaychartPBP.csv') 
-    print(df)  
-
-def setupChart():
-    fig,ax = plt.subplots()
-    #fig.set_size_inches(20, 30)
-    ax.set_xlim(-13,113)
-    plt.gca().invert_yaxis()
-    
-    return fig,ax        
-
-i=0
-df = pd.read_csv('csv/fbPlaychartPBP.csv')
-
-with open('lib/fbPlaychartColorsTech.txt') as f: 
-        data = f.read()
-        techColorsDict = json.loads(data)
-        print(techColorsDict)
-        print(type(techColorsDict))
-
-with open('lib/fbPlaychartColorsOppo.txt') as f: 
-        data = f.read()
-        oppoColorsDict = json.loads(data)
+    df.to_csv('csv/fbPlaychartPBP.csv')
+    return df
 
 
-fig,ax = setupChart()
-offense = ''
-for index,row in df.iterrows():
-    if row['offense'] != offense:
-        offense = row['offense']
-        i = i+10
+## Inches of figure per data-unit, kept roughly equal on both axes so the
+## fixed-width play arrows keep their proportions instead of squishing.
+UNITS_PER_INCH = 13.0
+X_RANGE = 126  # xlim spans -13 .. 113
 
 
+def setupChart(techColor, oppoColor):
+    fig, ax = plt.subplots()
+    fig.patch.set_facecolor(BACKGROUND_COLOR)
+    ax.set_facecolor(BACKGROUND_COLOR)
+    ax.set_xlim(-13, 113)
 
-    if row['offense'] == 'Louisiana Tech': 
-        colorsDict = techColorsDict
-        start = row['start']
-        pos_gained = row['gained'] - 1.9
-        neg_gained = row['gained'] + 1.9
-        fg_yards = row['gained'] - 10
-        touchback = [0,65]
-        endzone=100
-        coef = 1
-        marker = '>'
-        ko_marker = '<'
-        ha = 'left'
-        zha = 'right'
-    
+    ## Endzones: Tech's color on the left (-13..0), opponent's on the right (100..113).
+    ax.axvspan(-13, 0, color=techColor, zorder=-1)
+    ax.axvspan(100, 113, color=oppoColor, zorder=-1)
+
+    ## White yard lines every 10 from 0 to 100; 0/50/100 drawn thicker.
+    for yard in range(0, 101, 10):
+        lw = 3 if yard in (0, 50, 100) else 1
+        ax.axvline(yard, color='white', linewidth=lw, zorder=0)
+
+    return fig, ax
+
+
+def loadColors(path):
+    with open(path) as f:
+        return json.load(f)
+
+
+def formatClock(clock):
+    """Tidy the stored clock string (e.g. 'Q1 15:0' -> 'Q1 15:00')."""
+    try:
+        head, secs = str(clock).rsplit(':', 1)
+        return f"{head}:{int(secs):02d}"
+    except (ValueError, AttributeError):
+        return str(clock)
+
+
+def playColor(playType, colors):
+    key = PLAY_COLOR_KEYS.get(playType)
+    if key:
+        return colors[key]
+    print(playType)
+    return 'green'  # Catchall for unlisted. If we see green, there's a problem
+
+
+def playGeometry(row, team, techColors, oppoColors):
+    """Geometry/colors for drawing a play, mirrored depending on which team has the ball."""
+    gained = row.gained
+    if row.offense == team:
+        return {
+            'colors': techColors,
+            'pos_gained': gained - 1.9,
+            'neg_gained': gained + 1.9,
+            'fg_yards': gained - 10,
+            'int_endzone': 0,
+            'endzone': 100,
+            'marker': '>',
+            'ha': 'left',
+            'zha': 'right',
+        }
     else:
-        colorsDict = oppoColorsDict
-        start = row['start']
-        pos_gained = -1 * row['gained'] + 1.9
-        neg_gained = -1 * row['gained'] - 1.9
-        fg_yards = -1 * row['gained'] - 10
-        touchback = [100,35]
-        endzone=0
-        coef = -1
-        marker = '<'
-        ko_marker = '>'
-        ha = 'right'
-        zha= 'left'
+        return {
+            'colors': oppoColors,
+            'pos_gained': -gained + 1.9,
+            'neg_gained': -gained - 1.9,
+            'fg_yards': -gained - 10,
+            'int_endzone': 100,
+            'endzone': 0,
+            'marker': '<',
+            'ha': 'right',
+            'zha': 'left',
+        }
 
-    ## Get Color for each play
-    if row['type'] == 'Pass Reception' or row['type'] == 'Passing Touchdown' or row['type'] == 'Pass Incompletion': color = colorsDict['pass']
-    elif row['type'] == 'Rush' or row['type'] == 'Rushing Touchdown': color = colorsDict['run']
-    elif row['type'] == 'Penalty': color = colorsDict['penalty']
-    elif row['type'] == 'Sack': color = colorsDict['sack']
-    elif row['type'] == 'Interception Return Touchdown': color = colorsDict['int']
-    else: 
-        color = 'green' # Catchall for unlisted. If we see green, there's a problem
-        print(row['type'])
 
-    ## KICKOFF
-    ### TODO: Implement kickoffs
-    if row['type'] == 'Kickoff' or row['type'] == 'Kickoff Return (Offense)':
-        0
+def drawPlay(ax, row, i, geo):
+    """Draw a single play at row height i. Returns the extra vertical offset (if any) to apply before the next play."""
+    start = row.start
+    playType = row.type
+
+    ## KICKOFF (drawn as a dashed line, like a punt). The ball travels toward the
+    ## receiving team's own end, i.e. opposite the offense's normal direction.
+    if playType == 'Kickoff':
+        ko_marker = '<' if geo['marker'] == '>' else '>'
+        ax.text(start, i, " Kickoff ", fontsize=12, va='center', ha=geo['ha'])
+        ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=ko_marker, markersize=1, linewidth=2, color='black')
+
+    elif playType == 'Kickoff Return (Offense)':
+        ax.text(start + geo['pos_gained'], i, " Return ", fontsize=12, va='center', ha=geo['ha'])
+        ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+        
 
     ## FIELD GOAL
-    elif row['type'] == 'Field Goal Good':
-        ax.plot([start,start+fg_yards],[i, i], '--', marker = 'P', markersize = 8, linewidth=4, color='green')
-    elif row['type'] == 'Field Goal Missed':
-        ax.plot([start,start+fg_yards],[i, i], '--', marker = 'X', markersize = 8, linewidth=4, color='gray')
-    
+    elif playType == 'Field Goal Good':
+        ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='P', markersize=8, linewidth=4, color='green')
+    elif playType == 'Field Goal Missed':
+        ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='X', markersize=8, linewidth=4, color='gray')
+
     ## PUNT
-    elif row['type'] == 'Punt':
-        ax.text(start,i," Punt ", fontsize=3, va='top', ha=ha)
-        ax.plot([start,start+pos_gained],[i, i], '--', marker = marker, markersize = 1, linewidth=0.5, color='black')
-            
+    elif playType == 'Punt':
+        ax.text(start, i, " Punt ", fontsize=12, va='center', ha=geo['zha'])
+        ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+
     ## INTERCEPTION
-    elif row['type'] == 'Interception':
-        ax.text(start, i,'INTERCEPTION',color='purple', fontsize='40', ha=ha)
-        #i = i - 2
-        
-    elif row['type'] == 'Interception Return Touchdown':
-        ax.arrow(start,i,-1*(start-touchback[0]),0,width=3.8,head_width=3.8,head_length=0.9, color=color)
-        ax.text(touchback[0],i," INT TD! ", fontsize=6, va='center', ha=zha)
+    elif playType == 'Interception':
+        ax.text(start, i, 'INTERCEPTION', color='purple', fontsize='40', ha=geo['ha'])
 
-    
-    ## TIMEOUT
-    elif row['type'] == 'Timeout':
-        i = i - 1
-    
+    elif playType == 'Interception Return Touchdown':
+        color = playColor(playType, geo['colors'])
+        ax.arrow(start, i, -1 * (start - geo['int_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
+        ax.text(geo['int_endzone'], i, " INT TD! ", fontsize=12, color = 'white', va='center', ha=geo['zha'])
+
     ## TODO: Fumble Recovery, Fix Kickoffs
-    
-    # END PERIOD
-    elif row['type'] == 'End of Half':
-        i = i - 1
 
-    else:        
-        if row['gained'] > 0:
-            ax.arrow(start,i,pos_gained,0,width=3.8,head_width=3.8,head_length=0.9, color=color)
-        elif row['gained'] < 0:
-            ax.arrow(start,i,neg_gained,0,width=3.8,head_width=3.8,head_length=0.9, color=color)
+    else:
+        color = playColor(playType, geo['colors'])
+        if row.gained > 0:
+            ax.arrow(start, i, geo['pos_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
+        elif row.gained < 0:
+            ax.arrow(start, i, geo['neg_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
         else:
-            ax.plot([start,start],[i-0.9, i+0.9], color=color, linewidth=1)
-        
-        if 'Touchdown' in row['type']:
-            ax.text(endzone,i," TD! ", fontsize=6, va='center', ha=ha) 
+            ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
-    ## Adding text where needed
-    if row['type'] == 'Safety':
-        ax.text(start,i," Safety! ", fontsize=6, va='center', ha=zha)  
+        if 'Touchdown' in playType:
+            ax.text(geo['endzone'], i, " TD! ", fontsize=12, color='white', va='center', ha=geo['ha'])
 
-          
+        elif 'Sack' in playType:
+            ax.text(start, i, ' Sack! ', color='black', fontsize='12', ha=geo['ha'], va='center')
 
-    
-    i=i+4
+        elif 'Safety' in playType:
+            ax.text(geo['int_endzone'], i, " Safety! ", color="white", fontsize=10, va='center', ha=geo['zha'])
+    return 0
 
-fig_path = 'out/fbPlaychart.png'
-plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=1200, transparent = True)
-print("Done.")
 
+def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
+                 oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
+                 year=2024, week=1):
+    if refreshData:
+        df = getPBPData(year, week, team)
+    else:
+        df = pd.read_csv('csv/fbPlaychartPBP.csv')
+
+    techColors = loadColors(techColorPath)
+    oppoColors = loadColors(oppoColorPath)
+
+    fig, ax = setupChart(techColors['pass'], oppoColors['pass'])
+
+    i = 0
+    offense = ''
+    for row in df.itertuples():
+        if row.type in ('End Period', 'End of Half', 'Timeout'):
+            continue
+
+        if row.offense != offense:
+            offense = row.offense
+            i += 10
+            ## Drive header: who has the ball and the clock at the drive's start.
+            headerColors = techColors if offense == team else oppoColors
+            ax.text(50, i - 5, f"{offense}  —  {formatClock(row.clock)}",
+                    fontsize=12, fontweight='bold', va='center', ha='center',
+                    color=headerColors['pass'])
+
+        geo = playGeometry(row, team, techColors, oppoColors)
+        i += drawPlay(ax, row, i, geo)
+        i += 4
+
+    ## Size the figure so vertical spacing matches the horizontal scale,
+    ## keeping the fixed-width play arrows from squishing on a tall chart.
+    y_extent = i + 10
+    ax.set_ylim(y_extent, -10)  # inverted: first play at top
+    ## Label a tick at every play-spacing step so each row is easy to track.
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(4))
+    ax.tick_params(axis='y', labelsize=4)
+    width = X_RANGE / UNITS_PER_INCH
+    height = max(8.0, y_extent / UNITS_PER_INCH)
+    fig.set_size_inches(width, height)
+
+    fig_path = 'out/fbPlaychart.png'
+    fig.savefig(fig_path, bbox_inches='tight', pad_inches=0, dpi=200,
+                transparent=False, facecolor=BACKGROUND_COLOR)
+    print("Done.")
+
+
+fbPlaychart()

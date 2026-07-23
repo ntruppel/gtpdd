@@ -3,5 +3,6 @@
     "pass": "darkred",
     "penalty": "gold",
     "sack": "silver",
-    "int": "black"
+    "int": "black",
+    "safety":"black"
 }
