@@ -4,5 +4,6 @@
     "penalty": "gold",
     "sack": "silver",
     "int": "black",
-    "safety":"black"
+    "safety":"black",
+    "fumble":"black"
 }

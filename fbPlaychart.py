@@ -28,8 +28,11 @@ PLAY_COLOR_KEYS = {
     'Rushing Touchdown': 'run',
     'Penalty': 'penalty',
     'Sack': 'sack',
+    'Pass Interception Return': 'int',
     'Interception Return Touchdown': 'int',
-    'Safety': 'safety'
+    'Safety': 'safety',
+    'Fumble Recovery (Opponent)': 'fumble'
+
 }
 
 
@@ -148,18 +151,31 @@ def drawPlay(ax, row, i, geo):
     elif playType == 'Kickoff Return (Offense)':
         ax.text(start + geo['pos_gained'], i, " Return ", fontsize=12, va='center', ha=geo['ha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
-        
+
+    elif playType == 'Touchback':
+            ax.text(start + geo['pos_gained'], i, " Touchback ", fontsize=12, va='center', ha=geo['ha'])
+            ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+               
 
     ## FIELD GOAL
     elif playType == 'Field Goal Good':
         ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='P', markersize=8, linewidth=4, color='green')
+        ax.text(geo['endzone'], i, " FG! ", fontsize=12, color='white', va='top', ha=geo['ha'])
     elif playType == 'Field Goal Missed':
         ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='X', markersize=8, linewidth=4, color='gray')
+        ax.text(geo['endzone'], i+1, " FG Miss! ", fontsize=10, color='white', va='top', ha=geo['ha'])
+
 
     ## PUNT
     elif playType == 'Punt':
         ax.text(start, i, " Punt ", fontsize=12, va='center', ha=geo['zha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+
+    ## PUNT RETURN
+    elif playType == 'Punt Return':
+        ax.text(start, i, " Punt Return ", fontsize=12, va='center', ha=geo['zha'])
+        ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+
 
     ## INTERCEPTION
     elif playType == 'Interception':
@@ -167,17 +183,15 @@ def drawPlay(ax, row, i, geo):
 
     elif playType == 'Interception Return Touchdown':
         color = playColor(playType, geo['colors'])
-        ax.arrow(start, i, -1 * (start - geo['int_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
+        ax.arrow(start, i, -1 * (start - geo['int_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
         ax.text(geo['int_endzone'], i, " INT TD! ", fontsize=12, color = 'white', va='center', ha=geo['zha'])
-
-    ## TODO: Fumble Recovery, Fix Kickoffs
 
     else:
         color = playColor(playType, geo['colors'])
         if row.gained > 0:
-            ax.arrow(start, i, geo['pos_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
+            ax.arrow(start, i, geo['pos_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
         elif row.gained < 0:
-            ax.arrow(start, i, geo['neg_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, color=color)
+            ax.arrow(start, i, geo['neg_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
         else:
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
@@ -187,8 +201,30 @@ def drawPlay(ax, row, i, geo):
         elif 'Sack' in playType:
             ax.text(start, i, ' Sack! ', color='black', fontsize='12', ha=geo['ha'], va='center')
 
+        elif 'Interception' in playType:
+            ax.text(start, i, ' INT! ', color='black', fontsize='12', ha=geo['ha'], va='center')
+
         elif 'Safety' in playType:
             ax.text(geo['int_endzone'], i, " Safety! ", color="white", fontsize=10, va='center', ha=geo['zha'])
+
+        elif 'Fumble Recovery' in playType:
+            ## Label on the arrow's pointing (head) end, unless that text would run
+            ## into an endzone (x<0 or x>100) — then put it on the flat (tail) end.
+            dx = geo['pos_gained'] if row.gained > 0 else (geo['neg_gained'] if row.gained < 0 else 0)
+            head_x = start + dx
+            fumble_w = 11  # approx width of " Fumble! " in data units
+            if dx >= 0:  # arrow points right, head text extends right
+                head_ha, tail_ha = 'left', 'right'
+                overlaps = head_x + fumble_w > 100
+            else:  # arrow points left, head text extends left
+                head_ha, tail_ha = 'right', 'left'
+                overlaps = head_x - fumble_w < 0
+            if overlaps:
+                ax.text(start, i, ' Fumble! ', color='black', fontsize=12, ha=tail_ha, va='center')
+            else:
+                ax.text(head_x+1, i, ' Fumble! ', color='black', fontsize=12, ha=head_ha, va='center')
+            
+
     return 0
 
 

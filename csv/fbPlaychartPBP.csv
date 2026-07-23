@@ -17,7 +17,8 @@
 14,Louisiana Tech,Q1 11:12,1,10,Pass Reception,41,8
 15,Louisiana Tech,Q1 10:52,2,2,Pass Reception,49,23
 16,Louisiana Tech,Q1 10:14,1,10,Passing Touchdown,72,28
-17,Louisiana Tech,Q1 10:14,0,0,Kickoff,35,0
+17,Nicholls,Q1 10:14,0,0,Kickoff,35,-65
+17,Nicholls,Q1 10:14,0,0,Touchback,100,25
 18,Nicholls,Q1 10:9,1,10,Rush,75,-6
 19,Nicholls,Q1 9:38,2,16,Pass Incompletion,81,0
 20,Nicholls,Q1 9:38,3,16,Timeout,81,0
@@ -42,6 +43,7 @@
 39,Louisiana Tech,Q1 2:42,2,12,Pass Reception,54,4
 40,Louisiana Tech,Q1 2:4,3,8,Pass Incompletion,58,0
 41,Louisiana Tech,Q1 2:0,4,8,Punt,58,42
+41,Nicholls,Q1 2:0,4,8,Touchback,100,20
 42,Nicholls,Q1 1:53,1,10,Rush,80,5
 43,Nicholls,Q1 1:17,2,5,Pass Incompletion,75,0
 44,Nicholls,Q1 1:15,3,5,Timeout,75,0
@@ -54,7 +56,7 @@
 52,Louisiana Tech,Q2 14:27,1,10,Rush,23,5
 53,Louisiana Tech,Q2 13:48,2,5,Rush,28,2
 54,Louisiana Tech,Q2 13:10,3,3,Pass Incompletion,30,0
-55,Louisiana Tech,Q2 13:5,4,3,Punt,30,0
+55,Louisiana Tech,Q2 13:5,4,3,Punt,30,46
 56,Nicholls,Q2 12:57,1,10,Fumble Recovery (Opponent),76,-3
 57,Louisiana Tech,Q2 12:52,1,10,Rush,79,7
 58,Louisiana Tech,Q2 12:7,2,3,Rush,86,3
@@ -63,10 +65,12 @@
 61,Nicholls,Q2 10:48,2,8,Rush,96,2
 62,Nicholls,Q2 10:11,3,6,Rush,94,0
 63,Nicholls,Q2 9:32,4,6,Penalty,94,-3
-64,Nicholls,Q2 9:23,4,9,Punt,97,34
+64,Nicholls,Q2 9:23,4,9,Punt,97,47
+64,Louisiana Tech,Q2 9:23,4,9,Punt Return,50,34
 65,Louisiana Tech,Q2 9:7,1,10,Rush,84,2
 66,Louisiana Tech,Q2 8:27,2,8,Passing Touchdown,86,14
-67,Louisiana Tech,Q2 8:27,0,0,Kickoff,35,0
+67,Nicholls,Q2 8:27,0,0,Kickoff,35,-65
+67,Nicholls,Q2 8:27,0,0,Touchback,100,25
 68,Nicholls,Q2 8:27,1,10,Sack,75,-7
 69,Nicholls,Q2 7:37,2,17,Rush,82,2
 70,Nicholls,Q2 7:12,3,15,Pass Incompletion,80,0
@@ -88,12 +92,13 @@
 86,Louisiana Tech,Q2 2:2,1,10,Rush,41,0
 87,Louisiana Tech,Q2 1:57,2,10,Penalty,41,15
 88,Louisiana Tech,Q2 1:49,1,10,Rush,56,2
-89,Louisiana Tech,Q2 1:28,2,8,Pass Interception Return,58,49
+89,Louisiana Tech,Q2 1:28,2,8,Pass Interception Return,58,-37
 90,Nicholls,Q2 1:19,1,10,Rush,21,0
 91,Nicholls,Q2 1:10,2,10,Pass Incompletion,21,0
 92,Nicholls,Q2 1:5,3,10,Pass Incompletion,21,0
 93,Nicholls,Q2 0:56,4,10,Field Goal Good,21,38
-94,Nicholls,Q2 0:56,0,0,Kickoff,65,0
+94,Louisiana Tech,Q2 0:56,0,0,Kickoff,65,-65
+94,Louisiana Tech,Q2 0:56,0,0,Touchback,0,25
 95,Louisiana Tech,Q2 0:52,1,10,Rush,25,10
 96,Louisiana Tech,Q2 0:39,2,10,Rush,35,3
 97,Louisiana Tech,Q2 0:38,1,10,Pass Incompletion,35,0
