@@ -368,7 +368,12 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
             else:
                 tech_score = oppo_score = 0
             headerColors = techColors if offense == team else oppoColors
-            ax.text(50, i - 5, f"{formatClock(row.clock)}  —  Tech: {tech_score} - Opponent: {oppo_score} - {offense} ball",
+            if tech_score > oppo_score: scoreString = f"Tech up {tech_score} to {oppo_score}"
+            elif tech_score < oppo_score: scoreString = f"Tech down {oppo_score} to {tech_score}"
+            else: scoreString = f"Game tied at {tech_score}"
+
+
+            ax.text(50, i - 5, f"{formatClock(row.clock)} — {scoreString} — {offense} ball",
                     fontsize=12, fontweight='bold', va='center', ha='center',
                     color=headerColors['pass'])
 
