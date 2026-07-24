@@ -9,6 +9,7 @@ Created on Wed Nov  2 18:06:08 2022
 
 import json
 import os
+import re
 
 import cfbd
 import matplotlib.pyplot as plt
@@ -43,7 +44,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
 
     ## TODO: Grab the most recent game automatically
     api_response = api_instance.get_plays(year, week=week, team=team)
-
+    print(api_response)
     dictList = []
     for play in api_response:
         dictList.append({
@@ -52,11 +53,106 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             'down': play.down,
             'distance': play.distance,
             'type': play.play_type,
-            'start': play.yard_line,
-            'gained': play.gained,
+            'start': play.yardline,
+            'gained': play.yards_gained,
+            'text': play.play_text,
+            'id': play.id,
+            'offense_score': play.offense_score,
+            'defense_score': play.defense_score
         })
 
+    opponent = next((d['offense'] for d in dictList if d['offense'] and d['offense'] != team), team)
+    processed = []
+    for d in dictList:
+        text = str(d.get('text') or '')
+
+        ## Kickoff touchbacks: the CFBD "Kickoff" row is credited to the kicking
+        ## team. Flip it to the receiving team, mark it as a 65-yard kick, and
+        ## insert a following "Touchback" row spotting the ball at the 25.
+        if d['type'] == 'Kickoff' and 'touchback' in text.lower():
+            d['offense'] = opponent if d['offense'] == team else team
+            d['gained'] = -65
+            processed.append(d)
+
+            touchback = dict(d)
+            touchback['type'] = 'Touchback'
+            touchback['start'] = 0 if touchback['offense'] == team else 100
+            touchback['gained'] = 25
+            processed.append(touchback)
+
+        ## Kickoffs without a touchback: like the touchback case, credit the row
+        ## to the receiving team. Take the kick distance from the text ("kickoff
+        ## for N yds") as a negative gained so it draws toward the receiver's end.
+        elif d['type'] == 'Kickoff':
+            d['offense'] = opponent if d['offense'] == team else team
+            ko_match = re.search(r'kickoff for (\d+)', text, re.IGNORECASE)
+            if ko_match:
+                d['gained'] = -int(ko_match.group(1))
+            processed.append(d)
+
+        ## Returned kickoffs: split the CFBD "Kickoff Return (Offense)" row into
+        ## the kick leg and the return leg, like punts. Flip to the receiving team,
+        ## make this row the kick itself ("kickoff for N", drawn as a negative
+        ## gained toward the receiver's end), then add a "Kickoff Return (Offense)"
+        ## row for the runback ("return for N") starting where the ball was caught.
+        elif d['type'] == 'Kickoff Return (Offense)':
+            d['offense'] = opponent if d['offense'] == team else team
+            d['type'] = 'Kickoff'
+            ko_match = re.search(r'kickoff for (\d+)', text, re.IGNORECASE)
+            if ko_match:
+                d['gained'] = -int(ko_match.group(1))
+            processed.append(d)
+
+            return_match = re.search(r'return(?:ed|s)? for (\d+)', text, re.IGNORECASE)
+            if return_match:
+                catch = d['start'] + d['gained'] if d['offense'] == team else d['start'] - d['gained']
+                kick_return = dict(d)
+                kick_return['type'] = 'Kickoff Return (Offense)'
+                kick_return['start'] = catch
+                kick_return['gained'] = int(return_match.group(1))
+                processed.append(kick_return)
+
+        ## Punts: CFBD's "gained" is unreliable — take the punt distance from the
+        ## text ("punt for N yds"). If the returner brought it back ("returns for
+        ## N yds"), add a following "Punt Return" row for the receiving team,
+        ## starting where the punt was caught.
+        elif d['type'] == 'Punt':
+            punt_match = re.search(r'punt for (\d+)', text, re.IGNORECASE)
+            if punt_match:
+                d['gained'] = int(punt_match.group(1))
+            processed.append(d)
+
+            return_match = re.search(r'returns? for (\d+)', text, re.IGNORECASE)
+            if return_match:
+                ## Catch point is direction-aware: the punting team's own punts
+                ## travel toward x=100 (start+gained), the opponent's toward x=0.
+                catch = d['start'] + d['gained'] if d['offense'] == team else d['start'] - d['gained']
+                punt_return = dict(d)
+                punt_return['type'] = 'Punt Return'
+                punt_return['offense'] = opponent if d['offense'] == team else team
+                punt_return['start'] = catch
+                punt_return['gained'] = int(return_match.group(1))
+                processed.append(punt_return)
+
+        else:
+            processed.append(d)
+    dictList = processed
+
     df = pd.DataFrame(dictList)
+
+    ## CFBD can return plays out of game order — sort chronologically from the
+    ## clock string "Q<period> M:SS": quarter ascending, then time remaining
+    ## descending (the clock counts down within a quarter), then play id ascending
+    ## to break same-clock ties. A stable sort keeps inserted rows (touchbacks,
+    ## punt returns) right after their parent play, since they share its id.
+    clock_parts = df['clock'].str.extract(r'Q(\d+)\s+(\d+):(\d+)').astype(float)
+    df['_period'] = clock_parts[0]
+    df['_secs_remaining'] = clock_parts[1] * 60 + clock_parts[2]
+    df['_id'] = pd.to_numeric(df['id'], errors='coerce')
+    df = (df.sort_values(['_period', '_secs_remaining', '_id'], ascending=[True, False, True], kind='stable')
+            .drop(columns=['_period', '_secs_remaining', '_id'])
+            .reset_index(drop=True))
+
     df.to_csv('csv/fbPlaychartPBP.csv')
     return df
 
@@ -107,14 +203,22 @@ def playColor(playType, colors):
     return 'green'  # Catchall for unlisted. If we see green, there's a problem
 
 
+def shortenArrow(disp):
+    """Shorten a signed displacement toward zero by ~1.9 (to leave a gap for the
+    arrowhead) without ever flipping its sign — short plays keep pointing the right way."""
+    sign = 1 if disp >= 0 else -1
+    return sign * max(abs(disp) - 1.9, 0.6)
+
+
 def playGeometry(row, team, techColors, oppoColors):
     """Geometry/colors for drawing a play, mirrored depending on which team has the ball."""
     gained = row.gained
     if row.offense == team:
+        dx = shortenArrow(gained)  # tech drives toward x=100
         return {
             'colors': techColors,
-            'pos_gained': gained - 1.9,
-            'neg_gained': gained + 1.9,
+            'pos_gained': dx,
+            'neg_gained': dx,
             'fg_yards': gained - 10,
             'int_endzone': 0,
             'endzone': 100,
@@ -123,10 +227,11 @@ def playGeometry(row, team, techColors, oppoColors):
             'zha': 'right',
         }
     else:
+        dx = shortenArrow(-gained)  # opponent drives toward x=0
         return {
             'colors': oppoColors,
-            'pos_gained': -gained + 1.9,
-            'neg_gained': -gained - 1.9,
+            'pos_gained': dx,
+            'neg_gained': dx,
             'fg_yards': -gained - 10,
             'int_endzone': 100,
             'endzone': 0,
@@ -230,7 +335,7 @@ def drawPlay(ax, row, i, geo):
 
 def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
                  oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
-                 year=2024, week=1):
+                 year=2025, week=4):
     if refreshData:
         df = getPBPData(year, week, team)
     else:
@@ -243,22 +348,34 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     i = 0
     offense = ''
+    prev_row = None
     for row in df.itertuples():
-        if row.type in ('End Period', 'End of Half', 'Timeout'):
+        if row.type in ('End Period', 'End of Half', 'Timeout', 'End of Game'):
             continue
 
         if row.offense != offense:
             offense = row.offense
             i += 10
-            ## Drive header: who has the ball and the clock at the drive's start.
+            ## Drive header: who has the ball, the clock, and the score (Tech left,
+            ## USM right) at the drive's start. Read the score from the PREVIOUS
+            ## play — kickoff rows have had their "offense" flipped, so their own
+            ## offense/defense scores no longer line up with that column.
+            if prev_row is not None:
+                if prev_row.offense == team:
+                    tech_score, oppo_score = prev_row.offense_score, prev_row.defense_score
+                else:
+                    tech_score, oppo_score = prev_row.defense_score, prev_row.offense_score
+            else:
+                tech_score = oppo_score = 0
             headerColors = techColors if offense == team else oppoColors
-            ax.text(50, i - 5, f"{offense}  —  {formatClock(row.clock)}",
+            ax.text(50, i - 5, f"{formatClock(row.clock)}  —  Tech: {tech_score} - Opponent: {oppo_score} - {offense} ball",
                     fontsize=12, fontweight='bold', va='center', ha='center',
                     color=headerColors['pass'])
 
         geo = playGeometry(row, team, techColors, oppoColors)
         i += drawPlay(ax, row, i, geo)
         i += 4
+        prev_row = row
 
     ## Size the figure so vertical spacing matches the horizontal scale,
     ## keeping the fixed-width play arrows from squishing on a tall chart.
@@ -277,4 +394,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart()
+fbPlaychart(refreshData=True)
+#df = getPBPData(2025, 4, 'Louisiana Tech')

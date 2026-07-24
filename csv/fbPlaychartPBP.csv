@@ -1,192 +1,204 @@
-,offense,clock,down,distance,type,start,gained
-0,Louisiana Tech,Q1 15:00,0,0,Kickoff,65,-65
-0,Louisiana Tech,Q1 15:0,0,0,Kickoff Return (Offense),0,18
-1,Louisiana Tech,Q1 14:56,1,10,Rush,18,2
-2,Louisiana Tech,Q1 14:28,2,8,Pass Reception,20,11
-3,Louisiana Tech,Q1 14:14,1,10,Penalty,31,-5
-4,Louisiana Tech,Q1 13:53,1,15,Rush,26,3
-5,Louisiana Tech,Q1 13:19,2,12,Pass Incompletion,29,0
-6,Louisiana Tech,Q1 13:15,3,12,Pass Incompletion,29,0
-7,Louisiana Tech,Q1 13:9,4,12,Punt,29,70
-8,Nicholls,Q1 12:55,1,10,Safety,99,0
-9,Louisiana Tech,Q1 12:49,1,10,Rush,37,-4
-10,Louisiana Tech,Q1 12:13,2,14,Sack,33,-3
-11,Louisiana Tech,Q1 11:22,3,17,Interception Return Touchdown,30,25
-12,Louisiana Tech,Q1 11:22,0,0,Kickoff,65,-40
-13,Louisiana Tech,Q1 11:21,0,0,Kickoff Return (Offense),25,16
-14,Louisiana Tech,Q1 11:12,1,10,Pass Reception,41,8
-15,Louisiana Tech,Q1 10:52,2,2,Pass Reception,49,23
-16,Louisiana Tech,Q1 10:14,1,10,Passing Touchdown,72,28
-17,Nicholls,Q1 10:14,0,0,Kickoff,35,-65
-17,Nicholls,Q1 10:14,0,0,Touchback,100,25
-18,Nicholls,Q1 10:9,1,10,Rush,75,-6
-19,Nicholls,Q1 9:38,2,16,Pass Incompletion,81,0
-20,Nicholls,Q1 9:38,3,16,Timeout,81,0
-21,Nicholls,Q1 9:36,3,16,Pass Reception,81,29
-22,Nicholls,Q1 8:45,1,10,Rush,52,0
-23,Nicholls,Q1 7:57,2,10,Pass Reception,52,19
-24,Nicholls,Q1 7:24,1,10,Penalty,33,-10
-25,Nicholls,Q1 7:8,1,20,Sack,43,-7
-26,Nicholls,Q1 6:31,2,27,Pass Reception,50,17
-27,Nicholls,Q1 6:2,3,10,Pass Reception,33,20
-28,Nicholls,Q1 5:30,1,10,Rush,13,5
-29,Nicholls,Q1 5:3,2,5,Pass Incompletion,8,0
-30,Nicholls,Q1 4:57,3,5,Penalty,8,-10
-31,Nicholls,Q1 4:37,3,15,Pass Incompletion,18,0
-32,Nicholls,Q1 4:29,4,15,Field Goal Missed,18,35
-33,Louisiana Tech,Q1 4:24,1,10,Rush,20,3
-34,Louisiana Tech,Q1 3:53,2,7,Pass Incompletion,23,0
-35,Louisiana Tech,Q1 3:53,3,7,Timeout,23,0
-36,Louisiana Tech,Q1 3:53,3,7,Pass Reception,23,12
-37,Louisiana Tech,Q1 3:32,1,10,Pass Reception,35,21
-38,Louisiana Tech,Q1 3:14,1,10,Rush,56,-2
-39,Louisiana Tech,Q1 2:42,2,12,Pass Reception,54,4
-40,Louisiana Tech,Q1 2:4,3,8,Pass Incompletion,58,0
-41,Louisiana Tech,Q1 2:0,4,8,Punt,58,42
-41,Nicholls,Q1 2:0,4,8,Touchback,100,20
-42,Nicholls,Q1 1:53,1,10,Rush,80,5
-43,Nicholls,Q1 1:17,2,5,Pass Incompletion,75,0
-44,Nicholls,Q1 1:15,3,5,Timeout,75,0
-45,Nicholls,Q1 1:14,3,5,Penalty,75,0
-47,Nicholls,Q1 0:26,4,5,Punt,75,60
-48,Louisiana Tech,Q1 0:23,1,10,Pass Incompletion,10,0
-49,Louisiana Tech,Q1 0:22,2,10,Rush,10,8
-50,Louisiana Tech,Q1 0:0,0,10,End Period,10,8
-51,Louisiana Tech,Q2 14:59,3,2,Rush,18,5
-52,Louisiana Tech,Q2 14:27,1,10,Rush,23,5
-53,Louisiana Tech,Q2 13:48,2,5,Rush,28,2
-54,Louisiana Tech,Q2 13:10,3,3,Pass Incompletion,30,0
-55,Louisiana Tech,Q2 13:5,4,3,Punt,30,46
-56,Nicholls,Q2 12:57,1,10,Fumble Recovery (Opponent),76,-3
-57,Louisiana Tech,Q2 12:52,1,10,Rush,79,7
-58,Louisiana Tech,Q2 12:7,2,3,Rush,86,3
-59,Louisiana Tech,Q2 11:30,1,10,Fumble Recovery (Opponent),89,9
-60,Nicholls,Q2 11:22,1,10,Rush,98,2
-61,Nicholls,Q2 10:48,2,8,Rush,96,2
-62,Nicholls,Q2 10:11,3,6,Rush,94,0
-63,Nicholls,Q2 9:32,4,6,Penalty,94,-3
-64,Nicholls,Q2 9:23,4,9,Punt,97,47
-64,Louisiana Tech,Q2 9:23,4,9,Punt Return,50,34
-65,Louisiana Tech,Q2 9:7,1,10,Rush,84,2
-66,Louisiana Tech,Q2 8:27,2,8,Passing Touchdown,86,14
-67,Nicholls,Q2 8:27,0,0,Kickoff,35,-65
-67,Nicholls,Q2 8:27,0,0,Touchback,100,25
-68,Nicholls,Q2 8:27,1,10,Sack,75,-7
-69,Nicholls,Q2 7:37,2,17,Rush,82,2
-70,Nicholls,Q2 7:12,3,15,Pass Incompletion,80,0
-71,Nicholls,Q2 7:11,4,15,Punt,80,42
-72,Nicholls,Q2 6:56,1,10,Rush,37,3
-73,Nicholls,Q2 6:20,2,7,Rush,34,3
-74,Nicholls,Q2 5:54,3,4,Penalty,31,5
-75,Nicholls,Q2 5:43,1,10,Pass Incompletion,26,0
-76,Nicholls,Q2 5:42,2,10,Rush,26,5
-77,Nicholls,Q2 5:31,3,5,Pass Reception,21,7
-78,Nicholls,Q2 5:10,1,10,Rush,14,7
-79,Nicholls,Q2 4:32,2,3,Rush,7,6
-80,Nicholls,Q2 3:59,1,1,Penalty,1,0
-81,Nicholls,Q2 3:52,1,1,Rush,1,0
-82,Nicholls,Q2 3:21,2,1,Rush,1,0
-83,Nicholls,Q2 2:36,3,1,Pass Incompletion,1,0
-84,Nicholls,Q2 2:33,4,1,Field Goal Missed,1,18
-85,Louisiana Tech,Q2 2:30,1,10,Rush,20,21
-86,Louisiana Tech,Q2 2:2,1,10,Rush,41,0
-87,Louisiana Tech,Q2 1:57,2,10,Penalty,41,15
-88,Louisiana Tech,Q2 1:49,1,10,Rush,56,2
-89,Louisiana Tech,Q2 1:28,2,8,Pass Interception Return,58,-37
-90,Nicholls,Q2 1:19,1,10,Rush,21,0
-91,Nicholls,Q2 1:10,2,10,Pass Incompletion,21,0
-92,Nicholls,Q2 1:5,3,10,Pass Incompletion,21,0
-93,Nicholls,Q2 0:56,4,10,Field Goal Good,21,38
-94,Louisiana Tech,Q2 0:56,0,0,Kickoff,65,-65
-94,Louisiana Tech,Q2 0:56,0,0,Touchback,0,25
-95,Louisiana Tech,Q2 0:52,1,10,Rush,25,10
-96,Louisiana Tech,Q2 0:39,2,10,Rush,35,3
-97,Louisiana Tech,Q2 0:38,1,10,Pass Incompletion,35,0
-98,Louisiana Tech,Q2 0:0,0,10,End of Half,38,-3
-99,Louisiana Tech,Q3 15:0,0,0,Kickoff,35,0
-100,Nicholls,Q3 14:57,1,10,Rush,75,0
-101,Nicholls,Q3 14:30,2,10,Rush,75,1
-102,Nicholls,Q3 13:51,3,9,Pass Incompletion,74,0
-103,Nicholls,Q3 13:41,4,9,Punt,74,18
-104,Louisiana Tech,Q3 13:33,1,10,Rush,29,1
-105,Louisiana Tech,Q3 13:13,2,9,Rush,30,-1
-106,Louisiana Tech,Q3 12:45,3,10,Pass Incompletion,29,0
-107,Louisiana Tech,Q3 12:41,4,10,Punt,29,0
-108,Nicholls,Q3 12:25,1,10,Rush,60,12
-109,Nicholls,Q3 11:59,1,10,Rush,48,3
-110,Nicholls,Q3 11:23,2,7,Sack,45,-3
-111,Nicholls,Q3 10:54,3,10,Rush,48,5
-112,Nicholls,Q3 10:3,4,5,Punt,43,0
-113,Louisiana Tech,Q3 9:57,1,10,Pass Incompletion,6,0
-114,Louisiana Tech,Q3 9:52,2,10,Rush,6,1
-115,Louisiana Tech,Q3 9:14,3,9,Rush,7,2
-116,Louisiana Tech,Q3 8:30,4,7,Punt,9,2
-117,Nicholls,Q3 8:20,1,10,Penalty,57,5
-118,Nicholls,Q3 8:13,1,5,Penalty,52,15
-119,Nicholls,Q3 7:35,1,10,Pass Reception,37,0
-120,Nicholls,Q3 7:24,2,10,Pass Incompletion,37,0
-121,Nicholls,Q3 7:15,3,10,Sack,37,-1
-122,Nicholls,Q3 6:41,4,11,Punt,38,0
-123,Louisiana Tech,Q3 6:34,1,10,Rush,13,0
-124,Louisiana Tech,Q3 6:1,2,10,Pass Reception,13,5
-125,Louisiana Tech,Q3 5:20,3,5,Pass Reception,18,30
-126,Louisiana Tech,Q3 4:40,1,10,Rush,48,0
-127,Louisiana Tech,Q3 3:55,2,10,Penalty,48,15
-128,Nicholls,Q3 3:45,1,10,Rush,60,2
-129,Nicholls,Q3 3:11,2,8,Sack,58,-8
-130,Nicholls,Q3 2:25,3,16,Pass Reception,66,8
-131,Nicholls,Q3 1:43,4,8,Punt,58,0
-132,Louisiana Tech,Q3 1:15,1,10,Pass Reception,14,5
-133,Louisiana Tech,Q3 1:1,2,5,Pass Incompletion,19,0
-134,Louisiana Tech,Q3 0:54,3,5,Pass Reception,19,55
-135,Louisiana Tech,Q3 0:34,1,10,Pass Reception,74,4
-136,Louisiana Tech,Q3 0:0,0,10,End Period,74,4
-137,Louisiana Tech,Q4 15:0,2,6,Pass Reception,78,12
-138,Louisiana Tech,Q4 14:19,1,10,Rush,90,4
-139,Louisiana Tech,Q4 14:6,2,6,Timeout,94,0
-140,Louisiana Tech,Q4 13:32,2,6,Sack,94,-1
-141,Louisiana Tech,Q4 12:47,3,7,Pass Incompletion,93,0
-142,Louisiana Tech,Q4 12:41,4,7,Field Goal Good,93,24
-143,Louisiana Tech,Q4 12:41,0,0,Kickoff,35,0
-144,Nicholls,Q4 12:39,1,10,Pass Reception,75,7
-145,Nicholls,Q4 12:20,2,3,Rush,68,1
-146,Nicholls,Q4 11:35,3,2,Pass Incompletion,67,0
-147,Nicholls,Q4 11:30,4,2,Punt,67,0
-148,Louisiana Tech,Q4 11:27,1,10,Pass Reception,29,6
-149,Louisiana Tech,Q4 10:49,2,4,Pass Incompletion,35,0
-150,Louisiana Tech,Q4 10:45,3,4,Pass Reception,35,39
-151,Louisiana Tech,Q4 9:59,1,10,Rush,74,2
-152,Louisiana Tech,Q4 9:25,2,8,Rush,76,6
-153,Louisiana Tech,Q4 8:53,3,2,Rush,82,12
-154,Louisiana Tech,Q4 7:58,1,6,Rush,94,0
-155,Louisiana Tech,Q4 7:12,2,6,Rushing Touchdown,94,6
-156,Louisiana Tech,Q4 7:12,0,0,Penalty,97,-5
-157,Louisiana Tech,Q4 7:12,0,0,Kickoff,35,0
-158,Nicholls,Q4 7:6,1,10,Rush,75,2
-159,Nicholls,Q4 6:42,2,8,Pass Reception,73,4
-160,Nicholls,Q4 6:13,3,4,Pass Incompletion,69,0
-161,Nicholls,Q4 6:7,4,4,Punt,69,0
-162,Louisiana Tech,Q4 6:4,1,10,Rush,33,4
-163,Louisiana Tech,Q4 5:30,2,6,Pass Incompletion,37,0
-164,Louisiana Tech,Q4 5:27,3,6,Penalty,37,-10
-165,Louisiana Tech,Q4 4:54,3,13,Rush,30,2
-166,Louisiana Tech,Q4 4:7,4,11,Punt,32,0
-167,Nicholls,Q4 4:2,1,10,Rush,65,13
-168,Nicholls,Q4 3:36,1,10,Rush,52,3
-169,Nicholls,Q4 3:8,2,7,Rush,49,8
-170,Nicholls,Q4 2:39,1,10,Rush,41,14
-171,Nicholls,Q4 2:17,1,10,Passing Touchdown,27,27
-172,Louisiana Tech,Q4 2:11,1,10,Rush,54,1
-173,Louisiana Tech,Q4 2:10,3,7,Timeout,57,0
-174,Louisiana Tech,Q4 2:4,2,9,Rush,55,2
-175,Louisiana Tech,Q4 2:1,3,7,Sack,57,-8
-176,Louisiana Tech,Q4 1:55,4,15,Punt,49,0
-177,Nicholls,Q4 1:49,1,10,Pass Incompletion,81,0
-178,Nicholls,Q4 1:46,2,10,Pass Incompletion,81,0
-179,Nicholls,Q4 1:42,3,10,Pass Incompletion,81,0
-180,Nicholls,Q4 1:42,4,10,Timeout,81,0
-181,Nicholls,Q4 1:36,4,10,Sack,81,-6
-182,Louisiana Tech,Q4 1:29,1,10,Rush,87,-1
-183,Louisiana Tech,Q4 1:12,2,11,Rush,86,-1
-184,Louisiana Tech,Q4 0:19,3,12,Rush,85,-1
-185,Louisiana Tech,Q4 0:0,0,12,End of Game,84,0
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Southern Miss,Q1 15:0,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101849903,0,0
+1,Southern Miss,Q1 15:0,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101849903,0,0
+2,Southern Miss,Q1 14:53,1,10,Pass Incompletion,75,0,Braylon Braxton pass incomplete to Carl Chester,401757263101854601,0,0
+3,Southern Miss,Q1 14:48,2,10,Rush,75,3,Robert Briggs run for 3 yds to the USM 28,401757263101855101,0,0
+4,Southern Miss,Q1 14:25,3,7,Pass Incompletion,72,0,Braylon Braxton pass incomplete to Carl Chester,401757263101857401,0,0
+5,Southern Miss,Q1 14:17,4,7,Punt,72,47,"Jack Murley punt for 47 yds , Dedrick Latulas returns for 1 yd to the LT 26",401757263101858201,0,0
+6,Louisiana Tech,Q1 14:17,4,7,Punt Return,25,1,"Jack Murley punt for 47 yds , Dedrick Latulas returns for 1 yd to the LT 26",401757263101858201,0,0
+7,Louisiana Tech,Q1 13:50,1,10,Pass Reception,26,73,Blake Baker pass complete to Eli Finley for 73 yds to the USM 1 for a 1ST down,401757263101864901,0,0
+8,Louisiana Tech,Q1 13:43,1,1,Rushing Touchdown,99,1,Blake Baker run for 1 yd for a TD (Drew Henderson KICK),401757263101865601,7,0
+9,Southern Miss,Q1 13:43,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101865603,7,0
+10,Southern Miss,Q1 13:43,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101865603,7,0
+11,Southern Miss,Q1 13:37,1,10,Rush,75,3,Robert Briggs run for 3 yds to the USM 28,401757263101866201,0,7
+12,Southern Miss,Q1 13:5,2,7,Pass Reception,72,3,Braylon Braxton pass complete to Bralon Brown for 3 yds to the USM 31,401757263101869401,0,7
+13,Southern Miss,Q1 12:31,3,4,Pass Reception,69,39,Braylon Braxton pass complete to Carl Chester for 39 yds to the LT 30 for a 1ST down,401757263101876801,0,7
+14,Southern Miss,Q1 12:15,1,10,Passing Touchdown,30,30,Braylon Braxton pass complete to Kyirin Heath for 30 yds for a TD (Reed Harradine KICK),401757263101878401,7,7
+15,Louisiana Tech,Q1 12:15,1,10,Kickoff,65,-65,Reed Harradine kickoff for 65 yds for a touchback,401757263101878403,7,7
+16,Louisiana Tech,Q1 12:15,1,10,Touchback,0,25,Reed Harradine kickoff for 65 yds for a touchback,401757263101878403,7,7
+17,Louisiana Tech,Q1 11:54,1,10,Pass Reception,25,47,Blake Baker pass complete to Eli Finley for 47 yds to the USM 28 for a 1ST down,401757263101884501,7,7
+18,Louisiana Tech,Q1 11:54,1,10,Timeout,72,0,"Timeout Louisiana Tech, clock 11:54",401757263101884502,7,7
+19,Louisiana Tech,Q1 11:26,1,10,Rush,72,2,Omiri Wiggins run for 2 yds to the USM 26,401757263101887301,7,7
+20,Louisiana Tech,Q1 11:4,2,8,Rush,74,5,Omiri Wiggins run for 5 yds to the USM 21,401757263101889501,7,7
+21,Louisiana Tech,Q1 10:43,3,3,Rush,79,2,Omiri Wiggins run for 2 yds to the USM 19,401757263101895601,7,7
+22,Louisiana Tech,Q1 10:11,4,1,Rush,81,7,Clay Thevenin run for 7 yds to the USM 12 for a 1ST down,401757263101898801,7,7
+23,Louisiana Tech,Q1 9:51,1,10,Rush,88,1,Clay Thevenin run for 1 yd to the USM 11,401757263101904801,7,7
+24,Louisiana Tech,Q1 9:19,2,9,Rush,89,1,Clay Thevenin run for 1 yd to the USM 10,401757263101908001,7,7
+25,Louisiana Tech,Q1 8:44,3,8,Pass Reception,90,4,Blake Baker pass complete to Eli Finley for 4 yds to the USM 6,401757263101915501,7,7
+26,Louisiana Tech,Q1 8:10,4,4,Field Goal Good,94,24,Drew Henderson 24 yd FG GOOD,401757263101918901,10,7
+27,Southern Miss,Q1 8:10,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101918902,10,7
+28,Southern Miss,Q1 8:10,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101918902,10,7
+29,Southern Miss,Q1 8:4,1,10,Penalty,75,-13,"(08:10) Shotgun Braxton,Braylon rush right for 0 yards to the USM25 (Oguns,Emmanuel; Leota,Sifa) PENALTY USM Illegal Use Of Hands (Maui,Aloali'i) 13 yards from USM25 to USM12. NO PLAY.",401757263101919501,7,10
+30,Southern Miss,Q1 7:28,1,23,Rush,88,13,Matt Jones run for 13 yds to the USM 25,401757263101927101,7,10
+31,Southern Miss,Q1 7:4,2,10,Rush,75,4,Matt Jones run for 4 yds to the USM 29,401757263101929501,7,10
+32,Southern Miss,Q1 6:29,3,6,Pass Reception,71,23,"Braylon Braxton pass complete to Tychaun Chapman for 8 yds to the LT 37 for a 1ST down Louisiana Tech Penalty, Targeting (Jakari Foster) to the LT 48 for a 1ST down",401757263101937001,7,10
+33,Southern Miss,Q1 4:59,1,10,Pass Reception,48,2,Braylon Braxton pass complete to Micah Davis for 2 yds to the LT 46,401757263101954001,7,10
+34,Southern Miss,Q1 4:41,2,8,Rush,46,-2,Matt Jones run for a loss of 2 yards to the LT 48,401757263101955801,7,10
+35,Southern Miss,Q1 4:22,3,10,Penalty,48,7,"(04:27) Shotgun Braxton,Braylon pass incomplete short right to Davis,Micah thrown to LAT39 PENALTY LAT Pass Interference (Butler,Amari) 7 yards from LAT48 to LAT41, 1ST DOWN. NO PLAY.",401757263101957701,7,10
+36,Southern Miss,Q1 3:33,1,10,Rush,41,14,Robert Briggs run for 14 yds to the LT 27 for a 1ST down,401757263101966601,7,10
+37,Southern Miss,Q1 3:29,1,10,Rush,27,1,Robert Briggs run for 1 yd to the LT 26,401757263101967001,7,10
+38,Southern Miss,Q1 3:29,2,9,Pass Reception,26,6,Braylon Braxton pass complete to Robert Briggs for 6 yds to the LT 20,401757263101967002,7,10
+39,Southern Miss,Q1 3:29,3,3,Pass Incompletion,20,0,Braylon Braxton pass incomplete to Elijah Metcalf,401757263101967003,7,10
+40,Southern Miss,Q1 3:29,4,3,Field Goal Good,20,38,Reed Harradine 38 yd FG GOOD,401757263101967004,10,10
+41,Louisiana Tech,Q1 3:29,1,10,Kickoff,65,-64,Reed Harradine kickoff for 64 yds,401757263101967005,10,10
+42,Louisiana Tech,Q1 3:16,1,10,Pass Reception,35,18,Blake Baker pass complete to Eli Finley for 18 yds to the USM 47 for a 1ST down,401757263101968301,10,10
+43,Louisiana Tech,Q1 2:48,1,10,Rush,53,9,Blake Baker run for 9 yds to the USM 38,401757263101975101,10,10
+44,Louisiana Tech,Q1 2:16,2,1,Rush,62,3,Blake Baker run for 3 yds to the USM 35 for a 1ST down,401757263101978301,10,10
+45,Louisiana Tech,Q1 2:5,1,10,Pass Incompletion,65,0,Blake Baker pass incomplete to Devin Gandy,401757263101979401,10,10
+46,Louisiana Tech,Q1 2:2,2,10,Penalty,65,15,"(02:02) Shotgun Baker,Blake rush right for 2 yards loss to the USM37 (McKinney,Jaden) PENALTY USM Face Mask (McKinney,Jaden) 15 yards from USM35 to USM20, 1ST DOWN. NO PLAY.",401757263101979701,10,10
+47,Louisiana Tech,Q1 1:54,1,10,Penalty,80,5,"(01:57) Shotgun Baker,Blake pass incomplete deep right to Gandy,Devin thrown to USM00 PENALTY USM Illegal Substitution (Moten,Josh) 5 yards from USM20 to USM15. NO PLAY.",401757263101984501,10,10
+48,Louisiana Tech,Q1 1:41,1,5,Rush,85,9,Omiri Wiggins run for 9 yds to the USM 6 for a 1ST down,401757263101985801,10,10
+49,Louisiana Tech,Q1 1:18,1,6,Rush,94,-1,Omiri Wiggins run for a loss of 1 yard to the USM 7,401757263101988101,10,10
+50,Louisiana Tech,Q1 0:59,2,7,Penalty,93,4,"PENALTY USM Offside (Harper,Joseph) 4 yards from USM07 to USM03. NO PLAY.",401757263101994001,10,10
+51,Louisiana Tech,Q1 0:46,2,3,Rushing Touchdown,97,3,Omiri Wiggins run for 3 yds for a TD (Drew Henderson KICK),401757263101995301,17,10
+52,Southern Miss,Q1 0:46,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101995303,17,10
+53,Southern Miss,Q1 0:46,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263101995303,17,10
+54,Southern Miss,Q1 0:40,1,10,Rush,75,12,Robert Briggs run for 12 yds to the USM 37 for a 1ST down,401757263101995901,10,17
+55,Southern Miss,Q1 0:0,1,10,Sack,63,-4,Braylon Braxton sacked for a loss of 4 yards to the USM 33,401757263101999901,10,17
+56,Southern Miss,Q1 0:0,0,10,End Period,63,-4,End of 1st Quarter,401757263101999902,10,17
+57,Southern Miss,Q2 14:55,2,14,Rush,67,2,Matt Jones run for 2 yds to the USM 35,401757263102854401,10,17
+58,Southern Miss,Q2 14:18,3,12,Rush,65,15,Braylon Braxton run for 15 yds to the 50 yard line for a 1ST down,401757263102858101,10,17
+59,Southern Miss,Q2 14:1,1,10,Interception Return Touchdown,50,48,Braylon Braxton pass intercepted Kolbe Fields return for 48 yds for a TD (Drew Henderson PAT MISSED),401757263102859801,10,23
+60,Southern Miss,Q2 14:1,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263102859803,23,10
+61,Southern Miss,Q2 14:1,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263102859803,23,10
+62,Southern Miss,Q2 13:49,1,10,Rush,75,0,Braylon Braxton run for no gain to the USM 25,401757263102865001,10,23
+63,Southern Miss,Q2 13:20,2,10,Rush,75,0,Braylon Braxton run for no gain to the USM 25,401757263102867901,10,23
+64,Southern Miss,Q2 12:46,3,10,Pass Reception,75,22,Braylon Braxton pass complete to Kyirin Heath for 22 yds to the USM 47 for a 1ST down,401757263102875301,10,23
+65,Southern Miss,Q2 12:21,1,10,Rush,53,8,Matt Jones run for 8 yds to the LT 45,401757263102877801,10,23
+66,Southern Miss,Q2 12:21,2,2,Timeout,45,0,"Timeout Louisiana Tech, clock 12:21",401757263102877802,10,23
+67,Southern Miss,Q2 11:55,2,2,Rush,45,-6,Robert Briggs run for a loss of 6 yards to the USM 49,401757263102884401,10,23
+68,Southern Miss,Q2 11:33,3,8,Pass Incompletion,51,0,Braylon Braxton pass incomplete to Micah Davis,401757263102886601,10,23
+69,Southern Miss,Q2 11:19,4,8,Punt,51,47,"Reed Harradine punt for 47 yds , Dedrick Latulas returns for 24 yds to the LT 28",401757263102888001,10,23
+70,Louisiana Tech,Q2 11:19,4,8,Punt Return,4,24,"Reed Harradine punt for 47 yds , Dedrick Latulas returns for 24 yds to the LT 28",401757263102888001,10,23
+71,Louisiana Tech,Q2 11:11,1,10,Rush,28,16,Blake Baker run for 16 yds to the LT 44 for a 1ST down,401757263102888801,23,10
+72,Louisiana Tech,Q2 10:46,1,10,Rush,44,3,Andrew Burnette run for 3 yds to the LT 47,401757263102895301,23,10
+73,Louisiana Tech,Q2 10:17,2,7,Rush,47,1,Clay Thevenin run for 1 yd to the LT 48,401757263102898201,23,10
+74,Louisiana Tech,Q2 9:43,3,6,Pass Incompletion,48,0,Blake Baker pass incomplete to Marques Singleton Jr.,401757263102905601,23,10
+75,Louisiana Tech,Q2 9:36,4,6,Punt,48,45,"John Hoyet Chance punt for 45 yds, fair catch by Elijah Metcalf at the USM 7",401757263102906301,23,10
+76,Southern Miss,Q2 9:31,1,10,Rush,93,6,Matt Jones run for 6 yds to the USM 13,401757263102906801,10,23
+77,Southern Miss,Q2 8:54,2,4,Pass Reception,87,42,Braylon Braxton pass complete to Carl Chester for 42 yds to the LT 45 for a 1ST down,401757263102914501,10,23
+78,Southern Miss,Q2 8:47,1,10,Rush,45,1,Matt Jones run for 1 yd to the LT 44,401757263102915201,10,23
+79,Southern Miss,Q2 8:11,2,9,Pass Reception,44,18,Braylon Braxton pass complete to Kadinn Morris for 18 yds to the LT 26 for a 1ST down,401757263102918801,10,23
+80,Southern Miss,Q2 7:31,1,10,Rush,26,1,Braylon Braxton run for 1 yd to the LT 25,401757263102926801,10,23
+81,Southern Miss,Q2 6:54,2,9,Pass Reception,25,6,Braylon Braxton pass complete to Micah Davis for 6 yds to the LT 19,401757263102934501,10,23
+82,Southern Miss,Q2 6:34,3,3,Pass Incompletion,19,0,Braylon Braxton pass incomplete to Micah Davis,401757263102936501,10,23
+83,Southern Miss,Q2 6:28,4,3,Field Goal Missed,19,37,Reed Harradine 37 yd FG MISSED,401757263102937101,10,23
+84,Louisiana Tech,Q2 6:22,1,10,Rush,20,7,Omiri Wiggins run for 7 yds to the LT 27,401757263102937701,23,10
+85,Louisiana Tech,Q2 5:44,2,3,Pass Reception,27,3,Blake Baker pass complete to Marques Singleton Jr. for 3 yds to the LT 30 for a 1ST down,401757263102945501,23,10
+86,Louisiana Tech,Q2 5:6,1,10,Pass Reception,30,7,Blake Baker pass complete to Eli Finley for 7 yds to the LT 37,401757263102949301,23,10
+87,Louisiana Tech,Q2 4:27,2,3,Pass Reception,37,2,Blake Baker pass complete to Omiri Wiggins for 2 yds to the LT 39,401757263102957201,23,10
+88,Louisiana Tech,Q2 3:48,3,1,Pass Reception,39,25,Blake Baker pass complete to Devin Gandy for 25 yds to the USM 36 for a 1ST down,401757263102965101,23,10
+89,Louisiana Tech,Q2 3:13,1,10,Rush,64,1,Clay Thevenin run for 1 yd to the USM 35,401757263102968601,23,10
+90,Louisiana Tech,Q2 3:5,2,9,Penalty,65,5,"(03:05) PENALTY USM Offside (Lewis,Brodarius) 5 yards from USM35 to USM30. NO PLAY.",401757263102969401,23,10
+91,Louisiana Tech,Q2 2:55,2,4,Pass Reception,70,5,Blake Baker pass complete to Omiri Wiggins for 5 yds to the USM 25 for a 1ST down,401757263102974401,23,10
+92,Louisiana Tech,Q2 2:27,1,10,Rush,75,2,Omiri Wiggins run for 2 yds to the USM 23,401757263102977201,23,10
+93,Louisiana Tech,Q2 1:51,2,8,Rush,77,1,Amani Givens run for 1 yd to the USM 22,401757263102984801,23,10
+94,Louisiana Tech,Q2 1:51,3,7,Timeout,78,0,"Timeout Louisiana Tech, clock 01:51",401757263102984802,23,10
+95,Louisiana Tech,Q2 1:11,3,7,Pass Reception,78,15,Blake Baker pass complete to Marques Singleton Jr. for 15 yds to the USM 7 for a 1ST down,401757263102988801,23,10
+96,Louisiana Tech,Q2 1:5,1,7,Pass Incompletion,93,0,Blake Baker pass incomplete to Marques Singleton Jr.,401757263102989401,23,10
+97,Louisiana Tech,Q2 0:53,2,7,Rush,93,4,Blake Baker run for 4 yds to the USM 3,401757263102994601,23,10
+98,Louisiana Tech,Q2 0:24,3,3,Penalty,97,2,"Southern Miss Penalty, Defensive Offside (J'Mond Tapp) to the USM 1",401757263102997501,23,10
+99,Louisiana Tech,Q2 0:23,4,1,Rushing Touchdown,99,1,Clay Thevenin run for 1 yd for a TD (Drew Henderson KICK),401757263102997601,30,10
+100,Southern Miss,Q2 0:23,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757263102997603,30,10
+101,Southern Miss,Q2 0:23,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757263102997603,30,10
+102,Southern Miss,Q2 0:0,1,10,Rush,75,0,B. Braxton takes a knee,401757263102999901,10,30
+103,Southern Miss,Q2 0:0,0,10,End of Half,75,0,End of 2nd Quarter,401757263102999903,10,30
+104,Louisiana Tech,Q3 14:54,1,10,Kickoff,65,-62,"Reed Harradine kickoff for 62 yds , Devin Gandy return for 28 yds to the LT 31",401757263103854501,10,30
+105,Louisiana Tech,Q3 14:54,1,10,Kickoff Return (Offense),3,28,"Reed Harradine kickoff for 62 yds , Devin Gandy return for 28 yds to the LT 31",401757263103854501,10,30
+106,Louisiana Tech,Q3 14:34,1,10,Pass Reception,31,17,Blake Baker pass complete to Clay Thevenin for 17 yds to the LT 48 for a 1ST down,401757263103856501,30,10
+107,Louisiana Tech,Q3 14:9,1,10,Pass Reception,48,4,Blake Baker pass complete to Jalen Mickens for 4 yds to the USM 48,401757263103859001,30,10
+108,Louisiana Tech,Q3 13:41,2,6,Sack,52,-5,Blake Baker sacked by Garrick Ponder for a loss of 5 yards to the LT 47,401757263103865801,30,10
+109,Louisiana Tech,Q3 13:5,3,11,Pass Incompletion,47,0,Blake Baker pass incomplete to Jalen Mickens,401757263103869401,30,10
+110,Louisiana Tech,Q3 12:59,4,11,Punt,47,29,"John Hoyet Chance punt for 29 yds, punt out-of-bounds at the USM 24",401757263103874001,30,10
+111,Southern Miss,Q3 12:51,1,10,Pass Reception,76,4,Braylon Braxton pass complete to Kyirin Heath for 4 yds to the USM 28,401757263103874801,10,30
+112,Southern Miss,Q3 12:27,2,6,Pass Incompletion,72,0,Braylon Braxton pass incomplete to Elijah Metcalf,401757263103877201,10,30
+113,Southern Miss,Q3 12:27,3,6,Timeout,72,0,"Timeout Louisiana Tech, clock 12:27",401757263103877202,10,30
+114,Southern Miss,Q3 12:21,3,6,Pass Incompletion,72,0,Braylon Braxton pass incomplete to Elijah Metcalf,401757263103877801,10,30
+115,Southern Miss,Q3 11:35,4,6,Penalty,72,5,"(11:57) Harradine,Reed punt 33 yards to the LAT39 fair catch by Latulas,Dedrick at LAT39 PENALTY LAT Running Into The Kicker (Pierro,David) 5 yards from USM28 to USM33. NO PLAY.",401757263103886401,10,30
+116,Southern Miss,Q3 10:56,4,1,Punt,67,32,"Reed Harradine punt for 32 yds, punt out-of-bounds at the LT 35",401757263103894301,10,30
+117,Louisiana Tech,Q3 10:0,1,10,Pass Reception,35,-1,Blake Baker pass complete to Devin Gandy for a loss of 1 yard to the LT 34,401757263103899901,30,10
+118,Louisiana Tech,Q3 10:0,2,11,Penalty,34,-5,"PENALTY LAT False Start (Christman,Hayden) 5 yards from LAT34 to LAT29. NO PLAY.",401757263103899902,30,10
+119,Louisiana Tech,Q3 10:0,2,16,Sack,29,-4,Blake Baker sacked for a loss of 4 yards to the LT 25,401757263103899903,30,10
+120,Louisiana Tech,Q3 10:0,3,20,Rush,25,12,Omiri Wiggins run for 12 yds to the LT 37,401757263103899904,30,10
+121,Louisiana Tech,Q3 10:0,4,8,Punt,37,50,"John Hoyet Chance punt for 50 yds, punt out-of-bounds at the USM 13",401757263103899905,30,10
+122,Southern Miss,Q3 9:45,1,10,Pass Reception,87,23,Braylon Braxton pass complete to Carl Chester for 23 yds to the USM 36 for a 1ST down,401757263103905401,10,30
+123,Southern Miss,Q3 9:33,1,10,Rush,64,19,Robert Briggs run for 19 yds to the LT 45 for a 1ST down,401757263103906601,10,30
+124,Southern Miss,Q3 9:3,1,10,Rush,45,-1,Robert Briggs run for a loss of 1 yard to the LT 46,401757263103909601,10,30
+125,Southern Miss,Q3 8:29,2,11,Pass Reception,46,5,Braylon Braxton pass complete to Elijah Metcalf for 5 yds to the LT 41,401757263103917001,10,30
+126,Southern Miss,Q3 8:9,3,6,Pass Reception,41,14,Braylon Braxton pass complete to Carl Chester for 14 yds to the LT 27 for a 1ST down,401757263103919001,10,30
+127,Southern Miss,Q3 7:40,1,10,Pass Incompletion,27,0,Braylon Braxton pass incomplete to Elijah Metcalf,401757263103925901,10,30
+128,Southern Miss,Q3 7:31,2,10,Rush,27,2,Robert Briggs run for 2 yds to the LT 25,401757263103926801,10,30
+129,Southern Miss,Q3 7:0,3,8,Pass Reception,25,24,Braylon Braxton pass complete to Elijah Metcalf for 24 yds to the LT 1 for a 1ST down,401757263103929901,10,30
+130,Southern Miss,Q3 6:43,1,1,Rush,1,-1,Matt Jones run for a loss of 1 yard to the LT 2,401757263103935601,10,30
+131,Southern Miss,Q3 6:7,2,2,Rush,2,1,Matt Jones run for 1 yd to the LT 1,401757263103939201,10,30
+132,Southern Miss,Q3 5:18,3,1,Rush,1,0,Braylon Braxton run for no gain to the LT 1,401757263103948101,10,30
+133,Southern Miss,Q3 4:34,4,1,Pass Incompletion,1,0,Braylon Braxton pass incomplete to Kadinn Morris,401757263103956501,10,30
+134,Louisiana Tech,Q3 4:28,1,10,Pass Incompletion,1,0,Blake Baker pass incomplete to Devin Gandy,401757263103957101,30,10
+135,Louisiana Tech,Q3 4:14,2,10,Rush,1,5,Omiri Wiggins run for 5 yds to the LT 6,401757263103958501,30,10
+136,Louisiana Tech,Q3 3:34,3,5,Rush,6,2,Omiri Wiggins run for 2 yds to the LT 8,401757263103966501,30,10
+137,Louisiana Tech,Q3 2:56,4,3,Punt,8,60,"John Hoyet Chance punt for 60 yds , Elijah Metcalf returns for 4 yds to the USM 36",401757263103974301,30,10
+138,Southern Miss,Q3 2:56,4,3,Punt Return,68,4,"John Hoyet Chance punt for 60 yds , Elijah Metcalf returns for 4 yds to the USM 36",401757263103974301,30,10
+139,Southern Miss,Q3 2:49,1,10,Rush,64,2,Matt Jones run for 2 yds to the USM 38,401757263103975001,10,30
+140,Southern Miss,Q3 2:19,2,8,Pass Reception,62,20,Braylon Braxton pass complete to Micah Davis for 20 yds to the LT 42 for a 1ST down,401757263103978001,10,30
+141,Southern Miss,Q3 1:54,1,10,Pass Reception,42,29,"Braylon Braxton pass complete to Bralon Brown for 15 yds to the LT 27 for a 1ST down Louisiana Tech Penalty, Roughing The Passer (Mekhi Mason) to the LT 13 for a 1ST down",401757263103984501,10,30
+142,Southern Miss,Q3 1:5,1,10,Rush,13,1,Matt Jones run for 1 yd to the LT 12,401757263103989401,10,30
+143,Southern Miss,Q3 1:5,2,9,Pass Incompletion,12,0,Braylon Braxton pass incomplete to Kadinn Morris,401757263103989402,10,30
+144,Southern Miss,Q3 1:5,3,9,Pass Incompletion,12,0,Braylon Braxton pass incomplete to Matt Jones,401757263103989403,10,30
+145,Southern Miss,Q3 0:58,4,9,Field Goal Good,12,30,Reed Harradine 30 yd FG GOOD,401757263103994101,13,30
+146,Louisiana Tech,Q3 0:58,1,10,Kickoff,65,-65,Creighton Wilbanks kickoff for 65 yds for a touchback,401757263103994102,13,30
+147,Louisiana Tech,Q3 0:58,1,10,Touchback,0,25,Creighton Wilbanks kickoff for 65 yds for a touchback,401757263103994102,13,30
+148,Louisiana Tech,Q3 0:58,1,10,Pass Reception,25,14,Blake Baker pass complete to Devin Gandy for 14 yds to the LT 39 for a 1ST down,401757263103994104,30,13
+149,Louisiana Tech,Q3 0:0,1,10,Rush,39,1,Blake Baker run for 1 yd to the LT 40,401757263103999901,30,13
+150,Louisiana Tech,Q3 0:0,0,10,End Period,39,1,End of 3rd Quarter,401757263103999902,30,13
+151,Louisiana Tech,Q4 15:0,2,9,Rush,40,0,Blake Baker run for no gain to the LT 40,401757263104849902,30,13
+152,Louisiana Tech,Q4 15:0,3,9,Pass Reception,40,6,Blake Baker pass complete to Eli Finley for 6 yds to the LT 46,401757263104849903,30,13
+153,Louisiana Tech,Q4 13:38,4,3,Punt,46,43,"John Hoyet Chance punt for 43 yds , Elijah Metcalf returns for no gain to the USM 11",401757263104866101,30,13
+154,Southern Miss,Q4 13:38,1,10,Rush,89,12,Jaylin Carter run for 12 yds to the USM 23 for a 1ST down,401757263104866103,13,30
+155,Southern Miss,Q4 13:38,1,10,Pass Reception,77,5,Braylon Braxton pass complete to Jaylin Carter for 5 yds to the USM 28,401757263104866104,13,30
+156,Southern Miss,Q4 13:38,2,5,Rush,72,1,Jaylin Carter run for 1 yd to the USM 29,401757263104866105,13,30
+157,Southern Miss,Q4 13:38,3,4,Pass Incompletion,71,0,Braylon Braxton pass incomplete to Carl Chester,401757263104866106,13,30
+158,Southern Miss,Q4 11:47,4,4,Punt,71,50,"Reed Harradine punt for 50 yds , Dedrick Latulas returns for 7 yds to the LT 28",401757263104885201,13,30
+159,Louisiana Tech,Q4 11:47,4,4,Punt Return,21,7,"Reed Harradine punt for 50 yds , Dedrick Latulas returns for 7 yds to the LT 28",401757263104885201,13,30
+160,Louisiana Tech,Q4 11:47,1,10,Rush,28,4,Andrew Burnette run for 4 yds to the LT 32,401757263104885203,30,13
+161,Louisiana Tech,Q4 11:47,2,6,Rush,32,4,Andrew Burnette run for 4 yds to the LT 36,401757263104885204,30,13
+162,Louisiana Tech,Q4 11:47,3,2,Rush,36,0,Andrew Burnette run for no gain to the LT 36,401757263104885205,30,13
+163,Louisiana Tech,Q4 9:52,4,2,Punt,36,61,"John Hoyet Chance punt for 61 yds , Elijah Metcalf returns for no gain to the USM 3",401757263104904701,30,13
+164,Southern Miss,Q4 9:52,1,10,Pass Reception,97,5,Braylon Braxton pass complete to Kadinn Morris for 5 yds to the USM 8,401757263104904703,13,30
+165,Southern Miss,Q4 9:52,2,5,Pass Reception,92,7,Braylon Braxton pass complete to Bralon Brown for 7 yds to the USM 15 for a 1ST down,401757263104904704,13,30
+166,Southern Miss,Q4 9:52,1,10,Rush,85,1,Matt Jones run for 1 yd to the USM 16,401757263104904705,13,30
+167,Southern Miss,Q4 9:52,2,9,Pass Reception,84,14,Braylon Braxton pass complete to Matt Jones for 14 yds to the USM 30 for a 1ST down,401757263104904706,13,30
+168,Southern Miss,Q4 9:52,1,10,Pass Incompletion,70,0,Braylon Braxton pass incomplete to Carl Chester,401757263104904707,13,30
+169,Southern Miss,Q4 9:52,2,10,Rush,70,3,Jaylin Carter run for 3 yds to the USM 33,401757263104904708,13,30
+170,Southern Miss,Q4 9:52,3,7,Pass Incompletion,67,0,Braylon Braxton pass incomplete to Micah Davis,401757263104904709,13,30
+171,Southern Miss,Q4 9:52,4,7,Penalty,67,-5,"PENALTY USM Delay Of Game (Harradine,Reed) 5 yards from USM33 to USM28. NO PLAY.",401757263104904710,13,30
+172,Southern Miss,Q4 7:24,4,12,Punt,72,50,"Reed Harradine punt for 50 yds, punt out-of-bounds at the LT 22",401757263104927501,13,30
+173,Louisiana Tech,Q4 7:24,1,10,Rush,22,1,Omiri Wiggins run for 1 yd to the LT 23,401757263104927503,30,13
+174,Louisiana Tech,Q4 7:24,2,9,Rush,23,-2,Blake Baker run for a loss of 2 yards to the LT 21,401757263104927504,30,13
+175,Louisiana Tech,Q4 7:24,3,11,Rush,21,3,Blake Baker run for 3 yds to the LT 24,401757263104927505,30,13
+176,Louisiana Tech,Q4 5:14,4,8,Punt,24,52,"John Hoyet Chance punt for 52 yds, fair catch by Elijah Metcalf at the USM 39 for a 1ST down",401757263104948501,30,13
+177,Southern Miss,Q4 5:14,1,10,Pass Reception,61,2,Braylon Braxton pass complete to Kadinn Morris for 2 yds to the USM 41,401757263104948504,13,30
+178,Southern Miss,Q4 5:14,2,8,Pass Reception,59,11,Braylon Braxton pass complete to Bralon Brown for 11 yds to the LT 48 for a 1ST down,401757263104948505,13,30
+179,Southern Miss,Q4 5:14,1,10,Penalty,48,-5,"PENALTY USM Illegal Snap (Roman,Broderick) 5 yards from LAT48 to USM47. NO PLAY.",401757263104948506,13,30
+180,Southern Miss,Q4 5:14,1,15,Rush,53,2,Braylon Braxton run for 2 yds to the USM 49,401757263104948507,13,30
+181,Southern Miss,Q4 5:14,2,13,Rush,51,6,Braylon Braxton run for 6 yds to the LT 45,401757263104948508,13,30
+182,Southern Miss,Q4 5:14,3,7,Rush,45,2,Braylon Braxton run for 2 yds to the LT 43,401757263104948509,13,30
+183,Southern Miss,Q4 2:42,4,5,Pass Reception,43,3,Braylon Braxton pass complete to Jaylin Carter for 3 yds to the LT 40,401757263104975701,13,30
+184,Louisiana Tech,Q4 2:42,1,10,Rush,40,2,Blake Baker run for 2 yds to the LT 42,401757263104975703,30,13
+185,Louisiana Tech,Q4 2:42,2,8,Timeout,42,0,"Timeout Louisiana Tech, clock 02:42",401757263104975704,30,13
+186,Louisiana Tech,Q4 2:42,2,8,Rush,42,-1,Clay Thevenin run for a loss of 1 yard to the LT 41,401757263104975705,30,13
+187,Louisiana Tech,Q4 2:42,3,9,Rush,41,1,Blake Baker run for 1 yd to the LT 42,401757263104975706,30,13
+188,Louisiana Tech,Q4 1:50,4,8,Punt,42,58,John Hoyet Chance punt for 58 yds for a touchback,401757263104984901,30,13
+189,Southern Miss,Q4 1:50,1,10,Pass Reception,80,10,Braylon Braxton pass complete to Kadinn Morris for 10 yds to the USM 30 for a 1ST down,401757263104984903,13,30
+190,Southern Miss,Q4 1:50,1,10,Pass Incompletion,70,0,Braylon Braxton pass incomplete to Elijah Metcalf,401757263104984904,13,30
+191,Southern Miss,Q4 1:50,2,10,Pass Reception,70,13,Braylon Braxton pass complete to Jaylin Carter for 13 yds to the USM 43 for a 1ST down,401757263104984905,13,30
+192,Southern Miss,Q4 1:50,1,10,Penalty,57,5,"Shotgun Braxton,Braylon pass incomplete deep right to Davis,Micah thrown to LAT15 broken up by Carter,Kameron PENALTY LAT Illegal Substitution (Richard,Michael) 5 yards from USM43 to USM48. NO PLAY.",401757263104984906,13,30
+193,Southern Miss,Q4 1:50,1,5,Rush,52,1,Braylon Braxton run for 1 yd to the USM 49,401757263104984907,13,30
+194,Southern Miss,Q4 1:50,2,4,Pass Reception,51,7,Braylon Braxton pass complete to Davis Dalton for 7 yds to the LT 44 for a 1ST down,401757263104984908,13,30
+195,Southern Miss,Q4 1:50,1,10,Pass Incompletion,44,10,"Braylon Braxton pass incomplete to Davis Dalton for a 1ST down Louisiana Tech Penalty, Defensive Pass Interference (Kameron Carter) to the LT 34 for a 1ST down",401757263104984909,13,30
+196,Southern Miss,Q4 1:50,1,10,Pass Incompletion,34,0,Braylon Braxton pass incomplete to Jermane Hayes,401757263104984910,13,30
+197,Southern Miss,Q4 1:50,2,10,Pass Incompletion,34,0,Braylon Braxton pass incomplete to Kyirin Heath,401757263104984911,13,30
+198,Southern Miss,Q4 0:22,3,10,Passing Touchdown,34,34,Davis Dalton 34 Yd pass from Braylon Braxton (Creighton Wilbanks Kick),401757263104997701,20,30
+199,Louisiana Tech,Q4 0:22,1,10,Timeout,45,0,"Timeout Louisiana Tech, clock 00:22",401757263104997703,30,13
+200,Louisiana Tech,Q4 0:20,1,10,Kickoff,65,-20,Creighton Wilbanks kickoff for 20 yds,401757263104997901,20,30
+201,Louisiana Tech,Q4 0:0,1,10,Rush,45,0,B. Baker takes a knee,401757263104999901,30,20
+202,Louisiana Tech,Q4 0:0,0,10,End of Game,45,0,End of 4th Quarter,401757263104999903,30,20
