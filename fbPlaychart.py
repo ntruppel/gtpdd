@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BACKGROUND_COLOR = '#d6e8cf'  # muted light green
+BACKGROUND_COLOR = "#d6e8cf"  # muted light green
 
 PLAY_COLOR_KEYS = {
     'Pass Reception': 'pass',
@@ -250,15 +250,15 @@ def drawPlay(ax, row, i, geo):
     ## receiving team's own end, i.e. opposite the offense's normal direction.
     if playType == 'Kickoff':
         ko_marker = '<' if geo['marker'] == '>' else '>'
-        ax.text(start, i, " Kickoff ", fontsize=12, va='center', ha=geo['ha'])
+        ax.text(start, i+0.5, " Kickoff ", fontsize=8, va='top', ha=geo['zha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=ko_marker, markersize=1, linewidth=2, color='black')
 
     elif playType == 'Kickoff Return (Offense)':
-        ax.text(start + geo['pos_gained'], i, " Return ", fontsize=12, va='center', ha=geo['ha'])
+        ax.text(start, i+0.5, " Return ", fontsize=8, va='top', ha=geo['ha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
 
     elif playType == 'Touchback':
-            ax.text(start + geo['pos_gained'], i, " Touchback ", fontsize=12, va='center', ha=geo['ha'])
+            ax.text(start, i+0.5, " Touchback ", fontsize=8, va='top', ha=geo['ha'])
             ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
                
 
@@ -273,12 +273,12 @@ def drawPlay(ax, row, i, geo):
 
     ## PUNT
     elif playType == 'Punt':
-        ax.text(start, i, " Punt ", fontsize=12, va='center', ha=geo['zha'])
+        ax.text(start, i+0.5, " Punt ", fontsize=8, va='top', ha=geo['ha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
 
     ## PUNT RETURN
     elif playType == 'Punt Return':
-        ax.text(start, i, " Punt Return ", fontsize=12, va='center', ha=geo['zha'])
+        ax.text(start, i+0.5, " Return ", fontsize=8, va='top', ha=geo['ha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
 
 
@@ -368,12 +368,12 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
             else:
                 tech_score = oppo_score = 0
             headerColors = techColors if offense == team else oppoColors
-            if tech_score > oppo_score: scoreString = f"Tech up {tech_score} to {oppo_score}"
-            elif tech_score < oppo_score: scoreString = f"Tech down {oppo_score} to {tech_score}"
-            else: scoreString = f"Game tied at {tech_score}"
+            if tech_score > oppo_score: scoreString = f"Tech up {tech_score}-{oppo_score}"
+            elif tech_score < oppo_score: scoreString = f"Tech down {oppo_score}-{tech_score}"
+            else: scoreString = f"Tied at {tech_score}-{oppo_score}"
 
 
-            ax.text(50, i - 5, f"{formatClock(row.clock)} — {scoreString} — {offense} ball",
+            ax.text(50, i - 5, f"{formatClock(row.clock)} | {scoreString} | {offense} Ball",
                     fontsize=12, fontweight='bold', va='center', ha='center',
                     color=headerColors['pass'])
 
@@ -399,5 +399,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(refreshData=True)
+fbPlaychart(refreshData=False)
 #df = getPBPData(2025, 4, 'Louisiana Tech')
