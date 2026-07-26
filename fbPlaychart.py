@@ -14,6 +14,7 @@ import re
 import cfbd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+import matplotlib.patheffects as path_effects
 import pandas as pd
 from dotenv import load_dotenv
 
@@ -58,7 +59,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             'text': play.play_text,
             'id': play.id,
             'offense_score': play.offense_score,
-            'defense_score': play.defense_score
+            'defense_score': play.defense_score,
         })
 
     opponent = next((d['offense'] for d in dictList if d['offense'] and d['offense'] != team), team)
@@ -219,12 +220,15 @@ def playGeometry(row, team, techColors, oppoColors):
             'colors': techColors,
             'pos_gained': dx,
             'neg_gained': dx,
-            'fg_yards': gained - 10,
-            'int_endzone': 0,
+            'fg_yards': 200,
+            'oppo_endzone': 0,
+            'oppo_endzone_mid': -7,
             'endzone': 100,
+            'endzone_mid': 107,
             'marker': '>',
             'ha': 'left',
             'zha': 'right',
+            'direction': 1,
         }
     else:
         dx = shortenArrow(-gained)  # opponent drives toward x=0
@@ -232,19 +236,48 @@ def playGeometry(row, team, techColors, oppoColors):
             'colors': oppoColors,
             'pos_gained': dx,
             'neg_gained': dx,
-            'fg_yards': -gained - 10,
-            'int_endzone': 100,
+            'fg_yards': -100,
+            'oppo_endzone': 100,
+            'oppo_endzone_mid': 107,
             'endzone': 0,
+            'endzone_mid': -7,
             'marker': '<',
             'ha': 'right',
             'zha': 'left',
+            'direction': -1,
         }
+
+
+## Special-teams / non-scrimmage rows have no meaningful "yards to gain," so we
+## skip the first-down line for them.
+NO_FIRST_DOWN_TYPES = {
+    'Kickoff', 'Kickoff Return (Offense)', 'Touchback',
+    'Punt', 'Punt Return', 'Field Goal Good', 'Field Goal Missed',
+}
+
+
+def ordinalDown(down):
+    """1 -> '1', 2 -> '2nd', 3 -> '3rd', 4 -> '4th'."""
+    return {1: '1', 2: '2', 3: '3', 4: '4'}.get(int(down), '')
 
 
 def drawPlay(ax, row, i, geo):
     """Draw a single play at row height i. Returns the extra vertical offset (if any) to apply before the next play."""
     start = row.start
     playType = row.type
+
+    ## Faint orange first-down line: "distance" yards downfield from the start,
+    ## in the direction the offense is driving.
+    if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.distance):
+        first_down = start + geo['direction'] * row.distance
+        ax.plot([first_down, first_down], [i - 1.8, i + 1.8],
+                color='orange', alpha=0.2, linewidth=2, zorder=1)
+
+    ## Small down label inside the arrow, on its bottom edge, anchored to the
+    ## tail (the side opposite the direction the arrow points).
+    if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.down):
+        ax.text(start, i + 1.6, ordinalDown(row.down), fontsize=6, color='white',
+                va='bottom', ha=geo['ha'], zorder=6)
 
     ## KICKOFF (drawn as a dashed line, like a punt). The ball travels toward the
     ## receiving team's own end, i.e. opposite the offense's normal direction.
@@ -264,11 +297,16 @@ def drawPlay(ax, row, i, geo):
 
     ## FIELD GOAL
     elif playType == 'Field Goal Good':
-        ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='P', markersize=8, linewidth=4, color='green')
-        ax.text(geo['endzone'], i, " FG! ", fontsize=12, color='white', va='top', ha=geo['ha'])
+        ax.plot([start, geo['fg_yards']], [i, i], '--', marker='P', markersize=8, linewidth=4, color='green')
+        text_obj = ax.text(geo['endzone_mid'], i, " FG! ", weight='bold', fontsize=20, color='white', va='center', ha='center')
+
+        text_obj.set_path_effects([
+                        path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
+                        path_effects.withStroke(linewidth=1, foreground="black")
+                    ])
     elif playType == 'Field Goal Missed':
         ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='X', markersize=8, linewidth=4, color='gray')
-        ax.text(geo['endzone'], i+1, " FG Miss! ", fontsize=10, color='white', va='top', ha=geo['ha'])
+        ax.text(start, i+1, " FG Miss! ", weight='bold', fontsize=10, color='black', va='top', ha=geo['ha'])
 
 
     ## PUNT
@@ -288,9 +326,14 @@ def drawPlay(ax, row, i, geo):
 
     elif playType == 'Interception Return Touchdown':
         color = playColor(playType, geo['colors'])
-        ax.arrow(start, i, -1 * (start - geo['int_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
-        ax.text(geo['int_endzone'], i, " INT TD! ", fontsize=12, color = 'white', va='center', ha=geo['zha'])
+        ax.arrow(start, i, -1 * (start - geo['oppo_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
+        ax.text(start, i+2, " Interception ", fontsize=8, va='top', ha=geo['zha'])
+        text_obj=ax.text(geo['oppo_endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
 
+        text_obj.set_path_effects([
+            path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
+            path_effects.withStroke(linewidth=1, foreground="black")
+        ])
     else:
         color = playColor(playType, geo['colors'])
         if row.gained > 0:
@@ -301,10 +344,14 @@ def drawPlay(ax, row, i, geo):
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
         if 'Touchdown' in playType:
-            ax.text(geo['endzone'], i, " TD! ", fontsize=12, color='white', va='center', ha=geo['ha'])
+            text_obj=ax.text(geo['endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
 
+            text_obj.set_path_effects([
+                path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
+                path_effects.withStroke(linewidth=1, foreground="black")
+            ])
         elif 'Sack' in playType:
-            ax.text(start, i, ' Sack! ', color='black', fontsize='12', ha=geo['ha'], va='center')
+            ax.text(start+geo['neg_gained'], i, '  Sack!  ', color='black', fontsize='8', ha=geo['zha'], va='top')
 
         elif 'Interception' in playType:
             ax.text(start, i, ' INT! ', color='black', fontsize='12', ha=geo['ha'], va='center')
@@ -350,7 +397,18 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     offense = ''
     prev_row = None
     for row in df.itertuples():
-        if row.type in ('End Period', 'End of Half', 'Timeout', 'End of Game'):
+        if row.type == 'End of Half':
+            ## Draw a full-width divider between the two halves.
+            i += 4
+            ax.axhline(i, color='black', linewidth=3, zorder=5)
+            ax.text(50, i, " Halftime ", fontsize=12, fontweight='bold',
+                    va='center', ha='center', color='black',
+                    bbox=dict(facecolor=BACKGROUND_COLOR, edgecolor='black', pad=3), zorder=6)
+            i += 4
+            prev_row = row
+            continue
+
+        if row.type in ('End Period', 'Timeout', 'End of Game'):
             continue
 
         if row.offense != offense:
@@ -399,5 +457,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(refreshData=False)
+fbPlaychart(refreshData=True)
 #df = getPBPData(2025, 4, 'Louisiana Tech')
