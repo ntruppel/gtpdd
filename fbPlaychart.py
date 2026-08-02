@@ -10,6 +10,7 @@ Created on Wed Nov  2 18:06:08 2022
 import json
 import os
 import re
+from html import escape as html_escape
 
 import cfbd
 import matplotlib.pyplot as plt
@@ -22,6 +23,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BACKGROUND_COLOR = "#d6e8cf"  # muted light green
+EDGE_COLOR = "#222021"
+
+HOME_URL = "index.html"           # TODO: replace with gtpdd home page
+HTML_DIR = "html/fbPlaychart"     # per-game HTML pages
+PBP_DIR = "csv/fbPlaychartPBP"    # per-game play-by-play CSVs
 
 PLAY_COLOR_KEYS = {
     'Pass Reception': 'pass',
@@ -30,9 +36,9 @@ PLAY_COLOR_KEYS = {
     'Rush': 'run',
     'Rushing Touchdown': 'run',
     'Penalty': 'penalty',
-    'Sack': 'sack',
-    'Pass Interception Return': 'int',
-    'Interception Return Touchdown': 'int',
+    'Sack': 'run',                       # sacks reuse the run color
+    'Pass Interception Return': 'pass',   # interceptions reuse the pass color
+    'Interception Return Touchdown': 'pass',
     'Safety': 'safety',
     'Fumble Recovery (Opponent)': 'fumble'
 
@@ -46,7 +52,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
 
     ## TODO: Grab the most recent game automatically
     api_response = api_instance.get_plays(year, week=week, team=team)
-    print(api_response)
+    #print(api_response)
     dictList = []
     for play in api_response:
         dictList.append({
@@ -155,7 +161,9 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             .drop(columns=['_period', '_secs_remaining', '_id'])
             .reset_index(drop=True))
 
-    df.to_csv('csv/fbPlaychartPBP.csv')
+    ## Per-game CSV: csv/fbPlaychartPBP/fbPlaychartPBP_wk<week>_<opponent>.csv
+    os.makedirs(PBP_DIR, exist_ok=True)
+    df.to_csv(os.path.join(PBP_DIR, f"fbPlaychartPBP_{gameSlug(week, opponent)}.csv"))
     return df
 
 
@@ -163,6 +171,24 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
 ## fixed-width play arrows keep their proportions instead of squishing.
 UNITS_PER_INCH = 13.0
 X_RANGE = 126  # xlim spans -13 .. 113
+
+
+def drawYardNumbers(ax, y, upside_down):
+    rotation = 180 if upside_down else 0
+    for yard in range(10, 100, 10):
+        digits = list(str(min(yard, 100 - yard)))  # e.g. ['4', '0']
+        if upside_down:
+            digits = digits[::-1]
+        left, right = digits
+        for digit, dx in ((left, -1.1), (right, 1.1)):
+            ax.text(yard + dx, y, digit, color='white', fontsize=11, fontweight='bold',
+                    va='center', ha='center', rotation=rotation, zorder=2)
+
+        ## Small triangle pointing toward the nearest goal line
+        if yard != 50:
+            marker, mx = ('<', yard - 3.2) if yard < 50 else ('>', yard + 3.2)
+            ax.plot([mx], [y], marker=marker, markersize=3, color='white',
+                    linestyle='None', zorder=2)
 
 
 def setupChart(techColor, oppoColor):
@@ -176,9 +202,13 @@ def setupChart(techColor, oppoColor):
     ax.axvspan(100, 113, color=oppoColor, zorder=-1)
 
     ## White yard lines every 10 from 0 to 100; 0/50/100 drawn thicker.
+    ## (This chart only has lines on the 10s, unlike a real field's every-5.)
     for yard in range(0, 101, 10):
         lw = 3 if yard in (0, 50, 100) else 1
         ax.axvline(yard, color='white', linewidth=lw, zorder=0)
+
+    ## Yard numbers along the top, upside down (far-sideline view from above).
+    drawYardNumbers(ax, -6, upside_down=True)
 
     return fig, ax
 
@@ -188,8 +218,23 @@ def loadColors(path):
         return json.load(f)
 
 
+def logoDataUri(path, height_px=64):
+    try:
+        import base64
+        import io
+        from PIL import Image as PILImage
+        img = PILImage.open(path)
+        w, h = img.size
+        if h > height_px:
+            img = img.resize((max(1, round(w * height_px / h)), height_px), PILImage.LANCZOS)
+        b = io.BytesIO()
+        img.save(b, format='PNG')
+        return "data:image/png;base64," + base64.b64encode(b.getvalue()).decode('ascii')
+    except Exception:
+        return None
+
+
 def formatClock(clock):
-    """Tidy the stored clock string (e.g. 'Q1 15:0' -> 'Q1 15:00')."""
     try:
         head, secs = str(clock).rsplit(':', 1)
         return f"{head}:{int(secs):02d}"
@@ -206,8 +251,6 @@ def playColor(playType, colors):
 
 
 def shortenArrow(disp):
-    """Shorten a signed displacement toward zero by ~1.9 (to leave a gap for the
-    arrowhead) without ever flipping its sign — short plays keep pointing the right way."""
     sign = 1 if disp >= 0 else -1
     return sign * max(abs(disp) - 1.9, 0.6)
 
@@ -262,23 +305,40 @@ def ordinalDown(down):
     return {1: '1', 2: '2', 3: '3', 4: '4'}.get(int(down), '')
 
 
+## Interceptions get a contrasting hatch overlay so they stand out by texture,
+## independent of the team's fill color (which varies game to game).
+INTERCEPTION_HATCH = '//'
+INTERCEPTION_HATCH_COLOR = 'white'
+
+
+def drawArrow(ax, x, y, dx, color, interception=False):
+    """Draw a play arrow (int-color fill, black outline). Interceptions get a
+    second overlay arrow with no fill and a hatch, so the pattern reads on top
+    of any fill color while the base arrow keeps its outline."""
+    ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
+             facecolor=color, edgecolor='black', linewidth=0.5)
+    if interception:
+        ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
+                 facecolor='none', edgecolor=INTERCEPTION_HATCH_COLOR,
+                 linewidth=0, hatch=INTERCEPTION_HATCH, zorder=3)
+
+
 def drawPlay(ax, row, i, geo):
-    """Draw a single play at row height i. Returns the extra vertical offset (if any) to apply before the next play."""
     start = row.start
     playType = row.type
 
-    ## Faint orange first-down line: "distance" yards downfield from the start,
-    ## in the direction the offense is driving.
+    ## Faint orange first-down line: "distance" yards downfield from the start
     if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.distance):
         first_down = start + geo['direction'] * row.distance
         ax.plot([first_down, first_down], [i - 1.8, i + 1.8],
                 color='orange', alpha=0.2, linewidth=2, zorder=1)
 
-    ## Small down label inside the arrow, on its bottom edge, anchored to the
-    ## tail (the side opposite the direction the arrow points).
+    ## Small down label inside the arrow, on its bottom edge
     if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.down):
-        ax.text(start, i + 1.6, ordinalDown(row.down), fontsize=6, color='white',
-                va='bottom', ha=geo['ha'], zorder=6)
+        down_ha = geo['zha'] if row.gained < 0 else geo['ha']
+        down_color = 'black' if (row.gained == 0 or playType in ('Penalty')) else 'white'
+        ax.text(start, i + 1.6, ordinalDown(row.down), fontsize=6, color=down_color,
+                va='bottom', ha=down_ha, zorder=6)
 
     ## KICKOFF (drawn as a dashed line, like a punt). The ball travels toward the
     ## receiving team's own end, i.e. opposite the offense's normal direction.
@@ -327,8 +387,8 @@ def drawPlay(ax, row, i, geo):
 
     elif playType == 'Interception Return Touchdown':
         color = playColor(playType, geo['colors'])
-        ax.arrow(start, i, -1 * (start - geo['oppo_endzone']), 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
-        ax.text(start, i+2, " Interception ", fontsize=8, va='top', ha=geo['zha'])
+        drawArrow(ax, start, i, -1 * (start - geo['oppo_endzone']), color, interception=True)
+        ax.text(start, i+2, " Interception! ", fontsize=8, va='top', ha=geo['zha'])
         text_obj=ax.text(geo['oppo_endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
 
         text_obj.set_path_effects([
@@ -337,10 +397,11 @@ def drawPlay(ax, row, i, geo):
         ])
     else:
         color = playColor(playType, geo['colors'])
+        is_int = 'Interception' in playType
         if row.gained > 0:
-            ax.arrow(start, i, geo['pos_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
+            drawArrow(ax, start, i, geo['pos_gained'], color, interception=is_int)
         elif row.gained < 0:
-            ax.arrow(start, i, geo['neg_gained'], 0, width=3.5, head_width=3.5, head_length=0.9, facecolor=color, edgecolor='black', linewidth=0.5)
+            drawArrow(ax, start, i, geo['neg_gained'], color, interception=is_int)
         else:
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
@@ -381,13 +442,63 @@ def drawPlay(ax, row, i, geo):
     return 0
 
 
+def gameSlug(week, opponent):
+    """Shared 'wk<week>_<opponent>' slug for a game's output files. Spaces and
+    punctuation in the opponent become underscores so the name can be recovered
+    from the filename."""
+    opp = re.sub(r'[^0-9A-Za-z]+', '_', opponent).strip('_')
+    return f"wk{week}_{opp}"
+
+
+def gameFilename(week, opponent):
+    """Page filename for a game, e.g. week 4 vs Southern Miss ->
+    'fbPlaychart_wk4_Southern_Miss.html'."""
+    return f"fbPlaychart_{gameSlug(week, opponent)}.html"
+
+
+def findPbpCsv(week):
+    """Path to the cached play-by-play CSV for a week (fbPlaychartPBP_wk<week>_*.csv
+    in PBP_DIR), or None if none exists yet."""
+    prefix = f"fbPlaychartPBP_wk{week}_"
+    if os.path.isdir(PBP_DIR):
+        for fn in sorted(os.listdir(PBP_DIR)):
+            if fn.startswith(prefix) and fn.endswith('.csv'):
+                return os.path.join(PBP_DIR, fn)
+    return None
+
+
+def loadGames(html_dir, current=None):
+    """Build the game-selector list by scanning html_dir for pages named
+    fbPlaychart_wk<week>_<opponent>.html, recovering the week/opponent from each
+    filename. `current` ({week, opponent, href}) is folded in so a brand-new game
+    appears before its file has been written. Returns dicts sorted by week."""
+    games = {}
+    listing = os.listdir(html_dir) if os.path.isdir(html_dir) else []
+    for fn in listing:
+        m = re.match(r'fbPlaychart_wk(\d+)_(.+)\.html$', fn)
+        if m:
+            week, opponent = int(m.group(1)), m.group(2).replace('_', ' ')
+            games[fn] = {'week': week, 'label': f"Wk {week} — {opponent}", 'href': fn}
+    if current:
+        games[current['href']] = {'week': current['week'], 'href': current['href'],
+                                  'label': f"Wk {current['week']} — {current['opponent']}"}
+    return sorted(games.values(), key=lambda g: g['week'])
+
+
 def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
                  oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
                  year=2025, week=4):
     if refreshData:
         df = getPBPData(year, week, team)
     else:
-        df = pd.read_csv('csv/fbPlaychartPBP.csv')
+        csv_path = findPbpCsv(week)
+        if csv_path is None:
+            raise FileNotFoundError(
+                f"No cached play-by-play CSV for week {week} in {PBP_DIR}/. "
+                "Run with refreshData=True first.")
+        df = pd.read_csv(csv_path)
+
+    opponent = next((o for o in df['offense'].dropna().unique() if o != team), 'Opponent')
 
     techColors = loadColors(techColorPath)
     oppoColors = loadColors(oppoColorPath)
@@ -462,36 +573,113 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     ## keeping the fixed-width play arrows from squishing on a tall chart.
     y_extent = i + 10
     ax.set_ylim(y_extent, -10)  # inverted: first play at top
-    ## Label a tick at every play-spacing step so each row is easy to track.
-    ax.yaxis.set_major_locator(mticker.MultipleLocator(4))
-    ax.tick_params(axis='y', labelsize=4)
+
+    ## Yard numbers along the bottom, rightside up (near-sideline view).
+    drawYardNumbers(ax, y_extent - 4, upside_down=False)
+    ## Axis numbers are hidden for the clean look. To re-enable for debugging,
+    ## comment out the tick_params line below and uncomment the two after it.
+    ax.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
+    #ax.yaxis.set_major_locator(mticker.MultipleLocator(4))  # tick every play row
+    #ax.tick_params(axis='y', labelsize=4)
     width = X_RANGE / UNITS_PER_INCH
     height = max(8.0, y_extent / UNITS_PER_INCH)
     fig.set_size_inches(width, height)
 
-    fig_path = 'out/fbPlaychart.png'
+    ## Per-game output filenames: fbPlaychart_wk<week>_<opponent>.(png|html)
+    html_filename = gameFilename(week, opponent)
+    slug = html_filename[:-len('.html')]
+    os.makedirs('out', exist_ok=True)
+    os.makedirs(HTML_DIR, exist_ok=True)
+
+    fig_path = os.path.join('out', slug + '.png')
     fig.savefig(fig_path, bbox_inches='tight', pad_inches=0, dpi=200,
                 transparent=False, facecolor=BACKGROUND_COLOR)
 
-    ## Also export an HTML version by embedding matplotlib's OWN SVG of the figure
+    ## Also export an HTML version by embedding matplotlib's OWN SVG of the figure.
+    ## Save with a transparent figure background (facecolor='none') so the page's
+    ## dark background shows in the margins instead of a green border — the green
+    ## field and endzones live on the axes patch, so they stay.
     import io
-    html_path = 'out/fbPlaychart.html'
+    html_path = os.path.join(HTML_DIR, html_filename)
     buf = io.StringIO()
-    fig.savefig(buf, format='svg', bbox_inches='tight', pad_inches=0, facecolor=BACKGROUND_COLOR)
+    fig.savefig(buf, format='svg', bbox_inches='tight', pad_inches=0, facecolor='none')
     svg = buf.getvalue()
     svg = svg[svg.find('<svg'):]  # drop the <?xml?>/<!DOCTYPE> prolog for inline HTML
 
-    ## Handles tool tips for the play text
+    ## Styles for the nav header and the play-text tooltip.
     style = (
-        "body { margin: 0; background: " + "#A9A9A9" + "; }"
+        "body { margin: 0; background: " + EDGE_COLOR + "; }"
         " svg { display: block; margin: 0 auto; height: auto; max-width: 100%; }"
         " svg g[id^='pbp'] path { pointer-events: all; cursor: pointer; }"
-        " #pbp-tooltip { position: fixed; pointer-events: none; z-index: 10;"
+        " #gtpdd-nav { position: sticky; top: 0; z-index: 20; display: flex; gap: 10px;"
+        " align-items: center; padding: 8px 12px; background: #17181a;"
+        " border-bottom: 1px solid #333; font: 14px -apple-system, Segoe UI, sans-serif; }"
+        " #gtpdd-nav .spacer { flex: 1; }"
+        " #gtpdd-nav label { color: #aaa; }"
+        " #gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select {"
+        " font: inherit; color: #eee; background: #2a2c2f; border: 1px solid #444;"
+        " border-radius: 6px; padding: 6px 12px; cursor: pointer; text-decoration: none; }"
+        " #gtpdd-nav a.navbtn { display: inline-flex; align-items: center; gap: 5px; }"
+        " #gtpdd-nav a.navbtn:hover, #gtpdd-nav button:hover { background: #3a3d41; }"
+        " #gtpdd-nav .navlogo { height: 20px; width: auto; vertical-align: middle; }"
+        " #gtpdd-nav .nav-arrow { display: none; font-size: 16px; line-height: 1; }"
+        " @media (max-width: 640px) {"
+        " #gtpdd-nav { gap: 6px; padding: 6px 8px; }"
+        " #gtpdd-nav .nav-text { display: none; }"        # drop "Back to" / "home"
+        " #gtpdd-nav .nav-arrow { display: inline; }"     # show the left arrow instead
+        " #gtpdd-nav label { display: none; }"            # drop the "Game:" label
+        " #gtpdd-nav select { max-width: 120px; }"        # much narrower dropdown
+        " #gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select { padding: 6px 8px; } }"
+        " #pbp-tooltip { position: fixed; pointer-events: none; z-index: 30;"
         " max-width: 380px; padding: 6px 9px; border-radius: 5px; display: none;"
         " background: rgba(20,20,20,0.92); color: #fff;"
         " font: 13px/1.35 -apple-system, Segoe UI, sans-serif;"
         " box-shadow: 0 2px 8px rgba(0,0,0,0.3); }"
     )
+
+    ## Nav header: home button + a game selector. The full game list lives in
+    ## html/fbPlaychart/games.json (rebuilt here from the directory); each page
+    ## fetches it at load, so every page reflects all games without regenerating.
+    ## A single fallback <option> (this game) is baked in for when the fetch can't
+    ## run (e.g. the page opened via file://).
+    current_href = html_filename
+    games = loadGames(HTML_DIR, current={'week': week, 'opponent': opponent, 'href': current_href})
+    with open(os.path.join(HTML_DIR, 'games.json'), 'w') as f:
+        json.dump(games, f, indent=2)
+    current_label = f"Wk {week} — {opponent}"
+    options = "<option value='{}' selected>{}</option>".format(
+        html_escape(current_href, quote=True), html_escape(current_label))
+    ## "Back to <gtpdd logo> home" — embed the logo (falls back to a relative path).
+    logo_src = logoDataUri('img/gtpdd_logo.png') or '../img/gtpdd_logo.png'
+    logo_img = "<img class='navlogo' src='" + html_escape(logo_src, quote=True) + "' alt='gtpdd'>"
+    navbar = (
+        "<div id='gtpdd-nav'>"
+        "<a class='navbtn' href='" + html_escape(HOME_URL, quote=True) + "'>"
+        "<span class='nav-arrow'>&#8592;</span>"
+        "<span class='nav-text'>Back to</span>" + logo_img +
+        "<span class='nav-text'>home</span></a>"
+        "<span class='spacer'></span>"
+        "<label for='gtpdd-game'>Game:</label>"
+        "<select id='gtpdd-game'>" + options + "</select>"
+        "<button id='gtpdd-go'>Load</button>"
+        "</div>"
+    )
+    nav_js = (
+        "<script>(function(){"
+        "var cur=" + json.dumps(current_href) + ";"
+        "var sel=document.getElementById('gtpdd-game');"
+        "document.getElementById('gtpdd-go').addEventListener('click',function(){"
+        "if(sel.value)window.location.href=sel.value;});"
+        ## Populate the selector from the shared manifest so it lists every game.
+        "fetch('games.json').then(function(r){return r.json();}).then(function(gs){"
+        "sel.innerHTML='';"
+        "gs.forEach(function(g){var o=document.createElement('option');"
+        "o.value=g.href;o.textContent=g.label;if(g.href===cur)o.selected=true;"
+        "sel.appendChild(o);});"
+        "}).catch(function(){});"
+        "})();</script>"
+    )
+
     tooltip_js = (
         "<script>(function(){"
         "var T=" + json.dumps(hover_texts).replace("</", "<\\/") + ";"
@@ -508,10 +696,10 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         "<!DOCTYPE html>\n<html lang='en'>\n<head>\n"
         "<meta charset='utf-8'>\n"
         "<meta name='viewport' content='width=device-width, initial-scale=1'>\n"
-        "<title>Louisiana Tech Play Chart</title>\n"
+        "<title>" + html_escape(f"{team} vs {opponent} — Wk {week} Play Chart") + "</title>\n"
         "<style>" + style + "</style>\n"
-        "</head>\n<body>\n" + svg + "\n"
-        "<div id='pbp-tooltip'></div>\n" + tooltip_js + "\n</body>\n</html>\n"
+        "</head>\n<body>\n" + navbar + "\n" + svg + "\n"
+        "<div id='pbp-tooltip'></div>\n" + nav_js + tooltip_js + "\n</body>\n</html>\n"
     )
     with open(html_path, 'w') as f:
         f.write(page)
@@ -520,5 +708,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(refreshData=True)
+fbPlaychart(year=2025, week=3, refreshData=True)
 #df = getPBPData(2025, 4, 'Louisiana Tech')

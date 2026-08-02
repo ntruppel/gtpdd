@@ -1,0 +1,22 @@
+[
+  {
+    "week": 1,
+    "label": "Wk 1 \u2014 Coastal Carolina",
+    "href": "fbPlaychart_wk1_Coastal_Carolina.html"
+  },
+  {
+    "week": 2,
+    "label": "Wk 2 \u2014 LSU",
+    "href": "fbPlaychart_wk2_LSU.html"
+  },
+  {
+    "week": 3,
+    "href": "fbPlaychart_wk3_New_Mexico_State.html",
+    "label": "Wk 3 \u2014 New Mexico State"
+  },
+  {
+    "week": 4,
+    "label": "Wk 4 \u2014 Southern Miss",
+    "href": "fbPlaychart_wk4_Southern_Miss.html"
+  }
+]

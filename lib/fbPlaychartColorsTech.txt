@@ -1,9 +1,7 @@
 {
-    "run": "cornflowerblue", 
-    "pass": "mediumblue",
+    "run": "#E31B23", 
+    "pass": "#002F8B",
     "penalty": "gold",
-    "sack": "silver",
-    "int": "black",
     "safety":"black",
     "fumble":"black"
 }

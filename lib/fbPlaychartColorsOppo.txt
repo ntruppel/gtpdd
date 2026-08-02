@@ -1,9 +1,7 @@
 {
-    "run": "lightcoral", 
-    "pass": "darkred",
+    "run": "silver", 
+    "pass": "black",
     "penalty": "gold",
-    "sack": "silver",
-    "int": "black",
-    "safety":"black",
-    "fumble":"black"
+    "safety":"navy",
+    "fumble":"navy"
 }
