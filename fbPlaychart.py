@@ -15,6 +15,7 @@ import cfbd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import matplotlib.patheffects as path_effects
+from matplotlib.patches import Rectangle
 import pandas as pd
 from dotenv import load_dotenv
 
@@ -396,6 +397,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     i = 0
     offense = ''
     prev_row = None
+    hover_texts = {}  # gid -> play text, for the HTML tooltips
     for row in df.itertuples():
         if row.type == 'End of Half':
             ## Draw a full-width divider between the two halves.
@@ -436,7 +438,23 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
                     color=headerColors['pass'])
 
         geo = playGeometry(row, team, techColors, oppoColors)
+        play_y = i
+        n_patches, n_lines = len(ax.patches), len(ax.lines)
         i += drawPlay(ax, row, i, geo)
+
+        ## Invisible hover target for this play, +/- 5 yards of play
+        xs = []
+        for p in ax.patches[n_patches:]:
+            xs.extend(p.get_path().vertices[:, 0])
+        for ln in ax.lines[n_lines:]:
+            xs.extend(ln.get_xdata())
+        x_lo, x_hi = (min(xs), max(xs)) if xs else (row.start, row.start)
+        gid = f"pbp{len(hover_texts)}"
+        rect = ax.add_patch(Rectangle((x_lo - 5, play_y - 2), (x_hi - x_lo) + 10, 4,
+                                      facecolor='none', edgecolor='none', zorder=20))
+        rect.set_gid(gid)
+        hover_texts[gid] = '' if pd.isna(row.text) else str(row.text)
+
         i += 4
         prev_row = row
 
@@ -454,6 +472,51 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     fig_path = 'out/fbPlaychart.png'
     fig.savefig(fig_path, bbox_inches='tight', pad_inches=0, dpi=200,
                 transparent=False, facecolor=BACKGROUND_COLOR)
+
+    ## Also export an HTML version by embedding matplotlib's OWN SVG of the figure
+    import io
+    html_path = 'out/fbPlaychart.html'
+    buf = io.StringIO()
+    fig.savefig(buf, format='svg', bbox_inches='tight', pad_inches=0, facecolor=BACKGROUND_COLOR)
+    svg = buf.getvalue()
+    svg = svg[svg.find('<svg'):]  # drop the <?xml?>/<!DOCTYPE> prolog for inline HTML
+
+    ## Handles tool tips for the play text
+    style = (
+        "body { margin: 0; background: " + "#A9A9A9" + "; }"
+        " svg { display: block; margin: 0 auto; height: auto; max-width: 100%; }"
+        " svg g[id^='pbp'] path { pointer-events: all; cursor: pointer; }"
+        " #pbp-tooltip { position: fixed; pointer-events: none; z-index: 10;"
+        " max-width: 380px; padding: 6px 9px; border-radius: 5px; display: none;"
+        " background: rgba(20,20,20,0.92); color: #fff;"
+        " font: 13px/1.35 -apple-system, Segoe UI, sans-serif;"
+        " box-shadow: 0 2px 8px rgba(0,0,0,0.3); }"
+    )
+    tooltip_js = (
+        "<script>(function(){"
+        "var T=" + json.dumps(hover_texts).replace("</", "<\\/") + ";"
+        "var tip=document.getElementById('pbp-tooltip');"
+        "document.addEventListener('mousemove',function(e){"
+        "var g=e.target.closest?e.target.closest(\"g[id^='pbp']\"):null;"
+        "if(g&&T[g.id]){tip.textContent=T[g.id];tip.style.display='block';"
+        "tip.style.left=Math.min(e.clientX+14,window.innerWidth-260)+'px';"
+        "tip.style.top=(e.clientY+14)+'px';}"
+        "else{tip.style.display='none';}"
+        "});})();</script>"
+    )
+    page = (
+        "<!DOCTYPE html>\n<html lang='en'>\n<head>\n"
+        "<meta charset='utf-8'>\n"
+        "<meta name='viewport' content='width=device-width, initial-scale=1'>\n"
+        "<title>Louisiana Tech Play Chart</title>\n"
+        "<style>" + style + "</style>\n"
+        "</head>\n<body>\n" + svg + "\n"
+        "<div id='pbp-tooltip'></div>\n" + tooltip_js + "\n</body>\n</html>\n"
+    )
+    with open(html_path, 'w') as f:
+        f.write(page)
+    print(f"Wrote {html_path}")
+
     print("Done.")
 
 
