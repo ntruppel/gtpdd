@@ -6,17 +6,22 @@
   },
   {
     "week": 2,
-    "label": "Wk 2 \u2014 LSU",
-    "href": "fbPlaychart_wk2_LSU.html"
+    "href": "fbPlaychart_wk2_LSU.html",
+    "label": "Wk 2 \u2014 LSU"
   },
   {
     "week": 3,
-    "href": "fbPlaychart_wk3_New_Mexico_State.html",
-    "label": "Wk 3 \u2014 New Mexico State"
+    "label": "Wk 3 \u2014 New Mexico State",
+    "href": "fbPlaychart_wk3_New_Mexico_State.html"
   },
   {
     "week": 4,
     "label": "Wk 4 \u2014 Southern Miss",
     "href": "fbPlaychart_wk4_Southern_Miss.html"
+  },
+  {
+    "week": 5,
+    "label": "Wk 5 \u2014 UTEP",
+    "href": "fbPlaychart_wk5_UTEP.html"
   }
 ]

@@ -4,9 +4,7 @@ Created on Wed Nov  2 18:06:08 2022
 
 @author: ntrup
 """
-
-## TODO: This still needs a lot of work
-
+import csv
 import json
 import os
 import re
@@ -52,16 +50,24 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
 
     ## TODO: Grab the most recent game automatically
     api_response = api_instance.get_plays(year, week=week, team=team)
-    #print(api_response)
+
+    ## Check to see if $team is home. On chart, $team moves left to right
+    tech_is_home = bool(api_response) and api_response[0].home == team
+
     dictList = []
     for play in api_response:
+        start = play.yardline
+        if start is not None and not tech_is_home:
+            start = 100 - start
+        ## Treat a bare "Interception" identically to a "Pass Interception Return".
+        play_type = 'Pass Interception Return' if play.play_type == 'Interception' else play.play_type
         dictList.append({
             'offense': play.offense,
             'clock': f"Q{play.period} {play.clock.minutes}:{play.clock.seconds}",
             'down': play.down,
             'distance': play.distance,
-            'type': play.play_type,
-            'start': play.yardline,
+            'type': play_type,
+            'start': start,
             'gained': play.yards_gained,
             'text': play.play_text,
             'id': play.id,
@@ -69,14 +75,23 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             'defense_score': play.defense_score,
         })
 
+    ## Remove duplicate plays
+    seen, deduped = set(), []
+    for d in dictList:
+        key = tuple(v for k, v in d.items() if k != 'id')
+        if key not in seen:
+            seen.add(key)
+            deduped.append(d)
+    dictList = deduped
+
     opponent = next((d['offense'] for d in dictList if d['offense'] and d['offense'] != team), team)
+
     processed = []
     for d in dictList:
         text = str(d.get('text') or '')
 
-        ## Kickoff touchbacks: the CFBD "Kickoff" row is credited to the kicking
-        ## team. Flip it to the receiving team, mark it as a 65-yard kick, and
-        ## insert a following "Touchback" row spotting the ball at the 25.
+        ## Kickoff touchbacks: the CFBD "Kickoff" row is credited to the kicking team
+        ## Flip it to the receiving team.
         if d['type'] == 'Kickoff' and 'touchback' in text.lower():
             d['offense'] = opponent if d['offense'] == team else team
             d['gained'] = -65
@@ -88,9 +103,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             touchback['gained'] = 25
             processed.append(touchback)
 
-        ## Kickoffs without a touchback: like the touchback case, credit the row
-        ## to the receiving team. Take the kick distance from the text ("kickoff
-        ## for N yds") as a negative gained so it draws toward the receiver's end.
+        ## Kickoffs without a touchback
         elif d['type'] == 'Kickoff':
             d['offense'] = opponent if d['offense'] == team else team
             ko_match = re.search(r'kickoff for (\d+)', text, re.IGNORECASE)
@@ -98,11 +111,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
                 d['gained'] = -int(ko_match.group(1))
             processed.append(d)
 
-        ## Returned kickoffs: split the CFBD "Kickoff Return (Offense)" row into
-        ## the kick leg and the return leg, like punts. Flip to the receiving team,
-        ## make this row the kick itself ("kickoff for N", drawn as a negative
-        ## gained toward the receiver's end), then add a "Kickoff Return (Offense)"
-        ## row for the runback ("return for N") starting where the ball was caught.
+        ## Returned kickoffs: split the CFBD "Kickoff Return (Offense)" row into the kick and return
         elif d['type'] == 'Kickoff Return (Offense)':
             d['offense'] = opponent if d['offense'] == team else team
             d['type'] = 'Kickoff'
@@ -120,27 +129,46 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
                 kick_return['gained'] = int(return_match.group(1))
                 processed.append(kick_return)
 
-        ## Punts: CFBD's "gained" is unreliable — take the punt distance from the
-        ## text ("punt for N yds"). If the returner brought it back ("returns for
-        ## N yds"), add a following "Punt Return" row for the receiving team,
-        ## starting where the punt was caught.
+        ## Punts: CFBD's "gained" is unreliable — take the punt distance from the text ("punt for N yds")
+        ## Touchback: add a row for the receiving team at its own 20 (like the kickoff
+        ## Return:  add a following "Punt Return" row for the receiving team, starting where the punt was caught.
         elif d['type'] == 'Punt':
             punt_match = re.search(r'punt for (\d+)', text, re.IGNORECASE)
             if punt_match:
                 d['gained'] = int(punt_match.group(1))
             processed.append(d)
 
-            return_match = re.search(r'returns? for (\d+)', text, re.IGNORECASE)
-            if return_match:
-                ## Catch point is direction-aware: the punting team's own punts
-                ## travel toward x=100 (start+gained), the opponent's toward x=0.
-                catch = d['start'] + d['gained'] if d['offense'] == team else d['start'] - d['gained']
-                punt_return = dict(d)
-                punt_return['type'] = 'Punt Return'
-                punt_return['offense'] = opponent if d['offense'] == team else team
-                punt_return['start'] = catch
-                punt_return['gained'] = int(return_match.group(1))
-                processed.append(punt_return)
+            if 'touchback' in text.lower():
+                receiving = opponent if d['offense'] == team else team
+                touchback = dict(d)
+                touchback['type'] = 'Touchback'
+                touchback['offense'] = receiving
+                touchback['start'] = 0 if receiving == team else 100
+                touchback['gained'] = 20
+                processed.append(touchback)
+            else:
+                return_match = re.search(r'returns? for (\d+)', text, re.IGNORECASE)
+                if return_match:
+                    ## Catch point is direction-aware: the punting team's own punts
+                    ## travel toward x=100 (start+gained), the opponent's toward x=0.
+                    catch = d['start'] + d['gained'] if d['offense'] == team else d['start'] - d['gained']
+                    punt_return = dict(d)
+                    punt_return['type'] = 'Punt Return'
+                    punt_return['offense'] = opponent if d['offense'] == team else team
+                    punt_return['start'] = catch
+                    punt_return['gained'] = int(return_match.group(1))
+                    processed.append(punt_return)
+
+        ## Interception into the endzone -> touchback
+        elif 'Interception' in d['type'] and 'touchback' in text.lower():
+            processed.append(d)
+            intercepting = opponent if d['offense'] == team else team
+            touchback = dict(d)
+            touchback['type'] = 'Touchback'
+            touchback['offense'] = intercepting
+            touchback['start'] = 0 if intercepting == team else 100
+            touchback['gained'] = 20
+            processed.append(touchback)
 
         else:
             processed.append(d)
@@ -151,8 +179,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     ## CFBD can return plays out of game order — sort chronologically from the
     ## clock string "Q<period> M:SS": quarter ascending, then time remaining
     ## descending (the clock counts down within a quarter), then play id ascending
-    ## to break same-clock ties. A stable sort keeps inserted rows (touchbacks,
-    ## punt returns) right after their parent play, since they share its id.
+    ## to break same-clock ties.
     clock_parts = df['clock'].str.extract(r'Q(\d+)\s+(\d+):(\d+)').astype(float)
     df['_period'] = clock_parts[0]
     df['_secs_remaining'] = clock_parts[1] * 60 + clock_parts[2]
@@ -160,6 +187,21 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     df = (df.sort_values(['_period', '_secs_remaining', '_id'], ascending=[True, False, True], kind='stable')
             .drop(columns=['_period', '_secs_remaining', '_id'])
             .reset_index(drop=True))
+
+    ## Interception returns: CFBD yards gained doesn't work here. Draw arrow to start of the next play.
+    stop_types = {'End Period', 'End of Half', 'Timeout', 'End of Game'}
+    starts, types, offs, gains = (list(df[c]) for c in ('start', 'type', 'offense', 'gained'))
+    for i in range(len(df)):
+        if types[i] != 'Pass Interception Return' or pd.isna(starts[i]):
+            continue
+        j = i + 1
+        while j < len(df) and types[j] in stop_types:
+            j += 1
+        if j >= len(df) or pd.isna(starts[j]):
+            continue
+        end_x, start_i = starts[j], starts[i]
+        gains[i] = (end_x - start_i) if offs[i] == team else (start_i - end_x)
+    df['gained'] = gains
 
     ## Per-game CSV: csv/fbPlaychartPBP/fbPlaychartPBP_wk<week>_<opponent>.csv
     os.makedirs(PBP_DIR, exist_ok=True)
@@ -202,7 +244,6 @@ def setupChart(techColor, oppoColor):
     ax.axvspan(100, 113, color=oppoColor, zorder=-1)
 
     ## White yard lines every 10 from 0 to 100; 0/50/100 drawn thicker.
-    ## (This chart only has lines on the 10s, unlike a real field's every-5.)
     for yard in range(0, 101, 10):
         lw = 3 if yard in (0, 50, 100) else 1
         ax.axvline(yard, color='white', linewidth=lw, zorder=0)
@@ -216,6 +257,36 @@ def setupChart(techColor, oppoColor):
 def loadColors(path):
     with open(path) as f:
         return json.load(f)
+
+
+def lookupEspnId(name, team_id_csv='csv/espnTeamIDs.csv'):
+    if not os.path.isfile(team_id_csv):
+        return None
+    with open(team_id_csv, newline='') as f:
+        for row in csv.reader(f):
+            if len(row) >= 2 and row[0].strip().lower() == str(name).strip().lower():
+                return row[1].strip()
+    return None
+
+
+def updateOppoColors(opponent, oppo_color_path):
+    ## When refreshData=True, updates the team's colors in lib/fbPlaychartColorsOppo.txt
+    team_id = lookupEspnId(opponent)
+    if team_id is None:
+        print(f"No ESPN id for '{opponent}' in csv/espnTeamIDs.csv; keeping existing opponent colors.")
+        return
+    try:
+        from lib.fbCommon import getTeamInfo
+        _, color1, color2 = getTeamInfo(str(team_id))
+    except Exception as e:
+        print(f"Could not fetch ESPN colors for '{opponent}' ({type(e).__name__}: {e}); keeping existing.")
+        return
+    colors = loadColors(oppo_color_path)
+    colors['pass'] = '#' + str(color1).lstrip('#')
+    colors['run'] = '#' + str(color2).lstrip('#')
+    with open(oppo_color_path, 'w') as f:
+        json.dump(colors, f, indent=4)
+    print(f"Opponent colors from ESPN ({opponent}): pass={colors['pass']}, run={colors['run']}")
 
 
 def logoDataUri(path, height_px=64):
@@ -256,7 +327,7 @@ def shortenArrow(disp):
 
 
 def playGeometry(row, team, techColors, oppoColors):
-    """Geometry/colors for drawing a play, mirrored depending on which team has the ball."""
+    ## Geometry/colors for drawing a play, mirrored depending on which team has the ball.
     gained = row.gained
     if row.offense == team:
         dx = shortenArrow(gained)  # tech drives toward x=100
@@ -292,11 +363,10 @@ def playGeometry(row, team, techColors, oppoColors):
         }
 
 
-## Special-teams / non-scrimmage rows have no meaningful "yards to gain," so we
-## skip the first-down line for them.
+## Don't draw first down lines for Special-teams / non-scrimmage rows
 NO_FIRST_DOWN_TYPES = {
     'Kickoff', 'Kickoff Return (Offense)', 'Touchback',
-    'Punt', 'Punt Return', 'Field Goal Good', 'Field Goal Missed',
+    'Punt', 'Punt Return', 'Field Goal Good', 'Field Goal Missed', 'Blocked Field Goal',
 }
 
 
@@ -309,18 +379,23 @@ def ordinalDown(down):
 ## independent of the team's fill color (which varies game to game).
 INTERCEPTION_HATCH = '//'
 INTERCEPTION_HATCH_COLOR = 'white'
+## Penalties are drawn as patterned gold so they don't blend into a team whose
+## color happens to be gold (e.g. LSU): a black cross-hatch over the gold fill.
+PENALTY_HATCH = 'xxx'
+PENALTY_HATCH_COLOR = 'black'
 
 
-def drawArrow(ax, x, y, dx, color, interception=False):
-    """Draw a play arrow (int-color fill, black outline). Interceptions get a
-    second overlay arrow with no fill and a hatch, so the pattern reads on top
-    of any fill color while the base arrow keeps its outline."""
+def drawArrow(ax, x, y, dx, color, interception=False, penalty=False):
     ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
              facecolor=color, edgecolor='black', linewidth=0.5)
     if interception:
         ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
                  facecolor='none', edgecolor=INTERCEPTION_HATCH_COLOR,
                  linewidth=0, hatch=INTERCEPTION_HATCH, zorder=3)
+    if penalty:
+        ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
+                 facecolor='none', edgecolor=PENALTY_HATCH_COLOR,
+                 linewidth=0, hatch=PENALTY_HATCH, zorder=3)
 
 
 def drawPlay(ax, row, i, geo):
@@ -340,8 +415,7 @@ def drawPlay(ax, row, i, geo):
         ax.text(start, i + 1.6, ordinalDown(row.down), fontsize=6, color=down_color,
                 va='bottom', ha=down_ha, zorder=6)
 
-    ## KICKOFF (drawn as a dashed line, like a punt). The ball travels toward the
-    ## receiving team's own end, i.e. opposite the offense's normal direction.
+    ## KICKOFF (drawn as a dashed line, like a punt)
     if playType == 'Kickoff':
         ko_marker = '<' if geo['marker'] == '>' else '>'
         ax.text(start, i+0.5, " Kickoff ", fontsize=8, va='top', ha=geo['zha'])
@@ -365,7 +439,7 @@ def drawPlay(ax, row, i, geo):
                         path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
                         path_effects.withStroke(linewidth=1, foreground="black")
                     ])
-    elif playType == 'Field Goal Missed':
+    elif playType in ('Field Goal Missed', 'Blocked Field Goal'):
         ax.plot([start, start + geo['fg_yards']], [i, i], '--', marker='X', markersize=8, linewidth=4, color='gray')
         ax.text(start, i+1, " FG Miss! ", weight='bold', fontsize=10, color='black', va='top', ha=geo['ha'])
 
@@ -398,10 +472,11 @@ def drawPlay(ax, row, i, geo):
     else:
         color = playColor(playType, geo['colors'])
         is_int = 'Interception' in playType
+        is_pen = playType == 'Penalty'
         if row.gained > 0:
-            drawArrow(ax, start, i, geo['pos_gained'], color, interception=is_int)
+            drawArrow(ax, start, i, geo['pos_gained'], color, interception=is_int, penalty=is_pen)
         elif row.gained < 0:
-            drawArrow(ax, start, i, geo['neg_gained'], color, interception=is_int)
+            drawArrow(ax, start, i, geo['neg_gained'], color, interception=is_int, penalty=is_pen)
         else:
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
@@ -416,7 +491,8 @@ def drawPlay(ax, row, i, geo):
             ax.text(start+geo['neg_gained'], i, '  Sack!  ', color='black', fontsize='8', ha=geo['zha'], va='top')
 
         elif 'Interception' in playType:
-            ax.text(start, i, ' INT! ', color='black', fontsize='12', ha=geo['ha'], va='center')
+            ## Labeled below the arrow, matching the "Interception Return Touchdown" style.
+            ax.text(start, i+2, " Interception! ", fontsize=8, va='top', ha=geo['zha'])
 
         elif 'Safety' in playType:
             ax.text(geo['int_endzone'], i, " Safety! ", color="white", fontsize=10, va='center', ha=geo['zha'])
@@ -443,22 +519,18 @@ def drawPlay(ax, row, i, geo):
 
 
 def gameSlug(week, opponent):
-    """Shared 'wk<week>_<opponent>' slug for a game's output files. Spaces and
-    punctuation in the opponent become underscores so the name can be recovered
-    from the filename."""
+    ## Shared 'wk<week>_<opponent>' slug for a game's output files
     opp = re.sub(r'[^0-9A-Za-z]+', '_', opponent).strip('_')
     return f"wk{week}_{opp}"
 
 
 def gameFilename(week, opponent):
-    """Page filename for a game, e.g. week 4 vs Southern Miss ->
-    'fbPlaychart_wk4_Southern_Miss.html'."""
+    ## Page filename for a game, e.g. week 4 vs Southern Miss -> 'fbPlaychart_wk4_Southern_Miss.html'
     return f"fbPlaychart_{gameSlug(week, opponent)}.html"
 
 
 def findPbpCsv(week):
-    """Path to the cached play-by-play CSV for a week (fbPlaychartPBP_wk<week>_*.csv
-    in PBP_DIR), or None if none exists yet."""
+    ## Path to the cached play-by-play CSV for a week
     prefix = f"fbPlaychartPBP_wk{week}_"
     if os.path.isdir(PBP_DIR):
         for fn in sorted(os.listdir(PBP_DIR)):
@@ -468,10 +540,7 @@ def findPbpCsv(week):
 
 
 def loadGames(html_dir, current=None):
-    """Build the game-selector list by scanning html_dir for pages named
-    fbPlaychart_wk<week>_<opponent>.html, recovering the week/opponent from each
-    filename. `current` ({week, opponent, href}) is folded in so a brand-new game
-    appears before its file has been written. Returns dicts sorted by week."""
+    ## Build the game-selector list by scanning html_dir for pages named fbPlaychart_wk<week>_<opponent>.html
     games = {}
     listing = os.listdir(html_dir) if os.path.isdir(html_dir) else []
     for fn in listing:
@@ -500,6 +569,10 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     opponent = next((o for o in df['offense'].dropna().unique() if o != team), 'Opponent')
 
+    ## On a refresh, pull the opponent's team colors from ESPN
+    if refreshData:
+        updateOppoColors(opponent, oppoColorPath)
+
     techColors = loadColors(techColorPath)
     oppoColors = loadColors(oppoColorPath)
 
@@ -527,10 +600,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         if row.offense != offense:
             offense = row.offense
             i += 10
-            ## Drive header: who has the ball, the clock, and the score (Tech left,
-            ## USM right) at the drive's start. Read the score from the PREVIOUS
-            ## play — kickoff rows have had their "offense" flipped, so their own
-            ## offense/defense scores no longer line up with that column.
+            ## Drive header: who has the ball, the clock, and the score
             if prev_row is not None:
                 if prev_row.offense == team:
                     tech_score, oppo_score = prev_row.offense_score, prev_row.defense_score
@@ -570,17 +640,17 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         prev_row = row
 
     ## Size the figure so vertical spacing matches the horizontal scale,
-    ## keeping the fixed-width play arrows from squishing on a tall chart.
     y_extent = i + 10
     ax.set_ylim(y_extent, -10)  # inverted: first play at top
 
     ## Yard numbers along the bottom, rightside up (near-sideline view).
     drawYardNumbers(ax, y_extent - 4, upside_down=False)
-    ## Axis numbers are hidden for the clean look. To re-enable for debugging,
-    ## comment out the tick_params line below and uncomment the two after it.
+
+    ## Axis numbers are hidden for the clean look. Re-enable to debug
     ax.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
     #ax.yaxis.set_major_locator(mticker.MultipleLocator(4))  # tick every play row
     #ax.tick_params(axis='y', labelsize=4)
+    
     width = X_RANGE / UNITS_PER_INCH
     height = max(8.0, y_extent / UNITS_PER_INCH)
     fig.set_size_inches(width, height)
@@ -596,9 +666,6 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
                 transparent=False, facecolor=BACKGROUND_COLOR)
 
     ## Also export an HTML version by embedding matplotlib's OWN SVG of the figure.
-    ## Save with a transparent figure background (facecolor='none') so the page's
-    ## dark background shows in the margins instead of a green border — the green
-    ## field and endzones live on the axes patch, so they stay.
     import io
     html_path = os.path.join(HTML_DIR, html_filename)
     buf = io.StringIO()
@@ -637,11 +704,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         " box-shadow: 0 2px 8px rgba(0,0,0,0.3); }"
     )
 
-    ## Nav header: home button + a game selector. The full game list lives in
-    ## html/fbPlaychart/games.json (rebuilt here from the directory); each page
-    ## fetches it at load, so every page reflects all games without regenerating.
-    ## A single fallback <option> (this game) is baked in for when the fetch can't
-    ## run (e.g. the page opened via file://).
+    ## Nav header: home button + a game selector
     current_href = html_filename
     games = loadGames(HTML_DIR, current={'week': week, 'opponent': opponent, 'href': current_href})
     with open(os.path.join(HTML_DIR, 'games.json'), 'w') as f:
@@ -708,5 +771,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(year=2025, week=3, refreshData=True)
+fbPlaychart(year=2025, week=2, refreshData=True)
 #df = getPBPData(2025, 4, 'Louisiana Tech')

@@ -1,7 +1,7 @@
 {
-    "run": "silver", 
-    "pass": "black",
+    "pass": "#461d76",
+    "run": "#fdd023",
     "penalty": "gold",
-    "safety":"navy",
-    "fumble":"navy"
+    "safety": "navy",
+    "fumble": "navy"
 }

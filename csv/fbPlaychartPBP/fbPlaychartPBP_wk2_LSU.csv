@@ -1,0 +1,195 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,LSU,Q1 15:0,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401752687101849903,0,0
+1,LSU,Q1 15:0,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401752687101849903,0,0
+2,LSU,Q1 14:55,1,10,Rush,75,3,Caden Durham run for 3 yds to the LSU 28,401752687101854401,0,0
+3,LSU,Q1 14:31,2,7,Pass Reception,72,6,Garrett Nussmeier pass complete to Nic Anderson for 6 yds to the LSU 34,401752687101856801,0,0
+4,LSU,Q1 14:12,3,1,Rush,66,2,Caden Durham run for 2 yds to the LSU 36 for a 1ST down,401752687101858701,0,0
+5,LSU,Q1 13:35,1,10,Pass Interception Return,64,35,Garrett Nussmeier pass intercepted,401752687101866401,0,0
+6,Louisiana Tech,Q1 13:29,1,10,Rush,29,1,Omiri Wiggins run for 1 yd to the LT 30,401752687101867001,0,0
+7,Louisiana Tech,Q1 12:54,2,9,Pass Reception,30,8,Trey Kukuk pass complete to Marques Singleton Jr. for 8 yds to the LT 38,401752687101874501,0,0
+8,Louisiana Tech,Q1 12:39,3,1,Pass Incompletion,38,0,Trey Kukuk pass incomplete to Omiri Wiggins,401752687101876001,0,0
+9,Louisiana Tech,Q1 12:32,4,1,Punt,38,21,"John Hoyet Chance punt for 21 yds, punt out-of-bounds at the LSU 41",401752687101876701,0,0
+10,LSU,Q1 12:27,1,10,Rush,59,4,Caden Durham run for 4 yds to the LSU 45,401752687101877201,0,0
+11,LSU,Q1 11:45,2,6,Pass Reception,55,3,Garrett Nussmeier pass complete to Caden Durham for 3 yds to the LSU 48,401752687101885401,0,0
+12,LSU,Q1 11:9,3,3,Pass Reception,52,11,Garrett Nussmeier pass complete to Zavion Thomas for 11 yds to the LT 41 for a 1ST down,401752687101889001,0,0
+13,LSU,Q1 10:39,1,10,Rush,41,0,Caden Durham run for no gain to the LT 41,401752687101896001,0,0
+14,LSU,Q1 10:1,2,10,Penalty,41,10,"(10:04) No Huddle-Shotgun Nussmeier,Garrett pass incomplete short middle to Johnson,Ju'Juan thrown to TECH38 PENALTY TECH Holding (Mason,Mekhi) 10 yards from TECH41 to TECH31, 1ST DOWN. NO PLAY.",401752687101899802,0,0
+15,LSU,Q1 9:57,1,10,Penalty,31,-5,"(09:57) No Huddle-Shotgun Thomas,Zavion rush right for 1 yard gain to the TECH30 (Fields,Kolbe) PENALTY LSU Illegal Formation 5 yards from TECH31 to TECH36. NO PLAY.",401752687101904202,0,0
+16,LSU,Q1 9:30,1,15,Pass Incompletion,36,0,Garrett Nussmeier pass incomplete to Zavion Thomas,401752687101906901,0,0
+17,LSU,Q1 9:15,2,15,Pass Reception,36,2,Garrett Nussmeier pass complete to Aaron Anderson for 2 yds to the LT 38,401752687101908401,0,0
+18,LSU,Q1 8:43,3,17,Pass Reception,38,4,Garrett Nussmeier pass complete to Nic Anderson for 4 yds to the LT 34,401752687101915601,0,0
+19,LSU,Q1 8:12,4,13,Timeout,34,0,"Timeout LSU, clock 08:12",401752687101918701,0,0
+20,LSU,Q1 8:6,4,13,Field Goal Missed,34,51,Damian Ramos 51 yd FG MISSED,401752687101919301,0,0
+21,Louisiana Tech,Q1 7:56,1,10,Rush,34,17,Trey Kukuk run for 17 yds to the LSU 49 for a 1ST down,401752687101924301,0,0
+22,Louisiana Tech,Q1 7:42,1,10,Rush,51,1,Clay Thevenin run for 1 yd to the LSU 48,401752687101925701,0,0
+23,Louisiana Tech,Q1 7:16,2,9,Rush,52,-2,Trey Kukuk run for a loss of 2 yards to the 50 yard line,401752687101928301,0,0
+24,Louisiana Tech,Q1 6:39,3,11,Timeout,50,0,"Timeout Louisiana Tech, clock 06:39",401752687101936001,0,0
+25,Louisiana Tech,Q1 6:23,3,11,Pass Reception,50,6,Trey Kukuk pass complete to Eli Finley for 6 yds to the LSU 44,401752687101937601,0,0
+26,Louisiana Tech,Q1 5:49,4,5,Punt,56,42,John Hoyet Chance punt for 42 yds,401752687101945001,0,0
+27,LSU,Q1 5:43,1,10,Rush,98,2,Caden Durham run for 2 yds to the LSU 4,401752687101945601,0,0
+28,LSU,Q1 4:58,2,8,Pass Incompletion,96,0,Garrett Nussmeier pass incomplete to Bauer Sharp,401752687101954101,0,0
+29,LSU,Q1 4:40,3,8,Pass Reception,96,16,Garrett Nussmeier pass complete to Barion Brown for 16 yds to the LSU 20 for a 1ST down,401752687101955901,0,0
+30,LSU,Q1 3:51,1,10,Pass Reception,80,15,Garrett Nussmeier pass complete to Zavion Thomas for 15 yds to the LSU 35 for a 1ST down,401752687101964801,0,0
+31,LSU,Q1 3:28,1,10,Rush,65,1,Kaleb Jackson run for 1 yd to the LSU 36,401752687101967101,0,0
+32,LSU,Q1 2:43,2,9,Pass Reception,64,9,Garrett Nussmeier pass complete to Barion Brown for 9 yds to the LSU 45 for a 1ST down,401752687101975601,0,0
+33,LSU,Q1 2:8,1,10,Pass Incompletion,55,0,Garrett Nussmeier pass incomplete to Barion Brown,401752687101979101,0,0
+34,LSU,Q1 2:3,2,10,Penalty,55,-5,"(02:07) No Huddle-Shotgun Johnson,Ju'Juan rush left for 5 yards gain to the LSU50 (Mason,Mekhi; Cobbs,Joshua) PENALTY LSU Illegal Shift (Anderson,Nic) 5 yards from LSU45 to LSU40. NO PLAY.",401752687101979602,0,0
+35,LSU,Q1 1:29,2,15,Rush,60,48,Zavion Thomas run for 48 yds to the LT 12 for a 1ST down,401752687101987001,0,0
+36,LSU,Q1 0:59,1,10,Rush,12,5,Caden Durham run for 5 yds to the LT 7,401752687101994001,0,0
+37,LSU,Q1 0:18,2,5,Pass Incompletion,7,0,Garrett Nussmeier pass incomplete to Aaron Anderson,401752687101998101,0,0
+38,LSU,Q1 0:12,3,5,Passing Touchdown,7,7,Nic Anderson 7 Yd pass from Garrett Nussmeier (Damian Ramos Kick),401752687104999903,7,0
+39,Louisiana Tech,Q1 0:9,1,10,Kickoff,50,-17,Aeron Burrell kickoff for 17 yds,401752687101999001,14,0
+40,Louisiana Tech,Q1 0:0,1,10,Pass Reception,33,5,Trey Kukuk pass complete to Fred Robertson for 5 yds to the LT 38,401752687101999901,0,14
+41,Louisiana Tech,Q1 0:0,0,10,End Period,33,5,End of 1st Quarter,401752687101999902,0,14
+42,Louisiana Tech,Q2 14:55,2,5,Rush,38,1,Andrew Burnette run for 1 yd to the LT 39,401752687102854401,0,14
+43,Louisiana Tech,Q2 14:23,3,4,Pass Reception,39,4,Trey Kukuk pass complete to Andrew Burnette for 4 yds to the LT 43 for a 1ST down,401752687102857601,0,14
+44,Louisiana Tech,Q2 13:50,1,10,Pass Reception,43,9,Trey Kukuk pass complete to Marques Singleton Jr. for 9 yds to the LSU 48,401752687102864901,0,14
+45,Louisiana Tech,Q2 13:33,2,1,Rush,52,1,Omiri Wiggins run for 1 yd to the LSU 47 for a 1ST down,401752687102866601,0,14
+46,Louisiana Tech,Q2 12:55,1,10,Timeout,53,0,"Timeout Louisiana Tech, clock 12:55",401752687102874401,0,14
+47,Louisiana Tech,Q2 12:46,1,10,Pass Reception,53,5,Trey Kukuk pass complete to Dedrick Latulas for 5 yds to the LSU 42,401752687102875301,0,14
+48,Louisiana Tech,Q2 12:21,2,5,Pass Incompletion,58,0,Trey Kukuk pass incomplete to Devin Gandy,401752687102877801,0,14
+49,Louisiana Tech,Q2 12:5,3,5,Pass Reception,58,1,Trey Kukuk pass complete to Omiri Wiggins for 1 yd to the LSU 41,401752687102879401,0,14
+50,Louisiana Tech,Q2 11:31,4,4,Punt,59,32,"John Hoyet Chance punt for 32 yds, fair catch by Zavion Thomas at the LSU 9",401752687102886801,0,14
+51,LSU,Q2 11:16,1,10,Rush,91,-1,Zavion Thomas run for a loss of 1 yard to the LSU 8,401752687102888301,14,0
+52,LSU,Q2 10:39,2,11,Pass Reception,92,14,Garrett Nussmeier pass complete to Barion Brown for 14 yds to the LSU 22 for a 1ST down,401752687102896001,14,0
+53,LSU,Q2 10:11,1,10,Pass Reception,78,8,Garrett Nussmeier pass complete to Bauer Sharp for 8 yds to the LSU 30,401752687102898801,14,0
+54,LSU,Q2 9:33,2,2,Pass Reception,70,17,"Garrett Nussmeier pass complete to Aaron Anderson for 2 yds to the LSU 32 for a 1ST down Louisiana Tech Penalty, (15 Yards) to the LSU 47 for a 1ST down",401752687102906602,14,0
+55,LSU,Q2 9:17,1,10,Pass Incompletion,53,0,Garrett Nussmeier pass incomplete to Bauer Sharp,401752687102908201,14,0
+56,LSU,Q2 9:9,2,10,Pass Reception,53,5,Garrett Nussmeier pass complete to Aaron Anderson for 5 yds to the LT 48,401752687102909001,14,0
+57,LSU,Q2 8:23,3,5,Pass Reception,48,5,Garrett Nussmeier pass complete to Aaron Anderson for 5 yds to the LT 43 for a 1ST down,401752687102917601,14,0
+58,LSU,Q2 7:54,1,10,Pass Incompletion,43,0,Garrett Nussmeier pass incomplete to Aaron Anderson,401752687102924501,14,0
+59,LSU,Q2 7:54,2,10,Rush,43,6,Zavion Thomas run for 6 yds to the LT 37,401752687102924502,14,0
+60,LSU,Q2 7:25,3,4,Penalty,37,15,"(07:31) No Huddle-Shotgun Nussmeier,Garrett pass incomplete deep left to Hilton Jr.,Chris thrown to TECH06 PENALTY TECH Pass Interference (Shelby Jr.,Jhamal) 15 yards from TECH37 to TECH22, 1ST DOWN. NO PLAY.",401752687102927402,14,0
+61,LSU,Q2 7:20,1,10,Penalty,22,15,"(07:25) No Huddle-Shotgun Nussmeier,Garrett pass incomplete short middle to Thomas,Zavion thrown to TECH07, 1ST DOWN, PENALTY TECH Pass Interference (Fields,Jacob) 15 yards from TECH22 to TECH07, 1ST DOWN. NO PLAY.",401752687102927902,14,0
+62,LSU,Q2 7:14,1,7,Rush,7,1,Caden Durham run for 1 yd to the LT 6,401752687102928501,14,0
+63,LSU,Q2 6:35,2,6,Pass Incompletion,6,0,Garrett Nussmeier pass incomplete to Trey'Dez Green,401752687102936401,14,0
+64,LSU,Q2 6:35,3,6,Timeout,6,0,"Timeout LSU, clock 06:35",401752687102936402,14,0
+65,LSU,Q2 6:28,3,6,Pass Incompletion,6,0,Garrett Nussmeier pass incomplete to Kyle Parker,401752687102937101,14,0
+66,LSU,Q2 6:24,4,6,Field Goal Good,6,23,Damian Ramos 23 Yd Field Goal ,401752687102937501,10,0
+67,Louisiana Tech,Q2 6:24,1,10,Kickoff,65,-65,Aeron Burrell kickoff for 65 yds for a touchback,401752687102937502,10,0
+68,Louisiana Tech,Q2 6:24,1,10,Touchback,0,25,Aeron Burrell kickoff for 65 yds for a touchback,401752687102937502,10,0
+69,Louisiana Tech,Q2 6:18,1,10,Rush,25,5,Clay Thevenin run for 5 yds to the LT 30,401752687102938101,0,10
+70,Louisiana Tech,Q2 6:0,2,5,Rush,30,10,Clay Thevenin run for 10 yds to the LT 40 for a 1ST down,401752687102939901,0,10
+71,Louisiana Tech,Q2 5:41,1,10,Rush,40,1,Clay Thevenin run for 1 yd to the LT 41,401752687102945801,0,10
+72,Louisiana Tech,Q2 5:5,2,9,Pass Reception,41,0,Trey Kukuk pass complete to Clay Thevenin for no gain to the LT 41,401752687102949401,0,10
+73,Louisiana Tech,Q2 4:9,3,9,Rush,41,1,Trey Kukuk run for 1 yd to the LT 42,401752687102959001,0,10
+74,Louisiana Tech,Q2 3:42,4,8,Punt,42,49,John Hoyet Chance punt for 49 yds,401752687102965701,0,10
+75,LSU,Q2 3:34,1,10,Rush,91,11,Harlem Berry run for 11 yds to the LSU 20 for a 1ST down,401752687102966501,10,0
+76,LSU,Q2 2:51,1,10,Fumble Recovery (Own),80,3,"Zavion Thomas run for 3 yds to the LSU 23 Zavion Thomas fumbled, recovered by LSU",401752687102974801,10,0
+77,LSU,Q2 2:46,2,7,Pass Reception,77,5,Garrett Nussmeier pass complete to Barion Brown for 5 yds to the LSU 28,401752687102975301,10,0
+78,LSU,Q2 2:12,3,2,Rush,72,3,Caden Durham run for 3 yds to the LSU 31 for a 1ST down,401752687102978701,10,0
+79,LSU,Q2 2:0,1,10,Timeout,69,0,"Timeout LSU, clock 02:00",401752687102979901,10,0
+80,LSU,Q2 1:55,1,10,Penalty,69,12,"(02:00) Shotgun Nussmeier,Garrett pass incomplete short left to Anderson,Nic thrown to LSU43, 1ST DOWN, PENALTY TECH Pass Interference (Carter,Kameron) 12 yards from LSU31 to LSU43, 1ST DOWN. NO PLAY.",401752687102984402,10,0
+81,LSU,Q2 1:55,1,10,Penalty,57,-5,"PENALTY LSU False Start (Berry,Harlem) 5 yards from LSU43 to LSU38. NO PLAY.",401752687102984403,10,0
+82,LSU,Q2 1:39,1,15,Pass Reception,62,7,Garrett Nussmeier pass complete to Caden Durham for 7 yds to the LSU 45,401752687102986001,10,0
+83,LSU,Q2 1:23,2,8,Sack,55,-8,Garrett Nussmeier sacked for a loss of 8 yards to the LSU 37,401752687102987601,10,0
+84,LSU,Q2 0:43,3,16,Pass Incompletion,63,0,Garrett Nussmeier pass incomplete,401752687102995601,10,0
+85,LSU,Q2 0:32,4,16,Punt,63,46,"Grant Chadwick punt for 46 yds , Dedrick Latulas returns for 3 yds to the LT 10",401752687102996703,10,0
+86,Louisiana Tech,Q2 0:32,4,16,Punt Return,17,3,"Grant Chadwick punt for 46 yds , Dedrick Latulas returns for 3 yds to the LT 10",401752687102996703,10,0
+87,Louisiana Tech,Q2 0:32,2,13,Timeout,7,0,"Timeout Louisiana Tech, clock 00:32",401752687102996707,0,10
+88,Louisiana Tech,Q2 0:0,1,10,Rush,10,-3,(00:27) Kneel down by Louisiana Tech at TECH07 for loss of 3 yards.,401752687102999901,0,10
+89,Louisiana Tech,Q2 0:0,0,10,End of Half,10,-3,End of 2nd Quarter,401752687102999902,0,10
+90,Louisiana Tech,Q3 14:54,1,10,Kickoff,65,-63,"Aeron Burrell kickoff for 63 yds , Fred Robertson return for 16 yds to the LT 18",401752687103854501,10,0
+91,Louisiana Tech,Q3 14:54,1,10,Kickoff Return (Offense),2,16,"Aeron Burrell kickoff for 63 yds , Fred Robertson return for 16 yds to the LT 18",401752687103854501,10,0
+92,Louisiana Tech,Q3 14:49,1,10,Rush,18,-2,Clay Thevenin run for a loss of 2 yards to the LT 16,401752687103855001,0,10
+93,Louisiana Tech,Q3 14:5,2,12,Pass Reception,16,3,Trey Kukuk pass complete to Eli Finley for 3 yds to the LT 19,401752687103859401,0,10
+94,Louisiana Tech,Q3 13:48,3,9,Penalty,19,15,"(13:54) No Huddle-Shotgun Kukuk,Trey pass incomplete short right thrown to TECH30 QB hurried by Weeks,Whit PENALTY LSU Personal Foul (Guillory,Jacobian) 15 yards from TECH19 to TECH34, 1ST DOWN. NO PLAY.",401752687103865101,0,10
+95,Louisiana Tech,Q3 13:41,1,10,Penalty,34,0,"(13:48) No Huddle-Shotgun Kukuk,Trey rush left for 11 yards gain to the TECH45 (Delane,Mansoor; Haulcy,A.J.), out of bounds PENALTY TECH Holding declined LSU Personal Foul (Weeks,West) TECH Holding (Singleton Jr.,Marques) 25 yards from TECH34 to TECH39, 1ST DOWN. NO PLAY.",401752687103865802,0,10
+96,Louisiana Tech,Q3 13:21,1,10,Pass Reception,39,5,Trey Kukuk pass complete to Eli Finley for 5 yds to the LT 44,401752687103867803,0,10
+97,Louisiana Tech,Q3 13:8,2,5,Rush,44,5,Clay Thevenin run for 5 yds to the LT 49 for a 1ST down,401752687103869103,0,10
+98,Louisiana Tech,Q3 12:48,1,10,Pass Incompletion,49,0,Trey Kukuk pass incomplete to Devin Gandy,401752687103875103,0,10
+99,Louisiana Tech,Q3 12:40,2,10,Pass Reception,49,0,Trey Kukuk pass complete to Clay Thevenin for no gain to the LT 49,401752687103875903,0,10
+100,Louisiana Tech,Q3 12:12,3,10,Rush,49,3,Trey Kukuk run for 3 yds to the LSU 48,401752687103878703,0,10
+101,Louisiana Tech,Q3 11:33,4,7,Punt,52,38,"John Hoyet Chance punt for 38 yds, fair catch by Zavion Thomas at the LSU 10",401752687103886601,0,10
+102,LSU,Q3 11:26,1,10,Rush,90,-1,Caden Durham run for a loss of 1 yard to the LSU 9,401752687103887301,10,0
+103,LSU,Q3 10:47,2,11,Pass Reception,91,9,Garrett Nussmeier pass complete to Barion Brown for 9 yds to the LSU 18,401752687103895201,10,0
+104,LSU,Q3 10:2,3,2,Pass Reception,82,3,Garrett Nussmeier pass complete to Zavion Thomas for 3 yds to the LSU 21 for a 1ST down,401752687103899701,10,0
+105,LSU,Q3 9:26,1,10,Pass Reception,79,23,Garrett Nussmeier pass complete to Aaron Anderson for 23 yds to the LSU 44 for a 1ST down,401752687103907301,10,0
+106,LSU,Q3 8:50,1,10,Rush,56,3,Zavion Thomas run for 3 yds to the LSU 47,401752687103914901,10,0
+107,LSU,Q3 8:10,2,7,Rush,53,15,Barion Brown run for 15 yds to the LT 38 for a 1ST down,401752687103918901,10,0
+108,LSU,Q3 7:27,1,10,Rush,38,2,Caden Durham run for 2 yds to the LT 36,401752687103927201,10,0
+109,LSU,Q3 6:50,2,8,Pass Incompletion,36,0,Garrett Nussmeier pass incomplete to Chris Hilton Jr.,401752687103934901,10,0
+110,LSU,Q3 6:45,3,8,Pass Incompletion,36,0,Garrett Nussmeier pass incomplete to Nic Anderson,401752687103935401,10,0
+111,LSU,Q3 6:45,4,8,Penalty,36,-5,"(06:45) PENALTY LSU Delay Of Game (Chadwick,Grant) 5 yards from TECH36 to TECH41. NO PLAY.",401752687103935402,10,0
+112,LSU,Q3 6:39,4,13,Punt,41,30,"Grant Chadwick punt for 30 yds, fair catch by Dedrick Latulas at the LT 11",401752687103936001,10,0
+113,Louisiana Tech,Q3 6:33,1,10,Pass Incompletion,11,0,Trey Kukuk pass incomplete to Marques Singleton Jr.,401752687103936601,0,10
+114,Louisiana Tech,Q3 6:26,2,10,Rush,11,0,Andrew Burnette run for no gain to the LT 11,401752687103937301,0,10
+115,Louisiana Tech,Q3 5:55,3,10,Sack,11,-3,Trey Kukuk sacked for a loss of 3 yards to the LT 8,401752687103944401,0,10
+116,Louisiana Tech,Q3 5:14,4,13,Punt,8,25,"John Hoyet Chance punt for 25 yds, punt out-of-bounds at the LT 33",401752687103948501,0,10
+117,LSU,Q3 5:8,1,10,Pass Reception,33,11,Garrett Nussmeier pass complete to Barion Brown for 11 yds to the LT 22 for a 1ST down,401752687103949101,10,0
+118,LSU,Q3 4:40,1,10,Rush,22,1,Ju'Juan Johnson run for 1 yd to the LT 21,401752687103955901,10,0
+119,LSU,Q3 3:54,2,9,Pass Reception,21,13,Garrett Nussmeier pass complete to Aaron Anderson for 13 yds to the LT 8 for a 1ST down,401752687103964501,10,0
+120,LSU,Q3 3:15,1,8,Rush,8,4,Caden Durham run for 4 yds to the LT 4,401752687103968401,10,0
+121,LSU,Q3 2:40,2,4,Rush,4,1,Caden Durham run for 1 yd to the LT 3,401752687103975901,10,0
+122,LSU,Q3 1:58,3,3,Rushing Touchdown,3,3,Caden Durham 3 Yd Run (Damian Ramos Kick),401752687103984101,17,0
+123,Louisiana Tech,Q3 1:58,1,10,Kickoff,65,-65,Aeron Burrell kickoff for 65 yds for a touchback,401752687103984103,17,0
+124,Louisiana Tech,Q3 1:58,1,10,Touchback,0,25,Aeron Burrell kickoff for 65 yds for a touchback,401752687103984103,17,0
+125,Louisiana Tech,Q3 1:53,1,10,Pass Incompletion,25,0,Trey Kukuk pass incomplete to Marques Singleton Jr.,401752687103984601,0,17
+126,Louisiana Tech,Q3 1:39,2,10,Pass Reception,25,4,Trey Kukuk pass complete to Marques Singleton Jr. for 4 yds to the LT 29,401752687103986001,0,17
+127,Louisiana Tech,Q3 1:2,3,6,Pass Incompletion,29,0,Trey Kukuk pass incomplete to Marques Singleton Jr.,401752687103989701,0,17
+128,Louisiana Tech,Q3 0:50,4,6,Punt,29,50,"John Hoyet Chance punt for 50 yds, punt out-of-bounds at the LSU 33 , Zavion Thomas returns for 12 yds to the LSU 33",401752687103994901,0,17
+129,LSU,Q3 0:50,4,6,Punt Return,79,12,"John Hoyet Chance punt for 50 yds, punt out-of-bounds at the LSU 33 , Zavion Thomas returns for 12 yds to the LSU 33",401752687103994901,0,17
+130,LSU,Q3 0:41,1,10,Pass Reception,67,6,Garrett Nussmeier pass complete to Aaron Anderson for 6 yds to the LSU 39,401752687103995801,17,0
+131,LSU,Q3 0:0,2,4,Pass Reception,61,11,Garrett Nussmeier pass complete to Barion Brown for 11 yds to the 50 yard line for a 1ST down,401752687103999901,17,0
+132,LSU,Q3 0:0,0,4,End Period,61,11,End of 3rd Quarter,401752687103999902,17,0
+133,LSU,Q4 14:54,1,10,Pass Incompletion,50,0,Garrett Nussmeier pass incomplete to Barion Brown,401752687104854501,17,0
+134,LSU,Q4 14:48,2,10,Rush,50,-1,Kaleb Jackson run for a loss of 1 yard to the LSU 49,401752687104855101,17,0
+135,LSU,Q4 14:7,3,11,Pass Reception,51,21,Garrett Nussmeier pass complete to Aaron Anderson for 21 yds to the LT 30 for a 1ST down,401752687104859201,17,0
+136,LSU,Q4 13:52,1,10,Penalty,30,-10,"(13:57) No Huddle-Shotgun Nussmeier,Garrett pass complete short middle to Anderson,Aaron caught at TECH35, for 0 yards to the TECH30 (Leota,Sifa; Woods,Cedric) PENALTY LSU Holding (Jackson,Kaleb) 10 yards from TECH30 to TECH40. NO PLAY.",401752687104864702,17,0
+137,LSU,Q4 13:26,1,20,Pass Reception,40,19,Garrett Nussmeier pass complete to Barion Brown for 19 yds to the LT 21,401752687104867301,17,0
+138,LSU,Q4 12:57,2,1,Pass Reception,21,6,Garrett Nussmeier pass complete to Zavion Thomas for 6 yds to the LT 15 for a 1ST down,401752687104874201,17,0
+139,LSU,Q4 12:45,1,10,Pass Incompletion,15,0,Garrett Nussmeier pass incomplete to Kyle Parker,401752687104875401,17,0
+140,LSU,Q4 12:39,2,10,Rush,15,-5,Zavion Thomas run for a loss of 5 yards to the LT 20,401752687104876001,17,0
+141,LSU,Q4 11:52,3,15,Sack,20,-9,Garrett Nussmeier sacked by Mekhi Mason for a loss of 9 yards to the LT 29,401752687104884701,17,0
+142,LSU,Q4 11:14,4,24,Field Goal Good,29,46,Damian Ramos 46 Yd Field Goal ,401752687104888501,20,0
+143,Louisiana Tech,Q4 11:14,1,10,Kickoff,65,-65,Aeron Burrell kickoff for 65 yds for a touchback,401752687104888502,20,0
+144,Louisiana Tech,Q4 11:14,1,10,Touchback,0,25,Aeron Burrell kickoff for 65 yds for a touchback,401752687104888502,20,0
+145,Louisiana Tech,Q4 11:14,1,10,Penalty,25,-5,"PENALTY TECH False Start (Pierro,David) 5 yards from TECH25 to TECH20. NO PLAY.",401752687104888504,0,20
+146,Louisiana Tech,Q4 11:8,1,15,Rush,20,2,Fred Robertson run for 2 yds to the LT 22,401752687104889101,0,20
+147,Louisiana Tech,Q4 10:49,2,13,Pass Incompletion,22,0,Blake Baker pass incomplete to Marlion Jackson,401752687104895001,0,20
+148,Louisiana Tech,Q4 10:44,3,13,Pass Incompletion,22,0,Blake Baker pass incomplete to Fred Robertson,401752687104895501,0,20
+149,Louisiana Tech,Q4 10:38,4,13,Penalty,22,-5,"(10:43) punt 39 yards to the LSU39 muffed by Thomas,Zavion at LSU39 recovered by TECH Cobbs,Joshua at LSU41, End Of Play PENALTY TECH Illegal Formation 5 yards from TECH22 to TECH17. NO PLAY.",401752687104896103,0,20
+150,Louisiana Tech,Q4 10:26,4,18,Punt,17,43,"John Hoyet Chance punt for 43 yds , Zavion Thomas returns for 12 yds to the LT 48",401752687104897301,0,20
+151,LSU,Q4 10:26,4,18,Punt Return,60,12,"John Hoyet Chance punt for 43 yds , Zavion Thomas returns for 12 yds to the LT 48",401752687104897301,0,20
+152,LSU,Q4 10:26,1,10,Penalty,48,-5,"PENALTY LSU False Start (Chester,DJ) 5 yards from TECH48 to LSU47. NO PLAY.",401752687104897304,20,0
+153,LSU,Q4 10:20,1,15,Rush,53,1,Harlem Berry run for 1 yd to the LSU 48,401752687104897901,20,0
+154,LSU,Q4 9:45,2,14,Sack,52,-10,Garrett Nussmeier sacked by Christian Davis for a loss of 10 yards to the LSU 38,401752687104905401,20,0
+155,LSU,Q4 9:7,3,24,Timeout,62,0,"Timeout LSU, clock 09:07",401752687104909201,20,0
+156,LSU,Q4 8:59,3,24,Pass Incompletion,62,0,Garrett Nussmeier pass incomplete to Zavion Thomas,401752687104914001,20,0
+157,LSU,Q4 8:48,4,24,Punt,62,50,"Grant Chadwick punt for 50 yds , Dedrick Latulas returns for 14 yds to the LT 26",401752687104915101,20,0
+158,Louisiana Tech,Q4 8:48,4,24,Punt Return,12,14,"Grant Chadwick punt for 50 yds , Dedrick Latulas returns for 14 yds to the LT 26",401752687104915101,20,0
+159,Louisiana Tech,Q4 8:40,1,10,Rush,26,4,Blake Baker run for 4 yds to the LT 30,401752687104915901,0,20
+160,Louisiana Tech,Q4 8:19,2,6,Rush,30,1,Omiri Wiggins run for 1 yd to the LT 31,401752687104918001,0,20
+161,Louisiana Tech,Q4 7:42,3,5,Pass Reception,31,4,Blake Baker pass complete to Eli Finley for 4 yds to the LT 35,401752687104925701,0,20
+162,Louisiana Tech,Q4 7:5,4,1,Rush,35,1,Blake Baker run for 1 yd to the LT 36 for a 1ST down,401752687104929401,0,20
+163,Louisiana Tech,Q4 6:42,1,10,Rush,36,4,Blake Baker run for 4 yds to the LT 40,401752687104935701,0,20
+164,Louisiana Tech,Q4 6:24,2,6,Penalty,40,12,"(06:27) No Huddle-Shotgun Baker,Blake pass incomplete short middle to Finley,Eli thrown to TECH45 PENALTY LSU Pass Interference (Weeks,West) 12 yards from TECH40 to LSU48, 1ST DOWN. NO PLAY.",401752687104937502,0,20
+165,Louisiana Tech,Q4 6:7,1,10,Rush,52,9,Blake Baker run for 9 yds to the LSU 39,401752687104939201,0,20
+166,Louisiana Tech,Q4 5:55,2,1,Rush,61,2,Clay Thevenin run for 2 yds to the LSU 37 for a 1ST down,401752687104944401,0,20
+167,Louisiana Tech,Q4 5:31,1,10,Pass Reception,63,9,Blake Baker pass complete to Clay Thevenin for 9 yds to the LSU 28,401752687104946801,0,20
+168,Louisiana Tech,Q4 5:10,2,1,Pass Incompletion,72,0,Blake Baker pass incomplete to Devin Gandy,401752687104948901,0,20
+169,Louisiana Tech,Q4 5:5,3,1,Rush,72,2,Blake Baker run for 2 yds to the LSU 26 for a 1ST down,401752687104949401,0,20
+170,Louisiana Tech,Q4 4:45,1,10,Pass Incompletion,74,0,Blake Baker pass incomplete to Marlion Jackson,401752687104955401,0,20
+171,Louisiana Tech,Q4 4:34,2,10,Sack,74,-7,Blake Baker sacked for a loss of 7 yards to the LSU 33,401752687104956501,0,20
+172,Louisiana Tech,Q4 4:2,3,17,Passing Touchdown,67,33,Devin Gandy 33 Yd pass from Blake Baker (Drew Henderson Kick),401752687104959701,7,20
+173,LSU,Q4 4:2,1,10,Timeout,50,0,"Timeout LSU, clock 04:02",401752687104959704,20,0
+174,LSU,Q4 3:52,1,10,Kickoff,35,-57,"Drew Henderson kickoff for 57 yds , Barion Brown return for 42 yds to the 50 yard line",401752687104964701,7,20
+175,LSU,Q4 3:52,1,10,Kickoff Return (Offense),92,42,"Drew Henderson kickoff for 57 yds , Barion Brown return for 42 yds to the 50 yard line",401752687104964701,7,20
+176,LSU,Q4 3:47,1,10,Rush,50,1,Harlem Berry run for 1 yd to the LT 49,401752687104965201,20,7
+177,LSU,Q4 3:46,2,9,Timeout,49,0,"Timeout Louisiana Tech, clock 03:46",401752687104965301,20,7
+178,LSU,Q4 3:41,2,9,Rush,49,43,Harlem Berry run for 43 yds to the LT 6 for a 1ST down,401752687104965801,20,7
+179,LSU,Q4 3:1,1,6,Penalty,6,3,"(03:06) Shotgun Berry,Harlem rush middle for 1 yard gain to the TECH05 (Fields,Kolbe; Shelby Jr.,Jhamal) PENALTY TECH Illegal Substitution 3 yards from TECH06 to TECH03. NO PLAY.",401752687104969802,20,7
+180,LSU,Q4 2:43,1,3,Rush,3,1,Kaleb Jackson run for 1 yd to the LT 2,401752687104975601,20,7
+181,LSU,Q4 2:6,2,2,Rush,2,0,Harlem Berry run for no gain to the LT 2,401752687104979301,20,7
+182,LSU,Q4 2:6,3,2,Timeout,2,0,"Timeout Louisiana Tech, clock 02:06",401752687104979302,20,7
+183,LSU,Q4 2:0,3,2,Rush,2,0,Harlem Berry run for no gain to the LT 2,401752687104979901,20,7
+184,LSU,Q4 2:0,4,2,Timeout,2,0,"Timeout LSU, clock 02:00",401752687104979902,20,7
+185,LSU,Q4 1:55,4,2,Field Goal Good,2,19,Damian Ramos 19 Yd Field Goal ,401752687104984401,23,7
+186,Louisiana Tech,Q4 1:55,1,10,Kickoff,65,-65,Aeron Burrell kickoff for 65 yds for a touchback,401752687104984402,23,7
+187,Louisiana Tech,Q4 1:55,1,10,Touchback,0,25,Aeron Burrell kickoff for 65 yds for a touchback,401752687104984402,23,7
+188,Louisiana Tech,Q4 1:51,1,10,Rush,25,-2,Andrew Burnette run for a loss of 2 yards to the LT 23,401752687104984801,7,23
+189,Louisiana Tech,Q4 1:27,2,12,Pass Incompletion,23,0,Blake Baker pass incomplete to Devin Gandy,401752687104987201,7,23
+190,Louisiana Tech,Q4 1:21,3,12,Rush,23,6,Andrew Burnette run for 6 yds to the LT 29,401752687104987801,7,23
+191,Louisiana Tech,Q4 0:36,4,6,Punt,29,46,John Hoyet Chance punt for 46 yds,401752687104996303,7,23
+192,LSU,Q4 0:0,1,10,Rush,60,-1,(00:36) Kneel down by LSU at LSU39 for loss of 1 yard.,401752687104999901,23,7
+193,LSU,Q4 0:0,0,10,End of Game,60,-1,End of 4th Quarter,401752687104999902,23,7
