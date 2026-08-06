@@ -1,8 +1,8 @@
 [
   {
     "week": 1,
-    "label": "Wk 1 \u2014 Coastal Carolina",
-    "href": "fbPlaychart_wk1_Coastal_Carolina.html"
+    "label": "Wk 1 \u2014 SE Louisiana",
+    "href": "fbPlaychart_wk1_SE_Louisiana.html"
   },
   {
     "week": 2,
@@ -16,12 +16,52 @@
   },
   {
     "week": 4,
-    "href": "fbPlaychart_wk4_Southern_Miss.html",
-    "label": "Wk 4 \u2014 Southern Miss"
+    "label": "Wk 4 \u2014 Southern Miss",
+    "href": "fbPlaychart_wk4_Southern_Miss.html"
   },
   {
     "week": 5,
     "label": "Wk 5 \u2014 UTEP",
     "href": "fbPlaychart_wk5_UTEP.html"
+  },
+  {
+    "week": 7,
+    "label": "Wk 7 \u2014 Kennesaw State",
+    "href": "fbPlaychart_wk7_Kennesaw_State.html"
+  },
+  {
+    "week": 9,
+    "label": "Wk 9 \u2014 Western Kentucky",
+    "href": "fbPlaychart_wk9_Western_Kentucky.html"
+  },
+  {
+    "week": 10,
+    "label": "Wk 10 \u2014 Sam Houston",
+    "href": "fbPlaychart_wk10_Sam_Houston.html"
+  },
+  {
+    "week": 11,
+    "label": "Wk 11 \u2014 Delaware",
+    "href": "fbPlaychart_wk11_Delaware.html"
+  },
+  {
+    "week": 12,
+    "label": "Wk 12 \u2014 Washington State",
+    "href": "fbPlaychart_wk12_Washington_State.html"
+  },
+  {
+    "week": 13,
+    "label": "Wk 13 \u2014 Liberty",
+    "href": "fbPlaychart_wk13_Liberty.html"
+  },
+  {
+    "week": 14,
+    "href": "fbPlaychart_wk14_Missouri_State.html",
+    "label": "Wk 14 \u2014 Missouri State"
+  },
+  {
+    "week": 16,
+    "label": "Wk 16 \u2014 Coastal Carolina",
+    "href": "fbPlaychart_wk16_Coastal_Carolina.html"
   }
 ]

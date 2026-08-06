@@ -14,3 +14,5 @@ lib/__pycache__/*
 
 fbTest.py
 output.txt
+
+lib/fbPlaychartColorsOppo.txt

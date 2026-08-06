@@ -57,17 +57,18 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     ## TODO: Grab the most recent game automatically
     api_response = api_instance.get_plays(year, week=week, team=team)
 
-    ## Check to see if $team is home. On chart, $team moves left to right
-    tech_is_home = bool(api_response) and api_response[0].home == team
-
     dictList = []
     for play in api_response:
         start = play.yardline
-        if start is not None and not tech_is_home:
+        if start is not None and play.home != team:
             start = 100 - start
         ## Treat a bare "Interception" identically to a "Pass Interception Return".
         play_type = 'Pass Interception Return' if play.play_type == 'Interception' else play.play_type
+        ## "Pass Completion" is the same thing as "Pass Reception".
+        if play_type == 'Pass Completion':
+            play_type = 'Pass Reception'
         dictList.append({
+            'game_id': play.game_id,
             'offense': play.offense,
             'clock': f"Q{play.period} {play.clock.minutes}:{play.clock.seconds}",
             'down': play.down,
@@ -90,10 +91,28 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             deduped.append(d)
     dictList = deduped
 
-    opponent = next((d['offense'] for d in dictList if d['offense'] and d['offense'] != team), team)
+    ## Logic to separate games if CFBD's data is mixed up (G1 2025)
+    games = {}
+    for d in dictList:
+        games.setdefault(d['game_id'], []).append(d)
+    built = [buildGame(plays, team, week) for plays in games.values()]
+    if len(built) > 1:
+        print(f"\nWARNING: the Week {week} pull returned {len(built)} games (the data source merged them):")
+        for g_df, g_opp in built:
+            path = os.path.join(PBP_DIR, f"fbPlaychartPBP_{gameSlug(week, g_opp)}.csv")
+            print(f"  - vs {g_opp}: {len(g_df)} plays -> {path}")
+        print(f"Each was split into its own CSV (all named wk{week}). Rename the extra game(s)\n"
+              "to the correct week, then re-run with refreshData=False for the game you want.\n")
+        raise SystemExit(1)
+    return built[0][0]
+
+
+def buildGame(plays, team, week):
+    ## Process a single game's plays
+    opponent = next((d['offense'] for d in plays if d['offense'] and d['offense'] != team), team)
 
     processed = []
-    for d in dictList:
+    for d in plays:
         text = str(d.get('text') or '')
 
         ## Kickoff touchbacks: the CFBD "Kickoff" row is credited to the kicking team
@@ -178,9 +197,8 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
 
         else:
             processed.append(d)
-    dictList = processed
 
-    df = pd.DataFrame(dictList)
+    df = pd.DataFrame(processed)
 
     ## CFBD can return plays out of game order — sort chronologically from the
     ## clock string "Q<period> M:SS": quarter ascending, then time remaining
@@ -194,15 +212,23 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
             .drop(columns=['_period', '_secs_remaining', '_id'])
             .reset_index(drop=True))
 
-    ## Interception returns: CFBD yards gained doesn't work here. Draw arrow to start of the next play.
+    ## Interception returns and un-returned punts: CFBD yards gained doesn't work here. Draw the arrow to wherever the next play begins.
     stop_types = {'End Period', 'End of Half', 'Timeout', 'End of Game'}
     starts, types, offs, gains = (list(df[c]) for c in ('start', 'type', 'offense', 'gained'))
     for i in range(len(df)):
-        if types[i] != 'Pass Interception Return' or pd.isna(starts[i]):
+        if pd.isna(starts[i]):
             continue
         j = i + 1
         while j < len(df) and types[j] in stop_types:
             j += 1
+        if types[i] == 'Pass Interception Return':
+            pass  # always redraw an interception return to the next play
+        elif types[i] == 'Punt' and (j >= len(df) or types[j] not in ('Punt Return', 'Touchback')):
+            pass  # a punt with no return/touchback: end the arrow at the next play
+        elif types[i] == 'Kickoff' and (j >= len(df) or types[j] not in ('Kickoff Return (Offense)', 'Touchback')):
+            pass  # a kickoff with no return/touchback: end the line at the next play
+        else:
+            continue
         if j >= len(df) or pd.isna(starts[j]):
             continue
         end_x, start_i = starts[j], starts[i]
@@ -210,9 +236,10 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     df['gained'] = gains
 
     ## Per-game CSV: csv/fbPlaychartPBP/fbPlaychartPBP_wk<week>_<opponent>.csv
+    df = df.drop(columns=['game_id'], errors='ignore')
     os.makedirs(PBP_DIR, exist_ok=True)
     df.to_csv(os.path.join(PBP_DIR, f"fbPlaychartPBP_{gameSlug(week, opponent)}.csv"))
-    return df
+    return df, opponent
 
 
 ## Inches of figure per data-unit, kept roughly equal on both axes so the
@@ -282,8 +309,16 @@ def hexLuminance(hex_color):
     return 0.299 * r + 0.587 * g + 0.114 * b
 
 
+def whiteToBlack(hex_color):
+    ## Replace a white team color with black for a better chart
+    h = str(hex_color).lstrip('#').lower()
+    if h in ('fff', 'ffffff'):
+        return '#000000'
+    return hex_color
+
+
 def updateOppoColors(opponent, oppo_color_path):
-    ## When refreshData=True, updates the team's colors in lib/fbPlaychartColorsOppo.txt
+    ## When refreshColors=True, updates the team's colors in lib/fbPlaychartColorsOppo.txt
     team_id = lookupEspnId(opponent)
     if team_id is None:
         print(f"No ESPN id for '{opponent}' in csv/espnTeamIDs.csv; keeping existing opponent colors.")
@@ -297,6 +332,7 @@ def updateOppoColors(opponent, oppo_color_path):
     colors = loadColors(oppo_color_path)
     ## Use the darker of the two team colors for "pass" and the lighter for "run".
     c1, c2 = '#' + str(color1).lstrip('#'), '#' + str(color2).lstrip('#')
+    c1, c2 = whiteToBlack(c1), whiteToBlack(c2)
     try:
         colors['pass'], colors['run'] = sorted((c1, c2), key=hexLuminance)
     except (ValueError, IndexError):
@@ -582,7 +618,7 @@ def loadGames(html_dir, current=None):
 
 def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
                  oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
-                 year=2025, week=4):
+                 refreshColors=False, year=2025, week=4):
     if refreshData:
         df = getPBPData(year, week, team)
     else:
@@ -595,8 +631,8 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     opponent = next((o for o in df['offense'].dropna().unique() if o != team), 'Opponent')
 
-    ## On a refresh, pull the opponent's team colors from ESPN
-    if refreshData:
+    ## Pull the opponent's team colors from ESPN.
+    if refreshColors:
         updateOppoColors(opponent, oppoColorPath)
 
     techColors = loadColors(techColorPath)
@@ -623,7 +659,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         if row.type in ('End Period', 'Timeout', 'End of Game'):
             continue
 
-        if row.offense != offense:
+        if row.offense != offense or row.type == 'Kickoff':
             offense = row.offense
             i += 10
             ## Drive header: who has the ball, the clock, and the score
@@ -797,5 +833,18 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(year=2025, week=4, refreshData=True)
-#df = getPBPData(2025, 4, 'Louisiana Tech')
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Generate the Louisiana Tech play chart (PNG + interactive HTML) for a game.")
+    parser.add_argument("--year", type=int, default=2025, help="Season year (default: 2025)")
+    parser.add_argument("--week", type=int, default=1, help="Week number (default: 1)")
+    parser.add_argument("--refresh-data", action="store_true",
+                        help="Re-fetch play-by-play from CFBD (otherwise read the cached CSV)")
+    parser.add_argument("--refresh-colors", action="store_true",
+                        help="Pull the opponent's colors from ESPN into the opponent color file")
+    args = parser.parse_args()
+
+    fbPlaychart(year=args.year, week=args.week,
+                refreshData=args.refresh_data, refreshColors=args.refresh_colors)

@@ -1,0 +1,179 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Louisiana Tech,Q1 14:52,1,10,Kickoff,65,26,(15:00) #49 C.Pavon kickoff 65 yards to the LAT00 #1 D.Gandy return 26 yards to the LAT26 (#38 A.Murdaugh),4017572903,0,0
+1,Louisiana Tech,Q1 14:32,1,10,Pass Reception,26,6,"(14:44) Shotgun #5 B.Baker pass complete short right to #18 M.Jackson caught at LAT22, for 6 yards to the LAT32 (#4 J.Scott; #7 E.Allen)",40175729014,0,0
+2,Louisiana Tech,Q1 14:8,2,4,Rush,32,5,"(14:16) Shotgun #5 B.Baker rush middle for 5 yards gain to the LAT37 (#7 E.Allen), 1ST DOWN",40175729019,0,0
+3,Louisiana Tech,Q1 13:43,1,10,Pass Reception,37,2,"(13:52) Shotgun #5 B.Baker pass complete short right to #4 C.Thevenin caught at LAT36, for 2 yards to the LAT39 (#30 D.Ford)",40175729023,0,0
+4,Louisiana Tech,Q1 13:23,2,8,Rush,39,15,"(13:27) Shotgun #4 C.Thevenin rush middle for 15 yards gain to the SHU46 (#3 T.Harris), 1ST DOWN",40175729028,0,0
+5,Louisiana Tech,Q1 13:0,1,10,Rush,54,3,(13:04) Shotgun #4 C.Thevenin rush middle for 3 yards gain to the SHU43 (#17 C.Eaton; #4 J.Scott),40175729032,0,0
+6,Louisiana Tech,Q1 12:23,2,7,Rush,57,7,"(12:30) Shotgun #5 B.Baker rush middle for 7 yards gain to the SHU36 (#6 A.Fish; #0 A.Edwards Jr.), 1ST DOWN",40175729036,0,0
+7,Louisiana Tech,Q1 11:48,1,10,Passing Touchdown,64,36,Devin Gandy 36 Yd pass from Blake Baker (Drew Henderson Kick),40175729040,7,0
+8,Sam Houston,Q1 11:48,1,10,Kickoff,35,-65,"(11:48) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",40175729048,7,0
+9,Sam Houston,Q1 11:48,1,10,Touchback,100,25,"(11:48) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",40175729048,7,0
+10,Sam Houston,Q1 11:41,1,10,Pass Incompletion,75,0,(11:48) Shotgun #10 H.Watson pass incomplete short left to #84 L.Deyon thrown to SHU40,40175729051,0,7
+11,Sam Houston,Q1 11:28,2,10,Rush,75,8,(11:41) Shotgun #10 H.Watson rush middle for 8 yards gain to the SHU33 (#6 T.Averhart; #22 J.Mayfield),40175729054,0,7
+12,Sam Houston,Q1 10:44,3,2,Rush,67,7,"(11:02) Shotgun #10 H.Watson rush middle for 7 yards gain to the SHU40, End Of Play, 1ST DOWN",40175729058,0,7
+13,Sam Houston,Q1 10:21,1,10,Pass Incompletion,60,0,(10:21) Shotgun #10 H.Watson pass incomplete short middle to #2 C.Reed thrown to SHU50 broken up by #11 C.Woods,40175729062,0,7
+14,Sam Houston,Q1 9:26,2,10,Pass Reception,60,2,"(09:41) Shotgun #10 H.Watson pass complete short right to #2 C.Reed caught at SHU43, for 2 yards to the SHU42 (#11 C.Woods)",40175729070,0,7
+15,Sam Houston,Q1 8:55,3,8,Pass Incompletion,58,0,(08:55) Shotgun #10 H.Watson pass incomplete short left thrown to SHU45 PENALTY SHU Holding declined,40175729075,0,7
+16,Sam Houston,Q1 8:43,4,8,Punt Return,58,24,(08:43) #35 C.Gerrand punt 40 yards to the LAT18 #3 D.Latulas return 24 yards to the LAT42 (#86 T.Jewett),40175729079,0,7
+17,Louisiana Tech,Q1 8:36,1,10,Rush,42,8,(08:43) Shotgun #22 O.Wiggins rush middle for 8 yards gain to the LAT50 (#44 B.Henderson; #2 C.Powell),40175729085,7,0
+18,Louisiana Tech,Q1 8:16,2,2,Rush,50,10,"(08:31) Shotgun #22 O.Wiggins rush middle for 10 yards gain to the SHU40 (#3 T.Harris), 1ST DOWN",40175729089,7,0
+19,Louisiana Tech,Q1 7:40,1,10,Rush,60,37,"(07:53) Shotgun #22 O.Wiggins rush left for 37 yards gain to the SHU03 (#7 E.Allen), out of bounds, 1ST DOWN",40175729093,7,0
+20,Louisiana Tech,Q1 7:4,1,3,Rush,97,-3,(07:08) Shotgun #22 O.Wiggins rush right for 3 yards loss to the SHU06 (#30 D.Ford; #9 J.Arnold),40175729097,7,0
+21,Louisiana Tech,Q1 6:33,2,6,Rushing Touchdown,94,6,Clay Thevenin 6 Yd Run (Drew Henderson Kick),401757290101,14,0
+22,Sam Houston,Q1 6:28,1,10,Kickoff,35,11,(06:33) #48 J.Chance kickoff 64 yards to the SHU01 #11 M.Phillips return 11 yards to the SHU12 (#35 C.Watson; #21 Z.Hill),401757290108,14,0
+23,Sam Houston,Q1 6:18,1,10,Rush,88,0,(06:28) Shotgun #34 L.Brown rush right for 0 yards to the SHU12 (#11 C.Woods; #98 D.Rieman),401757290113,0,14
+24,Sam Houston,Q1 5:47,2,10,Penalty,88,5,PENALTY SHU False Start (#71 J.Dawn II) 5 yards from SHU12 to SHU07. NO PLAY,401757290119,0,14
+25,Sam Houston,Q1 5:31,2,15,Penalty,93,3,"(05:31) Shotgun #10 H.Watson pass complete deep middle to #6 G.O'Neill caught at SHU30, for 23 yards to the SHU30 (#8 J.Fields) PENALTY SHU Holding (#79 K.Dieterich) 3 yards from SHU07 to SHU04. NO PLAY",401757290122,0,14
+26,Sam Houston,Q1 5:2,2,18,Pass Reception,96,7,"(05:06) Shotgun #10 H.Watson pass complete short right to #2 C.Reed caught at SHU09, for 7 yards to the SHU11 (#11 C.Woods) PENALTY LAT Face Mask (#11 C.Woods) 15 yards from SHU11 to SHU26, 1ST DOWN",401757290128,0,14
+27,Sam Houston,Q1 4:26,1,10,Pass Reception,74,8,"(04:42) Shotgun #10 H.Watson pass complete short right to #2 C.Reed caught at SHU30, for 8 yards to the SHU34 (#11 C.Woods; #8 J.Fields), out of bounds",401757290134,0,14
+28,Sam Houston,Q1 3:52,2,2,Pass Incompletion,66,0,(03:57) Shotgun #10 H.Watson pass incomplete short left to #11 M.Phillips thrown to SHU41,401757290139,0,14
+29,Sam Houston,Q1 3:43,3,2,Rush,66,3,"(03:52) Shotgun #34 L.Brown rush middle for 3 yards gain to the SHU37 (#90 J.Madkins), 1ST DOWN",401757290142,0,14
+30,Sam Houston,Q1 2:59,1,10,Rush,63,7,(03:04) Shotgun #34 L.Brown rush middle for 7 yards gain to the SHU44 (#9 M.Mason),401757290146,0,14
+31,Sam Houston,Q1 2:24,2,3,Pass Incompletion,56,0,(02:34) Shotgun #10 H.Watson pass incomplete short middle to #7 Q.Humphreys thrown to SHU47 QB hurried by #22 J.Mayfield,401757290150,0,14
+32,Sam Houston,Q1 2:18,3,3,Sack,56,-1,(02:18) Shotgun #10 H.Watson sacked for loss of 1 yard to the SHU43 (#98 D.Rieman) PENALTY SHU Holding declined,401757290153,0,14
+33,Sam Houston,Q1 1:53,4,4,Punt,57,0,(01:59) #35 C.Gerrand punt 39 yards to the LAT18 fair catch by #3 D.Latulas at LAT18,401757290158,0,14
+34,Louisiana Tech,Q1 1:33,1,10,Pass Reception,18,8,"(01:53) Shotgun #5 B.Baker pass complete short right to #16 M.Singleton Jr. caught at LAT13, for 8 yards to the LAT26 (#7 E.Allen; #8 C.Johnson)",401757290162,14,0
+35,Louisiana Tech,Q1 1:12,2,2,Rush,26,5,"(01:12) Shotgun #4 C.Thevenin rush right for 5 yards gain to the LAT31 (#0 A.Edwards Jr.), out of bounds, 1ST DOWN",401757290167,14,0
+36,Louisiana Tech,Q1 0:38,1,10,Rush,31,6,(00:38) Shotgun #22 O.Wiggins rush middle for 6 yards gain to the LAT37 (#7 E.Allen),401757290171,14,0
+37,Louisiana Tech,Q1 0:0,1,10,End Period,31,6,End of 1st quarter.,401757290177,14,0
+38,Louisiana Tech,Q2 14:50,2,4,Rush,37,-3,(14:57) Shotgun #22 O.Wiggins rush left for 3 yards loss to the LAT34 (#33 Z.Lawton; #44 B.Henderson),401757290181,14,0
+39,Louisiana Tech,Q2 14:3,3,7,Pass Reception,34,16,"(14:16) Shotgun #5 B.Baker pass complete short middle to #84 E.Finley caught at LAT45, for 16 yards to the LAT50 (#13 T.Bailey), 1ST DOWN",401757290187,14,0
+40,Louisiana Tech,Q2 13:39,1,10,Rushing Touchdown,50,50,Clay Thevenin 50 Yd Run (Drew Henderson Kick),401757290192,21,0
+41,Sam Houston,Q2 13:39,1,10,Kickoff,35,-65,"(13:39) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290199,21,0
+42,Sam Houston,Q2 13:39,1,10,Touchback,100,25,"(13:39) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290199,21,0
+43,Sam Houston,Q2 13:26,1,10,Pass Reception,75,5,"(13:39) Shotgun #10 H.Watson pass complete short right to #6 G.O'Neill caught at SHU30, for 5 yards to the SHU30 (#9 M.Mason)",401757290202,0,21
+44,Sam Houston,Q2 13:5,2,5,Rush,70,5,"(13:19) Shotgun #10 H.Watson rush right for 5 yards gain to the SHU35, End Of Play, 1ST DOWN",401757290207,0,21
+45,Sam Houston,Q2 12:38,1,10,Pass Incompletion,65,0,(12:38) Shotgun #10 H.Watson pass incomplete short left to #5 L.Adkism thrown to SHU35,401757290211,0,21
+46,Sam Houston,Q2 12:29,2,10,Rush,65,13,"(12:37) Shotgun #34 L.Brown rush right for 13 yards gain to the SHU48 (#8 J.Fields; #22 J.Mayfield), 1ST DOWN",401757290214,0,21
+47,Sam Houston,Q2 11:52,1,10,Rush,52,1,(12:09) Shotgun #34 L.Brown rush middle for 1 yard gain to the SHU49 (#9 M.Mason; #96 Z.Nason),401757290218,0,21
+48,Sam Houston,Q2 11:15,2,9,Pass Incompletion,51,0,(11:22) Shotgun #10 H.Watson pass incomplete deep right to #7 Q.Humphreys thrown to LAT20 broken up by #3 K.Carter,401757290222,0,21
+49,Sam Houston,Q2 11:12,3,9,Pass Incompletion,51,0,(11:12) Shotgun #10 H.Watson pass incomplete short middle to #5 L.Adkism thrown to LAT46 broken up by #96 Z.Nason,401757290225,0,21
+50,Sam Houston,Q2 10:59,4,9,Punt,51,0,(11:07) #35 C.Gerrand punt 41 yards to the LAT10 #3 D.Latulas return 21 yards to the LAT31 (#36 O.Henderson) PENALTY LAT Illegal Block in Back (#36 Z.Hayes) 5 yards from LAT10 to LAT05,401757290228,0,21
+51,Louisiana Tech,Q2 10:53,1,10,Rush,5,9,"(10:54) Shotgun #22 O.Wiggins rush right for 9 yards gain to the LAT14 (#3 T.Harris), out of bounds",401757290235,21,0
+52,Louisiana Tech,Q2 10:3,2,1,Pass Reception,14,42,"(10:23) Shotgun #5 B.Baker pass complete deep middle to #1 D.Gandy caught at SHU44, for 42 yards to the SHU44, End Of Play, 1ST DOWN",401757290239,21,0
+53,Louisiana Tech,Q2 9:31,1,10,Pass Reception,56,5,"(09:48) Shotgun #5 B.Baker pass complete short left to #16 M.Singleton Jr. caught at LAT50, for 5 yards to the SHU39 (#6 A.Fish; #13 T.Bailey)",401757290244,21,0
+54,Louisiana Tech,Q2 9:6,2,5,Rush,61,7,"(09:15) Shotgun #5 B.Baker rush middle for 7 yards gain to the SHU32 (#95 S.Boyd), 1ST DOWN",401757290249,21,0
+55,Louisiana Tech,Q2 8:33,1,10,Rush,68,6,(08:37) Shotgun #22 O.Wiggins rush right for 6 yards gain to the SHU26 (#3 T.Harris; #9 J.Arnold),401757290253,21,0
+56,Louisiana Tech,Q2 7:46,2,4,Pass Reception,74,11,"(08:01) Shotgun #5 B.Baker pass complete short left to #2 T.Kukuk caught at SHU30, for 11 yards to the SHU15 (#0 A.Edwards Jr.; #6 A.Fish), 1ST DOWN",401757290257,21,0
+57,Louisiana Tech,Q2 7:24,1,10,Rush,85,14,"(07:28) Shotgun #22 O.Wiggins rush left for 14 yards gain to the SHU01 (#44 B.Henderson), out of bounds, 1ST DOWN",401757290262,21,0
+58,Louisiana Tech,Q2 6:44,1,1,Rushing Touchdown,99,1,"(06:55) Shotgun #5 B.Baker rush middle for 1 yard gain to the SHU00 TOUCHDOWN, clock 06:44 #43 D.Henderson kick attempt failed (H: #48 J.Chance, LS: #41 E.Burch)",401757290269,27,0
+59,Sam Houston,Q2 6:44,1,10,Kickoff,35,-65,"(06:44) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290276,27,0
+60,Sam Houston,Q2 6:44,1,10,Touchback,100,25,"(06:44) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290276,27,0
+61,Sam Houston,Q2 6:27,1,10,Pass Reception,75,15,"(06:43) Shotgun #10 H.Watson pass complete short middle to #6 G.O'Neill caught at SHU37, for 15 yards to the SHU40 (#8 J.Fields), 1ST DOWN",401757290279,0,27
+62,Sam Houston,Q2 6:5,1,10,Rush,60,9,(06:12) Shotgun #10 H.Watson rush left for 9 yards gain to the SHU49 (#97 C.Davis),401757290284,0,27
+63,Sam Houston,Q2 5:40,2,1,Pass Reception,51,32,"(05:56) Shotgun #10 H.Watson pass complete deep right to #2 C.Reed caught at LAT23, for 32 yards to the LAT19 (#11 C.Woods), 1ST DOWN",401757290288,0,27
+64,Sam Houston,Q2 5:13,1,10,Rush,19,5,(05:19) Shotgun #34 L.Brown rush middle for 5 yards gain to the LAT14 (#2 J.Cobbs; #22 J.Mayfield),401757290293,0,27
+65,Sam Houston,Q2 4:48,2,5,Pass Incompletion,14,0,(04:53) Shotgun #10 H.Watson pass incomplete short right to #85 D.Burk thrown to LAT00 broken up by #14 J.Mcrae,401757290297,0,27
+66,Sam Houston,Q2 4:43,3,5,Pass Incompletion,14,0,(04:42) Shotgun #10 H.Watson pass incomplete short left to #80 T.Burns Jr. thrown to LAT00 broken up by #7 J.Shelby Jr.,401757290300,0,27
+67,Sam Houston,Q2 4:39,4,5,Pass Incompletion,14,0,"(04:43) Shotgun #10 H.Watson pass incomplete short right to #34 L.Brown thrown to LAT00, TURNOVER ON DOWNS",401757290303,0,27
+68,Louisiana Tech,Q2 4:18,1,10,Pass Reception,14,7,"(04:33) Shotgun #5 B.Baker pass complete short right to #15 D.Pierro caught at LAT19, for 7 yards to the LAT21 (#17 C.Eaton; #20 D.Wilson)",401757290307,27,0
+69,Louisiana Tech,Q2 3:51,2,3,Rush,21,6,"(03:55) Shotgun #4 C.Thevenin rush middle for 6 yards gain to the LAT27 (#0 A.Edwards Jr.; #44 B.Henderson), 1ST DOWN",401757290312,27,0
+70,Louisiana Tech,Q2 3:16,1,10,Rush,27,3,(03:20) Shotgun #4 C.Thevenin rush middle for 3 yards gain to the LAT30 (#95 S.Boyd),401757290316,27,0
+71,Louisiana Tech,Q2 2:38,2,7,Rush,30,17,"(02:47) Shotgun #5 B.Baker rush middle for 17 yards gain to the LAT47 (#6 A.Fish), 1ST DOWN",401757290320,27,0
+72,Louisiana Tech,Q2 1:53,1,10,Pass Reception,47,10,"(02:00) Shotgun #5 B.Baker pass complete short right to #16 M.Singleton Jr. caught at LAT48, for 10 yards to the SHU43 (#3 T.Harris), 1ST DOWN",401757290324,27,0
+73,Louisiana Tech,Q2 1:29,1,10,Pass Reception,57,20,"(01:33) Shotgun #5 B.Baker pass complete short right to #18 M.Jackson caught at SHU27, for 20 yards to the SHU23 (#0 A.Edwards Jr.; #3 T.Harris), 1ST DOWN",401757290329,27,0
+74,Louisiana Tech,Q2 1:4,1,10,Pass Interception Return,77,-6,(01:07) Shotgun #5 B.Baker pass intercepted by #0 A.Edwards Jr. at SHU01 #0 A.Edwards Jr. return 28 yards to the SHU29 (#1 D.Gandy; #84 E.Finley),401757290334,27,0
+75,Sam Houston,Q2 0:58,1,10,Rush,71,11,"(01:04) Shotgun #34 L.Brown rush middle for 11 yards gain to the SHU40 (#94 E.Oguns; #96 Z.Nason), 1ST DOWN",401757290340,0,27
+76,Sam Houston,Q2 0:47,1,10,Pass Reception,60,11,"(00:49) No Huddle-Shotgun #10 H.Watson pass complete short right to #7 Q.Humphreys caught at LAT50, for 11 yards to the LAT49, out of bounds at LAT49, 1ST DOWN",401757290344,0,27
+77,Sam Houston,Q2 0:41,1,10,Pass Reception,49,38,"(00:47) Shotgun #10 H.Watson pass complete deep right to #7 Q.Humphreys caught at LAT23, for 38 yards to the LAT11 (#11 C.Woods), 1ST DOWN",401757290349,0,27
+78,Louisiana Tech,Q2 0:41,1,10,Timeout,49,0,"Timeout Louisiana Tech, clock 00:41",401757290356,27,0
+79,Sam Houston,Q2 0:33,1,10,Pass Incompletion,11,0,(00:37) No Huddle-Shotgun #10 H.Watson pass incomplete short right to #7 Q.Humphreys thrown to LAT00 broken up by #11 C.Woods,401757290354,0,27
+80,Sam Houston,Q2 0:27,2,10,Sack,11,-9,(00:33) No Huddle-Shotgun #10 H.Watson sacked for loss of 9 yards to the LAT20 (#22 J.Mayfield),401757290358,0,27
+81,Sam Houston,Q2 0:27,2,10,Timeout,11,0,"Timeout Sam Houston, clock 00:27",401757290364,0,27
+82,Sam Houston,Q2 0:18,3,19,Pass Reception,20,18,"(00:27) No Huddle-Shotgun #10 H.Watson pass complete short middle to #6 G.O'Neill caught at LAT02, for 18 yards to the LAT02 (#6 J.Foster; #8 J.Fields)",401757290362,0,27
+83,Louisiana Tech,Q2 0:18,3,19,Timeout,20,0,"Timeout Louisiana Tech, clock 00:18",401757290372,27,0
+84,Sam Houston,Q2 0:12,4,1,Rush,2,0,"(00:18) No Huddle-Shotgun #34 L.Brown rush middle for 0 yards to the LAT02 (#96 Z.Nason; #9 M.Mason), TURNOVER ON DOWNS",401757290370,0,27
+85,Louisiana Tech,Q2 0:12,4,1,Timeout,2,0,"Timeout Louisiana Tech, clock 00:12",401757290378,27,0
+86,Sam Houston,Q2 0:0,1,10,End Period,98,0,End of 2nd quarter.,401757290383,0,27
+87,Sam Houston,Q3 15:0,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the SHU00, Touchback PENALTY SHU UNR: Unnecessary Roughness (#8 C.Johnson) 12 yards from SHU25 to SHU13",401757290388,27,0
+88,Sam Houston,Q3 15:0,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the SHU00, Touchback PENALTY SHU UNR: Unnecessary Roughness (#8 C.Johnson) 12 yards from SHU25 to SHU13",401757290388,27,0
+89,Sam Houston,Q3 15:0,1,10,Pass Reception,87,15,"No Huddle-Shotgun #10 H.Watson pass complete short middle to #2 C.Reed caught at SHU16, for 15 yards to the SHU28 (#8 J.Fields), 1ST DOWN",401757290397,0,27
+90,Sam Houston,Q3 15:0,1,10,Rush,72,1,No Huddle-Shotgun #34 L.Brown rush left for 1 yard gain to the SHU29 (#42 S.Leota),401757290402,0,27
+91,Sam Houston,Q3 15:0,2,9,Pass Incompletion,71,0,No Huddle-Shotgun #10 H.Watson pass incomplete short left to #6 G.O'Neill thrown to SHU30,401757290406,0,27
+92,Sam Houston,Q3 13:33,3,9,Pass Reception,71,7,"(13:46) No Huddle-Shotgun #10 H.Watson pass complete short middle to #6 G.O'Neill caught at SHU36, for 7 yards to the SHU36 (#8 J.Fields)",401757290409,0,27
+93,Sam Houston,Q3 12:56,4,2,Pass Incompletion,64,15,"(13:15) No Huddle-Shotgun #10 H.Watson pass incomplete short right to #2 C.Reed thrown to SHU50 broken up by #11 C.Woods, TURNOVER ON DOWNS",401757290414,0,27
+94,Louisiana Tech,Q3 12:56,1,10,Penalty,64,15,PENALTY LAT UNS: Unsportsmanlike Conduct (#1 M.Richard) 15 yards from SHU36 to LAT49. NO PLAY,401757290419,27,0
+95,Louisiana Tech,Q3 12:56,1,10,Penalty,64,15,PENALTY LAT UNS: Unsportsmanlike Conduct (#16 M.Singleton Jr.) 15 yards from SHU36 to LAT49. NO PLAY,401757290427,27,0
+96,Louisiana Tech,Q3 12:56,1,25,Rush,49,6,#11 J.Mickens rush left for 6 yards gain to the SHU45 (#30 D.Ford),401757290431,27,0
+97,Louisiana Tech,Q3 12:56,2,19,Pass Reception,55,4,"#5 B.Baker pass complete short right to #4 C.Thevenin caught at SHU50, for 4 yards to the SHU41 (#7 E.Allen; #13 T.Bailey)",401757290435,27,0
+98,Louisiana Tech,Q3 11:40,3,15,Fumble Recovery (Opponent),59,8,"#4 C.Thevenin rush middle for 8 yards gain to the SHU33 fumbled by #4 C.Thevenin at SHU41 forced by #3 T.Harris recovered by SHU #3 T.Harris at SHU33, End Of Play",401757290440,27,0
+99,Sam Houston,Q3 11:28,1,10,Rush,67,-1,(11:40) No Huddle-Shotgun #34 L.Brown rush right for 1 yard loss to the SHU32 (#97 C.Davis; #98 D.Rieman),401757290447,0,27
+100,Sam Houston,Q3 10:44,2,11,Rush,68,15,"(10:47) No Huddle-Shotgun #10 H.Watson rush right for 15 yards gain to the SHU47, out of bounds at SHU47, 1ST DOWN",401757290453,0,27
+101,Sam Houston,Q3 10:7,1,10,Rush,53,25,"(10:23) No Huddle-Shotgun #21 E.Green rush right for 25 yards gain to the LAT28 (#8 J.Fields), out of bounds, 1ST DOWN",401757290457,0,27
+102,Sam Houston,Q3 9:30,1,10,Pass Incompletion,28,0,(09:34) No Huddle-Shotgun #10 H.Watson pass incomplete deep left to #7 Q.Humphreys thrown to LAT00,401757290461,0,27
+103,Sam Houston,Q3 9:23,2,10,Rushing Touchdown,28,28,"(09:30) No Huddle-Shotgun #21 E.Green rush middle for 28 yards gain to the LAT00 TOUCHDOWN, clock 09:23, 1ST DOWN #49 C.Pavon kick attempt good (H: #81 N.Ottomanelli, LS: #46 C.Whitington)",401757290464,7,27
+104,Louisiana Tech,Q3 9:18,1,10,Kickoff,65,23,(09:23) #49 C.Pavon kickoff 65 yards to the LAT00 #1 D.Gandy return 23 yards to the LAT23 (#29 L.Smith),401757290471,7,27
+105,Louisiana Tech,Q3 9:6,1,10,Pass Reception,23,0,"(09:14) #5 B.Baker pass complete short left to #11 J.Mickens caught at LAT20, for 0 yards to the LAT23 (#7 E.Allen)",401757290476,27,7
+106,Louisiana Tech,Q3 8:43,2,10,Pass Incompletion,23,0,(08:43) #5 B.Baker pass incomplete short right to #18 M.Jackson thrown to LAT30,401757290481,27,7
+107,Louisiana Tech,Q3 8:34,3,10,Rush,23,23,"(08:40) #22 O.Wiggins rush left for 23 yards gain to the LAT46 (#20 D.Wilson), 1ST DOWN",401757290484,27,7
+108,Louisiana Tech,Q3 8:2,1,10,Rush,46,5,(08:06) #22 O.Wiggins rush left for 5 yards gain to the SHU49 (#8 C.Johnson),401757290488,27,7
+109,Louisiana Tech,Q3 7:32,2,5,Pass Reception,51,6,"(07:43) #5 B.Baker pass complete short middle to #84 E.Finley caught at SHU45, for 6 yards to the SHU43 (#8 C.Johnson; #3 T.Harris), 1ST DOWN",401757290492,27,7
+110,Louisiana Tech,Q3 6:54,1,10,Pass Reception,57,23,"(07:09) #5 B.Baker pass complete short right to #84 E.Finley caught at SHU31, for 23 yards to the SHU20 (#3 T.Harris), 1ST DOWN",401757290497,27,7
+111,Louisiana Tech,Q3 6:19,1,10,Rush,80,4,(06:28) Shotgun #5 B.Baker rush middle for 4 yards gain to the SHU16 (#33 Z.Lawton),401757290502,27,7
+112,Louisiana Tech,Q3 5:53,2,6,Rushing Touchdown,84,16,"(05:54) Shotgun #22 O.Wiggins rush left for 16 yards gain to the SHU00 TOUCHDOWN, clock 05:53, 1ST DOWN #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",401757290506,35,7
+113,Sam Houston,Q3 5:53,1,10,Kickoff,35,-65,"(05:53) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290513,34,7
+114,Sam Houston,Q3 5:53,1,10,Touchback,100,25,"(05:53) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290513,34,7
+115,Sam Houston,Q3 5:39,1,10,Pass Reception,75,7,"(05:50) No Huddle-Shotgun #10 H.Watson pass complete short right to #21 E.Green caught at SHU23, for 7 yards to the SHU32, out of bounds at SHU32",401757290516,7,34
+116,Sam Houston,Q3 5:1,2,3,Rush,68,0,(05:18) No Huddle-Shotgun #21 E.Green rush left for 0 yards to the SHU32 (#97 C.Davis; #42 S.Leota),401757290521,7,34
+117,Sam Houston,Q3 4:30,3,3,Pass Incompletion,68,0,(04:33) No Huddle-Shotgun #10 H.Watson pass incomplete short right to #21 E.Green thrown to SHU35 QB hurried by #42 S.Leota,401757290525,7,34
+118,Sam Houston,Q3 4:30,3,3,Timeout,68,0,"Timeout Sam Houston, clock 04:30",401757290530,7,34
+119,Sam Houston,Q3 4:24,4,3,Punt,68,0,(04:26) #35 C.Gerrand punt 34 yards to the LAT34 fair catch by #3 D.Latulas at LAT34,401757290528,7,34
+120,Louisiana Tech,Q3 4:14,1,10,Pass Reception,34,26,"(04:21) Shotgun #5 B.Baker pass complete short left to #2 T.Kukuk caught at LAT28, for 26 yards to the SHU40 (#0 A.Edwards Jr.), out of bounds, 1ST DOWN",401757290533,34,7
+121,Louisiana Tech,Q3 3:52,1,10,Rush,60,15,"(03:57) Shotgun #4 C.Thevenin rush left for 15 yards gain to the SHU25 (#0 A.Edwards Jr.; #3 T.Harris), out of bounds, 1ST DOWN",401757290538,34,7
+122,Louisiana Tech,Q3 3:25,1,10,Rushing Touchdown,75,25,"(03:29) Shotgun #4 C.Thevenin rush middle for 25 yards gain to the SHU00 TOUCHDOWN, clock 03:25, 1ST DOWN, PENALTY SHU Illegal Use Of Hands (#55 C.Adams) 10 yards from SHU00 to SHU03, 1ST DOWN #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",401757290543,41,7
+123,Sam Houston,Q3 3:25,1,10,Kickoff,45,0,"(03:25) #43 D.Henderson kickoff 40 yards to the SHU15, out of bounds at SHU15",401757290553,41,7
+124,Sam Houston,Q3 3:13,1,10,Rushing Touchdown,80,80,"(03:20) No Huddle-Shotgun #21 E.Green rush left for 80 yards gain to the LAT00 TOUCHDOWN, clock 03:13, 1ST DOWN #49 C.Pavon kick attempt good (H: #81 N.Ottomanelli, LS: #46 C.Whitington)",401757290560,14,41
+125,Louisiana Tech,Q3 3:8,1,10,Kickoff,65,19,(03:11) #49 C.Pavon kickoff 65 yards to the LAT00 #1 D.Gandy return 19 yards to the LAT19 (#29 L.Smith),401757290567,14,41
+126,Louisiana Tech,Q3 3:8,1,10,Timeout,19,0,"Timeout Louisiana Tech, clock 03:08",401757290574,41,14
+127,Louisiana Tech,Q3 3:0,1,10,Rush,19,7,(03:03) Shotgun #4 C.Thevenin rush middle for 7 yards gain to the LAT26 (#5 J.Stanford),401757290572,41,14
+128,Louisiana Tech,Q3 2:35,2,3,Pass Incompletion,26,0,(02:35) Shotgun #5 B.Baker pass incomplete short middle to #1 D.Gandy thrown to LAT37,401757290577,41,14
+129,Louisiana Tech,Q3 2:27,3,3,Rush,26,3,"(02:31) Shotgun #22 O.Wiggins rush middle for 3 yards gain to the LAT29 (#23 A.Sargent), 1ST DOWN",401757290580,41,14
+130,Louisiana Tech,Q3 1:52,1,10,Rush,29,5,(01:59) Shotgun #22 O.Wiggins rush middle for 5 yards gain to the LAT34 (#5 J.Stanford; #9 J.Arnold),401757290584,41,14
+131,Louisiana Tech,Q3 1:23,2,5,Pass Incompletion,34,0,(01:26) Shotgun #5 B.Baker pass incomplete short middle to #18 M.Jackson thrown to LAT45,401757290588,41,14
+132,Louisiana Tech,Q3 1:11,3,5,Pass Reception,34,-1,"(01:23) Shotgun #5 B.Baker pass complete short right to #4 C.Thevenin caught at LAT30, for 1 yard loss to the LAT33 (#8 C.Johnson)",401757290591,41,14
+133,Louisiana Tech,Q3 0:29,4,6,Punt Return,33,4,(00:34) #48 J.Chance punt 51 yards to the SHU16 #80 T.Burns Jr. return 4 yards to the SHU20 (#35 C.Watson; #23 A.Jackson Jr.),401757290596,41,14
+134,Sam Houston,Q3 0:29,1,10,Rush,80,0,(00:29) No Huddle-Shotgun #21 E.Green rush left for 0 yards to the SHU20 (#9 M.Mason; #94 E.Oguns),401757290602,14,41
+135,Sam Houston,Q3 0:0,1,10,End Period,20,-60,End of 3rd quarter.,401757290608,14,41
+136,Sam Houston,Q4 15:0,2,10,Pass Incompletion,80,0,No Huddle-Shotgun #10 H.Watson pass incomplete short left to #80 T.Burns Jr. thrown to SHU35 broken up by #4 K.Franklin,401757290612,14,41
+137,Sam Houston,Q4 15:0,3,10,Pass Incompletion,80,0,No Huddle-Shotgun #10 H.Watson pass incomplete short right to #6 G.O'Neill thrown to SHU30,401757290617,14,41
+138,Sam Houston,Q4 15:0,3,10,Penalty,80,5,PENALTY SHU Delay Of Game (#10 H.Watson) 5 yards from SHU20 to SHU15. NO PLAY,401757290620,14,41
+139,Sam Houston,Q4 15:0,3,15,Rush,85,25,"No Huddle-Shotgun #10 H.Watson rush middle for 25 yards gain to the SHU40, End Of Play, 1ST DOWN",401757290623,14,41
+140,Sam Houston,Q4 15:0,1,10,Rush,60,45,"No Huddle-Shotgun #21 E.Green rush middle for 45 yards gain to the LAT15 (#6 T.Averhart; #2 J.Cobbs), 1ST DOWN",401757290628,14,41
+141,Sam Houston,Q4 15:0,1,10,Rush,15,-1,No Huddle-Shotgun #21 E.Green rush middle for 1 yard loss to the LAT16 (#42 S.Leota; #92 L.Condry),401757290632,14,41
+142,Sam Houston,Q4 15:0,2,11,Penalty,16,5,PENALTY SHU False Start (#54 M.Joseph) 5 yards from LAT16 to LAT21. NO PLAY,401757290636,14,41
+143,Sam Houston,Q4 15:0,2,16,Rush,21,3,No Huddle-Shotgun #34 L.Brown rush right for 3 yards gain to the LAT18 (#23 A.Jackson Jr.),401757290639,14,41
+144,Sam Houston,Q4 15:0,3,13,Penalty,18,5,PENALTY SHU False Start (#54 M.Joseph) 5 yards from LAT18 to LAT23. NO PLAY,401757290643,14,41
+145,Sam Houston,Q4 15:0,3,18,Pass Incompletion,23,0,No Huddle-Shotgun #10 H.Watson pass incomplete short middle to #6 G.O'Neill thrown to LAT05,401757290646,14,41
+146,Sam Houston,Q4 11:13,4,18,Interception Return Touchdown,23,85,"No Huddle-Shotgun #10 H.Watson pass intercepted by #8 J.Fields at LAT15 #8 J.Fields return 85 yards to the SHU00 TOUCHDOWN, clock 11:13 #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",401757290649,14,48
+147,Louisiana Tech,Q4 11:13,0,0,Penalty,97,15,PENALTY LAT UNS: Unsportsmanlike Conduct (#17 A.Butler) 15 yards from SHU03 to SHU18. NO PLAY,401757290658,47,14
+148,Sam Houston,Q4 11:13,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290664,48,14
+149,Sam Houston,Q4 11:13,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290664,48,14
+150,Sam Houston,Q4 11:13,1,10,Pass Reception,75,15,"No Huddle-Shotgun #10 H.Watson pass complete short right to #2 C.Reed caught at SHU25, for 15 yards to the SHU40 (#0 S.Fongang) PENALTY SHU Targeting (#54 M.Joseph) 15 yards from SHU40 to SHU25",401757290667,14,48
+151,Sam Houston,Q4 11:13,1,10,Rush,75,-5,No Huddle-Shotgun #6 G.O'Neill rush right for 5 yards loss to the SHU20 (#0 S.Fongang),401757290675,14,48
+152,Sam Houston,Q4 11:13,2,15,Rush,80,6,No Huddle-Shotgun #34 L.Brown rush right for 6 yards gain to the SHU26 (#93 J.Bradford; #21 Z.Hill),401757290679,14,48
+153,Sam Houston,Q4 11:13,3,9,Pass Reception,74,13,"No Huddle-Shotgun #10 H.Watson pass complete short right to #7 Q.Humphreys caught at SHU30, for 13 yards to the SHU39 (#20 K.McNeese), out of bounds, 1ST DOWN",401757290683,14,48
+154,Sam Houston,Q4 11:13,1,10,Rush,61,6,"No Huddle-Shotgun #10 H.Watson rush middle for 6 yards gain to the SHU45, End Of Play",401757290688,14,48
+155,Sam Houston,Q4 11:13,2,4,Rush,55,3,No Huddle-Shotgun #21 E.Green rush left for 3 yards gain to the SHU48 (#9 M.Mason),401757290692,14,48
+156,Sam Houston,Q4 11:13,3,1,Rush,52,0,No Huddle-Shotgun #21 E.Green rush middle for 0 yards to the SHU48 (#98 D.Rieman; #91 C.Sims),401757290698,14,48
+157,Sam Houston,Q4 11:13,4,1,Pass Reception,52,12,"No Huddle-Shotgun #3 M.Mettauer pass complete short right to #11 M.Phillips caught at LAT48, for 12 yards to the LAT40, out of bounds at LAT40, 1ST DOWN",401757290702,14,48
+158,Sam Houston,Q4 11:13,1,10,Rush,40,11,"No Huddle-Shotgun #21 E.Green rush right for 11 yards gain to the LAT29 (#20 K.McNeese), 1ST DOWN",401757290707,14,48
+159,Sam Houston,Q4 11:13,1,10,Pass Reception,29,0,"No Huddle-Shotgun #3 M.Mettauer pass complete short left to #5 L.Adkism caught at LAT29, for 0 yards to the LAT29 (#18 J.Hampton)",401757290711,14,48
+160,Sam Houston,Q4 11:13,2,10,Pass Incompletion,29,-5,No Huddle-Shotgun #3 M.Mettauer pass incomplete short middle to #5 L.Adkism thrown to LAT20,401757290716,14,48
+161,Sam Houston,Q4 11:13,2,15,Pass Incompletion,34,0,No Huddle-Shotgun #3 M.Mettauer pass incomplete deep right to #7 Q.Humphreys thrown to LAT00 broken up by #17 A.Butler,401757290722,14,48
+162,Sam Houston,Q4 11:13,3,10,Penalty,29,5,PENALTY SHU Delay Of Game (#3 M.Mettauer) 5 yards from LAT29 to LAT34. NO PLAY,401757290730,14,48
+163,Sam Houston,Q4 11:13,3,15,Pass Incompletion,34,0,No Huddle-Shotgun #3 M.Mettauer pass incomplete deep right to #7 Q.Humphreys thrown to LAT00 broken up by #17 A.Butler,401757290733,14,48
+164,Sam Houston,Q4 5:21,4,15,Pass Incompletion,34,0,"No Huddle-Shotgun #3 M.Mettauer pass incomplete short middle to #6 G.O'Neill thrown to LAT20, TURNOVER ON DOWNS",401757290736,14,48
+165,Louisiana Tech,Q4 5:8,1,10,Rushing Touchdown,34,66,"Shotgun #0 A.Burnette rush middle for 66 yards gain to the SHU00 TOUCHDOWN, clock 05:08, 1ST DOWN #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",401757290740,55,14
+166,Sam Houston,Q4 5:8,1,10,Kickoff,35,-65,"(05:08) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290747,55,14
+167,Sam Houston,Q4 5:8,1,10,Touchback,100,25,"(05:08) #48 J.Chance kickoff 65 yards to the SHU00, Touchback",401757290747,55,14
+168,Sam Houston,Q4 4:57,1,10,Rush,75,-4,(05:03) No Huddle-Shotgun #34 L.Brown rush right for 4 yards loss to the SHU21 (#35 C.Watson; #39 J.Crowe),401757290750,14,55
+169,Sam Houston,Q4 4:32,2,14,Pass Incompletion,79,0,(04:34) No Huddle-Shotgun #3 M.Mettauer pass incomplete short left to #9 J.Parker thrown to SHU15,401757290754,14,55
+170,Sam Houston,Q4 4:10,3,14,Pass Reception,79,1,"(04:30) No Huddle-Shotgun #3 M.Mettauer pass complete short left to #9 J.Parker caught at SHU20, for 1 yard to the SHU22 (#23 A.Jackson Jr.; #14 J.Mcrae)",401757290757,14,55
+171,Sam Houston,Q4 3:32,4,13,Punt,78,0,(03:36) #35 C.Gerrand punt 38 yards to the LAT40 #16 M.Singleton Jr. return 20 yards to the SHU40 (#35 C.Gerrand) PENALTY LAT Holding (#30 S.Simpson) 1 yard from LAT40 to LAT39,401757290764,14,55
+172,Louisiana Tech,Q4 3:1,1,10,Rush,39,2,(03:05) Shotgun #0 A.Burnette rush right for 2 yards gain to the LAT41 (#8 C.Johnson),401757290771,55,14
+173,Louisiana Tech,Q4 2:35,2,8,Rush,41,18,"(02:45) Shotgun #25 A.Givens rush left for 18 yards gain to the SHU41 (#13 T.Bailey), 1ST DOWN",401757290775,55,14
+174,Louisiana Tech,Q4 1:38,1,10,Rush,59,5,(02:00) Shotgun #25 A.Givens rush middle for 5 yards gain to the SHU36 (#8 C.Johnson; #20 D.Wilson),401757290779,55,14
+175,Louisiana Tech,Q4 1:1,2,5,Rush,64,3,(01:09) Shotgun #19 M.Welch rush middle for 3 yards gain to the SHU33 (#8 C.Johnson),401757290783,55,14
+176,Louisiana Tech,Q4 0:29,3,2,Rush,67,4,"(00:29) Shotgun #0 A.Burnette rush middle for 4 yards gain to the SHU29 (#5 J.Stanford), 1ST DOWN",401757290787,55,14
+177,Louisiana Tech,Q4 0:0,3,2,End Period,67,4,End of 4th quarter.,401757290793,55,14

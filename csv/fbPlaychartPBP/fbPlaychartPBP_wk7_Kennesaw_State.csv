@@ -1,0 +1,192 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Kennesaw State,Q1 15:0,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757280101849902,0,0
+1,Kennesaw State,Q1 15:0,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757280101849902,0,0
+2,Kennesaw State,Q1 15:0,1,10,Penalty,75,-5,"Kennesaw State Penalty, Delay of Game (-5 Yards) to the KENN 20",401757280101849903,0,0
+3,Kennesaw State,Q1 14:45,1,15,Pass Reception,80,-4,Dexter Williams II pass complete to Gabriel Benyard for a loss of 4 yards to the KENN 16,401757280101855401,0,0
+4,Kennesaw State,Q1 14:14,2,19,Rush,84,6,Gabriel Benyard run for 6 yds to the KENN 22,401757280101858501,0,0
+5,Kennesaw State,Q1 13:43,3,13,Pass Reception,78,5,Dexter Williams II pass complete to Gerard Bullock Jr. for 5 yds to the KENN 27,401757280101865601,0,0
+6,Kennesaw State,Q1 13:13,4,8,Penalty,73,-5,"Kennesaw State Penalty, Illegal Formation (-5 Yards) to the KENN 22",401757280101868601,0,0
+7,Kennesaw State,Q1 13:8,4,3,Punt,78,48,"Joshua Huiet punt for 48 yds, fair catch by Dedrick Latulas at the LT 30",401757280101869101,0,0
+8,Louisiana Tech,Q1 13:0,1,10,Rush,30,6,Clay Thevenin run for 6 yds to the LT 36,401757280101869901,0,0
+9,Louisiana Tech,Q1 12:35,2,4,Rush,36,3,Clay Thevenin run for 3 yds to the LT 39,401757280101876401,0,0
+10,Louisiana Tech,Q1 12:2,3,1,Rush,39,3,Blake Baker run for 3 yds to the LT 42 for a 1ST down,401757280101879701,0,0
+11,Louisiana Tech,Q1 11:35,1,10,Pass Reception,42,2,Blake Baker pass complete to Marques Singleton Jr. for 2 yds to the LT 44,401757280101886401,0,0
+12,Louisiana Tech,Q1 11:11,2,8,Pass Incompletion,44,0,Blake Baker pass incomplete,401757280101888801,0,0
+13,Louisiana Tech,Q1 10:58,3,8,Pass Reception,44,17,Blake Baker pass complete to Clay Thevenin for 17 yds to the KENN 39 for a 1ST down,401757280101894101,0,0
+14,Louisiana Tech,Q1 10:42,1,10,Rush,61,6,Blake Baker run for 6 yds to the KENN 33,401757280101895701,0,0
+15,Louisiana Tech,Q1 10:10,2,4,Rush,67,8,Omiri Wiggins run for 8 yds to the KENN 25 for a 1ST down,401757280101898901,0,0
+16,Louisiana Tech,Q1 9:45,1,10,Rush,75,-2,Omiri Wiggins run for a loss of 2 yards to the KENN 27,401757280101905401,0,0
+17,Louisiana Tech,Q1 9:9,2,12,Pass Reception,73,3,Blake Baker pass complete to Omiri Wiggins for 3 yds to the KENN 24,401757280101909001,0,0
+18,Louisiana Tech,Q1 8:45,3,9,Rush,76,21,Blake Baker run for 21 yds to the KENN 3 for a 1ST down,401757280101915401,0,0
+19,Louisiana Tech,Q1 8:8,1,3,Rush,97,1,Blake Baker run for 1 yd to the KENN 2,401757280101919101,0,0
+20,Louisiana Tech,Q1 7:45,2,0,Penalty,98,1,"Kukuk, Trey rush for 1 yard to the KENN1, PENALTY KENN neutral zone infraction 1 yards to the KENN1, NO PLAY.",401757280101925401,0,0
+21,Louisiana Tech,Q1 7:12,2,1,Rushing Touchdown,99,1,Omiri Wiggins run for 1 yd for a TD (Drew Henderson KICK),401757280101928701,7,0
+22,Kennesaw State,Q1 7:12,2,8,Kickoff,35,-63,"John Hoyet Chance kickoff for 63 yds , Kody Jones return for 10 yds to the KENN 6 Kody Jones fumbled, recovered by KENN Kody Jones  Kennesaw State Penalty, Offensive Holding (6 Yards) to the KENN 6",401757280101928703,7,0
+23,Kennesaw State,Q1 7:12,2,8,Kickoff Return (Offense),98,10,"John Hoyet Chance kickoff for 63 yds , Kody Jones return for 10 yds to the KENN 6 Kody Jones fumbled, recovered by KENN Kody Jones  Kennesaw State Penalty, Offensive Holding (6 Yards) to the KENN 6",401757280101928703,7,0
+24,Kennesaw State,Q1 6:50,1,10,Rush,94,1,Coleman Bennett run for 1 yd to the KENN 7,401757280101934901,0,7
+25,Kennesaw State,Q1 6:26,2,9,Pass Reception,93,5,Dexter Williams II pass complete to Gabriel Benyard for 5 yds to the KENN 12,401757280101937302,0,7
+26,Kennesaw State,Q1 6:6,3,4,Pass Incompletion,88,0,Dexter Williams II pass incomplete,401757280101939301,0,7
+27,Kennesaw State,Q1 5:52,4,4,Punt,88,56,"Joshua Huiet punt for 56 yds , Dedrick Latulas returns for 6 yds to the LT 38",401757280101944701,0,7
+28,Louisiana Tech,Q1 5:52,4,4,Punt Return,32,6,"Joshua Huiet punt for 56 yds , Dedrick Latulas returns for 6 yds to the LT 38",401757280101944701,0,7
+29,Louisiana Tech,Q1 5:46,1,10,Pass Incompletion,38,0,Blake Baker pass incomplete,401757280101945301,7,0
+30,Louisiana Tech,Q1 5:35,2,10,Rush,38,2,Blake Baker run for 2 yds to the LT 40,401757280101946401,7,0
+31,Louisiana Tech,Q1 4:59,3,8,Pass Incompletion,40,0,Blake Baker pass incomplete,401757280101954001,7,0
+32,Louisiana Tech,Q1 4:51,4,8,Punt,40,55,"John Hoyet Chance punt for 55 yds, punt out-of-bounds at the KENN 5",401757280101954801,7,0
+33,Kennesaw State,Q1 4:44,1,10,Pass Reception,95,12,Dexter Williams II pass complete to Preston Clemmer for 12 yds to the KENN 17 for a 1ST down,401757280101955501,0,7
+34,Kennesaw State,Q1 4:23,1,10,Penalty,83,15,"Williams II, Dexter pass incomplete, PENALTY LATECH roughing passer 15 yards to the KENN32, NO PLAY, 1ST DOWN KENN.",401757280101957601,0,7
+35,Kennesaw State,Q1 4:12,1,10,Rush,68,12,Coleman Bennett run for 12 yds to the KENN 44 for a 1ST down,401757280101958701,0,7
+36,Kennesaw State,Q1 3:58,1,10,Sack,56,-5,Dexter Williams II sacked by Zheric Hill for a loss of 5 yards to the KENN 39,401757280101964101,0,7
+37,Kennesaw State,Q1 3:55,2,15,Timeout,61,0,"Timeout Kennesaw State, clock 03:55",401757280101964401,0,7
+38,Kennesaw State,Q1 3:48,2,15,Pass Incompletion,61,0,Dexter Williams II pass incomplete,401757280101965101,0,7
+39,Kennesaw State,Q1 3:33,3,15,Pass Reception,61,2,Dexter Williams II pass complete to Gabriel Benyard for 2 yds to the KENN 41,401757280101966601,0,7
+40,Kennesaw State,Q1 3:4,4,13,Punt,59,39,"Joshua Huiet punt for 39 yds, fair catch by Dedrick Latulas at the LT 20",401757280101969501,0,7
+41,Louisiana Tech,Q1 2:54,1,10,Pass Reception,20,15,Blake Baker pass complete to Devin Gandy for 15 yds to the LT 35 for a 1ST down,401757280101974501,7,0
+42,Louisiana Tech,Q1 2:34,1,10,Rush,35,10,Omiri Wiggins run for 10 yds to the LT 45 for a 1ST down,401757280101976501,7,0
+43,Louisiana Tech,Q1 2:22,1,10,Pass Reception,45,1,Blake Baker pass complete to Clay Thevenin for 1 yd to the LT 46,401757280101977701,7,0
+44,Louisiana Tech,Q1 1:48,2,9,Rush,46,2,Blake Baker run for 2 yds to the LT 48,401757280101985101,7,0
+45,Louisiana Tech,Q1 0:58,3,7,Pass Reception,48,8,Blake Baker pass complete to Omiri Wiggins for 8 yds to the KENN 44 for a 1ST down,401757280101994101,7,0
+46,Louisiana Tech,Q1 0:29,1,10,Rush,56,0,Omiri Wiggins run for no gain to the KENN 44,401757280101997001,7,0
+47,Louisiana Tech,Q1 0:0,2,10,Pass Incompletion,56,0,Blake Baker pass incomplete,401757280101999901,7,0
+48,Louisiana Tech,Q1 0:0,0,10,End Period,56,0,End of 1st Quarter,401757280101999902,7,0
+49,Louisiana Tech,Q2 14:55,3,10,Pass Incompletion,56,0,Blake Baker pass incomplete,401757280102854401,7,0
+50,Louisiana Tech,Q2 14:45,4,10,Punt,56,36,"John Hoyet Chance punt for 36 yds, fair catch by Gabriel Benyard at the KENN 8",401757280102855401,7,0
+51,Kennesaw State,Q2 14:20,1,10,Pass Reception,92,7,Dexter Williams II pass complete to Lyndon Ravare for 7 yds to the KENN 15,401757280102857901,0,7
+52,Kennesaw State,Q2 14:8,2,3,Rush,85,5,Coleman Bennett run for 5 yds to the KENN 20 for a 1ST down,401757280102859101,0,7
+53,Kennesaw State,Q2 13:58,1,10,Rush,80,0,Coleman Bennett run for no gain to the KENN 20,401757280102864101,0,7
+54,Kennesaw State,Q2 13:29,2,10,Pass Incompletion,80,0,Dexter Williams II pass incomplete,401757280102867001,0,7
+55,Kennesaw State,Q2 13:14,3,10,Pass Reception,80,22,Dexter Williams II pass complete to Christian Moss for 22 yds to the KENN 42 for a 1ST down,401757280102868501,0,7
+56,Kennesaw State,Q2 12:45,1,10,Rush,58,16,Gabriel Benyard run for 16 yds to the LT 42 for a 1ST down,401757280102875401,0,7
+57,Kennesaw State,Q2 12:9,1,10,Rush,42,2,Dexter Williams II run for 2 yds to the LT 40,401757280102879001,0,7
+58,Kennesaw State,Q2 11:38,2,8,Pass Incompletion,40,0,Dexter Williams II pass incomplete,401757280102886101,0,7
+59,Kennesaw State,Q2 11:11,3,8,Pass Reception,40,8,Dexter Williams II pass complete to Clayton Coppock for 8 yds to the LT 32 for a 1ST down,401757280102888801,0,7
+60,Kennesaw State,Q2 10:50,1,10,Rush,32,2,Chase Belcher run for 2 yds to the LT 30,401757280102894901,0,7
+61,Kennesaw State,Q2 10:30,2,8,Pass Reception,30,5,Dexter Williams II pass complete to Clayton Coppock for 5 yds to the LT 25,401757280102896901,0,7
+62,Kennesaw State,Q2 9:55,3,3,Pass Reception,25,13,Dexter Williams II pass complete to Gerard Bullock Jr. for 13 yds to the LT 12 for a 1ST down,401757280102904401,0,7
+63,Kennesaw State,Q2 9:14,1,10,Rush,12,4,Coleman Bennett run for 4 yds to the LT 8,401757280102908501,0,7
+64,Kennesaw State,Q2 8:40,2,6,Rush,8,2,Coleman Bennett run for 2 yds to the LT 6,401757280102915901,0,7
+65,Kennesaw State,Q2 8:3,3,4,Passing Touchdown,6,6,Dexter Williams II pass complete to Clayton Coppock for 6 yds for a TD (Britton Williams KICK),401757280102919601,7,7
+66,Louisiana Tech,Q2 8:3,3,4,Kickoff,65,-62,"Britton Williams kickoff for 62 yds , Devin Gandy return for 22 yds to the LT 25",401757280102919603,7,7
+67,Louisiana Tech,Q2 8:3,3,4,Kickoff Return (Offense),3,22,"Britton Williams kickoff for 62 yds , Devin Gandy return for 22 yds to the LT 25",401757280102919603,7,7
+68,Louisiana Tech,Q2 7:47,1,10,Rush,25,4,Clay Thevenin run for 4 yds to the LT 29,401757280102925201,7,7
+69,Louisiana Tech,Q2 7:30,2,6,Pass Incompletion,29,0,Trey Kukuk pass incomplete,401757280102926901,7,7
+70,Louisiana Tech,Q2 7:7,3,6,Pass Reception,29,11,Trey Kukuk pass complete to Marlion Jackson for 11 yds to the LT 40 for a 1ST down,401757280102929201,7,7
+71,Louisiana Tech,Q2 6:47,1,10,Rush,40,2,Trey Kukuk run for 2 yds to the LT 42,401757280102935201,7,7
+72,Louisiana Tech,Q2 6:20,2,8,Pass Interception Return,42,-33,"Trey Kukuk pass intercepted Kody Jones return for 29 yds to the KENN 29 Louisiana Tech Penalty, Horse Collar Tackle (-9 Yards) to the LT 9",401757280102937901,7,7
+73,Kennesaw State,Q2 6:15,1,10,Rushing Touchdown,9,9,Gabriel Benyard run for 9 yds for a TD (Britton Williams KICK),401757280102938401,14,7
+74,Louisiana Tech,Q2 6:15,1,10,Kickoff,65,-64,"Britton Williams kickoff for 64 yds , Devin Gandy return for 17 yds to the LT 18",401757280102938403,14,7
+75,Louisiana Tech,Q2 6:15,1,10,Kickoff Return (Offense),1,17,"Britton Williams kickoff for 64 yds , Devin Gandy return for 17 yds to the LT 18",401757280102938403,14,7
+76,Louisiana Tech,Q2 6:0,1,10,Pass Reception,18,7,Evan Bullock pass complete to Marques Singleton Jr. for 7 yds to the LT 25,401757280102939901,7,14
+77,Louisiana Tech,Q2 5:30,2,3,Rush,25,4,Omiri Wiggins run for 4 yds to the LT 29 for a 1ST down,401757280102946901,7,14
+78,Louisiana Tech,Q2 5:9,1,10,Pass Incompletion,29,0,Evan Bullock pass incomplete,401757280102949001,7,14
+79,Louisiana Tech,Q2 4:58,2,10,Pass Reception,29,6,Evan Bullock pass complete to Eli Finley for 6 yds to the LT 35,401757280102954101,7,14
+80,Louisiana Tech,Q2 4:30,3,4,Sack,35,-7,Evan Bullock sacked by Roderick Daniels for a loss of 7 yards to the LT 28,401757280102956901,7,14
+81,Louisiana Tech,Q2 3:40,4,11,Punt,28,42,"John Hoyet Chance punt for 42 yds , Gabriel Benyard returns for 4 yds to the KENN 34",401757280102965901,7,14
+82,Kennesaw State,Q2 3:40,4,11,Punt Return,70,4,"John Hoyet Chance punt for 42 yds , Gabriel Benyard returns for 4 yds to the KENN 34",401757280102965901,7,14
+83,Kennesaw State,Q2 3:33,1,10,Pass Reception,66,-2,Dexter Williams II pass complete to Coleman Bennett for a loss of 2 yards to the KENN 32,401757280102966601,14,7
+84,Kennesaw State,Q2 3:0,2,12,Rush,68,1,Coleman Bennett run for 1 yd to the KENN 33,401757280102969901,14,7
+85,Kennesaw State,Q2 2:23,3,11,Pass Reception,67,6,Dexter Williams II pass complete to Gabriel Benyard for 6 yds to the KENN 39,401757280102977601,14,7
+86,Kennesaw State,Q2 1:52,4,5,Punt,61,61,Joshua Huiet punt for 61 yds for a touchback,401757280102984701,14,7
+87,Louisiana Tech,Q2 1:52,4,5,Touchback,0,20,Joshua Huiet punt for 61 yds for a touchback,401757280102984701,14,7
+88,Louisiana Tech,Q2 1:46,1,10,Penalty,20,-5,"Bullock, Evan pass incomplete, PENALTY LATECH ineligible downfield on pass 5 yards to the LATECH15, NO PLAY.",401757280102985302,7,14
+89,Louisiana Tech,Q2 1:33,1,15,Rush,15,1,Clay Thevenin run for 1 yd to the LT 16,401757280102986601,7,14
+90,Louisiana Tech,Q2 0:57,2,14,Pass Incompletion,16,0,Evan Bullock pass incomplete,401757280102994201,7,14
+91,Louisiana Tech,Q2 0:53,3,14,Pass Incompletion,16,0,Evan Bullock pass incomplete,401757280102994601,7,14
+92,Louisiana Tech,Q2 0:42,4,14,Punt,16,50,"John Hoyet Chance punt for 50 yds , Gabriel Benyard returns for 9 yds to the KENN 43",401757280102995701,7,14
+93,Kennesaw State,Q2 0:42,4,14,Punt Return,66,9,"John Hoyet Chance punt for 50 yds , Gabriel Benyard returns for 9 yds to the KENN 43",401757280102995701,7,14
+94,Kennesaw State,Q2 0:33,1,10,Pass Reception,57,25,Dexter Williams II pass complete to Christian Moss for 25 yds to the LT 32 for a 1ST down,401757280102996601,14,7
+95,Kennesaw State,Q2 0:20,1,10,Pass Reception,32,9,Dexter Williams II pass complete to Christian Moss for 9 yds to the LT 23,401757280102997901,14,7
+96,Kennesaw State,Q2 0:19,2,1,Timeout,23,0,"Timeout Kennesaw State, clock 00:19",401757280102998001,14,7
+97,Kennesaw State,Q2 0:10,2,1,Rush,23,-1,Dexter Williams II run for a loss of 1 yard to the LT 24,401757280102998901,14,7
+98,Kennesaw State,Q2 0:7,3,2,Pass Incompletion,24,0,TEAM pass incomplete,401757280102999201,14,7
+99,Kennesaw State,Q2 0:6,4,2,Penalty,24,-5,"Kennesaw State Penalty, Offensive Offside (-5 Yards) to the LT 29",401757280102999301,14,7
+100,Kennesaw State,Q2 0:5,4,7,Timeout,29,0,"Timeout Louisiana Tech, clock 00:05",401757280102999401,14,7
+101,Kennesaw State,Q2 0:0,4,7,Field Goal Missed,29,46,Britton Williams 46 yd FG MISSED,401757280102999901,14,7
+102,Kennesaw State,Q2 0:0,0,7,End of Half,29,0,End of 2nd Quarter,401757280102999902,14,7
+103,Louisiana Tech,Q3 15:0,1,10,Kickoff,65,-63,"Britton Williams kickoff for 63 yds , Devin Gandy return for 24 yds to the LT 41 Louisiana Tech Penalty, Offensive Holding (10 Yards) to the LT 16",401757280103849901,14,7
+104,Louisiana Tech,Q3 15:0,1,10,Kickoff Return (Offense),2,24,"Britton Williams kickoff for 63 yds , Devin Gandy return for 24 yds to the LT 41 Louisiana Tech Penalty, Offensive Holding (10 Yards) to the LT 16",401757280103849901,14,7
+105,Louisiana Tech,Q3 14:44,1,10,Rush,16,3,Evan Bullock run for 3 yds to the LT 19,401757280103855501,7,14
+106,Louisiana Tech,Q3 13:58,2,7,Rush,19,6,Omiri Wiggins run for 6 yds to the LT 25,401757280103864101,7,14
+107,Louisiana Tech,Q3 13:48,3,1,Rush,25,3,Omiri Wiggins run for 3 yds to the LT 28 for a 1ST down,401757280103865101,7,14
+108,Louisiana Tech,Q3 13:18,1,10,Pass Incompletion,28,0,Evan Bullock pass incomplete,401757280103868101,7,14
+109,Louisiana Tech,Q3 12:55,2,10,Rush,28,3,Clay Thevenin run for 3 yds to the LT 31,401757280103874401,7,14
+110,Louisiana Tech,Q3 12:34,3,7,Sack,31,-7,Evan Bullock sacked by Tylon Dunlap for a loss of 7 yards to the LT 24,401757280103876501,7,14
+111,Louisiana Tech,Q3 11:44,4,14,Punt,24,41,"John Hoyet Chance punt for 41 yds , Gabriel Benyard returns for 6 yds to the KENN 41",401757280103885501,7,14
+112,Kennesaw State,Q3 11:44,4,14,Punt Return,65,6,"John Hoyet Chance punt for 41 yds , Gabriel Benyard returns for 6 yds to the KENN 41",401757280103885501,7,14
+113,Kennesaw State,Q3 11:11,1,10,Rush,59,0,Dexter Williams II run for no gain to the KENN 41,401757280103888801,14,7
+114,Kennesaw State,Q3 10:55,2,10,Pass Reception,59,11,Dexter Williams II pass complete to Clayton Coppock for 11 yds to the LT 48 for a 1ST down,401757280103894401,14,7
+115,Kennesaw State,Q3 10:20,1,10,Rush,48,0,Coleman Bennett run for no gain to the LT 48,401757280103897901,14,7
+116,Kennesaw State,Q3 9:55,2,10,Pass Reception,48,19,Dexter Williams II pass complete to Lyndon Ravare for 19 yds to the LT 29 for a 1ST down,401757280103904401,14,7
+117,Kennesaw State,Q3 9:19,1,10,Passing Touchdown,29,29,Dexter Williams II pass complete to Jordan Jackson for 29 yds for a TD (Britton Williams KICK),401757280103908001,21,7
+118,Louisiana Tech,Q3 9:19,1,10,Kickoff,65,-65,Britton Williams kickoff for 65 yds for a touchback,401757280103908003,21,7
+119,Louisiana Tech,Q3 9:19,1,10,Touchback,0,25,Britton Williams kickoff for 65 yds for a touchback,401757280103908003,21,7
+120,Louisiana Tech,Q3 9:8,1,10,Pass Reception,25,28,Evan Bullock pass complete to Marlion Jackson for 28 yds to the KENN 47 for a 1ST down,401757280103909101,7,21
+121,Louisiana Tech,Q3 8:42,1,10,Rush,53,3,Evan Bullock run for 3 yds to the KENN 44,401757280103915701,7,21
+122,Louisiana Tech,Q3 8:17,2,7,Pass Incompletion,56,0,Evan Bullock pass incomplete,401757280103918201,7,21
+123,Louisiana Tech,Q3 7:59,3,7,Pass Reception,56,5,Evan Bullock pass complete to Eli Finley for 5 yds to the KENN 39,401757280103924001,7,21
+124,Louisiana Tech,Q3 7:19,4,2,Sack,61,-3,Evan Bullock sacked by Tylon Dunlap for a loss of 3 yards to the KENN 42,401757280103928001,7,21
+125,Kennesaw State,Q3 7:12,1,10,Rush,58,-1,Coleman Bennett run for a loss of 1 yard to the KENN 41,401757280103928701,21,7
+126,Kennesaw State,Q3 6:32,2,11,Pass Incompletion,59,0,Dexter Williams II pass incomplete,401757280103936701,21,7
+127,Kennesaw State,Q3 6:29,3,11,Pass Incompletion,59,0,Dexter Williams II pass incomplete,401757280103937001,21,7
+128,Kennesaw State,Q3 6:20,4,11,Penalty,59,-5,"Huiet, Joshua punt 41 yards to the LATECH18, Latulas, Dedrick return -2 yards to the LATECH16, PENALTY KENN illegal formation 5 yards to the KENN36, NO PLAY.",401757280103937902,21,7
+129,Kennesaw State,Q3 6:14,4,16,Punt,64,37,"Joshua Huiet punt for 37 yds, fair catch by Dedrick Latulas at the LT 27",401757280103938501,21,7
+130,Louisiana Tech,Q3 5:45,1,10,Pass Reception,27,21,Evan Bullock pass complete to Devin Gandy for 21 yds to the LT 48 for a 1ST down,401757280103945401,7,21
+131,Louisiana Tech,Q3 5:30,1,10,Rush,48,7,Omiri Wiggins run for 7 yds to the KENN 45,401757280103946901,7,21
+132,Louisiana Tech,Q3 5:10,2,3,Rush,55,10,Omiri Wiggins run for 10 yds to the KENN 35 for a 1ST down,401757280103948901,7,21
+133,Louisiana Tech,Q3 4:55,1,10,Rush,65,0,Omiri Wiggins run for no gain to the KENN 35,401757280103954401,7,21
+134,Louisiana Tech,Q3 4:20,2,10,Penalty,65,15,"Kennesaw State Penalty, Defensive Pass Interference (15 Yards) to the KENN 20 for a 1ST down",401757280103957901,7,21
+135,Louisiana Tech,Q3 4:0,1,10,Pass Reception,80,10,Evan Bullock pass complete to Marlion Jackson for 10 yds to the KENN 10 for a 1ST down,401757280103959901,7,21
+136,Louisiana Tech,Q3 3:53,1,10,Pass Incompletion,90,0,Evan Bullock pass incomplete,401757280103964601,7,21
+137,Louisiana Tech,Q3 3:45,2,10,Pass Reception,90,3,Evan Bullock pass complete to Fred Robertson for 3 yds to the KENN 7,401757280103965401,7,21
+138,Louisiana Tech,Q3 3:9,3,7,Pass Interception Return,93,7,"Evan Bullock pass intercepted, touchback. Antonio Stevens return for no gain",401757280103969001,7,21
+139,Kennesaw State,Q3 3:9,3,7,Touchback,100,20,"Evan Bullock pass intercepted, touchback. Antonio Stevens return for no gain",401757280103969001,7,21
+140,Kennesaw State,Q3 2:58,1,10,Pass Reception,80,17,Dexter Williams II pass complete to Gabriel Benyard for 17 yds to the KENN 37 for a 1ST down,401757280103974101,21,7
+141,Kennesaw State,Q3 2:34,1,10,Pass Reception,63,3,Dexter Williams II pass complete to Gabriel Benyard for 3 yds to the KENN 40,401757280103976501,21,7
+142,Kennesaw State,Q3 1:55,2,7,Rush,60,29,Coleman Bennett run for 29 yds to the LT 31 for a 1ST down,401757280103984401,21,7
+143,Kennesaw State,Q3 1:11,1,10,Pass Reception,31,10,Dexter Williams II pass complete to Christian Moss for 10 yds to the LT 21 for a 1ST down,401757280103988801,21,7
+144,Kennesaw State,Q3 0:30,1,10,Pass Incompletion,21,0,Dexter Williams II pass incomplete,401757280103996901,21,7
+145,Kennesaw State,Q3 0:15,2,10,Pass Reception,21,7,Dexter Williams II pass complete to Coleman Bennett for 7 yds to the LT 14,401757280103998401,21,7
+146,Kennesaw State,Q3 0:0,0,10,End Period,21,7,End of 3rd Quarter,401757280103998402,21,7
+147,Kennesaw State,Q4 14:45,3,3,Pass Reception,14,5,Dexter Williams II pass complete to Lyndon Ravare for 5 yds to the LT 9 for a 1ST down,401757280104855401,21,7
+148,Kennesaw State,Q4 14:0,1,9,Rush,9,2,Coleman Bennett run for 2 yds to the LT 7,401757280104859901,21,7
+149,Kennesaw State,Q4 13:37,2,7,Pass Incompletion,7,0,Dexter Williams II pass incomplete,401757280104866201,21,7
+150,Kennesaw State,Q4 13:32,3,7,Passing Touchdown,7,7,Dexter Williams II pass complete to Lyndon Ravare for 7 yds for a TD (Britton Williams KICK),401757280104866701,28,7
+151,Louisiana Tech,Q4 13:32,3,8,Kickoff,65,-65,Britton Williams kickoff for 65 yds for a touchback,401757280104866703,28,7
+152,Louisiana Tech,Q4 13:32,3,8,Touchback,0,25,Britton Williams kickoff for 65 yds for a touchback,401757280104866703,28,7
+153,Louisiana Tech,Q4 13:32,1,10,Penalty,25,-13,"Louisiana Tech Penalty, Unnecessary Roughness (-13 Yards) to the LT 12",401757280104866704,7,28
+154,Louisiana Tech,Q4 13:7,1,10,Rush,12,6,Clay Thevenin run for 6 yds to the LT 18,401757280104869201,7,28
+155,Louisiana Tech,Q4 12:45,2,4,Rush,18,3,Clay Thevenin run for 3 yds to the LT 21,401757280104875401,7,28
+156,Louisiana Tech,Q4 12:34,3,1,Rush,21,-1,Clay Thevenin run for a loss of 1 yard to the LT 20,401757280104876501,7,28
+157,Louisiana Tech,Q4 12:2,4,2,Timeout,20,0,"Timeout Kennesaw State, clock 12:02",401757280104879701,7,28
+158,Louisiana Tech,Q4 11:50,4,2,Punt,20,67,"John Hoyet Chance punt for 67 yds, downed at the KENN 13",401757280104884901,7,28
+159,Kennesaw State,Q4 11:28,1,10,Rush,87,3,Coleman Bennett run for 3 yds to the KENN 16,401757280104887101,28,7
+160,Kennesaw State,Q4 11:11,2,7,Rush,84,2,Coleman Bennett run for 2 yds to the KENN 18,401757280104888801,28,7
+161,Kennesaw State,Q4 10:10,3,5,Pass Reception,82,7,Dexter Williams II pass complete to Gerard Bullock Jr. for 7 yds to the KENN 25 for a 1ST down,401757280104898901,28,7
+162,Kennesaw State,Q4 9:24,1,10,Rush,75,5,Coleman Bennett run for 5 yds to the KENN 30,401757280104907501,28,7
+163,Kennesaw State,Q4 8:25,2,5,Rush,70,3,Dexter Williams II run for 3 yds to the KENN 33,401757280104917401,28,7
+164,Kennesaw State,Q4 7:50,3,2,Rush,67,4,Coleman Bennett run for 4 yds to the KENN 37 for a 1ST down,401757280104924901,28,7
+165,Kennesaw State,Q4 6:58,1,10,Rush,63,6,Dexter Williams II run for 6 yds to the KENN 43,401757280104934101,28,7
+166,Kennesaw State,Q4 6:2,2,4,Rush,57,5,Chase Belcher run for 5 yds to the KENN 48 for a 1ST down,401757280104939701,28,7
+167,Kennesaw State,Q4 5:45,1,10,Rush,52,2,Coleman Bennett run for 2 yds to the 50 yard line,401757280104945401,28,7
+168,Kennesaw State,Q4 4:59,2,8,Pass Incompletion,50,0,Dexter Williams II pass incomplete,401757280104954002,28,7
+169,Kennesaw State,Q4 4:45,3,8,Passing Touchdown,50,50,Dexter Williams II pass complete to Coleman Bennett for 50 yds for a TD (Britton Williams KICK),401757280104955401,35,7
+170,Louisiana Tech,Q4 4:45,3,8,Kickoff,65,-62,"Britton Williams kickoff for 62 yds , Devin Gandy return for 11 yds to the LT 14",401757280104955403,35,7
+171,Louisiana Tech,Q4 4:45,3,8,Kickoff Return (Offense),3,11,"Britton Williams kickoff for 62 yds , Devin Gandy return for 11 yds to the LT 14",401757280104955403,35,7
+172,Louisiana Tech,Q4 4:20,1,10,Pass Reception,14,5,Evan Bullock pass complete to Jay Simon for 5 yds to the LT 19,401757280104957901,7,35
+173,Louisiana Tech,Q4 3:59,2,5,Pass Reception,19,9,Evan Bullock pass complete to Eli Finley for 9 yds to the LT 28 for a 1ST down,401757280104964001,7,35
+174,Louisiana Tech,Q4 3:33,1,10,Rush,28,10,Evan Bullock run for 10 yds to the LT 38 for a 1ST down,401757280104966601,7,35
+175,Louisiana Tech,Q4 3:7,1,10,Rush,38,11,Omiri Wiggins run for 11 yds to the LT 49 for a 1ST down,401757280104969201,7,35
+176,Louisiana Tech,Q4 2:40,1,10,Rush,49,9,Omiri Wiggins run for 9 yds to the KENN 42,401757280104975901,7,35
+177,Louisiana Tech,Q4 2:10,2,1,Rush,58,15,"Omiri Wiggins run for no gain to the KENN 42 for a 1ST down Kennesaw State Penalty, Face Mask (15 yards) (15 Yards) to the KENN 27 for a 1ST down",401757280104978901,7,35
+178,Louisiana Tech,Q4 2:2,1,10,Pass Incompletion,73,0,Evan Bullock pass incomplete,401757280104979701,7,35
+179,Louisiana Tech,Q4 1:53,2,10,Rush,73,6,Clay Thevenin run for 6 yds to the KENN 21,401757280104984601,7,35
+180,Louisiana Tech,Q4 1:42,3,4,Pass Reception,79,8,Evan Bullock pass complete to Clay Thevenin for 8 yds to the KENN 13 for a 1ST down,401757280104985701,7,35
+181,Louisiana Tech,Q4 1:20,1,10,Pass Reception,87,9,Evan Bullock pass complete to Devin Gandy for 9 yds to the KENN 4,401757280104987901,7,35
+182,Louisiana Tech,Q4 1:10,2,1,Pass Incompletion,96,0,Evan Bullock pass incomplete,401757280104988901,7,35
+183,Louisiana Tech,Q4 1:2,3,1,Rush,96,3,Evan Bullock run for 3 yds to the KENN 1 for a 1ST down,401757280104989701,7,35
+184,Louisiana Tech,Q4 0:35,1,1,Rush,99,0,Clay Thevenin run for no gain to the KENN 1,401757280104996401,7,35
+185,Louisiana Tech,Q4 0:34,2,1,Pass Incompletion,99,0,Evan Bullock pass incomplete,401757280104996501,7,35
+186,Louisiana Tech,Q4 0:26,3,1,Rush,99,0,Clay Thevenin run for no gain to the KENN 1,401757280104997301,7,35
+187,Louisiana Tech,Q4 0:26,4,0,Timeout,99,0,"Timeout Louisiana Tech, clock 00:26",401757280104997302,7,35
+188,Louisiana Tech,Q4 0:26,4,1,Rush,99,0,Evan Bullock run for no gain to the KENN 1,401757280104997303,7,35
+189,Kennesaw State,Q4 0:10,1,10,Rush,99,2,Coleman Bennett run for 2 yds to the KENN 3,401757280104998901,35,7
+190,Kennesaw State,Q4 0:0,0,10,End of Game,99,2,End of 4th Quarter,401757280104998902,35,7

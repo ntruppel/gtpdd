@@ -1,0 +1,197 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Louisiana Tech,Q1 15:0,1,10,Kickoff,65,-65,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",40175729515,0,0
+1,Louisiana Tech,Q1 15:0,1,10,Touchback,0,25,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",40175729515,0,0
+2,Louisiana Tech,Q1 15:0,1,10,Rush,25,4,No Huddle-Shotgun #4 C.Thevenin rush middle for 4 yards gain to the TECH29 (#8 E.Saunders),40175729522,0,0
+3,Louisiana Tech,Q1 15:0,2,6,Rush,29,-2,No Huddle-Shotgun #4 C.Thevenin rush right for 2 yards loss to the TECH27 (#35 G.Moul; #13 N.Matthews),40175729526,0,0
+4,Louisiana Tech,Q1 15:0,3,8,Penalty,27,5,No Huddle-Shotgun #5 B.Baker pass incomplete short right to #1 D.Gandy thrown to TECH44 PENALTY DEL Offside (#34 D.McConomy) 5 yards from TECH27 to TECH32. NO PLAY,40175729530,0,0
+5,Louisiana Tech,Q1 15:0,3,3,Pass Incompletion,32,0,No Huddle-Shotgun #5 B.Baker pass incomplete short right to #1 D.Gandy thrown to TECH45,40175729534,0,0
+6,Louisiana Tech,Q1 13:44,4,3,Punt,32,0,#48 J.Chance punt 50 yards to the DEL18 fair catch by #19 K.Duplessis at DEL18,40175729537,0,0
+7,Delaware,Q1 13:44,1,10,Rush,82,-5,No Huddle-Shotgun #27 J.Silver rush left for 5 yards loss to the DEL13 (#22 J.Mayfield; #94 E.Oguns),40175729541,0,0
+8,Delaware,Q1 13:44,2,15,Pass Reception,87,14,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #18 S.Wilson caught at DEL25, for 14 yards to the DEL27 (#11 C.Woods)",40175729545,0,0
+9,Delaware,Q1 13:44,3,1,Rush,73,1,"No Huddle-Shotgun #27 J.Silver rush middle for 1 yard gain to the DEL28 (#94 E.Oguns; #90 J.Madkins), 1ST DOWN",40175729550,0,0
+10,Delaware,Q1 13:44,1,10,Pass Reception,72,8,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #19 K.Duplessis caught at DEL30, for 8 yards to the DEL36 (#7 J.Shelby Jr.; #6 J.Foster)",40175729554,0,0
+11,Delaware,Q1 13:44,2,2,Rush,64,-4,No Huddle-Shotgun #27 J.Silver rush right for 4 yards loss to the DEL32 (#42 S.Leota; #9 M.Mason),40175729559,0,0
+12,Delaware,Q1 10:31,3,6,Pass Interception Return,68,26,"No Huddle-Shotgun #4 N.Minicucci pass intercepted by #6 J.Foster at TECH46 #6 J.Foster return for loss of 4 yards to the TECH42, out of bounds at TECH42",40175729563,0,0
+13,Louisiana Tech,Q1 10:31,1,10,Rush,42,14,"No Huddle-Shotgun #22 O.Wiggins rush right for 14 yards gain to the DEL44 (#7 K.Seay), out of bounds, 1ST DOWN",40175729569,0,0
+14,Louisiana Tech,Q1 10:31,1,10,Pass Reception,56,7,"No Huddle-Shotgun #5 B.Baker pass complete short middle to #16 M.Singleton Jr. caught at DEL40, for 7 yards to the DEL37 QB hurried by #10 B.Matthews (#7 K.Seay)",40175729573,0,0
+15,Louisiana Tech,Q1 10:31,2,3,Rush,63,1,No Huddle-Shotgun #22 O.Wiggins rush left for 1 yard gain to the DEL36 (#10 B.Matthews; #18 J.Kolagbodi),40175729578,0,0
+16,Louisiana Tech,Q1 10:31,3,2,Penalty,64,15,"No Huddle-Shotgun #5 B.Baker pass incomplete deep left to #1 D.Gandy thrown to DEL01 PENALTY DEL Pass Interference (#18 J.Kolagbodi) 15 yards from DEL36 to DEL21, 1ST DOWN. NO PLAY",40175729582,0,0
+17,Louisiana Tech,Q1 10:31,1,10,Rush,79,4,"No Huddle-Shotgun #22 O.Wiggins rush left for 4 yards gain to the DEL17 (#7 K.Seay), out of bounds",40175729586,0,0
+18,Louisiana Tech,Q1 10:31,2,6,Pass Incompletion,83,0,No Huddle-Shotgun #5 B.Baker pass incomplete short right to #1 D.Gandy thrown to DEL00,40175729590,0,0
+19,Louisiana Tech,Q1 10:31,3,6,Rush,83,1,No Huddle-Shotgun #5 B.Baker rush left for 1 yard gain to the DEL16 (#19 D.Trainer) PENALTY TECH Holding declined,40175729593,0,0
+20,Louisiana Tech,Q1 7:47,4,5,Field Goal Missed,84,34,"#43 D.Henderson field goal attempt from 34 yards NO GOOD (H: #48 J.Chance, LS: #41 E.Burch), clock 07:47",40175729598,0,0
+21,Delaware,Q1 7:47,1,10,Pass Reception,80,4,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #9 J.Kelly caught at DEL20, for 4 yards to the DEL24 (#7 J.Shelby Jr.; #8 J.Fields)",401757295102,0,0
+22,Delaware,Q1 7:47,2,6,Rush,76,4,No Huddle-Shotgun #23 V.Ellison Jr. rush middle for 4 yards gain to the DEL28 (#98 D.Rieman; #22 J.Mayfield),401757295107,0,0
+23,Delaware,Q1 7:47,3,2,Penalty,72,10,"No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #41 C.Witthoft thrown to DEL30 PENALTY TECH Holding (#9 M.Mason) 10 yards from DEL28 to DEL38, 1ST DOWN. NO PLAY",401757295111,0,0
+24,Delaware,Q1 7:47,1,10,Rush,62,7,No Huddle-Shotgun #23 V.Ellison Jr. rush middle for 7 yards gain to the DEL45 (#6 J.Foster),401757295115,0,0
+25,Delaware,Q1 7:47,2,3,Pass Reception,55,24,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #19 K.Duplessis caught at DEL48, for 24 yards to the TECH31 (#11 C.Woods; #7 J.Shelby Jr.), 1ST DOWN",401757295119,0,0
+26,Delaware,Q1 7:47,1,10,Pass Incompletion,31,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short left to #23 V.Ellison Jr. thrown to TECH30 QB hurried by #94 E.Oguns,401757295124,0,0
+27,Delaware,Q1 7:47,2,10,Pass Reception,31,14,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #88 E.Sessoms caught at TECH24, for 14 yards to the TECH17 (#8 J.Fields), 1ST DOWN",401757295127,0,0
+28,Delaware,Q1 7:47,1,10,Pass Incompletion,17,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #27 J.Silver thrown to TECH20,401757295132,0,0
+29,Delaware,Q1 7:47,2,10,Rush,17,-1,No Huddle-Shotgun #27 J.Silver rush right for 1 yard loss to the TECH18 (#90 J.Madkins; #6 J.Foster),401757295135,0,0
+30,Delaware,Q1 3:48,3,11,Rush,18,7,"No Huddle-Shotgun #4 N.Minicucci rush left for 7 yards gain to the TECH11 (#42 S.Leota), out of bounds",401757295139,0,0
+31,Louisiana Tech,Q1 3:48,2,10,Timeout,17,0,"Timeout Louisiana Tech, clock 03:48",401757295141,0,0
+32,Delaware,Q1 2:59,4,4,Field Goal Good,11,28,"#91 N.Reed field goal attempt from 28 yards GOOD (H: #99 B.Lach, LS: #49 M.Sills), clock 02:59",401757295144,3,0
+33,Louisiana Tech,Q1 2:59,1,10,Kickoff,65,-65,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295147,3,0
+34,Louisiana Tech,Q1 2:59,1,10,Touchback,0,25,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295147,3,0
+35,Louisiana Tech,Q1 2:59,1,10,Rush,25,1,No Huddle-Shotgun #22 O.Wiggins rush left for 1 yard gain to the TECH26 (#35 G.Moul; #2 M.Pollard),401757295150,0,3
+36,Louisiana Tech,Q1 2:59,2,9,Pass Reception,26,5,"No Huddle-Shotgun #5 B.Baker pass complete short right to #22 O.Wiggins caught at TECH22, for 5 yards to the TECH31 (#1 N.Evans; #2 M.Pollard)",401757295154,0,3
+37,Louisiana Tech,Q1 2:59,3,4,Pass Reception,31,6,"No Huddle-Shotgun #5 B.Baker pass complete short left to #84 E.Finley caught at TECH35, for 6 yards to the TECH37 (#7 K.Seay), 1ST DOWN",401757295159,0,3
+38,Louisiana Tech,Q1 2:59,1,10,Pass Reception,37,23,"No Huddle-Shotgun #5 B.Baker pass complete short right to #1 D.Gandy caught at TECH46, for 23 yards to the DEL40 (#1 N.Evans), 1ST DOWN",401757295164,0,3
+39,Louisiana Tech,Q1 2:59,1,10,Pass Incompletion,60,0,No Huddle-Shotgun #5 B.Baker pass incomplete short right to #18 M.Jackson thrown to DEL28 broken up by #7 K.Seay,401757295169,0,3
+40,Louisiana Tech,Q1 2:59,2,10,Rush,60,-2,No Huddle-Shotgun #5 B.Baker rush right for 2 yards loss to the DEL42 (#18 J.Kolagbodi),401757295172,0,3
+41,Louisiana Tech,Q1 2:59,3,12,Penalty,58,5,No Huddle-Shotgun #5 B.Baker pass incomplete short right to #15 D.Pierro thrown to DEL30 PENALTY DEL Offside (#11 J.Yelbert Jr.) 5 yards from DEL42 to DEL37. NO PLAY,401757295176,0,3
+42,Louisiana Tech,Q1 0:6,3,7,Rushing Touchdown,63,37,"No Huddle-Shotgun #4 C.Thevenin rush left for 37 yards gain to the DEL00 TOUCHDOWN, clock 00:06, 1ST DOWN #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",401757295180,7,3
+43,Delaware,Q1 0:6,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295187,7,3
+44,Delaware,Q1 0:6,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295187,7,3
+45,Delaware,Q1 0:6,1,10,Pass Reception,75,28,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #8 N.Laboy caught at DEL30, for 28 yards to the TECH47 (#3 K.Carter), 1ST DOWN",401757295190,3,7
+46,Delaware,Q1 0:0,1,10,End Period,75,28,End of 1st quarter.,401757295197,3,7
+47,Delaware,Q2 15:0,1,10,Rush,47,-1,No Huddle-Shotgun #27 J.Silver rush middle for 1 yard loss to the TECH48 (#22 J.Mayfield),401757295201,3,7
+48,Delaware,Q2 15:0,2,11,Rush,48,8,"No Huddle-Shotgun #27 J.Silver rush left for 8 yards gain to the TECH40 (#17 A.Butler), out of bounds",401757295207,3,7
+49,Delaware,Q2 15:0,3,3,Pass Reception,40,4,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #0 M.Patterson caught at TECH38, for 4 yards to the TECH36 (#1 M.Richard), 1ST DOWN",401757295211,3,7
+50,Delaware,Q2 15:0,1,10,Rush,36,1,No Huddle-Shotgun #27 J.Silver rush middle for 1 yard gain to the TECH35 (#9 M.Mason),401757295216,3,7
+51,Delaware,Q2 15:0,2,9,Pass Incompletion,35,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete deep right to #18 S.Wilson thrown to TECH09,401757295220,3,7
+52,Delaware,Q2 15:0,3,9,Pass Reception,35,9,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #18 S.Wilson caught at TECH26, for 9 yards to the TECH26 (#11 C.Woods), 1ST DOWN",401757295223,3,7
+53,Delaware,Q2 15:0,1,10,Pass Reception,26,2,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #0 M.Patterson caught at TECH28, for 2 yards to the TECH24 (#11 C.Woods; #22 J.Mayfield)",401757295228,3,7
+54,Delaware,Q2 15:0,2,8,Pass Incompletion,24,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete deep left to #87 D.Lewis thrown to TECH02 QB hurried by #8 J.Fields and #42 S.Leota,401757295233,3,7
+55,Delaware,Q2 15:0,3,8,Pass Incompletion,24,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete deep left to #87 D.Lewis thrown to TECH00 broken up by #11 C.Woods,401757295236,3,7
+56,Delaware,Q2 11:5,4,8,Field Goal Good,24,41,"#91 N.Reed field goal attempt from 41 yards GOOD (H: #99 B.Lach, LS: #49 M.Sills), clock 11:05",401757295239,6,7
+57,Louisiana Tech,Q2 10:58,1,10,Kickoff,65,26,#91 N.Reed kickoff 65 yards to the TECH00 #1 D.Gandy return 26 yards to the TECH26 (#1 N.Evans; #36 N.Eatmon),401757295242,6,7
+58,Louisiana Tech,Q2 10:58,1,10,Pass Incompletion,26,0,No Huddle-Shotgun #7 E.Bullock pass incomplete short left to #4 C.Thevenin thrown to TECH20,401757295247,7,6
+59,Louisiana Tech,Q2 10:58,2,10,Pass Reception,26,14,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #16 M.Singleton Jr. caught at TECH26, for 14 yards to the TECH40 (#14 K.Ali; #10 B.Matthews), 1ST DOWN",401757295250,7,6
+60,Louisiana Tech,Q2 10:58,1,10,Penalty,40,15,"No Huddle-Shotgun #7 E.Bullock pass incomplete deep left to #18 M.Jackson thrown to DEL40 PENALTY DEL Roughing The Passer (#33 T.Scott III) 15 yards from TECH40 to DEL45, 1ST DOWN. NO PLAY",401757295255,7,6
+61,Louisiana Tech,Q2 10:21,1,10,Pass Interception Return,55,5,"No Huddle-Shotgun #7 E.Bullock pass intercepted by #1 N.Evans at DEL40 QB hurried by #93 J.Hall, End Of Play",401757295259,7,6
+62,Delaware,Q2 10:21,1,10,Pass Reception,60,8,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #41 C.Witthoft caught at DEL45, for 8 yards to the DEL48 (#7 J.Shelby Jr.)",401757295265,6,7
+63,Delaware,Q2 10:21,2,2,Rush,52,5,"No Huddle-Shotgun #4 N.Minicucci rush middle for 5 yards gain to the TECH47 (#8 J.Fields; #94 E.Oguns), 1ST DOWN",401757295270,6,7
+64,Delaware,Q2 10:21,1,10,Pass Reception,47,3,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #19 K.Duplessis caught at TECH44, for 3 yards to the TECH44 (#6 J.Foster)",401757295274,6,7
+65,Delaware,Q2 10:21,2,7,Rush,44,3,No Huddle-Shotgun #23 V.Ellison Jr. rush middle for 3 yards gain to the TECH41 (#22 J.Mayfield; #23 A.Jackson Jr.),401757295279,6,7
+66,Delaware,Q2 10:21,3,4,Pass Incompletion,41,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short left to #18 S.Wilson thrown to TECH35,401757295283,6,7
+67,Delaware,Q2 10:21,4,4,Penalty,41,5,PENALTY DEL Delay Of Game (#4 N.Minicucci) 5 yards from TECH41 to TECH46. NO PLAY,401757295290,6,7
+68,Delaware,Q2 7:30,4,9,Punt,46,0,#99 B.Lach punt 31 yards to the TECH15 fair catch by #3 D.Latulas at TECH15,401757295293,6,7
+69,Louisiana Tech,Q2 7:30,1,10,Pass Reception,15,18,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #18 M.Jackson caught at TECH33, for 18 yards to the TECH33 (#1 N.Evans), 1ST DOWN",401757295297,7,6
+70,Louisiana Tech,Q2 7:30,1,10,Rush,33,4,No Huddle-Shotgun #2 T.Kukuk rush middle for 4 yards gain to the TECH37 (#32 M.Mulumba; #93 J.Hall),401757295302,7,6
+71,Louisiana Tech,Q2 7:30,2,6,Pass Reception,37,1,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #22 O.Wiggins caught at TECH34, for 1 yard to the TECH38 (#14 K.Ali; #35 G.Moul)",401757295306,7,6
+72,Louisiana Tech,Q2 5:29,2,6,Timeout,37,0,"Timeout Louisiana Tech, clock 05:29",401757295313,7,6
+73,Louisiana Tech,Q2 5:29,3,5,Rush,38,5,"No Huddle-Shotgun #2 T.Kukuk rush right for 5 yards gain to the TECH43 (#35 G.Moul; #13 N.Matthews), 1ST DOWN. The previous play is under automatic review - ""Short of the line to gain"". CALL OVERTURNED. (Original Play: No Huddle-Shotgun #2 T.Kukuk rush right for 4 yards gain to the TECH42 (#35 G.Moul; #13 N.Matthews))",401757295319,7,6
+74,Louisiana Tech,Q2 5:29,1,10,Pass Reception,43,22,"No Huddle-Shotgun #2 T.Kukuk pass complete short left to #11 J.Mickens caught at DEL45, for 22 yards to the DEL35 (#32 M.Mulumba), 1ST DOWN",401757295324,7,6
+75,Louisiana Tech,Q2 5:29,1,10,Rush,65,11,"No Huddle-Shotgun #2 T.Kukuk rush left for 11 yards gain to the DEL24 (#32 M.Mulumba; #14 K.Ali), 1ST DOWN",401757295329,7,6
+76,Louisiana Tech,Q2 5:29,1,10,Rush,76,1,No Huddle-Shotgun #2 T.Kukuk rush middle for 1 yard gain to the DEL23 (#9 K.Hunter),401757295333,7,6
+77,Louisiana Tech,Q2 5:29,2,9,Rush,77,-2,No Huddle-Shotgun #4 C.Thevenin rush right for 2 yards loss to the DEL25 (#32 M.Mulumba),401757295337,7,6
+78,Louisiana Tech,Q2 5:29,3,11,Sack,75,-6,No Huddle-Shotgun #2 T.Kukuk sacked for loss of 6 yards to the DEL31 (#31 B.Gorham),401757295341,7,6
+79,Louisiana Tech,Q2 1:55,4,17,Field Goal Missed,69,49,"#43 D.Henderson field goal attempt from 49 yards NO GOOD (H: #48 J.Chance, LS: #41 E.Burch), clock 01:55",401757295345,7,6
+80,Delaware,Q2 1:55,1,10,Pass Reception,69,6,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #27 J.Silver caught at DEL35, for 6 yards to the DEL37 (#23 A.Jackson Jr.)",401757295349,6,7
+81,Delaware,Q2 1:55,2,4,Rush,63,17,"No Huddle-Shotgun #4 N.Minicucci rush left for 17 yards gain to the TECH46 (#8 J.Fields), 1ST DOWN",401757295354,6,7
+82,Delaware,Q2 1:55,1,10,Rush,46,13,"No Huddle-Shotgun #4 N.Minicucci rush left for 13 yards gain to the TECH33 (#23 A.Jackson Jr.), out of bounds, 1ST DOWN",401757295358,6,7
+83,Delaware,Q2 1:55,1,10,Pass Incompletion,33,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #8 N.Laboy thrown to TECH14,401757295362,6,7
+84,Delaware,Q2 1:55,2,10,Pass Reception,33,23,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #19 K.Duplessis caught at TECH15, for 23 yards to the TECH10 (#9 M.Mason), 1ST DOWN, PENALTY TECH Holding declined",401757295365,6,7
+85,Delaware,Q2 1:55,1,10,Pass Incompletion,10,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #27 J.Silver thrown to TECH00,401757295376,6,7
+86,Delaware,Q2 1:55,2,10,Rush,10,0,No Huddle-Shotgun #4 N.Minicucci rush middle for 0 yards to the TECH10 (#92 L.Condry; #93 J.Bradford),401757295379,6,7
+87,Delaware,Q2 1:55,3,10,Pass Incompletion,10,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #18 S.Wilson thrown to TECH00 QB hurried by #9 M.Mason,401757295383,6,7
+88,Delaware,Q2 0:7,4,10,Field Goal Good,10,27,"#91 N.Reed field goal attempt from 27 yards GOOD (H: #99 B.Lach, LS: #49 M.Sills), clock 00:07",401757295386,9,7
+89,Louisiana Tech,Q2 0:7,1,10,Kickoff,65,-65,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295389,9,7
+90,Louisiana Tech,Q2 0:7,1,10,Touchback,0,25,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295389,9,7
+91,Louisiana Tech,Q2 0:7,1,10,Rush,25,0,Kneel down by #7 E.Bullock at TECH25 for loss of 0 yards,401757295392,7,9
+92,Louisiana Tech,Q2 0:0,1,10,End Period,75,25,End of 2nd quarter.,401757295397,7,9
+93,Delaware,Q3 15:0,1,10,Kickoff,35,-65,"#43 D.Henderson kickoff 65 yards to the DEL00, Touchback",401757295404,7,9
+94,Delaware,Q3 15:0,1,10,Touchback,100,25,"#43 D.Henderson kickoff 65 yards to the DEL00, Touchback",401757295404,7,9
+95,Delaware,Q3 15:0,1,10,Pass Incompletion,75,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #88 E.Sessoms thrown to DEL30,401757295407,9,7
+96,Delaware,Q3 15:0,2,10,Pass Reception,75,13,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #18 S.Wilson caught at DEL30, for 13 yards to the DEL38 (#7 J.Shelby Jr.; #8 J.Fields), 1ST DOWN",401757295410,9,7
+97,Delaware,Q3 15:0,1,10,Pass Incompletion,62,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #19 K.Duplessis thrown to TECH45,401757295415,9,7
+98,Delaware,Q3 15:0,2,10,Penalty,62,13,No Huddle-Shotgun #9 J.Kelly rush left for 30 yards gain (3) to the TECH32 (#42 S.Leota) PENALTY DEL Holding (#61 S.Demboski) 10 yards from DEL41 to DEL31,401757295418,9,7
+99,Delaware,Q3 15:0,2,17,Pass Incompletion,69,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #19 K.Duplessis thrown to DEL45 QB hurried by #45 J.Odom,401757295423,9,7
+100,Delaware,Q3 15:0,3,17,Rush,69,4,No Huddle-Shotgun #4 N.Minicucci rush right for 4 yards gain to the DEL35 (#8 J.Fields),401757295426,9,7
+101,Delaware,Q3 12:47,4,13,Punt,65,0,#99 B.Lach punt 36 yards to the TECH29 fair catch by #3 D.Latulas at TECH29,401757295430,9,7
+102,Louisiana Tech,Q3 12:47,1,10,Rush,29,4,No Huddle-Shotgun #2 T.Kukuk rush right for 4 yards gain to the TECH33 (#2 M.Pollard; #13 N.Matthews),401757295434,7,9
+103,Louisiana Tech,Q3 12:47,2,6,Pass Incompletion,33,0,No Huddle-Shotgun #7 E.Bullock pass incomplete deep right to #1 D.Gandy thrown to DEL40 broken up by #18 J.Kolagbodi,401757295438,7,9
+104,Louisiana Tech,Q3 12:47,3,6,Pass Incompletion,33,0,No Huddle-Shotgun #7 E.Bullock pass incomplete short right to #84 E.Finley thrown to TECH45 QB hurried by #52 D.Brogna,401757295441,7,9
+105,Louisiana Tech,Q3 12:5,4,6,Punt Return,33,5,"#48 J.Chance punt 56 yards to the DEL11 #19 K.Duplessis return 5 yards to the DEL16 (#41 E.Burch) PENALTY TECH Face Mask (#15 D.Pierro) 15 yards from DEL16 to DEL31, 1ST DOWN",401757295444,7,9
+106,Delaware,Q3 12:5,1,10,Rush,69,1,No Huddle-Shotgun #4 N.Minicucci rush left for 1 yard gain to the DEL32 (#97 C.Davis; #23 A.Jackson Jr.),401757295451,9,7
+107,Delaware,Q3 12:5,2,9,Pass Reception,68,7,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #87 D.Lewis caught at DEL34, for 7 yards to the DEL39 (#3 K.Carter; #97 C.Davis)",401757295455,9,7
+108,Delaware,Q3 12:5,3,2,Pass Incompletion,61,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #15 J.Thaw thrown to DEL40 QB hurried by #23 A.Jackson Jr.,401757295460,9,7
+109,Delaware,Q3 10:46,4,2,Punt,61,0,#99 B.Lach punt 39 yards to the TECH22 fair catch by #3 D.Latulas at TECH22,401757295463,9,7
+110,Louisiana Tech,Q3 10:46,1,10,Rush,22,16,"No Huddle-Shotgun #22 O.Wiggins rush middle for 16 yards gain to the TECH38 (#7 K.Seay; #35 G.Moul), 1ST DOWN",401757295467,7,9
+111,Louisiana Tech,Q3 10:46,1,10,Rush,38,3,No Huddle-Shotgun #22 O.Wiggins rush middle for 3 yards gain to the TECH41 (#13 T.Salazer; #35 G.Moul),401757295471,7,9
+112,Louisiana Tech,Q3 10:46,2,7,Penalty,41,15,"No Huddle-Shotgun #7 E.Bullock pass incomplete short right to #1 D.Gandy thrown to DEL41 QB hurried by #10 B.Matthews PENALTY DEL Pass Interference (#1 N.Evans) 15 yards from TECH41 to DEL44, 1ST DOWN. NO PLAY",401757295475,7,9
+113,Louisiana Tech,Q3 10:46,1,10,Pass Reception,56,3,"No Huddle-Shotgun #7 E.Bullock pass complete short right to #16 M.Singleton Jr. caught at DEL42, for 3 yards to the DEL41 (#2 M.Pollard)",401757295479,7,9
+114,Louisiana Tech,Q3 10:46,2,7,Rush,59,2,No Huddle-Shotgun #22 O.Wiggins rush right for 2 yards gain to the DEL39 (#14 K.Ali),401757295484,7,9
+115,Louisiana Tech,Q3 10:46,3,5,Pass Reception,61,-1,"No Huddle-Shotgun #7 E.Bullock pass complete short middle to #84 E.Finley caught at DEL44, for 1 yard loss to the DEL40 QB hurried by #13 N.Matthews and #33 T.Scott III (#7 K.Seay)",401757295488,7,9
+116,Louisiana Tech,Q3 7:3,4,6,Punt,60,0,#48 J.Chance punt 36 yards to the DEL04,401757295496,7,9
+117,Delaware,Q3 7:3,1,10,Rush,96,7,No Huddle-Shotgun #27 J.Silver rush middle for 7 yards gain to the DEL11 (#21 Z.Hill; #0 S.Fongang),401757295500,9,7
+118,Delaware,Q3 7:3,2,3,Rush,89,3,"No Huddle-Shotgun #27 J.Silver rush middle for 3 yards gain to the DEL14 (#90 J.Madkins; #21 Z.Hill), 1ST DOWN",401757295504,9,7
+119,Delaware,Q3 7:3,1,10,Rush,86,4,"No Huddle-Shotgun #4 N.Minicucci rush right for 4 yards gain to the DEL18, out of bounds at DEL18",401757295508,9,7
+120,Delaware,Q3 7:3,2,6,Penalty,82,9,No Huddle-Shotgun #4 N.Minicucci rush right for 2 yards gain to the DEL20 (#21 Z.Hill) PENALTY DEL Holding (#41 C.Witthoft) 9 yards from DEL18 to DEL09. NO PLAY,401757295513,9,7
+121,Delaware,Q3 7:3,2,15,Pass Reception,91,51,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #18 S.Wilson caught at DEL25, for 51 yards to the TECH40 (#2 J.Cobbs; #11 C.Woods), 1ST DOWN",401757295518,9,7
+122,Delaware,Q3 7:3,1,10,Pass Reception,40,6,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #41 C.Witthoft caught at TECH36, for 6 yards to the TECH34 (#9 M.Mason; #42 S.Leota)",401757295524,9,7
+123,Delaware,Q3 7:3,2,4,Rush,34,12,"No Huddle-Shotgun #27 J.Silver rush middle for 12 yards gain to the TECH22 (#4 K.Franklin; #22 J.Mayfield), 1ST DOWN",401757295529,9,7
+124,Delaware,Q3 7:3,1,10,Pass Incompletion,22,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #18 S.Wilson thrown to TECH18,401757295533,9,7
+125,Delaware,Q3 7:3,2,10,Pass Reception,22,8,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #41 C.Witthoft caught at TECH15, for 8 yards to the TECH14 (#8 J.Fields)",401757295536,9,7
+126,Delaware,Q3 2:44,3,2,Passing Touchdown,14,14,Kyre Duplessis 14 Yd pass from Nick Minicucci (Nate Reed Kick),401757295541,16,7
+127,Louisiana Tech,Q3 2:44,1,10,Kickoff,65,-65,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295549,16,7
+128,Louisiana Tech,Q3 2:44,1,10,Touchback,0,25,"#91 N.Reed kickoff 65 yards to the TECH00, Touchback",401757295549,16,7
+129,Louisiana Tech,Q3 2:44,1,10,Pass Reception,25,11,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #1 D.Gandy caught at TECH37, for 11 yards to the TECH36 (#14 K.Ali), out of bounds, 1ST DOWN",401757295552,7,16
+130,Louisiana Tech,Q3 2:44,0,0,Timeout,65,0,"Timeout Louisiana Tech, clock 02:44",401757295554,7,16
+131,Louisiana Tech,Q3 2:44,1,10,Rush,36,7,"No Huddle-Shotgun #4 C.Thevenin rush left for 7 yards gain to the TECH43 (#35 G.Moul), out of bounds",401757295558,7,16
+132,Louisiana Tech,Q3 2:44,2,3,Rush,43,6,"No Huddle-Shotgun #2 T.Kukuk rush middle for 6 yards gain to the TECH49 (#2 M.Pollard; #32 M.Mulumba), 1ST DOWN",401757295562,7,16
+133,Louisiana Tech,Q3 2:44,1,10,Rush,49,2,No Huddle-Shotgun #2 T.Kukuk rush middle for 2 yards gain to the DEL49 (#35 G.Moul; #10 B.Matthews),401757295566,7,16
+134,Louisiana Tech,Q3 2:44,2,8,Penalty,51,5,No Huddle-Shotgun #4 C.Thevenin rush right for 1 yard gain to the DEL48 (#9 K.Hunter) PENALTY DEL Illegal Substitution 5 yards from DEL49 to DEL44. NO PLAY,401757295570,7,16
+135,Louisiana Tech,Q3 2:44,2,3,Rush,56,1,No Huddle-Shotgun #4 C.Thevenin rush left for 1 yard gain to the DEL43 (#8 E.Saunders; #35 G.Moul),401757295575,7,16
+136,Louisiana Tech,Q3 0:0,2,3,End Period,44,13,End of 3rd quarter.,401757295581,7,16
+137,Louisiana Tech,Q4 15:0,3,2,Rush,57,4,"No Huddle-Shotgun #4 C.Thevenin rush middle for 4 yards gain to the DEL39 (#9 K.Hunter; #33 T.Scott III), 1ST DOWN",401757295585,7,16
+138,Louisiana Tech,Q4 15:0,1,10,Rush,61,2,No Huddle-Shotgun #4 C.Thevenin rush right for 2 yards gain to the DEL37 (#2 M.Pollard),401757295591,7,16
+139,Louisiana Tech,Q4 15:0,2,8,Pass Reception,63,9,"No Huddle-Shotgun #2 T.Kukuk pass complete short left to #11 J.Mickens caught at DEL31, for 9 yards to the DEL28 (#1 N.Evans; #7 K.Seay), 1ST DOWN",401757295595,7,16
+140,Louisiana Tech,Q4 15:0,1,10,Penalty,72,5,PENALTY TECH False Start (#60 R.Brackins III) 5 yards from DEL28 to DEL33. NO PLAY,401757295600,7,16
+141,Louisiana Tech,Q4 15:0,1,15,Rush,67,0,No Huddle-Shotgun #0 A.Burnette rush right for 0 yards to the DEL33 (#52 D.Brogna; #58 C.Gallagher),401757295603,7,16
+142,Louisiana Tech,Q4 15:0,2,15,Pass Reception,67,19,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #4 C.Thevenin caught at DEL32, for 19 yards to the DEL14 (#2 M.Pollard; #58 C.Gallagher), 1ST DOWN",401757295607,7,16
+143,Louisiana Tech,Q4 15:0,1,10,Rush,86,0,No Huddle-Shotgun #4 C.Thevenin rush right for 0 yards to the DEL14 (#11 J.Yelbert Jr.; #93 J.Hall),401757295612,7,16
+144,Louisiana Tech,Q4 15:0,2,10,Rush,86,1,No Huddle-Shotgun #2 T.Kukuk rush right for 1 yard gain to the DEL13 (#2 M.Pollard; #52 D.Brogna),401757295616,7,16
+145,Louisiana Tech,Q4 15:0,3,9,Sack,87,-4,"No Huddle-Shotgun #7 E.Bullock sacked for loss of 7 yards to the DEL20 (#35 G.Moul, #33 T.Scott III)",401757295620,7,16
+146,Louisiana Tech,Q4 9:9,4,16,Field Goal Good,80,38,"#43 D.Henderson field goal attempt from 38 yards GOOD (H: #48 J.Chance, LS: #41 E.Burch), clock 09:09 PENALTY TECH UNS: Unsportsmanlike Conduct (#41 E.Burch) 15 yards from DEL00 to TECH20",401757295624,10,16
+147,Delaware,Q4 9:2,1,10,Kickoff,20,15,#48 J.Chance kickoff 73 yards to the DEL07 #2 M.Pollard return 15 yards to the DEL22 (#15 D.Pierro; #35 C.Watson),401757295628,10,16
+148,Delaware,Q4 9:2,1,10,Rush,78,2,No Huddle-Shotgun #23 V.Ellison Jr. rush middle for 2 yards gain to the DEL24 (#23 A.Jackson Jr.),401757295633,16,10
+149,Delaware,Q4 9:2,2,8,Penalty,76,10,No Huddle-Shotgun #23 V.Ellison Jr. rush middle for 12 yards gain to the DEL36 (#23 A.Jackson Jr.) PENALTY DEL Holding (#70 A.O'neal) 10 yards from DEL24 to DEL14. NO PLAY,401757295638,16,10
+150,Delaware,Q4 9:2,2,18,Pass Reception,86,0,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #9 J.Kelly caught at DEL14, for 0 yards to the DEL14 (#1 M.Richard)",401757295643,16,10
+151,Delaware,Q4 9:2,3,18,Pass Reception,86,4,"No Huddle-Shotgun #4 N.Minicucci pass complete short left to #27 J.Silver caught at DEL10, for 4 yards to the DEL18 (#98 D.Rieman)",401757295650,16,10
+152,Delaware,Q4 6:41,4,14,Punt Return,82,11,#99 B.Lach punt 32 yards to the DEL50 #3 D.Latulas return 11 yards to the DEL39 (#58 C.Gallagher),401757295655,16,10
+153,Louisiana Tech,Q4 6:41,1,10,Pass Reception,61,8,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #11 J.Mickens caught at DEL31, for 8 yards to the DEL31, out of bounds at DEL31",401757295661,10,16
+154,Louisiana Tech,Q4 6:41,2,2,Rush,69,1,No Huddle-Shotgun #22 O.Wiggins rush middle for 1 yard gain to the DEL30 (#14 K.Ali; #93 J.Hall),401757295666,10,16
+155,Louisiana Tech,Q4 6:41,3,1,Rush,70,0,No Huddle-Shotgun #22 O.Wiggins rush middle for 0 yards to the DEL30 (#35 G.Moul; #9 K.Hunter),401757295670,10,16
+156,Louisiana Tech,Q4 6:41,4,1,Rush,70,5,"No Huddle-Shotgun #0 A.Burnette rush left for 5 yards gain to the DEL25 (#7 K.Seay; #58 C.Gallagher), 1ST DOWN",401757295674,10,16
+157,Louisiana Tech,Q4 6:41,1,10,Pass Reception,75,3,"No Huddle-Shotgun #7 E.Bullock pass complete short left to #11 J.Mickens caught at DEL28, for 3 yards to the DEL22 (#2 M.Pollard; #1 N.Evans) PENALTY TECH Holding (#18 M.Jackson) 10 yards from DEL22 to DEL32",401757295678,10,16
+158,Louisiana Tech,Q4 6:41,1,17,Pass Reception,68,6,"No Huddle-Shotgun #7 E.Bullock pass complete short middle to #84 E.Finley caught at DEL26, for 6 yards to the DEL26 (#10 B.Matthews; #32 M.Mulumba)",401757295684,10,16
+159,Louisiana Tech,Q4 6:41,2,11,Pass Reception,74,13,"No Huddle-Shotgun #7 E.Bullock pass complete short right to #4 C.Thevenin caught at DEL29, for 13 yards to the DEL13 (#1 N.Evans), out of bounds, 1ST DOWN",401757295689,10,16
+160,Louisiana Tech,Q4 3:9,1,10,Rushing Touchdown,87,13,"C. Thevenin run for 13 yds, for a TD (D. Henderson KICK)",401757295694,17,16
+161,Delaware,Q4 3:9,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295701,20,16
+162,Delaware,Q4 3:9,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295701,20,16
+163,Delaware,Q4 3:9,1,10,Pass Incompletion,75,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #18 S.Wilson thrown to DEL25 broken up by #90 J.Madkins,401757295704,16,20
+164,Delaware,Q4 3:9,2,10,Pass Incompletion,75,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #19 K.Duplessis thrown to DEL42 broken up by #11 C.Woods,401757295707,16,20
+165,Delaware,Q4 3:9,3,10,Penalty,75,5,PENALTY DEL False Start (#62 A.Caccese) 5 yards from DEL25 to DEL20. NO PLAY,401757295710,16,20
+166,Delaware,Q4 3:9,3,15,Penalty,80,10,"No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #27 A.Graham thrown to DEL25 PENALTY TECH Holding (#1 M.Richard) 10 yards from DEL20 to DEL30, 1ST DOWN. NO PLAY",401757295713,16,20
+167,Delaware,Q4 3:9,1,10,Pass Incompletion,70,0,"No Huddle-Shotgun #4 N.Minicucci pass incomplete short left to #15 J.Thaw thrown to DEL49. The previous play is under automatic review - ""Runner was out of bounds"". CALL OVERTURNED. (Original Play: No Huddle-Shotgun #4 N.Minicucci pass complete short left to #15 J.Thaw caught at DEL49, for 19 yards to the DEL49 (#1 M.Richard), out of bounds, 1ST DOWN)",401757295723,16,20
+168,Delaware,Q4 3:9,2,10,Pass Incompletion,70,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #27 J.Silver thrown to DEL35,401757295727,16,20
+169,Delaware,Q4 3:9,3,10,Pass Incompletion,70,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #18 S.Wilson thrown to DEL40,401757295730,16,20
+170,Delaware,Q4 2:23,4,10,Interception Return Touchdown,70,38,"N. Minicucci pass intercepted, J. Fields return  for 38 yds, for a TD (D. Henderson KICK)",401757295733,16,24
+171,Delaware,Q4 2:23,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295741,27,16
+172,Delaware,Q4 2:23,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the DEL00, Touchback",401757295741,27,16
+173,Delaware,Q4 2:23,1,10,Pass Reception,75,5,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #40 S.Moore caught at DEL28, for 5 yards to the DEL30 (#8 J.Fields)",401757295744,16,27
+174,Delaware,Q4 2:23,2,5,Pass Reception,70,20,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #40 S.Moore caught at DEL40, for 20 yards to the DEL50 QB hurried by #92 L.Condry (#21 Z.Hill; #9 M.Mason), 1ST DOWN",401757295749,16,27
+175,Delaware,Q4 2:23,1,10,Pass Incompletion,50,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short right to #40 S.Moore thrown to TECH40 QB hurried by #90 J.Madkins,401757295754,16,27
+176,Delaware,Q4 2:23,2,10,Pass Incompletion,50,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete deep right to #18 S.Wilson thrown to TECH25,401757295757,16,27
+177,Delaware,Q4 2:23,3,10,Pass Incompletion,50,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short left to #19 K.Duplessis thrown to TECH40 QB hurried by #21 Z.Hill,401757295760,16,27
+178,Delaware,Q4 2:23,4,10,Penalty,50,15,"No Huddle-Shotgun #4 N.Minicucci pass incomplete deep left to #19 K.Duplessis thrown to TECH12 PENALTY TECH Pass Interference (#7 J.Shelby Jr.) 15 yards from TECH50 to TECH35, 1ST DOWN. NO PLAY",401757295763,16,27
+179,Delaware,Q4 2:23,1,10,Pass Reception,35,20,"No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #18 S.Wilson caught at TECH20, for 20 yards to the TECH15 (#0 S.Fongang), 1ST DOWN",401757295767,16,27
+180,Delaware,Q4 2:23,1,10,Penalty,15,8,"No Huddle-Shotgun #4 N.Minicucci pass incomplete short middle to #18 S.Wilson thrown to TECH00 QB hurried by #8 J.Fields PENALTY TECH Face Mask (#22 J.Mayfield) 8 yards from TECH15 to TECH07, 1ST DOWN. NO PLAY",401757295774,16,27
+181,Delaware,Q4 0:58,1,7,Rush,7,4,No Huddle-Shotgun #4 N.Minicucci rush middle for 4 yards gain to the TECH03 (#98 D.Rieman),401757295778,16,27
+182,Delaware,Q4 0:58,1,10,Timeout,7,0,"Timeout Delaware, clock 00:58",401757295780,16,27
+183,Delaware,Q4 0:34,2,3,Passing Touchdown,3,3,"N. Minicucci pass to E. Sessoms for 3 yds, for a TD (Two-Point Conversion failed)",401757295783,22,24
+184,Louisiana Tech,Q4 0:34,2,3,Timeout,3,0,"Timeout Louisiana Tech, clock 00:34",401757295790,27,22
+185,Louisiana Tech,Q4 0:34,0,0,Timeout,65,0,"Timeout Louisiana Tech, clock 00:34",401757295798,27,22
+186,Delaware,Q4 0:34,1,10,Pass Incompletion,40,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete short left to #15 J.Thaw thrown to TECH25 QB hurried by #9 M.Mason,401757295800,22,27
+187,Delaware,Q4 0:34,2,10,Pass Reception,40,6,"No Huddle-Shotgun #4 N.Minicucci pass complete short right to #19 K.Duplessis caught at TECH34, for 6 yards to the TECH34 (#7 J.Shelby Jr.), out of bounds",401757295803,22,27
+188,Delaware,Q4 0:34,3,4,Pass Incompletion,34,0,No Huddle-Shotgun #4 N.Minicucci pass incomplete deep left to #18 S.Wilson thrown to TECH09 QB hurried by #6 J.Foster,401757295808,22,27
+189,Louisiana Tech,Q4 0:33,1,10,Kickoff,65,0,#91 N.Reed onside kickoff 25 yards to the TECH40,401757295796,22,27
+190,Delaware,Q4 0:12,4,4,Field Goal Good,34,51,Nate Reed 51 Yd Field Goal ,401757295811,25,24
+191,Delaware,Q4 0:12,0,0,Penalty,65,15,PENALTY DEL UNS: Unsportsmanlike Conduct  15 yards from DEL35 to DEL20. NO PLAY,401757295814,25,24
+192,Delaware,Q4 0:6,0,0,Penalty,80,10,#91 N.Reed kickoff 45 yards to the TECH35 #1 D.Gandy return 0 yards to the TECH35 (#58 C.Gallagher) PENALTY TECH Holding (#4 K.Franklin) 10 yards from TECH35 to TECH25,401757295817,25,24
+193,Louisiana Tech,Q4 0:6,1,10,Pass Reception,25,35,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at TECH27, for 35 yards to the DEL40 lateral to #2 T.Kukuk for 12 yards gain to the TECH47 lateral to #3 D.Latulas for 13 yards gain to the DEL40 (#14 K.Ali), 1ST DOWN",401757295835,24,25
+194,Louisiana Tech,Q4 0:0,1,10,End Period,75,-15,End of 4th quarter.,401757295844,24,25
+195,Delaware,Q4 0:0,1,10,Kickoff,20,15,#48 J.Chance kickoff 73 yards to the DEL07 #2 M.Pollard return 15 yards to the DEL22 (#15 D.Pierro; #35 C.Watson),401757295855,24,25

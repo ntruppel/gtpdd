@@ -1,0 +1,193 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Louisiana Tech,Q1 15:0,1,10,Kickoff,65,-65,"(15:00) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",4017573073,0,0
+1,Louisiana Tech,Q1 15:0,1,10,Touchback,0,25,"(15:00) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",4017573073,0,0
+2,Louisiana Tech,Q1 14:44,1,10,Rush,25,12,"(15:00) Shotgun #2 T.Kukuk rush right for 12 yards gain to the LAT37 (#6 C.Bodnar), 1ST DOWN",40175730712,0,0
+3,Louisiana Tech,Q1 14:18,1,10,Rush,37,6,(14:35) Shotgun #0 A.Burnette rush middle for 6 yards gain to the LAT43 (#11 D.Farrar; #99 B.Dixon),40175730717,0,0
+4,Louisiana Tech,Q1 13:48,2,4,Rush,43,4,"(14:04) Shotgun #2 T.Kukuk rush middle for 4 yards gain to the LAT47 (#99 B.Dixon), 1ST DOWN",40175730721,0,0
+5,Louisiana Tech,Q1 13:20,1,10,Rush,47,-1,"(13:32) Shotgun #4 C.Thevenin rush right for 1 yard loss to the LAT46 (#13 D.Harmon; #29 A.Jones), out of bounds",40175730725,0,0
+6,Louisiana Tech,Q1 12:41,2,11,Pass Reception,46,6,"(13:05) Shotgun #2 T.Kukuk pass complete short middle to #84 E.Finley caught at LUF50, for 6 yards to the LUF48 (#33 A.Vaughan; #13 D.Harmon)",40175730729,0,0
+7,Louisiana Tech,Q1 12:5,3,5,Pass Reception,52,7,"(12:25) Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LAT46, for 7 yards to the LUF41 (#57 A.Hester; #29 A.Jones), 1ST DOWN",40175730734,0,0
+8,Louisiana Tech,Q1 11:32,1,10,Rush,59,4,(11:47) Shotgun #0 A.Burnette rush middle for 4 yards gain to the LUF37 (#30 E.Crisp; #14 E.Auguste),40175730739,0,0
+9,Louisiana Tech,Q1 11:12,2,6,Rush,63,3,"(11:17) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LUF34 (#1 C.Bazile, Jr.; #97 M.Jarvis)",40175730743,0,0
+10,Louisiana Tech,Q1 10:31,3,3,Rush,66,5,"(10:43) Shotgun #2 T.Kukuk rush middle for 5 yards gain to the LUF29 (#14 E.Auguste; #94 N.Pirolli), 1ST DOWN",40175730747,0,0
+11,Louisiana Tech,Q1 9:46,1,10,Rush,71,14,"(10:01) Shotgun #18 M.Jackson rush right for 14 yards gain to the LUF15 (#4 M.Pollard), 1ST DOWN",40175730751,0,0
+12,Louisiana Tech,Q1 9:21,1,10,Rush,85,5,(09:27) Shotgun #4 C.Thevenin rush middle for 5 yards gain to the LUF10 (#94 N.Pirolli; #4 M.Pollard),40175730755,0,0
+13,Louisiana Tech,Q1 8:58,2,5,Rush,90,2,(09:08) Shotgun #4 C.Thevenin rush middle for 2 yards gain to the LUF08 (#55 D.Dozier; #94 N.Pirolli),40175730759,0,0
+14,Louisiana Tech,Q1 8:23,3,3,Rushing Touchdown,92,8,"(08:33) Shotgun #0 A.Burnette rush right for 8 yards gain to the LUF00 TOUCHDOWN, clock 08:23, 1ST DOWN #43 D.Henderson kick attempt good (H: #48 J.Chance, LS: #41 E.Burch)",40175730763,7,0
+15,Liberty,Q1 8:23,1,10,Kickoff,35,-65,"(08:23) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",40175730770,7,0
+16,Liberty,Q1 8:23,1,10,Touchback,100,25,"(08:23) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",40175730770,7,0
+17,Liberty,Q1 8:5,1,10,Pass Reception,75,16,"(08:23) Shotgun #15 E.Vasko pass complete short middle to #48 C.Ryan caught at LUF37, for 16 yards to the LUF41 (#8 J.Fields), 1ST DOWN",40175730773,0,7
+18,Liberty,Q1 7:48,1,10,Rush,59,1,(07:57) Shotgun #23 E.Dickens rush middle for 1 yard gain to the LUF42 (#90 J.Madkins; #1 M.Richard),40175730778,0,7
+19,Liberty,Q1 7:17,2,9,Rush,58,0,(07:36) Shotgun #23 E.Dickens rush right for 0 yards to the LUF42 (#22 J.Mayfield; #7 J.Shelby Jr.),40175730782,0,7
+20,Liberty,Q1 6:39,3,9,Pass Reception,58,8,"(06:43) Shotgun #15 E.Vasko pass complete short right to #3 J.Person caught at LUF50, for 8 yards to the LUF50 (#7 J.Shelby Jr.), out of bounds",40175730786,0,7
+21,Liberty,Q1 6:28,4,1,Rush,50,3,"(06:35) Shotgun #15 E.Vasko rush middle for 3 yards gain to the LAT47 (#8 J.Fields; #6 J.Foster), 1ST DOWN",40175730791,0,7
+22,Liberty,Q1 5:55,1,10,Rush,47,12,"(05:59) Shotgun #23 E.Dickens rush middle for 12 yards gain to the LAT35 (#8 J.Fields), 1ST DOWN",40175730795,0,7
+23,Liberty,Q1 5:25,1,10,Rush,35,1,(05:37) Shotgun #23 E.Dickens rush middle for 1 yard gain to the LAT34 (#0 S.Fongang; #9 M.Mason),40175730799,0,7
+24,Liberty,Q1 4:39,2,9,Pass Reception,34,17,"(05:05) Shotgun #15 E.Vasko pass complete short left to #9 D.Lee Jr. caught at LAT17, for 17 yards to the LAT17 (#22 J.Mayfield; #11 C.Woods), 1ST DOWN",401757307103,0,7
+25,Liberty,Q1 4:22,1,10,Rush,17,-1,(04:28) Shotgun #23 E.Dickens rush middle for 1 yard loss to the LAT18 (#8 J.Fields; #94 E.Oguns),401757307108,0,7
+26,Liberty,Q1 3:27,2,11,Pass Reception,18,7,"(03:39) Shotgun #15 E.Vasko pass complete short right to #0 J.Coleman caught at LAT15, for 7 yards to the LAT11 (#21 Z.Hill; #7 J.Shelby Jr.)",401757307112,0,7
+27,Liberty,Q1 2:54,3,4,Rush,11,-4,(02:58) Shotgun #0 J.Coleman rush left for 4 yards loss to the LAT15 (#22 J.Mayfield; #17 A.Butler),401757307117,0,7
+28,Liberty,Q1 2:22,4,8,Field Goal Good,15,33,"(02:22) #43 J.Billingsley field goal attempt from 33 yards GOOD (H: #37 M.Morgan, LS: #47 R.Manis), clock 02:22",401757307121,3,7
+29,Louisiana Tech,Q1 2:22,1,10,Kickoff,65,-65,"(02:22) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307124,3,7
+30,Louisiana Tech,Q1 2:22,1,10,Touchback,0,25,"(02:22) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307124,3,7
+31,Louisiana Tech,Q1 2:8,1,10,Pass Reception,25,8,"(02:22) Shotgun #2 T.Kukuk pass complete short middle to #84 E.Finley caught at LAT26, for 8 yards to the LAT33 (#33 A.Vaughan)",401757307127,7,3
+32,Louisiana Tech,Q1 1:49,2,2,Rush,33,2,"(01:51) Shotgun #22 O.Wiggins rush left for 2 yards gain to the LAT35 (#97 M.Jarvis; #13 D.Harmon), 1ST DOWN, PENALTY LUF Face Mask (#97 M.Jarvis) 15 yards from LAT35 to LAT50, 1ST DOWN",401757307132,7,3
+33,Louisiana Tech,Q1 1:14,1,10,Rush,50,2,(01:22) Shotgun #0 A.Burnette rush right for 2 yards gain to the LUF48 (#8 B.Williams),401757307138,7,3
+34,Louisiana Tech,Q1 0:52,2,8,Pass Incompletion,52,0,(00:55) Shotgun #2 T.Kukuk pass incomplete deep right to #1 D.Gandy thrown to LUF25,401757307142,7,3
+35,Louisiana Tech,Q1 0:43,3,8,Rush,52,0,(00:52) Shotgun #2 T.Kukuk rush middle for 0 yards to the LUF48 (#8 B.Williams; #57 A.Hester),401757307145,7,3
+36,Louisiana Tech,Q1 0:5,4,8,Punt,52,0,"(00:19) #48 J.Chance punt 33 yards to the LUF15, out of bounds at LUF15",401757307149,7,3
+37,Liberty,Q1 0:5,1,10,Rush,85,8,(00:05) Shotgun #15 E.Vasko rush middle for 8 yards gain to the LUF23 (#42 S.Leota; #91 C.Sims),401757307154,3,7
+38,Liberty,Q1 0:0,1,10,End Period,85,8,End of 1st quarter.,401757307160,3,7
+39,Liberty,Q2 14:52,2,2,Rush,77,36,"(15:00) Shotgun #23 E.Dickens rush right for 36 yards gain to the LAT41 (#6 J.Foster), out of bounds, 1ST DOWN",401757307164,3,7
+40,Liberty,Q2 14:24,1,10,Rush,41,5,(14:35) Shotgun #23 E.Dickens rush middle for 5 yards gain to the LAT36 (#8 J.Fields; #98 D.Rieman),401757307170,3,7
+41,Liberty,Q2 13:55,2,5,Penalty,36,15,"(13:55) Shotgun #15 E.Vasko pass incomplete deep left to #8 T.Mobley thrown to LAT00 PENALTY LAT Pass Interference (#7 J.Shelby Jr.) 15 yards from LAT36 to LAT21, 1ST DOWN. NO PLAY",401757307174,3,7
+42,Liberty,Q2 13:41,1,10,Rush,21,9,(13:51) Shotgun #24 V.Blue rush left for 9 yards gain to the LAT12 (#97 C.Davis),401757307178,3,7
+43,Liberty,Q2 13:9,2,1,Rush,12,8,"(13:17) Shotgun #24 V.Blue rush middle for 8 yards gain to the LAT04 (#22 J.Mayfield), 1ST DOWN",401757307182,3,7
+44,Liberty,Q2 12:35,1,4,Rush,4,-1,(12:39) Shotgun #15 E.Vasko rush middle for 1 yard loss to the LAT05 (#4 K.Franklin; #9 M.Mason),401757307186,3,7
+45,Liberty,Q2 12:1,2,5,Pass Incompletion,5,0,(12:22) Shotgun #15 E.Vasko pass incomplete short middle to #8 T.Mobley thrown to LAT00,401757307190,3,7
+46,Liberty,Q2 11:54,3,5,Rush,5,0,(12:01) Shotgun #15 E.Vasko rush middle for 0 yards to the LAT05 (#97 C.Davis),401757307193,3,7
+47,Liberty,Q2 11:12,4,5,Field Goal Good,5,23,"(11:19) #43 J.Billingsley field goal attempt from 23 yards GOOD (H: #37 M.Morgan, LS: #47 R.Manis), clock 11:12",401757307197,6,7
+48,Louisiana Tech,Q2 11:8,1,10,Kickoff,65,9,(11:12) #37 M.Morgan kickoff 58 yards to the LAT07 #4 C.Thevenin return 9 yards to the LAT16 (#6 C.Bodnar; #34 S.Moore),401757307200,6,7
+49,Louisiana Tech,Q2 11:1,1,10,Rush,16,4,(11:08) Shotgun #4 C.Thevenin rush middle for 4 yards gain to the LAT20 (#35 D.Glaud),401757307206,7,6
+50,Louisiana Tech,Q2 10:12,2,6,Pass Interception Return,20,5,(10:46) Shotgun #0 A.Burnette pass intercepted by #13 D.Harmon at LUF49 #13 D.Harmon return 26 yards to the LAT25 (#60 R.Brackins III; #6 T.Averhart),401757307210,7,6
+51,Liberty,Q2 9:52,1,10,Pass Reception,25,21,"(10:11) Shotgun #15 E.Vasko pass complete deep middle to #0 J.Coleman caught at LAT04, for 21 yards to the LAT04, End Of Play, 1ST DOWN",401757307216,6,7
+52,Liberty,Q2 9:27,1,4,Rush,4,2,(09:32) Shotgun #23 E.Dickens rush middle for 2 yards gain to the LAT02 (#6 J.Foster; #90 J.Madkins),401757307221,6,7
+53,Liberty,Q2 9:0,2,2,Rushing Touchdown,2,2,"(08:59) Shotgun #23 E.Dickens rush middle for 2 yards gain to the LAT00 TOUCHDOWN, clock 09:00 #43 J.Billingsley kick attempt good (H: #37 M.Morgan, LS: #45 C.Comer) #43 J.Billingsley kick attempt good (H: #37 M.Morgan, LS: #47 R.Manis)",401757307225,13,7
+54,Louisiana Tech,Q2 9:0,1,10,Kickoff,65,0,"(09:00) #37 M.Morgan kickoff 40 yards to the LAT25, out of bounds at LAT25",401757307232,13,7
+55,Louisiana Tech,Q2 8:51,1,10,Rush,35,5,(09:00) Shotgun #22 O.Wiggins rush middle for 5 yards gain to the LAT40 (#97 M.Jarvis; #56 S.Cohen),401757307236,7,13
+56,Louisiana Tech,Q2 8:38,2,5,Penalty,40,5,(08:44) PENALTY LAT False Start (#18 M.Jackson) 5 yards from LAT40 to LAT35. NO PLAY,401757307240,7,13
+57,Louisiana Tech,Q2 8:27,2,10,Rush,35,6,(08:34) Shotgun #2 T.Kukuk rush middle for 6 yards gain to the LAT41 (#11 D.Farrar; #7 D.Henderson),401757307243,7,13
+58,Louisiana Tech,Q2 7:47,3,4,Rush,41,2,(07:55) Shotgun #2 T.Kukuk rush middle for 2 yards gain to the LAT43 (#35 D.Glaud; #56 S.Cohen),401757307247,7,13
+59,Louisiana Tech,Q2 7:12,4,2,Punt,43,0,(07:12) #48 J.Chance punt 42 yards to the LUF15 fair catch by #15 B.Green at LUF15,401757307253,7,13
+60,Liberty,Q2 7:5,1,10,Rush,85,1,(07:08) Shotgun #23 E.Dickens rush right for 1 yard gain to the LUF16 (#8 J.Fields),401757307257,13,7
+61,Liberty,Q2 6:27,2,9,Rush,84,25,"(06:34) Shotgun #23 E.Dickens rush right for 25 yards gain to the LUF41 (#21 Z.Hill), 1ST DOWN",401757307261,13,7
+62,Liberty,Q2 5:54,1,10,Rush,59,19,"(05:58) Shotgun #15 E.Vasko rush right for 19 yards gain to the LAT40 (#7 J.Shelby Jr.), 1ST DOWN",401757307265,13,7
+63,Liberty,Q2 5:21,1,10,Rush,40,0,(05:27) Shotgun #23 E.Dickens rush left for 0 yards to the LAT40 (#8 J.Fields),401757307269,13,7
+64,Liberty,Q2 4:51,2,10,Pass Incompletion,40,0,(05:00) Shotgun #15 E.Vasko pass incomplete short middle to #3 J.Person thrown to LAT27,401757307273,13,7
+65,Liberty,Q2 4:47,3,10,Sack,40,-10,(04:51) Shotgun #15 E.Vasko pass incomplete short left to #9 D.Lee Jr. thrown to LAT30 QB hurried by #22 J.Mayfield PENALTY LUF Intentional Grounding (#15 E.Vasko),401757307276,13,7
+66,Louisiana Tech,Q2 4:47,3,10,Timeout,40,0,"Timeout Louisiana Tech, clock 04:47",401757307283,7,13
+67,Liberty,Q2 4:39,4,20,Punt,50,0,(04:47) #37 M.Morgan punt 40 yards to the LAT10 fair catch by #3 D.Latulas at LAT10 PENALTY LUF Kick Catch Interference (#0 J.Coleman) 15 yards from LAT13 to LAT28,401757307281,13,7
+68,Louisiana Tech,Q2 4:28,1,10,Rush,28,2,(04:39) Shotgun #18 M.Jackson rush left for 2 yards gain to the LAT30 (#6 C.Bodnar; #55 D.Dozier),401757307287,7,13
+69,Louisiana Tech,Q2 4:1,2,8,Pass Incompletion,30,0,(04:06) Shotgun #2 T.Kukuk pass incomplete short middle to #84 E.Finley thrown to LAT35 broken up by #94 N.Pirolli,401757307291,7,13
+70,Louisiana Tech,Q2 4:1,3,8,Penalty,30,10,(04:01) Shotgun #2 T.Kukuk rush middle for 12 yards gain to the LAT42 (#4 M.Pollard) PENALTY LAT Holding (#4 C.Thevenin) 10 yards from LAT30 to LAT20. NO PLAY,401757307294,7,13
+71,Louisiana Tech,Q2 3:29,3,18,Rush,20,8,"(03:36) Shotgun #2 T.Kukuk rush middle for 8 yards gain to the LAT28 (#1 C.Bazile, Jr.; #4 M.Pollard)",401757307299,7,13
+72,Louisiana Tech,Q2 2:44,4,10,Punt,28,0,"(02:57) #48 J.Chance punt 72 yards to the LUF00, Touchback",401757307303,7,13
+73,Liberty,Q2 2:44,4,10,Touchback,100,20,"(02:57) #48 J.Chance punt 72 yards to the LUF00, Touchback",401757307303,7,13
+74,Liberty,Q2 2:37,1,10,Rush,80,17,"(02:42) Shotgun #23 E.Dickens rush left for 17 yards gain to the LUF37 (#1 M.Richard), out of bounds, 1ST DOWN",401757307307,13,7
+75,Liberty,Q2 2:16,1,10,Rush,63,2,(02:23) Shotgun #23 E.Dickens rush middle for 2 yards gain to the LUF39 (#8 J.Fields; #97 C.Davis),401757307311,13,7
+76,Liberty,Q2 1:52,2,8,Rush,61,9,"(02:00) Shotgun #23 E.Dickens rush right for 9 yards gain to the LUF48 (#6 J.Foster; #22 J.Mayfield), 1ST DOWN",401757307315,13,7
+77,Liberty,Q2 1:41,1,10,Pass Incompletion,52,0,(01:41) Shotgun #15 E.Vasko pass incomplete short middle to #6 R.Smith thrown to LUF50 broken up by #42 S.Leota,401757307319,13,7
+78,Liberty,Q2 1:33,2,10,Rush,52,-3,(01:40) Shotgun #15 E.Vasko rush middle for 3 yards loss to the LUF45 (#22 J.Mayfield; #21 Z.Hill),401757307322,13,7
+79,Liberty,Q2 0:57,2,10,Timeout,52,0,"Timeout Liberty, clock 00:57",401757307328,13,7
+80,Liberty,Q2 0:54,3,13,Pass Incompletion,55,0,(01:13) Shotgun #15 E.Vasko pass incomplete short middle to #8 T.Mobley thrown to LUF45,401757307326,13,7
+81,Liberty,Q2 0:49,4,13,Punt,55,0,(00:54) #37 M.Morgan punt 38 yards to the LAT17 fair catch by #3 D.Latulas at LAT17,401757307330,13,7
+82,Louisiana Tech,Q2 0:33,1,10,Pass Reception,17,3,"(00:49) Shotgun #2 T.Kukuk pass complete short right to #11 J.Mickens caught at LAT15, for 3 yards to the LAT20 (#6 C.Bodnar; #11 D.Farrar)",401757307334,7,13
+83,Louisiana Tech,Q2 0:18,2,7,Pass Reception,20,21,"(00:19) No Huddle-Shotgun #2 T.Kukuk pass complete short middle to #84 E.Finley caught at LAT35, for 21 yards to the LAT41 (#6 C.Bodnar; #15 B.Green), 1ST DOWN",401757307339,7,13
+84,Louisiana Tech,Q2 0:18,2,7,Timeout,20,0,"Timeout Louisiana Tech, clock 00:18",401757307346,7,13
+85,Louisiana Tech,Q2 0:11,1,10,Rush,41,9,"(00:18) No Huddle-Shotgun #2 T.Kukuk rush left for 9 yards gain to the LAT50, out of bounds at LAT50",401757307344,7,13
+86,Louisiana Tech,Q2 0:6,2,1,Pass Reception,50,20,"(00:11) No Huddle-Shotgun #2 T.Kukuk pass complete short right to #1 D.Gandy caught at LUF32, for 20 yards to the LUF30 (#13 D.Harmon), 1ST DOWN, PENALTY LUF Offside declined",401757307349,7,13
+87,Louisiana Tech,Q2 0:3,1,10,Rush,70,0,(00:03) No Huddle-Shotgun #2 T.Kukuk rush right for 0 yards to the LUF30 (#4 M.Pollard),401757307355,7,13
+88,Louisiana Tech,Q2 0:3,2,9,Timeout,70,0,"Timeout Louisiana Tech, clock 00:03",401757307361,7,13
+89,Louisiana Tech,Q2 0:0,2,9,End Period,71,0,End of 2nd quarter.,401757307366,7,13
+90,Louisiana Tech,Q2 0:0,2,9,Field Goal Missed,70,47,"#43 D.Henderson field goal attempt from 47 yards NO GOOD (H: #48 J.Chance, LS: #41 E.Burch), clock 00:00",401757307375,7,13
+91,Liberty,Q3 15:0,1,10,Kickoff,35,-65,"(15:00) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307371,7,13
+92,Liberty,Q3 15:0,1,10,Touchback,100,25,"(15:00) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307371,7,13
+93,Liberty,Q3 14:54,1,10,Rush,75,1,(15:00) Shotgun #23 E.Dickens rush middle for 1 yard gain to the LUF26 (#94 E.Oguns; #22 J.Mayfield),401757307379,13,7
+94,Liberty,Q3 14:11,2,9,Pass Reception,74,56,"(14:27) Shotgun #15 E.Vasko pass complete deep middle to #48 C.Ryan caught at LAT45, for 56 yards to the LAT18 (#1 M.Richard), 1ST DOWN",401757307383,13,7
+95,Liberty,Q3 13:49,1,10,Rush,18,1,(13:54) Shotgun #23 E.Dickens rush middle for 1 yard gain to the LAT17 (#9 M.Mason; #42 S.Leota),401757307388,13,7
+96,Liberty,Q3 13:20,2,9,Pass Incompletion,17,0,(13:26) Shotgun #15 E.Vasko pass incomplete short right to #2 C.Cain thrown to LAT10 QB hurried by #42 S.Leota,401757307392,13,7
+97,Liberty,Q3 13:20,3,9,Penalty,17,9,"(13:20) Shotgun #15 E.Vasko pass incomplete short right to #9 D.Lee Jr. thrown to LAT00, 1ST DOWN, PENALTY LAT Pass Interference (#7 J.Shelby Jr.) 15 yards from LAT17 to LAT02, 1ST DOWN",401757307395,13,7
+98,Liberty,Q3 13:10,1,2,Rushing Touchdown,2,2,"(13:10) Shotgun #23 E.Dickens rush middle for 2 yards gain to the LAT00 TOUCHDOWN, clock 13:10 #43 J.Billingsley kick attempt good (H: #37 M.Morgan, LS: #45 C.Comer) #43 J.Billingsley kick attempt good (H: #37 M.Morgan, LS: #47 R.Manis)",401757307401,20,7
+99,Louisiana Tech,Q3 13:10,1,10,Kickoff,65,-65,"(13:10) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307408,20,7
+100,Louisiana Tech,Q3 13:10,1,10,Touchback,0,25,"(13:10) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307408,20,7
+101,Louisiana Tech,Q3 12:53,1,10,Pass Reception,25,-1,"(13:10) Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LAT22, for 1 yard loss to the LAT24 (#11 D.Farrar; #29 A.Jones)",401757307411,7,20
+102,Louisiana Tech,Q3 12:31,2,11,Rush,24,2,(12:41) Shotgun #4 C.Thevenin rush left for 2 yards gain to the LAT26 (#11 D.Farrar),401757307416,7,20
+103,Louisiana Tech,Q3 11:53,3,9,Pass Incompletion,26,0,(12:16) Shotgun #2 T.Kukuk pass incomplete short right to #18 M.Jackson thrown to LAT37 broken up by #29 A.Jones QB hurried by #8 B.Williams,401757307420,7,20
+104,Louisiana Tech,Q3 11:46,4,9,Punt,26,0,(11:45) #48 J.Chance punt 47 yards to the LUF27 fair catch by #15 B.Green at LUF27,401757307423,7,20
+105,Liberty,Q3 11:36,1,10,Rush,73,31,"(11:46) Shotgun #23 E.Dickens rush left for 31 yards gain to the LAT42 (#1 M.Richard), 1ST DOWN",401757307427,20,7
+106,Liberty,Q3 10:56,1,10,Rush,42,12,"(11:12) Shotgun #15 E.Vasko rush left for 12 yards gain to the LAT30 (#8 J.Fields), 1ST DOWN",401757307431,20,7
+107,Liberty,Q3 10:27,1,10,Rush,30,-2,(10:30) Shotgun #23 E.Dickens rush middle for 2 yards loss to the LAT32 (#9 M.Mason),401757307435,20,7
+108,Liberty,Q3 9:35,2,12,Pass Reception,32,10,"(10:02) Shotgun #15 E.Vasko pass complete short right to #0 J.Coleman caught at LAT36, for 10 yards to the LAT22 (#8 J.Fields)",401757307439,20,7
+109,Liberty,Q3 9:14,3,2,Rush,22,0,"(09:21) Shotgun #23 E.Dickens rush middle for 0 yards to the LAT22 (#9 M.Mason; #8 J.Fields) PENALTY LAT Illegal Use Of Hands 10 yards from LAT22 to LAT12, 1ST DOWN",401757307444,20,7
+110,Liberty,Q3 8:47,1,10,Rush,12,8,"(08:50) Shotgun #24 V.Blue rush left for 8 yards gain to the LAT04 (#8 J.Fields), out of bounds",401757307449,20,7
+111,Liberty,Q3 8:18,2,2,Rush,4,-2,(08:22) Shotgun #24 V.Blue rush middle for 2 yards loss to the LAT06 (#9 M.Mason),401757307453,20,7
+112,Liberty,Q3 7:39,3,4,Passing Touchdown,6,6,"(07:45) Shotgun #15 E.Vasko pass complete short left to #84 J.Jenkins caught at LAT00, for 6 yards to the LAT00 TOUCHDOWN, clock 07:39, 1ST DOWN #15 E.Vasko rush attempt Successful",401757307457,28,7
+113,Louisiana Tech,Q3 7:39,1,10,Kickoff,65,-65,"(07:39) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307467,28,7
+114,Louisiana Tech,Q3 7:39,1,10,Touchback,0,25,"(07:39) #37 M.Morgan kickoff 65 yards to the LAT00, Touchback",401757307467,28,7
+115,Louisiana Tech,Q3 7:30,1,10,Rush,25,12,"(07:36) Shotgun #0 A.Burnette rush left for 12 yards gain to the LAT37, out of bounds at LAT37, 1ST DOWN",401757307470,7,28
+116,Louisiana Tech,Q3 7:10,1,10,Rush,37,3,(07:18) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LAT40 (#44 J.Strickland; #94 N.Pirolli),401757307474,7,28
+117,Louisiana Tech,Q3 6:37,2,7,Pass Reception,40,7,"(06:44) Shotgun #2 T.Kukuk pass complete short right to #22 O.Wiggins caught at LAT35, for 7 yards to the LAT47 (#11 D.Farrar), out of bounds, 1ST DOWN",401757307478,7,28
+118,Louisiana Tech,Q3 6:18,1,10,Penalty,47,15,"PENALTY LUF UNS: Unsportsmanlike Conduct (#26 A.Williams) 15 yards from LAT47 to LUF38, 1ST DOWN. NO PLAY",401757307483,7,28
+119,Louisiana Tech,Q3 6:2,1,10,Rush,62,3,(06:09) Shotgun #22 O.Wiggins rush middle for 3 yards gain to the LUF35 (#3 E.Griffin; #44 J.Strickland),401757307487,7,28
+120,Louisiana Tech,Q3 5:41,2,7,Rush,65,1,(05:47) Shotgun #0 A.Burnette rush middle for 1 yard gain to the LUF34 (#3 E.Griffin),401757307491,7,28
+121,Louisiana Tech,Q3 4:56,3,6,Pass Reception,66,3,"(05:20) Shotgun #2 T.Kukuk pass complete short middle to #4 C.Thevenin caught at LUF32, for 3 yards to the LUF31 (#4 M.Pollard)",401757307495,7,28
+122,Louisiana Tech,Q3 4:14,4,3,Rushing Touchdown,69,31,"(04:34) Shotgun #2 T.Kukuk rush middle for 31 yards gain to the LUF00 TOUCHDOWN, clock 04:14, 1ST DOWN #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757307500,14,28
+123,Liberty,Q3 4:14,1,10,Kickoff,35,-65,"(04:14) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307507,14,28
+124,Liberty,Q3 4:14,1,10,Touchback,100,25,"(04:14) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307507,14,28
+125,Liberty,Q3 4:6,1,10,Rush,75,27,"(04:10) Shotgun #23 E.Dickens rush right for 27 yards gain to the LAT48 (#6 J.Foster), out of bounds, 1ST DOWN",401757307510,28,14
+126,Liberty,Q3 3:41,1,10,Pass Interception Return,48,44,"(03:49) Shotgun #15 E.Vasko pass intercepted by #6 J.Foster at LAT04, End Of Play",401757307514,28,14
+127,Louisiana Tech,Q3 3:34,1,10,Rush,4,5,(03:41) Shotgun #4 C.Thevenin rush middle for 5 yards gain to the LAT09 (#91 M.Clark),401757307519,14,28
+128,Louisiana Tech,Q3 3:2,2,5,Rush,9,7,"(03:20) Shotgun #4 C.Thevenin rush middle for 7 yards gain to the LAT16 (#11 D.Farrar; #8 B.Williams), 1ST DOWN",401757307523,14,28
+129,Louisiana Tech,Q3 2:45,1,10,Rush,16,6,(02:59) Shotgun #0 A.Burnette rush middle for 6 yards gain to the LAT22 (#4 M.Pollard),401757307527,14,28
+130,Louisiana Tech,Q3 2:11,2,4,Rush,22,3,(02:15) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LAT25 (#11 D.Farrar; #30 E.Crisp),401757307531,14,28
+131,Louisiana Tech,Q3 1:33,3,1,Rush,25,4,"(01:51) Shotgun #0 A.Burnette rush left for 4 yards gain to the LAT29 (#4 M.Pollard), 1ST DOWN",401757307535,14,28
+132,Louisiana Tech,Q3 1:2,1,10,Rush,29,12,"(01:05) Shotgun #4 C.Thevenin rush right for 12 yards gain to the LAT41, out of bounds at LAT41, 1ST DOWN",401757307539,14,28
+133,Louisiana Tech,Q3 0:33,1,10,Rush,41,4,(00:33) Shotgun #4 C.Thevenin rush left for 4 yards gain to the LAT45 (#94 N.Pirolli),401757307543,14,28
+134,Louisiana Tech,Q3 0:0,1,10,End Period,41,4,End of 3rd quarter.,401757307549,14,28
+135,Louisiana Tech,Q4 14:54,2,6,Pass Incompletion,45,0,(15:00) Shotgun #2 T.Kukuk pass incomplete deep left to #8 J.Fields thrown to LUF20 broken up by #13 D.Harmon,401757307553,14,28
+136,Louisiana Tech,Q4 14:50,3,6,Rush,45,12,"(14:54) Shotgun #2 T.Kukuk rush middle for 12 yards gain to the LUF43 (#15 B.Green), 1ST DOWN, PENALTY LUF Illegal Use Of Hands (#29 A.Jones) 10 yards from LUF43 to LUF33, 1ST DOWN",401757307558,14,28
+137,Louisiana Tech,Q4 12:20,1,10,Rush,67,3,(12:32) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LUF30 (#11 D.Farrar; #4 M.Pollard),401757307565,14,28
+138,Louisiana Tech,Q4 12:0,2,7,Pass Incompletion,70,0,(12:07) Shotgun #2 T.Kukuk pass incomplete deep right to #6 T.Averhart thrown to LUF00 broken up by #15 B.Green,401757307569,14,28
+139,Louisiana Tech,Q4 11:33,3,7,Rush,70,2,(11:38) Shotgun #2 T.Kukuk rush middle for 2 yards gain to the LUF28 (#97 M.Jarvis),401757307572,14,28
+140,Louisiana Tech,Q4 11:10,4,5,Pass Reception,72,9,"(11:21) Shotgun #2 T.Kukuk pass complete short left to #84 E.Finley caught at LUF20, for 9 yards to the LUF19, End Of Play, 1ST DOWN",401757307576,14,28
+141,Louisiana Tech,Q4 10:58,1,10,Rush,81,4,(11:04) Shotgun #2 T.Kukuk rush left for 4 yards gain to the LUF15 (#29 A.Jones; #8 B.Williams),401757307581,14,28
+142,Louisiana Tech,Q4 10:28,2,6,Rush,85,2,(10:28) Shotgun #22 O.Wiggins rush middle for 2 yards gain to the LUF13 (#11 D.Farrar; #94 N.Pirolli),401757307585,14,28
+143,Louisiana Tech,Q4 10:28,3,4,Rush,87,4,"Shotgun #2 T.Kukuk rush middle for 4 yards gain to the LUF09 (#94 N.Pirolli; #26 A.Williams), 1ST DOWN",401757307589,14,28
+144,Louisiana Tech,Q4 10:28,1,9,Rush,91,2,Shotgun #22 O.Wiggins rush right for 2 yards gain to the LUF07 (#55 D.Dozier; #4 M.Pollard),401757307593,14,28
+145,Louisiana Tech,Q4 10:28,2,7,Rush,93,4,Shotgun #0 A.Burnette rush middle for 4 yards gain to the LUF03 (#97 M.Jarvis; #4 M.Pollard),401757307597,14,28
+146,Liberty,Q4 10:28,2,7,Timeout,93,0,"Timeout Liberty, clock 10:28",401757307603,28,14
+147,Louisiana Tech,Q4 10:24,3,3,Rushing Touchdown,97,3,"(10:24) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LUF00 TOUCHDOWN, clock 10:24 #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757307601,21,28
+148,Liberty,Q4 10:24,1,10,Kickoff,35,-65,"(10:24) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307609,21,28
+149,Liberty,Q4 10:24,1,10,Touchback,100,25,"(10:24) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307609,21,28
+150,Liberty,Q4 10:24,1,10,Penalty,75,10,(10:24) Shotgun #23 E.Dickens rush left for 5 yards gain to the LUF30 (#1 M.Richard) PENALTY LUF Illegal Block in Back 10 yards from LUF25 to LUF15. NO PLAY,401757307612,28,21
+151,Liberty,Q4 9:59,1,20,Pass Incompletion,85,0,(09:59) Shotgun #15 E.Vasko pass incomplete short middle to #6 R.Smith thrown to LUF27 broken up by #1 M.Richard,401757307617,28,21
+152,Liberty,Q4 9:51,2,20,Rush,85,8,(09:55) Shotgun #23 E.Dickens rush middle for 8 yards gain to the LUF23 (#6 J.Foster; #96 Z.Nason),401757307620,28,21
+153,Liberty,Q4 9:10,3,12,Pass Interception Return,77,22,"(09:10) Shotgun #15 E.Vasko pass intercepted by #1 M.Richard at LUF45, End Of Play",401757307624,28,21
+154,Louisiana Tech,Q4 9:2,1,10,Rush,55,3,(09:10) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LUF42 (#97 M.Jarvis; #57 A.Hester),401757307629,21,28
+155,Louisiana Tech,Q4 8:22,2,7,Rush,58,10,"(08:29) Shotgun #25 A.Givens rush middle for 10 yards gain to the LUF32 (#14 E.Auguste), 1ST DOWN",401757307633,21,28
+156,Louisiana Tech,Q4 7:45,1,10,Rush,68,3,(08:01) Shotgun #2 T.Kukuk rush middle for 3 yards gain to the LUF29 (#94 N.Pirolli; #57 A.Hester),401757307637,21,28
+157,Louisiana Tech,Q4 7:11,2,7,Pass Incompletion,71,0,(07:11) Shotgun #2 T.Kukuk pass incomplete short left to #11 J.Mickens thrown to LUF20 QB hurried by #57 A.Hester,401757307641,21,28
+158,Louisiana Tech,Q4 7:5,3,7,Rushing Touchdown,71,29,"(07:11) Shotgun #2 T.Kukuk rush middle for 29 yards gain to the LUF00 TOUCHDOWN, clock 07:05, 1ST DOWN #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757307644,28,28
+159,Liberty,Q4 7:5,1,10,Kickoff,35,-65,"(07:05) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307651,28,28
+160,Liberty,Q4 7:5,1,10,Touchback,100,25,"(07:05) #48 J.Chance kickoff 65 yards to the LUF00, Touchback",401757307651,28,28
+161,Liberty,Q4 6:57,1,10,Rush,75,26,"(07:04) Shotgun #23 E.Dickens rush right for 26 yards gain to the LAT49 (#11 C.Woods; #97 C.Davis), 1ST DOWN",401757307654,28,28
+162,Liberty,Q4 6:22,1,10,Rush,49,2,(06:26) Shotgun #23 E.Dickens rush right for 2 yards gain to the LAT47 (#9 M.Mason; #6 J.Foster),401757307658,28,28
+163,Liberty,Q4 5:51,2,8,Pass Interception Return,47,26,"(05:54) Shotgun #15 E.Vasko pass intercepted by #8 J.Fields at LAT21, End Of Play PENALTY LUF Pass Interference declined",401757307662,28,28
+164,Louisiana Tech,Q4 5:39,1,10,Rush,21,3,(05:44) Shotgun #2 T.Kukuk rush middle for 3 yards gain to the LAT24 (#55 D.Dozier; #8 B.Williams),401757307668,28,28
+165,Louisiana Tech,Q4 5:5,2,7,Rush,24,3,(05:09) Shotgun #0 A.Burnette rush middle for 3 yards gain to the LAT27 (#4 M.Pollard; #30 E.Crisp),401757307672,28,28
+166,Louisiana Tech,Q4 4:29,3,4,Rush,27,3,(04:43) Shotgun #4 C.Thevenin rush middle for 3 yards gain to the LAT30 (#4 M.Pollard; #8 B.Williams),401757307676,28,28
+167,Louisiana Tech,Q4 3:52,4,1,Punt,30,0,(03:56) #48 J.Chance punt 54 yards to the LUF16 fair catch by #15 B.Green at LUF16,401757307680,28,28
+168,Liberty,Q4 3:45,1,10,Rush,84,3,(03:52) Shotgun #23 E.Dickens rush middle for 3 yards gain to the LUF19 (#90 J.Madkins; #8 J.Fields),401757307684,28,28
+169,Liberty,Q4 3:9,2,7,Rush,81,10,"(03:13) Shotgun #23 E.Dickens rush left for 10 yards gain to the LUF29 (#1 M.Richard), 1ST DOWN",401757307688,28,28
+170,Liberty,Q4 2:33,1,10,Rush,71,8,(02:40) Shotgun #0 J.Coleman rush left for 8 yards gain to the LUF37 (#6 J.Foster),401757307692,28,28
+171,Liberty,Q4 2:11,2,2,Rush,63,5,"(02:15) Shotgun #23 E.Dickens rush middle for 5 yards gain to the LUF42 (#4 K.Franklin), 1ST DOWN",401757307696,28,28
+172,Liberty,Q4 1:53,1,10,Rush,58,-1,(02:00) Shotgun #23 E.Dickens rush right for 1 yard loss to the LUF41 (#9 M.Mason),401757307700,28,28
+173,Liberty,Q4 1:20,2,11,Pass Incompletion,59,0,(01:31) Shotgun #15 E.Vasko pass incomplete short left thrown to LUF50,401757307704,28,28
+174,Liberty,Q4 1:20,3,11,Penalty,59,5,PENALTY LUF Illegal Substitution  5 yards from LUF41 to LUF36. NO PLAY,401757307707,28,28
+175,Liberty,Q4 1:15,3,16,Pass Incompletion,64,0,(01:20) Shotgun #15 E.Vasko pass incomplete short middle to #9 D.Lee Jr. thrown to LUF36 broken up by #11 C.Woods,401757307710,28,28
+176,Liberty,Q4 1:9,4,16,Punt,64,0,(01:12) #37 M.Morgan punt 45 yards to the LAT19 fair catch by #3 D.Latulas at LAT19,401757307713,28,28
+177,Louisiana Tech,Q4 0:55,1,10,Pass Reception,19,5,"(01:08) Shotgun #2 T.Kukuk pass complete short right to #11 J.Mickens caught at LAT20, for 5 yards to the LAT24 (#26 A.Williams; #94 N.Pirolli)",401757307717,28,28
+178,Louisiana Tech,Q4 0:34,2,5,Fumble Recovery (Own),24,16,"(00:34) No Huddle-Shotgun #2 T.Kukuk pass complete short left to #4 C.Thevenin caught at LAT25, for 16 yards to the LAT40 fumbled by #4 C.Thevenin at LAT40 forced by #4 M.Pollard recovered by LAT #4 C.Thevenin at LAT40, End Of Play, 1ST DOWN",401757307722,28,28
+179,Louisiana Tech,Q4 0:27,2,5,Timeout,24,0,"Timeout Louisiana Tech, clock 00:27",401757307732,28,28
+180,Louisiana Tech,Q4 0:13,1,10,Pass Incompletion,40,0,(00:13) No Huddle-Shotgun #2 T.Kukuk pass incomplete short right to #4 C.Thevenin thrown to LAT37,401757307730,28,28
+181,Louisiana Tech,Q4 0:9,2,10,Rush,40,5,(00:13) No Huddle-Shotgun #2 T.Kukuk rush middle for 5 yards gain to the LAT45 (#94 N.Pirolli),401757307734,28,28
+182,Louisiana Tech,Q4 0:6,3,5,Pass Reception,45,14,"(00:06) No Huddle-Shotgun #2 T.Kukuk pass complete short middle to #84 E.Finley caught at LUF45, for 14 yards to the LUF41 (#6 C.Bodnar), 1ST DOWN",401757307738,28,28
+183,Louisiana Tech,Q4 0:6,3,5,Timeout,45,0,"Timeout Louisiana Tech, clock 00:06",401757307745,28,28
+184,Louisiana Tech,Q4 0:3,1,10,Rush,59,4,(00:03) No Huddle-Shotgun #2 T.Kukuk rush middle for 4 yards gain to the LUF37 (#4 M.Pollard),401757307743,28,28
+185,Louisiana Tech,Q4 0:3,2,6,Field Goal Missed,63,54,John Hoyet Chance 54 Yard Field Goal Missed,401757307748,28,28
+186,Louisiana Tech,Q4 0:3,1,10,Timeout,59,0,"Timeout Louisiana Tech, clock 00:03",401757307750,28,28
+187,Louisiana Tech,Q4 0:0,2,6,End Period,63,0,End of 4th quarter.,401757307755,28,28
+188,Liberty,Q5 0:0,1,10,Rush,25,3,(00:00) Shotgun #23 E.Dickens rush left for 3 yards gain to the LAT22 (#8 J.Fields; #7 J.Shelby Jr.),401757307761,28,28
+189,Liberty,Q5 0:0,2,7,Pass Interception Return,22,-53,"(00:00) Shotgun #15 E.Vasko pass intercepted by #6 J.Foster at LAT00, End Of Play",401757307767,28,28
+190,Louisiana Tech,Q5 0:0,1,10,Rushing Touchdown,75,25,"(00:00) No Huddle-Shotgun #0 A.Burnette rush middle for 25 yards gain to the LUF00 TOUCHDOWN, clock 00:00, 1ST DOWN",401757307772,34,28
+191,Liberty,Q5 0:0,1,10,End Period,85,85,End of OT.,401757307778,28,34

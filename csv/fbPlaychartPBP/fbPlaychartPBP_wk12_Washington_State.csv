@@ -1,0 +1,160 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Louisiana Tech,Q1 15:0,1,10,Kickoff,65,-65,"(15:00) #98 R.Harris kickoff 65 yards to the LAT00, Touchback",4017529533,0,0
+1,Louisiana Tech,Q1 15:0,1,10,Touchback,0,25,"(15:00) #98 R.Harris kickoff 65 yards to the LAT00, Touchback",4017529533,0,0
+2,Louisiana Tech,Q1 14:53,1,10,Pass Incompletion,25,0,(14:59) Shotgun #7 E.Bullock pass incomplete short left to #1 D.Gandy thrown to LAT35,40175295312,0,0
+3,Louisiana Tech,Q1 14:50,2,10,Penalty,25,5,(14:50) No Huddle-Shotgun #2 T.Kukuk rush middle for 2 yards gain to the LAT27 (#44 P.McKenna) PENALTY WSU Illegal Substitution 5 yards from LAT25 to LAT30. NO PLAY,40175295315,0,0
+4,Louisiana Tech,Q1 14:37,2,5,Rush,30,0,(14:42) No Huddle-Shotgun #4 C.Thevenin rush right for 0 yards to the LAT30 (#2 C.Humphrey; #24 S.Schlimgen),40175295320,0,0
+5,Louisiana Tech,Q1 13:56,3,5,Pass Reception,30,15,"(14:05) No Huddle-Shotgun #7 E.Bullock pass complete short left to #11 J.Mickens caught at LAT48, for 15 yards to the LAT45 QB hurried by #45 R.Stevenson (#5 J.Colson), out of bounds, 1ST DOWN",40175295324,0,0
+6,Louisiana Tech,Q1 13:33,1,10,Rush,45,0,(13:36) No Huddle-Shotgun #4 C.Thevenin rush middle for 0 yards to the LAT45 (#5 J.Colson),40175295329,0,0
+7,Louisiana Tech,Q1 13:1,2,10,Pass Reception,45,3,"(13:09) No Huddle-Shotgun #7 E.Bullock pass complete short right to #11 J.Mickens caught at LAT48, for 3 yards to the LAT48 (#2 C.Humphrey), out of bounds",40175295333,0,0
+8,Louisiana Tech,Q1 12:31,3,7,Pass Incompletion,48,0,(12:33) No Huddle-Shotgun #7 E.Bullock pass incomplete short right to #16 M.Singleton Jr. thrown to WSU45,40175295338,0,0
+9,Louisiana Tech,Q1 12:27,4,7,Pass Incompletion,48,0,"(12:31) No Huddle #48 J.Chance pass incomplete short right to #18 M.Jackson thrown to WSU45 broken up by #19 K.Patu, TURNOVER ON DOWNS",40175295341,0,0
+10,Washington State,Q1 12:20,1,10,Rush,48,10,"(12:25) Shotgun #9 K.Vorhees rush middle for 10 yards gain to the LAT38 (#8 J.Fields; #6 J.Foster), 1ST DOWN",40175295345,0,0
+11,Washington State,Q1 11:43,1,10,Rush,38,8,(11:50) Shotgun #4 Z.Eckhaus rush middle for 8 yards gain to the LAT30 (#8 J.Fields),40175295349,0,0
+12,Washington State,Q1 11:5,2,2,Rush,30,7,"(11:11) Shotgun #9 K.Vorhees rush middle for 7 yards gain to the LAT23 (#6 J.Foster), 1ST DOWN",40175295353,0,0
+13,Washington State,Q1 10:27,1,10,Rush,23,2,(10:31) Shotgun #9 K.Vorhees rush middle for 2 yards gain to the LAT21 (#6 J.Foster; #96 Z.Nason),40175295357,0,0
+14,Washington State,Q1 9:53,2,8,Penalty,21,5,(09:55) PENALTY WSU False Start (#61 C.Hilborn) 5 yards from LAT21 to LAT26. NO PLAY,40175295361,0,0
+15,Washington State,Q1 9:31,2,13,Rush,26,3,(09:36) Shotgun #4 Z.Eckhaus rush middle for 3 yards gain to the LAT23 (#8 J.Fields),40175295364,0,0
+16,Washington State,Q1 8:51,3,10,Passing Touchdown,23,23,"(08:56) Shotgun #4 Z.Eckhaus pass complete short middle to #18 J.Meredith caught at LAT10, for 23 yards to the LAT00 TOUCHDOWN, clock 08:51, 1ST DOWN #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples)",40175295368,7,0
+17,Louisiana Tech,Q1 8:51,1,10,Kickoff,65,-65,"(08:51) #98 R.Harris kickoff 65 yards to the LAT00, Touchback",40175295376,7,0
+18,Louisiana Tech,Q1 8:51,1,10,Touchback,0,25,"(08:51) #98 R.Harris kickoff 65 yards to the LAT00, Touchback",40175295376,7,0
+19,Louisiana Tech,Q1 8:44,1,10,Rush,25,2,(08:50) No Huddle-Shotgun #22 O.Wiggins rush left for 2 yards gain to the LAT27 (#1 T.Large),40175295379,0,7
+20,Louisiana Tech,Q1 8:13,2,8,Rush,27,4,(08:18) No Huddle-Shotgun #22 O.Wiggins rush right for 4 yards gain to the LAT31 (#23 M.Durrance; #1 T.Large),40175295383,0,7
+21,Louisiana Tech,Q1 7:32,3,4,Pass Incompletion,31,0,(07:37) No Huddle-Shotgun #7 E.Bullock pass incomplete deep left to #11 J.Mickens thrown to WSU45,40175295387,0,7
+22,Louisiana Tech,Q1 7:25,4,4,Punt,31,0,(07:29) #48 J.Chance punt 44 yards to the WSU25 fair catch by #0 T.Freeman at WSU25,40175295390,0,7
+23,Washington State,Q1 7:18,1,10,Rush,75,2,(07:23) Shotgun #9 K.Vorhees rush middle for 2 yards gain to the WSU27 (#11 C.Woods),40175295394,7,0
+24,Washington State,Q1 6:39,2,8,Pass Reception,73,5,"(06:46) Shotgun #4 Z.Eckhaus pass complete short left to #18 J.Meredith caught at WSU27, for 5 yards to the WSU32 (#8 J.Fields)",40175295398,7,0
+25,Washington State,Q1 5:59,3,3,Pass Reception,68,8,"(06:03) Shotgun #4 Z.Eckhaus pass complete short right to #0 T.Freeman caught at WSU33, for 8 yards to the WSU40 (#8 J.Fields), out of bounds, 1ST DOWN",401752953103,7,0
+26,Washington State,Q1 5:31,1,10,Pass Incompletion,60,0,(05:38) No Huddle-Shotgun #4 Z.Eckhaus pass incomplete short right to #0 T.Freeman thrown to WSU45 QB hurried by #22 J.Mayfield and #6 J.Foster,401752953108,7,0
+27,Washington State,Q1 5:22,2,10,Pass Reception,60,23,"(05:30) Shotgun #4 Z.Eckhaus pass complete deep middle to #18 J.Meredith caught at LAT40, for 23 yards to the LAT37, End Of Play, 1ST DOWN",401752953111,7,0
+28,Washington State,Q1 4:34,1,10,Pass Reception,37,5,"(04:44) Shotgun #4 Z.Eckhaus pass complete short middle to #21 C.Pabst caught at LAT33, for 5 yards to the LAT32 QB hurried by #9 M.Mason and #94 E.Oguns (#7 J.Shelby Jr.)",401752953117,7,0
+29,Washington State,Q1 4:3,2,5,Penalty,32,10,(04:03) Shotgun #4 Z.Eckhaus pass incomplete short middle to #61 C.Hilborn thrown to LAT32 PENALTY WSU Ineligible Downfield on Pass declined WSU Holding (#71 A.Tripp) 10 yards from LAT32 to LAT42. NO PLAY,401752953122,7,0
+30,Washington State,Q1 3:50,2,15,Pass Incompletion,42,0,(03:59) Shotgun #4 Z.Eckhaus pass incomplete short left to #0 T.Freeman thrown to LAT25 broken up by #8 J.Fields QB hurried by #21 Z.Hill,401752953127,7,0
+31,Washington State,Q1 3:40,3,15,Pass Reception,42,5,"(03:49) Shotgun #4 Z.Eckhaus pass complete short right to #3 M.Woods caught at LAT45, for 5 yards to the LAT37 (#8 J.Fields), out of bounds PENALTY WSU Holding (#65 B.Dieu) 10 yards from LAT37 to LAT47",401752953130,7,0
+32,Washington State,Q1 3:10,3,20,Pass Reception,47,9,"(03:14) Shotgun #4 Z.Eckhaus pass complete short middle to #0 T.Freeman caught at LAT40, for 9 yards to the LAT38 (#0 S.Fongang)",401752953136,7,0
+33,Washington State,Q1 2:29,4,11,Punt,38,0,"(02:35) #98 R.Harris punt 35 yards to the LAT03, out of bounds at LAT03",401752953141,7,0
+34,Louisiana Tech,Q1 2:23,1,10,Rush,3,1,(02:28) No Huddle-Shotgun #4 C.Thevenin rush middle for 1 yard gain to the LAT04 (#44 P.McKenna; #92 D.Dalton),401752953146,0,7
+35,Louisiana Tech,Q1 1:39,2,9,Penalty,4,2,PENALTY LAT Delay Of Game (#7 E.Bullock) 2 yards from LAT04 to LAT02. NO PLAY,401752953150,0,7
+36,Louisiana Tech,Q1 1:29,2,11,Penalty,2,10,"(01:29) No Huddle-Shotgun #7 E.Bullock pass incomplete deep right to #1 D.Gandy thrown to LAT25 PENALTY WSU Holding (#2 C.Humphrey) 10 yards from LAT02 to LAT12, 1ST DOWN. NO PLAY",401752953153,0,7
+37,Louisiana Tech,Q1 1:19,1,10,Sack,12,-6,(01:24) No Huddle-Shotgun #7 E.Bullock sacked for loss of 6 yards to the LAT06 (#98 M.Ta'ase),401752953157,0,7
+38,Louisiana Tech,Q1 0:38,2,16,Pass Reception,6,4,"(00:44) No Huddle-Shotgun #7 E.Bullock pass complete short middle to #84 E.Finley caught at LAT10, for 4 yards to the LAT10 (#23 M.Durrance)",401752953161,0,7
+39,Louisiana Tech,Q1 0:0,2,16,End Period,6,4,End of 1st quarter.,401752953168,0,7
+40,Louisiana Tech,Q2 14:57,3,12,Pass Incompletion,10,0,(15:00) No Huddle-Shotgun #7 E.Bullock pass incomplete short left to #4 C.Thevenin thrown to LAT06,401752953172,0,7
+41,Louisiana Tech,Q2 14:38,4,12,Punt Return,10,58,(14:56) #48 J.Chance punt 65 yards to the WSU25 #0 T.Freeman return 58 yards to the LAT17 (#41 E.Burch),401752953177,0,7
+42,Washington State,Q2 14:26,1,10,Pass Reception,17,7,"(14:37) Shotgun #4 Z.Eckhaus pass complete short right to #18 J.Meredith caught at LAT16, for 7 yards to the LAT10 (#17 A.Butler)",401752953183,7,0
+43,Washington State,Q2 14:11,2,3,Rush,10,2,(14:13) No Huddle-Shotgun #9 K.Vorhees rush left for 2 yards gain to the LAT08 (#1 M.Richard; #7 J.Shelby Jr.),401752953188,7,0
+44,Washington State,Q2 13:27,3,1,Rush,8,0,(13:33) Shotgun #9 K.Vorhees rush middle for 0 yards to the LAT08 (#22 J.Mayfield; #9 M.Mason),401752953192,7,0
+45,Washington State,Q2 12:50,4,1,Rush,8,1,"(12:54) #4 Z.Eckhaus rush middle for 1 yard gain to the LAT07 (#97 C.Davis), 1ST DOWN",401752953196,7,0
+46,Washington State,Q2 12:15,1,7,Pass Incompletion,7,0,(12:17) Shotgun #4 Z.Eckhaus pass incomplete short right to #18 J.Meredith thrown to LAT05,401752953200,7,0
+47,Washington State,Q2 12:11,2,7,Rushing Touchdown,7,7,"(12:15) Shotgun #4 Z.Eckhaus rush left for 7 yards gain to the LAT00 TOUCHDOWN, clock 12:11 #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples)",401752953203,14,0
+48,Louisiana Tech,Q2 12:4,1,10,Kickoff,65,21,(12:11) #98 R.Harris kickoff 62 yards to the LAT03 #4 C.Thevenin return 21 yards to the LAT24 (#33 G.Jones),401752953210,14,0
+49,Louisiana Tech,Q2 11:57,1,10,Pass Incompletion,24,0,(12:03) No Huddle-Shotgun #7 E.Bullock pass incomplete short left to #15 D.Pierro thrown to LAT30 broken up by #5 J.Colson,401752953215,0,14
+50,Louisiana Tech,Q2 11:54,2,10,Pass Incompletion,24,0,(11:56) No Huddle-Shotgun #7 E.Bullock pass incomplete short middle to #18 M.Jackson thrown to LAT30 PENALTY LAT Illegal Formation declined,401752953218,0,14
+51,Louisiana Tech,Q2 11:44,3,10,Pass Reception,24,14,"(11:53) No Huddle-Shotgun #7 E.Bullock pass complete short middle to #84 E.Finley caught at LAT30, for 14 yards to the LAT38 (#28 K.Peterson), 1ST DOWN",401752953222,0,14
+52,Louisiana Tech,Q2 11:19,1,10,Rush,38,4,(11:23) No Huddle-Shotgun #22 O.Wiggins rush middle for 4 yards gain to the LAT42 (#32 D.Russell; #53 S.Finau),401752953227,0,14
+53,Louisiana Tech,Q2 10:47,2,6,Rush,42,1,(10:52) No Huddle-Shotgun #22 O.Wiggins rush middle for 1 yard gain to the LAT43 (#23 M.Durrance; #9 C.Francl),401752953231,0,14
+54,Louisiana Tech,Q2 10:10,3,5,Rush,43,-1,(10:20) No Huddle-Shotgun #4 C.Thevenin rush left for 1 yard loss to the LAT42 (#93 J.Janikowski; #5 J.Colson),401752953235,0,14
+55,Louisiana Tech,Q2 9:33,4,6,Punt,42,0,"(09:40) #48 J.Chance punt 58 yards to the WSU00, Touchback",401752953239,0,14
+56,Washington State,Q2 9:33,4,6,Touchback,100,20,"(09:40) #48 J.Chance punt 58 yards to the WSU00, Touchback",401752953239,0,14
+57,Washington State,Q2 9:27,1,10,Rush,80,1,(09:33) Shotgun #1 A.Johnson rush middle for 1 yard gain to the WSU21 (#0 S.Fongang),401752953243,14,0
+58,Washington State,Q2 8:45,2,9,Pass Reception,79,5,"(08:54) Shotgun #4 Z.Eckhaus pass complete short right to #15 J.Noga caught at WSU26, for 5 yards to the WSU26 QB hurried by #21 Z.Hill, out of bounds at WSU26",401752953247,14,0
+59,Washington State,Q2 8:9,3,4,Rush,74,3,(08:18) Shotgun #4 Z.Eckhaus rush middle for 3 yards gain to the WSU29 (#9 M.Mason; #93 J.Bradford),401752953252,14,0
+60,Washington State,Q2 7:30,4,1,Punt,71,0,(07:40) #98 R.Harris punt 38 yards to the LAT33,401752953256,14,0
+61,Louisiana Tech,Q2 7:20,1,10,Rush,33,6,(07:22) No Huddle-Shotgun #0 A.Burnette rush middle for 6 yards gain to the LAT39 (#44 P.McKenna; #23 M.Durrance),401752953260,0,14
+62,Louisiana Tech,Q2 6:49,2,4,Rush,39,4,"(06:51) No Huddle-Shotgun #0 A.Burnette rush middle for 4 yards gain to the LAT43 (#92 D.Dalton), 1ST DOWN",401752953264,0,14
+63,Louisiana Tech,Q2 6:7,1,10,Rush,43,10,"(06:15) No Huddle-Shotgun #7 E.Bullock rush middle for 10 yards gain to the WSU47 (#44 P.McKenna), 1ST DOWN",401752953268,0,14
+64,Louisiana Tech,Q2 5:33,1,10,Rush,53,5,(05:39) No Huddle-Shotgun #2 T.Kukuk rush middle for 5 yards gain to the WSU42 (#1 T.Large),401752953272,0,14
+65,Louisiana Tech,Q2 4:57,2,5,Rush,58,17,"(05:03) No Huddle-Shotgun #2 T.Kukuk rush middle for 17 yards gain to the WSU25 (#2 C.Humphrey), 1ST DOWN",401752953276,0,14
+66,Louisiana Tech,Q2 4:26,1,10,Rush,75,1,(04:31) No Huddle-Shotgun #2 T.Kukuk rush middle for 1 yard gain to the WSU24 (#53 S.Finau; #89 D.Fitzmaurice),401752953280,0,14
+67,Louisiana Tech,Q2 3:45,2,9,Rush,76,4,(03:52) No Huddle-Shotgun #2 T.Kukuk rush left for 4 yards gain to the WSU20 (#1 T.Large) PENALTY LAT UNS: Unsportsmanlike Conduct (#2 T.Kukuk) 15 yards from WSU20 to WSU35,401752953284,0,14
+68,Louisiana Tech,Q2 3:18,2,9,Timeout,76,0,"Timeout Louisiana Tech, clock 03:18",401752953292,0,14
+69,Louisiana Tech,Q2 3:11,3,20,Rush,65,6,(03:16) No Huddle-Shotgun #2 T.Kukuk rush middle for 6 yards gain to the WSU29 (#44 P.McKenna),401752953289,0,14
+70,Louisiana Tech,Q2 2:31,4,14,Field Goal Missed,71,47,"(02:36) #43 D.Henderson field goal attempt from 47 yards NO GOOD (H: #48 J.Chance, LS: #41 E.Burch), clock 02:31",401752953295,0,14
+71,Washington State,Q2 2:24,1,10,Pass Reception,71,1,"(02:31) Shotgun #4 Z.Eckhaus pass complete short left to #9 K.Vorhees caught at WSU27, for 1 yard to the WSU30 (#1 M.Richard), out of bounds",401752953299,14,0
+72,Washington State,Q2 2:0,1,10,Timeout,71,0,"Timeout Washington State, clock 02:00",401752953306,14,0
+73,Washington State,Q2 1:53,2,9,Rush,70,0,(01:59) Shotgun #4 Z.Eckhaus rush middle for 0 yards to the WSU30 (#97 C.Davis),401752953304,14,0
+74,Louisiana Tech,Q2 1:49,2,9,Timeout,70,0,"Timeout Louisiana Tech, clock 01:49",401752953311,0,14
+75,Louisiana Tech,Q2 1:42,3,9,Timeout,70,0,"Timeout Louisiana Tech, clock 01:42",401752953317,0,14
+76,Washington State,Q2 1:39,3,9,Pass Reception,70,5,"(01:49) Shotgun #4 Z.Eckhaus pass complete short middle to #3 M.Woods caught at WSU34, for 5 yards to the WSU35 (#22 J.Mayfield)",401752953309,14,0
+77,Washington State,Q2 1:32,4,4,Punt,65,0,(01:42) #98 R.Harris punt 28 yards to the LAT37,401752953315,14,0
+78,Louisiana Tech,Q2 1:20,1,10,Pass Reception,37,3,"(01:29) No Huddle-Shotgun #2 T.Kukuk pass complete short left to #84 E.Finley caught at LAT35, for 3 yards to the LAT40 (#2 C.Humphrey; #44 P.McKenna)",401752953321,0,14
+79,Louisiana Tech,Q2 0:57,2,7,Rush,40,10,"(00:58) No Huddle-Shotgun #4 C.Thevenin rush right for 10 yards gain to the LAT50 (#1 T.Large), out of bounds, 1ST DOWN",401752953326,0,14
+80,Louisiana Tech,Q2 0:47,1,10,Pass Reception,50,1,"(00:56) No Huddle-Shotgun #2 T.Kukuk pass complete short left to #15 D.Pierro caught at LAT47, for 1 yard to the WSU49 (#10 B.Peleti)",401752953330,0,14
+81,Louisiana Tech,Q2 0:26,2,9,Pass Incompletion,51,0,(00:29) No Huddle-Shotgun #2 T.Kukuk pass incomplete short left to #1 D.Gandy thrown to WSU45,401752953335,0,14
+82,Louisiana Tech,Q2 0:18,3,9,Pass Reception,51,11,"(00:25) No Huddle-Shotgun #2 T.Kukuk pass complete short left to #4 C.Thevenin caught at WSU48, for 11 yards to the WSU38 (#23 M.Durrance; #9 C.Francl), 1ST DOWN",401752953338,0,14
+83,Louisiana Tech,Q2 0:16,1,10,Pass Incompletion,62,0,"(00:16) No Huddle-Shotgun #2 T.Kukuk pass incomplete, Spike",401752953343,0,14
+84,Louisiana Tech,Q2 0:9,2,10,Pass Incompletion,62,0,(00:16) No Huddle-Shotgun #2 T.Kukuk pass incomplete short right to #11 J.Mickens thrown to WSU30,401752953346,0,14
+85,Washington State,Q2 0:9,2,10,Timeout,62,0,"Timeout Washington State, clock 00:09",401752953351,14,0
+86,Louisiana Tech,Q2 0:0,3,5,Field Goal Good,67,51,Drew Henderson 51 Yd Field Goal ,401752953354,3,14
+87,Louisiana Tech,Q2 0:0,3,5,End Period,67,-32,End of 2nd quarter.,401752953359,3,14
+88,Washington State,Q3 15:0,1,10,Kickoff,35,-65,"(15:00) #48 J.Chance kickoff 65 yards to the WSU00, Touchback",401752953364,3,14
+89,Washington State,Q3 15:0,1,10,Touchback,100,25,"(15:00) #48 J.Chance kickoff 65 yards to the WSU00, Touchback",401752953364,3,14
+90,Washington State,Q3 14:55,1,10,Rush,75,2,(14:59) Shotgun #9 K.Vorhees rush middle for 2 yards gain to the WSU27 (#8 J.Fields; #96 Z.Nason),401752953369,14,3
+91,Washington State,Q3 14:13,2,8,Rush,73,6,(14:19) Shotgun #20 L.Pulalasi rush right for 6 yards gain to the WSU33 (#90 J.Madkins),401752953373,14,3
+92,Washington State,Q3 13:35,3,2,Rush,67,8,"(13:40) Shotgun #4 Z.Eckhaus rush middle for 8 yards gain to the WSU41 (#22 J.Mayfield), 1ST DOWN",401752953377,14,3
+93,Washington State,Q3 12:57,1,10,Rush,59,7,(13:05) Shotgun #20 L.Pulalasi rush middle for 7 yards gain to the WSU48 (#6 J.Foster),401752953381,14,3
+94,Washington State,Q3 12:20,2,3,Rush,52,4,"(12:29) Shotgun #20 L.Pulalasi rush middle for 4 yards gain to the LAT48 (#21 Z.Hill), 1ST DOWN",401752953385,14,3
+95,Washington State,Q3 11:46,1,10,Pass Incompletion,48,0,(11:51) Shotgun #4 Z.Eckhaus pass incomplete deep right to #0 T.Freeman thrown to LAT18,401752953389,14,3
+96,Washington State,Q3 11:38,2,10,Rush,48,0,(11:45) Shotgun #20 L.Pulalasi rush right for 0 yards to the LAT48 (#9 M.Mason),401752953392,14,3
+97,Washington State,Q3 10:57,3,10,Pass Incompletion,48,0,(11:03) Shotgun #4 Z.Eckhaus pass incomplete deep left to #21 C.Pabst thrown to LAT15 QB hurried by #21 Z.Hill,401752953396,14,3
+98,Washington State,Q3 10:49,4,10,Punt,48,0,"(10:57) #98 R.Harris punt 48 yards to the LAT00, Touchback",401752953399,14,3
+99,Louisiana Tech,Q3 10:49,4,10,Touchback,0,20,"(10:57) #98 R.Harris punt 48 yards to the LAT00, Touchback",401752953399,14,3
+100,Louisiana Tech,Q3 10:49,1,10,Rush,20,0,(10:49) No Huddle-Shotgun #2 T.Kukuk rush middle for 0 yards to the LAT20 (#44 P.McKenna; #99 B.Lamb),401752953403,3,14
+101,Louisiana Tech,Q3 10:49,1,10,Timeout,20,0,"Timeout Louisiana Tech, clock 10:49",401752953412,3,14
+102,Louisiana Tech,Q3 10:36,2,10,Rush,20,1,(10:39) No Huddle-Shotgun #4 C.Thevenin rush left for 1 yard gain to the LAT21 (#88 I.Terrell),401752953410,3,14
+103,Louisiana Tech,Q3 10:0,3,9,Sack,21,-3,(10:05) No Huddle-Shotgun #7 E.Bullock sacked for loss of 3 yards to the LAT18 (#10 B.Peleti),401752953415,3,14
+104,Louisiana Tech,Q3 9:17,4,12,Punt,18,0,(09:24) #48 J.Chance punt 50 yards to the WSU32 fair catch by #0 T.Freeman at WSU32,401752953419,3,14
+105,Washington State,Q3 9:15,1,10,Pass Incompletion,68,0,(09:17) Shotgun #4 Z.Eckhaus pass incomplete short left to #0 T.Freeman thrown to WSU32,401752953423,14,3
+106,Washington State,Q3 9:10,2,10,Rush,68,1,(09:15) Shotgun #1 A.Johnson rush middle for 1 yard gain to the WSU33 (#23 A.Jackson Jr.),401752953426,14,3
+107,Washington State,Q3 8:31,3,9,Pass Incompletion,67,0,(08:34) Shotgun #4 Z.Eckhaus pass incomplete short middle to #18 J.Meredith thrown to WSU40,401752953432,14,3
+108,Washington State,Q3 8:19,4,9,Punt Return,67,-3,(08:30) #98 R.Harris punt 56 yards to the LAT11 #3 D.Latulas return for loss of 3 yards to the LAT08 (#24 S.Schlimgen),401752953435,14,3
+109,Louisiana Tech,Q3 8:11,1,10,Rush,8,6,(08:18) No Huddle-Shotgun #2 T.Kukuk rush left for 6 yards gain to the LAT14 (#5 J.Colson),401752953441,3,14
+110,Louisiana Tech,Q3 7:35,2,4,Rush,14,2,(07:39) No Huddle-Shotgun #4 C.Thevenin rush middle for 2 yards gain to the LAT16 (#98 M.Ta'ase),401752953445,3,14
+111,Louisiana Tech,Q3 6:58,3,2,Pass Incompletion,16,0,(07:03) No Huddle-Shotgun #4 C.Thevenin pass incomplete short left to #2 T.Kukuk thrown to LAT12 broken up by #9 C.Francl QB hurried by #53 S.Finau,401752953449,3,14
+112,Louisiana Tech,Q3 6:49,4,2,Punt,16,0,(06:55) #48 J.Chance punt 50 yards to the WSU34 fair catch by #0 T.Freeman at WSU34,401752953452,3,14
+113,Washington State,Q3 6:41,1,10,Rush,66,5,(06:48) Shotgun #9 K.Vorhees rush middle for 5 yards gain to the WSU39 (#8 J.Fields; #21 Z.Hill),401752953456,14,3
+114,Washington State,Q3 6:20,1,10,Timeout,66,0,"Timeout Washington State, clock 06:20",401752953462,14,3
+115,Washington State,Q3 6:12,2,5,Pass Reception,61,10,"(06:19) Shotgun #4 Z.Eckhaus pass complete short left to #0 T.Freeman caught at WSU40, for 10 yards to the WSU49 (#17 A.Butler), 1ST DOWN",401752953460,14,3
+116,Washington State,Q3 5:34,1,10,Rush,51,2,(05:38) Shotgun #20 L.Pulalasi rush left for 2 yards gain to the LAT49 (#9 M.Mason),401752953466,14,3
+117,Washington State,Q3 4:56,2,8,Penalty,49,15,"(04:56) Shotgun #4 Z.Eckhaus pass incomplete short right to #18 J.Meredith thrown to LAT30, 1ST DOWN, PENALTY LAT Pass Interference (#1 M.Richard) WSU UNS: Unsportsmanlike Conduct (#66 A.Vaipulu) 30 yards from LAT49 to LAT49, 1ST DOWN",401752953470,14,3
+118,Washington State,Q3 4:44,1,10,Pass Reception,49,4,"(04:49) Shotgun #4 Z.Eckhaus pass complete short right to #0 T.Freeman caught at LAT50, for 4 yards to the LAT45 (#23 A.Jackson Jr.)",401752953475,14,3
+119,Washington State,Q3 4:7,2,6,Rush,45,8,"(04:10) Shotgun #9 K.Vorhees rush middle for 8 yards gain to the LAT37 (#96 Z.Nason), 1ST DOWN",401752953480,14,3
+120,Washington State,Q3 3:26,1,10,Rush,37,4,(03:31) Shotgun #9 K.Vorhees rush middle for 4 yards gain to the LAT33 (#21 Z.Hill; #7 J.Shelby Jr.),401752953484,14,3
+121,Washington State,Q3 2:37,2,6,Pass Reception,33,4,"(02:44) Shotgun #4 Z.Eckhaus pass complete short left to #23 T.Leckner caught at LAT35, for 4 yards to the LAT29 (#0 S.Fongang)",401752953488,14,3
+122,Washington State,Q3 1:58,3,2,Rush,29,1,(02:05) Shotgun #9 K.Vorhees rush middle for 1 yard gain to the LAT28 (#98 D.Rieman),401752953493,14,3
+123,Washington State,Q3 1:14,4,1,Rush,28,16,"(01:21) Shotgun #4 Z.Eckhaus rush middle for 16 yards gain to the LAT12 (#9 M.Mason), 1ST DOWN",401752953497,14,3
+124,Washington State,Q3 0:33,1,10,Rush,12,6,(00:38) Shotgun #4 Z.Eckhaus rush middle for 6 yards gain to the LAT06 (#21 Z.Hill),401752953501,14,3
+125,Washington State,Q3 0:10,2,4,Penalty,6,3,(00:10) PENALTY LAT Offside (#9 M.Mason) 3 yards from LAT06 to LAT03. NO PLAY,401752953505,14,3
+126,Washington State,Q3 0:0,2,4,End Period,6,3,End of 3rd quarter.,401752953510,14,3
+127,Washington State,Q4 14:54,2,1,Rush,3,2,"(15:00) Shotgun #1 A.Johnson rush middle for 2 yards gain to the LAT01 (#9 M.Mason; #94 E.Oguns), 1ST DOWN",401752953514,14,3
+128,Washington State,Q4 14:13,2,1,Timeout,3,0,"Timeout Washington State, clock 14:13",401752953522,14,3
+129,Washington State,Q4 14:6,1,1,Rush,1,0,(14:12) Shotgun #1 A.Johnson rush middle for 0 yards to the LAT01 (#22 J.Mayfield; #21 Z.Hill),401752953520,14,3
+130,Washington State,Q4 13:30,2,1,Rushing Touchdown,1,1,"(13:33) #4 Z.Eckhaus rush middle for 1 yard gain to the LAT00 TOUCHDOWN, clock 13:30 #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples) #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples) PENALTY #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples) PENALTY WSU UNS: Unsportsmanlike Conduct 15 yards from LAT00 to WSU20 #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples) PENALTY WSU UNS: Unsportsmanlike Conduct (#46 C.Peoples) 15 yards from LAT00 to WSU20",401752953525,21,3
+131,Louisiana Tech,Q4 13:22,1,10,Kickoff,80,14,(13:30) #98 R.Harris kickoff 59 yards to the LAT21 #4 C.Thevenin return 14 yards to the LAT35 (#98 R.Harris; #33 G.Jones),401752953535,21,3
+132,Louisiana Tech,Q4 13:9,1,10,Pass Reception,35,5,"(13:18) No Huddle-Shotgun #2 T.Kukuk pass complete short left to #87 B.Bockler caught at LAT37, for 5 yards to the LAT40 (#9 C.Francl)",401752953540,3,21
+133,Louisiana Tech,Q4 12:31,2,5,Pass Reception,40,4,"(12:42) No Huddle-Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LAT35, for 4 yards to the LAT44 (#24 S.Schlimgen)",401752953545,3,21
+134,Louisiana Tech,Q4 12:0,3,1,Penalty,44,15,"(12:00) No Huddle-Shotgun #2 T.Kukuk pass incomplete short left to #8 J.Fields thrown to WSU41 PENALTY WSU Pass Interference (#2 C.Humphrey) 15 yards from LAT44 to WSU41, 1ST DOWN. NO PLAY",401752953550,3,21
+135,Louisiana Tech,Q4 11:48,1,10,Rush,59,11,"(11:57) No Huddle-Shotgun #0 A.Burnette rush middle for 11 yards gain to the WSU30 (#24 S.Schlimgen), 1ST DOWN",401752953554,3,21
+136,Louisiana Tech,Q4 11:32,1,10,Rush,70,3,(11:37) No Huddle-Shotgun #0 A.Burnette rush middle for 3 yards gain to the WSU27 (#2 C.Humphrey; #9 C.Francl),401752953560,3,21
+137,Louisiana Tech,Q4 10:52,2,7,Rush,73,15,"(10:59) No Huddle-Shotgun #0 A.Burnette rush right for 15 yards gain to the WSU12 (#24 S.Schlimgen), 1ST DOWN",401752953564,3,21
+138,Louisiana Tech,Q4 10:35,1,10,Penalty,88,15,(10:35) No Huddle-Shotgun #2 T.Kukuk rush middle for 2 yards gain to the WSU10 (#24 S.Schlimgen; #98 M.Ta'ase) PENALTY LAT Chop Block (#79 A.Cole) 15 yards from WSU12 to WSU27. NO PLAY,401752953568,3,21
+139,Louisiana Tech,Q4 10:13,1,25,Rush,73,6,(10:16) No Huddle-Shotgun #2 T.Kukuk rush left for 6 yards gain to the WSU21 (#9 C.Francl),401752953573,3,21
+140,Louisiana Tech,Q4 9:33,2,19,Sack,79,-3,"(09:39) No Huddle-Shotgun #2 T.Kukuk sacked for loss of 6 yards to the WSU27 (#88 I.Terrell, #98 M.Ta'ase)",401752953577,3,21
+141,Louisiana Tech,Q4 8:46,3,25,Pass Interception Return,73,-3,(08:54) No Huddle-Shotgun #2 T.Kukuk pass intercepted by #2 C.Humphrey at WSU15 #2 C.Humphrey return 15 yards to the WSU30 (#4 C.Thevenin),401752953581,3,21
+142,Washington State,Q4 8:41,1,10,Rush,70,3,(08:45) Shotgun #9 K.Vorhees rush middle for 3 yards gain to the WSU33 (#90 J.Madkins),401752953587,21,3
+143,Washington State,Q4 7:59,2,7,Rush,67,6,(08:04) Shotgun #9 K.Vorhees rush middle for 6 yards gain to the WSU39 (#0 S.Fongang),401752953591,21,3
+144,Washington State,Q4 7:21,3,1,Rush,61,3,"(07:25) Shotgun #4 Z.Eckhaus rush middle for 3 yards gain to the WSU42 (#90 J.Madkins), 1ST DOWN",401752953595,21,3
+145,Washington State,Q4 6:37,1,10,Pass Reception,58,11,"(06:39) Shotgun #4 Z.Eckhaus pass complete short right to #9 K.Vorhees caught at WSU45, for 11 yards to the LAT47 (#0 S.Fongang), out of bounds, 1ST DOWN",401752953599,21,3
+146,Washington State,Q4 5:56,1,10,Rush,47,1,(06:05) Shotgun #20 L.Pulalasi rush middle for 1 yard gain to the LAT46 (#2 J.Cobbs),401752953604,21,3
+147,Washington State,Q4 5:15,2,9,Rush,46,-1,(05:20) Shotgun #3 M.Woods rush middle for 1 yard loss to the LAT47 (#91 C.Sims),401752953608,21,3
+148,Washington State,Q4 4:25,3,10,Pass Reception,47,12,"(04:33) Shotgun #4 Z.Eckhaus pass complete short left to #18 J.Meredith caught at LAT35, for 12 yards to the LAT35 QB hurried by #23 A.Jackson Jr., out of bounds at LAT35, 1ST DOWN",401752953612,21,3
+149,Washington State,Q4 3:49,1,10,Rush,35,4,(03:53) Shotgun #9 K.Vorhees rush right for 4 yards gain to the LAT31 (#14 J.Mcrae),401752953617,21,3
+150,Washington State,Q4 3:0,2,6,Pass Reception,31,9,"(03:10) Shotgun #4 Z.Eckhaus pass complete short left to #88 M.Alleyne caught at LAT30, for 9 yards to the LAT22 (#7 J.Shelby Jr.), 1ST DOWN",401752953621,21,3
+151,Washington State,Q4 2:22,1,10,Rush,22,1,(02:25) Shotgun #9 K.Vorhees rush middle for 1 yard gain to the LAT21 (#22 J.Mayfield),401752953626,21,3
+152,Washington State,Q4 2:0,1,10,Timeout,22,0,"Timeout Washington State, clock 02:00",401752953632,21,3
+153,Washington State,Q4 1:54,2,9,Rush,21,2,(01:59) Shotgun #1 A.Johnson rush left for 2 yards gain to the LAT19 (#0 S.Fongang),401752953630,21,3
+154,Washington State,Q4 1:12,3,7,Rushing Touchdown,19,19,"(01:16) Shotgun #9 K.Vorhees rush middle for 19 yards gain to the LAT00 TOUCHDOWN, clock 01:12, 1ST DOWN #38 J.Stevens kick attempt good (H: #98 R.Harris, LS: #46 C.Peoples)",401752953635,28,3
+155,Louisiana Tech,Q4 1:7,1,10,Kickoff,65,12,(01:12) #98 R.Harris kickoff 64 yards to the LAT01 #4 C.Thevenin return 12 yards to the LAT13 (#32 D.Russell; #33 G.Jones),401752953643,28,3
+156,Louisiana Tech,Q4 0:59,1,10,Rush,13,0,(01:06) No Huddle-Shotgun #25 A.Givens rush left for 0 yards to the LAT13 (#4 K.Rapolla),401752953648,3,28
+157,Louisiana Tech,Q4 0:28,2,10,Rush,13,4,(00:28) No Huddle-Shotgun #25 A.Givens rush middle for 4 yards gain to the LAT17 (#94 T.Miller),401752953652,3,28
+158,Louisiana Tech,Q4 0:0,2,10,End Period,13,4,End of 4th quarter.,401752953658,3,28

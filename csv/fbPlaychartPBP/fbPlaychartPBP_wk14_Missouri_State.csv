@@ -1,0 +1,170 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Missouri State,Q1 15:0,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",4017573143,0,0
+1,Missouri State,Q1 15:0,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",4017573143,0,0
+2,Missouri State,Q1 15:0,1,10,Rush,75,14,"Shotgun #2 S.Lawrence rush right for 14 yards gain to the MSU39 (#11 C.Woods; #8 J.Fields), 1ST DOWN",40175731412,0,0
+3,Missouri State,Q1 15:0,1,10,Pass Reception,61,8,"No Huddle-Shotgun #12 J.Clark pass complete short left to #85 D.Hipp caught at MSU44, for 8 yards to the MSU47 (#8 J.Fields; #6 J.Foster)",40175731416,0,0
+4,Missouri State,Q1 15:0,2,2,Pass Incompletion,53,0,No Huddle-Shotgun #12 J.Clark pass incomplete short middle to #11 M.Cope thrown to LTU40,40175731421,0,0
+5,Missouri State,Q1 15:0,3,2,Pass Reception,53,33,"No Huddle #12 J.Clark pass complete short right to #40 C.Lair caught at MSU49, for 33 yards to the LTU20 (#6 J.Foster), 1ST DOWN",40175731424,0,0
+6,Missouri State,Q1 15:0,1,10,Sack,20,-6,No Huddle-Shotgun #12 J.Clark sacked for loss of 6 yards to the LTU26 (#98 D.Rieman),40175731429,0,0
+7,Missouri State,Q1 15:0,2,16,Rush,26,1,No Huddle-Shotgun #12 J.Clark rush middle for 1 yard gain to the LTU25 (#91 C.Sims),40175731433,0,0
+8,Missouri State,Q1 15:0,3,15,Sack,25,-10,No Huddle-Shotgun #12 J.Clark sacked for loss of 10 yards to the LTU35 (#42 S.Leota),40175731437,0,0
+9,Missouri State,Q1 10:58,4,25,Punt,35,33,#25 S.McDonald punt 33 yards to the LTU02,40175731441,0,0
+10,Louisiana Tech,Q1 10:43,1,10,Rushing Touchdown,2,98,"No Huddle-Shotgun #0 A.Burnette rush right for 98 yards gain to the MSU00 TOUCHDOWN, clock 10:43, 1ST DOWN #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",40175731445,7,0
+11,Missouri State,Q1 10:43,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",40175731453,7,0
+12,Missouri State,Q1 10:43,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",40175731453,7,0
+13,Missouri State,Q1 10:43,1,10,Rush,75,-4,Shotgun #2 S.Lawrence rush right for 4 yards loss to the MSU21 (#22 J.Mayfield; #98 D.Rieman),40175731456,0,7
+14,Missouri State,Q1 10:43,2,14,Pass Reception,79,12,"No Huddle-Shotgun #12 J.Clark pass complete short middle to #11 M.Cope caught at MSU33, for 12 yards to the MSU33 (#7 J.Shelby Jr.)",40175731460,0,7
+15,Missouri State,Q1 10:43,3,2,Pass Reception,67,1,"No Huddle #12 J.Clark pass complete short left to #2 S.Lawrence caught at MSU34, for 1 yard to the MSU34 (#7 J.Shelby Jr.)",40175731465,0,7
+16,Missouri State,Q1 10:43,4,1,Rush,66,2,"#12 J.Clark rush middle for 2 yards gain to the MSU36 (#6 J.Foster), 1ST DOWN",40175731470,0,7
+17,Missouri State,Q1 10:43,1,10,Pass Incompletion,64,0,No Huddle-Shotgun #12 J.Clark pass incomplete deep right to #0 J.Robinson thrown to LTU30,40175731474,0,7
+18,Missouri State,Q1 10:43,2,10,Rush,64,-3,No Huddle-Shotgun #2 S.Lawrence rush right for 3 yards loss to the MSU33 (#9 M.Mason),40175731477,0,7
+19,Missouri State,Q1 10:43,3,13,Pass Reception,67,14,"No Huddle-Shotgun #12 J.Clark pass complete short right to #9 R.Johnson caught at MSU47, for 14 yards to the MSU47 (#11 C.Woods), 1ST DOWN",40175731481,0,7
+20,Missouri State,Q1 10:43,1,10,Rush,53,-5,No Huddle-Shotgun #2 S.Lawrence rush right for 5 yards loss to the MSU42 (#22 J.Mayfield),40175731486,0,7
+21,Missouri State,Q1 10:43,2,15,Pass Reception,58,8,"No Huddle-Shotgun #12 J.Clark pass complete short middle to #2 S.Lawrence caught at MSU45, for 8 yards to the MSU50 (#22 J.Mayfield; #21 Z.Hill)",40175731490,0,7
+22,Missouri State,Q1 10:43,3,7,Penalty,50,5,"No Huddle-Shotgun #12 J.Clark pass incomplete short middle to #1 D.Luke thrown to LTU45 PENALTY LTU Pass Interference (#8 J.Fields) 5 yards from MSU50 to LTU45, 1ST DOWN. NO PLAY",40175731495,0,7
+23,Missouri State,Q1 10:43,1,10,Rush,45,0,No Huddle-Shotgun #2 S.Lawrence rush middle for 0 yards to the LTU45 (#42 S.Leota),40175731499,0,7
+24,Missouri State,Q1 10:43,2,10,Pass Incompletion,45,0,No Huddle-Shotgun #12 J.Clark pass incomplete short middle to #1 D.Luke thrown to LTU39 broken up by #0 S.Fongang,401757314103,0,7
+25,Missouri State,Q1 10:43,3,10,Pass Incompletion,45,0,No Huddle-Shotgun #12 J.Clark pass incomplete short left to #2 S.Lawrence thrown to LTU45 broken up by #42 S.Leota,401757314106,0,7
+26,Missouri State,Q1 4:27,4,10,Punt,45,30,#25 S.McDonald punt 30 yards to the LTU15 fair catch by #3 D.Latulas at LTU15,401757314109,0,7
+27,Louisiana Tech,Q1 4:27,1,10,Pass Incompletion,15,0,No Huddle-Shotgun #2 T.Kukuk pass incomplete short left to #0 A.Burnette thrown to LTU10,401757314113,7,0
+28,Louisiana Tech,Q1 4:27,2,10,Rush,15,3,No Huddle-Shotgun #18 M.Jackson rush left for 3 yards gain to the LTU18 (#0 M.Neal),401757314116,7,0
+29,Louisiana Tech,Q1 4:27,3,7,Rush,18,24,"No Huddle-Shotgun #2 T.Kukuk rush left for 24 yards gain to the LTU42 (#29 C.Ford), out of bounds, 1ST DOWN",401757314120,7,0
+30,Louisiana Tech,Q1 4:27,1,10,Pass Reception,42,4,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LTU40, for 4 yards to the LTU46 (#44 K.Young)",401757314124,7,0
+31,Louisiana Tech,Q1 4:27,2,6,Pass Reception,46,30,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LTU45, for 30 yards to the MSU24 (#14 T.Anderson), 1ST DOWN, PENALTY MSU Offside declined",401757314129,7,0
+32,Louisiana Tech,Q1 4:27,1,10,Rush,76,4,No Huddle-Shotgun #0 A.Burnette rush right for 4 yards gain to the MSU20 (#6 J.Lloyd; #98 D.Barnes),401757314135,7,0
+33,Louisiana Tech,Q1 4:27,2,6,Rush,80,3,No Huddle-Shotgun #4 C.Thevenin rush right for 3 yards gain to the MSU17 (#44 K.Young; #6 J.Lloyd),401757314139,7,0
+34,Louisiana Tech,Q1 4:27,3,3,Rush,83,3,"No Huddle-Shotgun #2 T.Kukuk rush middle for 3 yards gain to the MSU14 (#91 T.Brantley), 1ST DOWN",401757314143,7,0
+35,Louisiana Tech,Q1 0:0,3,3,End Period,83,3,End of 1st quarter.,401757314149,7,0
+36,Louisiana Tech,Q2 15:0,1,10,Rush,86,9,No Huddle-Shotgun #2 T.Kukuk rush right for 9 yards gain to the MSU05 (#44 K.Young; #6 J.Lloyd),401757314153,7,0
+37,Louisiana Tech,Q2 15:0,2,1,Rush,95,4,"No Huddle-Shotgun #0 A.Burnette rush middle for 4 yards gain to the MSU01 (#30 C.Wiest; #6 J.Lloyd), 1ST DOWN",401757314159,7,0
+38,Louisiana Tech,Q2 13:54,1,1,Rushing Touchdown,99,1,"No Huddle-Shotgun #0 A.Burnette rush middle for 1 yard gain to the MSU00 TOUCHDOWN, clock 13:54 #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757314163,14,0
+39,Missouri State,Q2 13:45,1,10,Kickoff,35,-43,#48 J.Chance kickoff 63 yards to the MSU02 #0 J.Robinson return 20 yards to the MSU22 (#4 K.Franklin),401757314170,14,0
+40,Missouri State,Q2 13:45,1,10,Rush,78,8,Shotgun #22 R.Green Jr. rush left for 8 yards gain to the MSU30 (#8 J.Fields),401757314175,0,14
+41,Missouri State,Q2 13:45,2,2,Rush,70,5,"No Huddle-Shotgun #22 R.Green Jr. rush right for 5 yards gain to the MSU35 (#94 E.Oguns), 1ST DOWN",401757314179,0,14
+42,Missouri State,Q2 13:45,1,10,Pass Reception,65,-4,"No Huddle-Shotgun #12 J.Clark pass complete short left to #40 C.Lair caught at MSU30, for 4 yards loss to the MSU31 (#1 M.Richard)",401757314183,0,14
+43,Missouri State,Q2 13:45,2,14,Pass Reception,69,12,"No Huddle-Shotgun #12 J.Clark pass complete short middle to #0 J.Robinson caught at MSU35, for 12 yards to the MSU43 (#97 C.Davis)",401757314188,0,14
+44,Missouri State,Q2 13:45,3,2,Rush,57,5,"No Huddle #12 J.Clark rush middle for 5 yards gain to the MSU48 (#96 Z.Nason), 1ST DOWN",401757314193,0,14
+45,Missouri State,Q2 13:45,1,10,Rush,52,7,No Huddle-Shotgun #2 S.Lawrence rush middle for 7 yards gain to the LTU45 (#20 K.McNeese; #14 J.Mcrae),401757314198,0,14
+46,Missouri State,Q2 13:45,2,3,Rush,45,2,No Huddle-Shotgun #2 S.Lawrence rush left for 2 yards gain to the LTU43 (#22 J.Mayfield; #21 Z.Hill),401757314202,0,14
+47,Missouri State,Q2 13:45,3,1,Rush,43,6,"#2 S.Lawrence rush left for 6 yards gain to the LTU37 (#21 Z.Hill), 1ST DOWN",401757314206,0,14
+48,Missouri State,Q2 13:45,1,10,Rush,37,0,No Huddle-Shotgun #22 R.Green Jr. rush left for 0 yards to the LTU37 (#22 J.Mayfield),401757314210,0,14
+49,Missouri State,Q2 13:45,2,10,Sack,37,-3,No Huddle-Shotgun #12 J.Clark sacked for loss of 3 yards to the LTU40 (#95 T.Vivians),401757314214,0,14
+50,Missouri State,Q2 13:45,3,13,Penalty,40,15,"No Huddle-Shotgun #12 J.Clark pass incomplete deep right to #0 J.Robinson thrown to LTU15 PENALTY LTU Pass Interference (#7 J.Shelby Jr.) 15 yards from LTU40 to LTU25, 1ST DOWN. NO PLAY",401757314218,0,14
+51,Missouri State,Q2 13:45,2,10,Pass Incompletion,25,0,No Huddle-Shotgun #12 J.Clark pass incomplete deep middle to #88 J.Askren thrown to LTU03,401757314227,0,14
+52,Missouri State,Q2 13:45,1,10,Pass Incompletion,25,0,Shotgun #12 J.Clark pass incomplete deep left to #9 R.Johnson thrown to LTU02,401757314229,0,14
+53,Missouri State,Q2 13:45,3,10,Pass Incompletion,25,0,No Huddle-Shotgun #12 J.Clark pass incomplete short middle thrown to LTU25 broken up by #6 J.Foster,401757314233,0,14
+54,Missouri State,Q2 6:36,4,10,Field Goal Good,25,42,"#36 Y.Obeid field goal attempt from 42 yards GOOD (H: #25 S.McDonald, LS: #47 A.Kallas), clock 06:36",401757314236,3,14
+55,Louisiana Tech,Q2 6:36,1,10,Kickoff,65,-65,"#36 Y.Obeid kickoff 65 yards to the LTU00, Touchback",401757314239,3,14
+56,Louisiana Tech,Q2 6:36,1,10,Touchback,0,25,"#36 Y.Obeid kickoff 65 yards to the LTU00, Touchback",401757314239,3,14
+57,Louisiana Tech,Q2 6:36,1,10,Rush,25,7,No Huddle-Shotgun #0 A.Burnette rush middle for 7 yards gain to the LTU32 (#91 T.Brantley; #7 D.Wesolak),401757314242,14,3
+58,Louisiana Tech,Q2 6:36,2,3,Fumble Recovery (Own),32,2,"No Huddle-Shotgun #0 A.Burnette rush left for 2 yards gain to the LTU34 fumbled by #0 A.Burnette at LTU33 forced by #55 A.Poole recovered by LTU #55 L.Nelson at LTU34, End Of Play",401757314246,14,3
+59,Louisiana Tech,Q2 6:36,3,1,Penalty,34,5,"PENALTY MSU Offside (#55 A.Poole) 5 yards from LTU34 to LTU39, 1ST DOWN. NO PLAY",401757314252,14,3
+60,Louisiana Tech,Q2 6:36,1,10,Rush,39,7,No Huddle-Shotgun #4 C.Thevenin rush left for 7 yards gain to the LTU46 (#6 J.Lloyd; #29 C.Ford),401757314255,14,3
+61,Louisiana Tech,Q2 6:36,2,3,Rush,46,4,"No Huddle-Shotgun #2 T.Kukuk rush middle for 4 yards gain to the LTU50 (#6 J.Lloyd), 1ST DOWN",401757314259,14,3
+62,Louisiana Tech,Q2 6:36,1,10,Rush,50,0,No Huddle-Shotgun #4 C.Thevenin rush left for 0 yards to the LTU50 (#19 J.Brooks),401757314263,14,3
+63,Louisiana Tech,Q2 6:36,2,10,Pass Incompletion,50,0,No Huddle-Shotgun #2 T.Kukuk pass incomplete short right thrown to MSU45 QB hurried by #6 J.Lloyd,401757314267,14,3
+64,Louisiana Tech,Q2 3:6,3,10,Pass Reception,50,1,"No Huddle-Shotgun #2 T.Kukuk pass complete short left to #18 M.Jackson caught at LTU48, for 1 yard to the MSU49 (#14 T.Anderson), out of bounds",401757314270,14,3
+65,Missouri State,Q2 3:6,2,10,Timeout,50,0,"Timeout Missouri State, clock 03:06",401757314272,3,14
+66,Louisiana Tech,Q2 2:25,4,9,Punt,51,34,"#48 J.Chance punt 34 yards to the MSU15, out of bounds at MSU15",401757314276,14,3
+67,Missouri State,Q2 2:25,1,10,Pass Incompletion,85,0,Shotgun #12 J.Clark pass incomplete short left to #1 D.Luke thrown to MSU19 broken up by #8 J.Fields,401757314281,3,14
+68,Missouri State,Q2 2:25,2,10,Rush,85,1,No Huddle-Shotgun #2 S.Lawrence rush right for 1 yard gain to the MSU16 (#90 J.Madkins),401757314284,3,14
+69,Missouri State,Q2 2:0,3,9,Rush,84,10,"Shotgun #12 J.Clark rush right for 10 yards gain to the MSU26 (#22 J.Mayfield), 1ST DOWN",401757314288,3,14
+70,Missouri State,Q2 2:0,2,10,Timeout,85,0,"Timeout Missouri State, clock 02:00",401757314290,3,14
+71,Missouri State,Q2 2:0,1,10,Penalty,74,15,"No Huddle-Shotgun #12 J.Clark pass incomplete short right to #15 T.Gardner thrown to MSU42 PENALTY LTU Pass Interference (#7 J.Shelby Jr.) 15 yards from MSU26 to MSU41, 1ST DOWN. NO PLAY",401757314294,3,14
+72,Missouri State,Q2 2:0,1,10,Pass Incompletion,59,0,No Huddle-Shotgun #12 J.Clark pass incomplete short left to #2 S.Lawrence thrown to MSU37,401757314298,3,14
+73,Missouri State,Q2 2:0,2,10,Pass Reception,59,27,"No Huddle-Shotgun #12 J.Clark pass complete deep middle to #15 T.Gardner caught at LTU32, for 27 yards to the LTU32 (#7 J.Shelby Jr.), 1ST DOWN",401757314301,3,14
+74,Missouri State,Q2 2:0,1,10,Pass Reception,32,9,"No Huddle-Shotgun #12 J.Clark pass complete short right to #1 D.Luke caught at LTU25, for 9 yards to the LTU23 (#6 J.Foster), out of bounds",401757314306,3,14
+75,Missouri State,Q2 1:9,2,1,Passing Touchdown,23,23,"J. Clark pass to J. Robinson for 23 yds, for a TD (Y. Obeid KICK)",401757314311,10,14
+76,Louisiana Tech,Q2 1:3,1,10,Kickoff,65,-50,#36 Y.Obeid kickoff 65 yards to the LTU00 #1 D.Gandy return 34 yards to the LTU34 (#36 Y.Obeid) PENALTY LTU Holding (#4 C.Thevenin) 10 yards from LTU25 to LTU15,401757314319,10,14
+77,Louisiana Tech,Q2 1:3,1,10,Rush,15,5,No Huddle-Shotgun #4 C.Thevenin rush left for 5 yards gain to the LTU20 (#91 T.Brantley; #44 K.Young),401757314325,14,10
+78,Louisiana Tech,Q2 1:3,2,5,Rush,20,2,No Huddle-Shotgun #4 C.Thevenin rush right for 2 yards gain to the LTU22 (#12 J.Dunbar),401757314329,14,10
+79,Louisiana Tech,Q2 0:32,3,3,Rush,22,7,"No Huddle-Shotgun #2 T.Kukuk rush right for 7 yards gain to the LTU29 (#44 K.Young), 1ST DOWN",401757314333,14,10
+80,Missouri State,Q2 0:32,2,5,Timeout,20,0,"Timeout Missouri State, clock 00:32",401757314335,10,14
+81,Louisiana Tech,Q2 0:27,1,10,Pass Reception,29,9,"No Huddle-Shotgun #2 T.Kukuk pass complete short middle to #4 C.Thevenin caught at LTU30, for 9 yards to the LTU38 (#9 D.Dixson; #44 K.Young)",401757314338,14,10
+82,Louisiana Tech,Q2 0:27,3,3,Timeout,22,0,"Timeout Louisiana Tech, clock 00:27",401757314340,14,10
+83,Louisiana Tech,Q2 0:0,1,10,End Period,29,-7,End of 2nd quarter.,401757314346,14,10
+84,Louisiana Tech,Q3 14:53,1,10,Kickoff,65,-32,#36 Y.Obeid kickoff 45 yards to the LTU20 #1 D.Gandy return 13 yards to the LTU33 (#36 Y.Obeid),401757314351,10,14
+85,Louisiana Tech,Q3 14:48,1,10,Rush,33,11,"No Huddle-Shotgun #22 O.Wiggins rush right for 11 yards gain to the LTU44 (#0 M.Neal), 1ST DOWN",401757314358,14,10
+86,Louisiana Tech,Q3 14:18,1,10,Rush,44,7,No Huddle-Shotgun #22 O.Wiggins rush middle for 7 yards gain to the MSU49 (#29 C.Ford; #44 K.Young),401757314362,14,10
+87,Louisiana Tech,Q3 13:48,2,3,Rush,51,2,No Huddle-Shotgun #0 A.Burnette rush middle for 2 yards gain to the MSU47 (#91 T.Brantley; #55 A.Poole),401757314366,14,10
+88,Louisiana Tech,Q3 13:18,3,1,Rush,53,0,No Huddle-Shotgun #0 A.Burnette rush middle for 0 yards to the MSU47 (#91 T.Brantley),401757314370,14,10
+89,Louisiana Tech,Q3 12:8,4,1,Pass Incompletion,53,0,"Shotgun #2 T.Kukuk pass incomplete deep right to #18 M.Jackson thrown to MSU20, TURNOVER ON DOWNS",401757314374,14,10
+90,Missouri State,Q3 12:8,1,10,Penalty,53,5,PENALTY MSU Delay Of Game  5 yards from MSU47 to MSU42. NO PLAY,401757314378,10,14
+91,Missouri State,Q3 12:8,1,15,Pass Reception,58,6,"Shotgun #12 J.Clark pass complete short left to #9 R.Johnson caught at MSU45, for 6 yards to the MSU48 (#6 J.Foster; #7 J.Shelby Jr.)",401757314381,10,14
+92,Missouri State,Q3 12:8,2,9,Pass Incompletion,52,0,No Huddle-Shotgun #12 J.Clark pass incomplete short right to #11 M.Cope thrown to LTU42 broken up by #9 M.Mason,401757314386,10,14
+93,Missouri State,Q3 12:8,3,9,Sack,52,-10,No Huddle-Shotgun #12 J.Clark sacked for loss of 10 yards to the MSU38 (#94 E.Oguns),401757314389,10,14
+94,Missouri State,Q3 10:48,4,19,Fumble,62,11,"No Huddle #25 S.McDonald rush right for 11 yards gain to the MSU49 fumbled by #25 S.McDonald at LTU45 forced by #11 C.Woods, out of bounds at MSU49, TURNOVER ON DOWNS",401757314393,10,14
+95,Louisiana Tech,Q3 10:48,1,10,Rush,51,20,"No Huddle-Shotgun #22 O.Wiggins rush left for 20 yards gain to the MSU29 (#0 M.Neal), 1ST DOWN",401757314400,14,10
+96,Louisiana Tech,Q3 10:48,1,10,Rush,71,22,"No Huddle-Shotgun #2 T.Kukuk rush middle for 22 yards gain to the MSU07 (#44 K.Young), 1ST DOWN",401757314404,14,10
+97,Louisiana Tech,Q3 10:48,1,7,Rush,93,-2,No Huddle-Shotgun #22 O.Wiggins rush left for 2 yards loss to the MSU09 (#0 M.Neal),401757314408,14,10
+98,Louisiana Tech,Q3 10:48,2,9,Rush,91,4,No Huddle-Shotgun #2 T.Kukuk rush middle for 4 yards gain to the MSU05 (#44 K.Young; #30 C.Wiest),401757314412,14,10
+99,Louisiana Tech,Q3 10:48,3,5,Penalty,95,5,PENALTY LTU False Start (#55 L.Nelson) 5 yards from MSU05 to MSU10. NO PLAY,401757314418,14,10
+100,Louisiana Tech,Q3 10:48,3,10,Penalty,90,8,"No Huddle-Shotgun #2 T.Kukuk pass incomplete short middle to #18 M.Jackson thrown to MSU00 PENALTY MSU Pass Interference (#12 J.Dunbar) 8 yards from MSU10 to MSU02, 1ST DOWN. NO PLAY",401757314421,14,10
+101,Louisiana Tech,Q3 8:18,1,2,Rushing Touchdown,98,2,"No Huddle-Shotgun #2 T.Kukuk rush middle for 2 yards gain to the MSU00 TOUCHDOWN, clock 08:18 #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757314425,21,10
+102,Missouri State,Q3 8:18,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314432,21,10
+103,Missouri State,Q3 8:18,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314432,21,10
+104,Missouri State,Q3 8:18,1,10,Pass Reception,75,19,"Shotgun #12 J.Clark pass complete short middle to #11 M.Cope caught at MSU41, for 19 yards to the MSU44 (#8 J.Fields; #11 C.Woods), 1ST DOWN",401757314435,10,21
+105,Missouri State,Q3 7:25,1,10,Rushing Touchdown,56,56,"No Huddle-Shotgun #2 S.Lawrence rush middle for 56 yards gain to the LTU00 TOUCHDOWN, clock 07:25, 1ST DOWN #36 Y.Obeid kick attempt good (H: #25 S.McDonald, LS: #47 A.Kallas)",401757314440,17,21
+106,Louisiana Tech,Q3 7:21,1,10,Kickoff,65,-43,#36 Y.Obeid kickoff 52 yards to the LTU13 #22 O.Wiggins return 9 yards to the LTU22 (#40 C.Lair; #24 C.Olabode),401757314447,17,21
+107,Louisiana Tech,Q3 7:21,1,10,Pass Reception,22,4,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #11 J.Mickens caught at LTU25, for 4 yards to the LTU26 (#12 J.Dunbar)",401757314452,21,17
+108,Louisiana Tech,Q3 7:21,2,6,Rush,26,3,No Huddle-Shotgun #0 A.Burnette rush left for 16 yards gain (3) to the LTU42 (#44 K.Young) PENALTY LTU Holding (#55 L.Nelson) 10 yards from LTU29 to LTU19,401757314457,21,17
+109,Louisiana Tech,Q3 7:21,2,13,Pass Incompletion,19,0,No Huddle-Shotgun #2 T.Kukuk pass incomplete short right to #11 J.Mickens thrown to LTU25 QB hurried by #6 J.Lloyd,401757314462,21,17
+110,Louisiana Tech,Q3 6:15,3,13,Pass Reception,19,17,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #4 C.Thevenin caught at LTU19, for 17 yards to the LTU36 (#29 C.Ford), 1ST DOWN",401757314465,21,17
+111,Missouri State,Q3 6:15,2,13,Timeout,19,0,"Timeout Missouri State, clock 06:15",401757314467,17,21
+112,Louisiana Tech,Q3 6:15,1,10,Rush,36,4,No Huddle-Shotgun #2 T.Kukuk rush middle for 4 yards gain to the LTU40 (#44 K.Young),401757314471,21,17
+113,Louisiana Tech,Q3 6:15,2,6,Rush,40,16,"No Huddle-Shotgun #4 C.Thevenin rush middle for 16 yards gain to the MSU44 (#29 C.Ford), 1ST DOWN",401757314475,21,17
+114,Louisiana Tech,Q3 6:15,1,10,Rush,56,3,No Huddle-Shotgun #4 C.Thevenin rush middle for 3 yards gain to the MSU41 (#0 M.Neal; #17 D.Townley),401757314479,21,17
+115,Louisiana Tech,Q3 6:15,2,7,Rush,59,3,No Huddle-Shotgun #0 A.Burnette rush middle for 3 yards gain to the MSU38 (#31 C.Roy; #17 D.Townley),401757314483,21,17
+116,Louisiana Tech,Q3 6:15,3,4,Pass Reception,62,5,"No Huddle-Shotgun #2 T.Kukuk pass complete short right to #11 J.Mickens caught at MSU35, for 5 yards to the MSU33 (#14 T.Anderson; #0 M.Neal), 1ST DOWN",401757314487,21,17
+117,Louisiana Tech,Q3 6:15,1,10,Rush,67,0,No Huddle-Shotgun #0 A.Burnette rush middle for 0 yards to the MSU33 (#44 K.Young; #6 J.Lloyd),401757314492,21,17
+118,Louisiana Tech,Q3 6:15,2,10,Pass Incompletion,67,0,No Huddle-Shotgun #2 T.Kukuk pass incomplete deep middle to #84 E.Finley thrown to MSU00 broken up by #0 M.Neal,401757314496,21,17
+119,Louisiana Tech,Q3 6:15,3,10,Rush,67,22,"No Huddle-Shotgun #2 T.Kukuk rush right for 22 yards gain to the MSU11 (#12 J.Dunbar; #9 D.Dixson), 1ST DOWN",401757314499,21,17
+120,Louisiana Tech,Q3 6:15,1,10,Rush,89,4,No Huddle-Shotgun #4 C.Thevenin rush middle for 4 yards gain to the MSU07 (#17 D.Townley),401757314503,21,17
+121,Louisiana Tech,Q3 6:15,2,6,Rush,93,2,No Huddle-Shotgun #2 T.Kukuk rush right for 2 yards gain to the MSU05 (#91 T.Brantley),401757314507,21,17
+122,Louisiana Tech,Q3 0:0,2,6,End Period,93,2,End of 3rd quarter.,401757314513,21,17
+123,Louisiana Tech,Q4 15:0,3,4,Rush,95,3,No Huddle-Shotgun #0 A.Burnette rush middle for 3 yards gain to the MSU02 (#6 J.Lloyd),401757314517,21,17
+124,Louisiana Tech,Q4 14:12,4,1,Rushing Touchdown,98,2,"No Huddle-Shotgun #2 T.Kukuk rush right for 2 yards gain to the MSU00 TOUCHDOWN, clock 14:12, 1ST DOWN #38 K.Kent kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757314523,28,17
+125,Missouri State,Q4 14:12,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314530,28,17
+126,Missouri State,Q4 14:12,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314530,28,17
+127,Missouri State,Q4 14:12,1,10,Rush,75,1,No Huddle-Shotgun #2 S.Lawrence rush right for 1 yard gain to the MSU26 (#9 M.Mason),401757314533,17,28
+128,Missouri State,Q4 14:12,2,9,Rush,74,5,No Huddle-Shotgun #2 S.Lawrence rush left for 5 yards gain to the MSU31 (#42 S.Leota),401757314537,17,28
+129,Missouri State,Q4 14:12,3,4,Pass Incompletion,69,0,No Huddle-Shotgun #12 J.Clark pass incomplete deep left to #15 T.Gardner thrown to LTU45,401757314541,17,28
+130,Louisiana Tech,Q4 14:12,1,10,Rush,18,3,No Huddle-Shotgun #22 O.Wiggins rush middle for 3 yards gain to the LTU21 (#35 A.Yelder),401757314551,28,17
+131,Missouri State,Q4 14:12,4,4,Punt Return,69,-8,#25 S.McDonald punt 41 yards to the LTU28 #11 C.Woods return for loss of 8 yards to the LTU20 (#18 D.Quist) PENALTY LTU Holding (#1 D.Gandy) 10 yards from LTU28 to LTU18,401757314553,17,28
+132,Louisiana Tech,Q4 14:12,2,7,Rush,21,-2,No Huddle-Shotgun #0 A.Burnette rush middle for 2 yards loss to the LTU19 (#30 C.Wiest; #35 A.Yelder),401757314561,28,17
+133,Louisiana Tech,Q4 14:12,3,9,Rush,19,7,No Huddle-Shotgun #2 T.Kukuk rush left for 51 yards gain (7) to the MSU30 (#0 M.Neal) PENALTY LTU Personal Foul (#1 D.Gandy) 13 yards from LTU26 to LTU13,401757314565,28,17
+134,Louisiana Tech,Q4 14:12,3,15,Rush,13,2,No Huddle-Shotgun #4 C.Thevenin rush middle for 2 yards gain to the LTU15 (#35 A.Yelder),401757314570,28,17
+135,Louisiana Tech,Q4 9:41,4,13,Punt,15,60,#48 J.Chance punt 50 yards to the MSU35 PENALTY MSU Holding (#3 K.Anderson) 10 yards from MSU25 to MSU25,401757314574,28,17
+136,Missouri State,Q4 9:30,1,10,Passing Touchdown,75,75,Jeron Askren 75 Yd pass from Jacob Clark (Two-Point Run Conversion Failed),401757314579,23,28
+137,Missouri State,Q4 9:15,1,10,Kickoff Return Touchdown,65,93,"Y. Obeid kickoff for 58 yds, D. Gandy returns for 93 yds for a TD (K. Kent KICK)",401757314588,23,35
+138,Missouri State,Q4 9:15,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314595,35,23
+139,Missouri State,Q4 9:15,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314595,35,23
+140,Missouri State,Q4 9:15,1,10,Pass Reception,75,31,"Shotgun #12 J.Clark pass complete deep middle to #0 J.Robinson caught at LTU44, for 31 yards to the LTU44, End Of Play, 1ST DOWN",401757314598,23,35
+141,Missouri State,Q4 9:15,1,10,Pass Incompletion,44,0,No Huddle-Shotgun #12 J.Clark pass incomplete short right to #11 M.Cope thrown to LTU25,401757314603,23,35
+142,Missouri State,Q4 9:15,2,10,Rush,44,4,No Huddle-Shotgun #2 S.Lawrence rush middle for 4 yards gain to the LTU40 (#9 M.Mason; #8 J.Fields),401757314606,23,35
+143,Missouri State,Q4 9:15,3,6,Pass Reception,40,15,"No Huddle-Shotgun #12 J.Clark pass complete short middle to #1 D.Luke caught at LTU29, for 15 yards to the LTU25 (#8 J.Fields), 1ST DOWN",401757314610,23,35
+144,Missouri State,Q4 9:15,1,10,Rush,25,13,"No Huddle-Shotgun #22 R.Green Jr. rush right for 13 yards gain to the LTU12 (#6 J.Foster), 1ST DOWN",401757314615,23,35
+145,Missouri State,Q4 6:44,1,10,Rushing Touchdown,12,12,"R. Green Jr. run for 12 yds, for a TD (Y. Obeid KICK)",401757314619,30,35
+146,Louisiana Tech,Q4 6:39,1,10,Kickoff,65,-47,"#36 Y.Obeid kickoff 60 yards to the LTU05 #4 C.Thevenin return 13 yards to the LTU18, End Of Play",401757314626,30,35
+147,Louisiana Tech,Q4 6:39,1,10,Rush,18,4,No Huddle-Shotgun #4 C.Thevenin rush left for 4 yards gain to the LTU22 (#29 C.Ford),401757314632,35,30
+148,Louisiana Tech,Q4 6:39,2,6,Rush,22,2,No Huddle-Shotgun #2 T.Kukuk rush middle for 2 yards gain to the LTU24 (#7 D.Wesolak),401757314636,35,30
+149,Louisiana Tech,Q4 6:39,3,4,Pass Reception,24,17,"No Huddle-Shotgun #2 T.Kukuk pass complete short middle to #84 E.Finley caught at LTU41, for 17 yards to the LTU41 (#29 C.Ford), 1ST DOWN",401757314640,35,30
+150,Louisiana Tech,Q4 6:39,1,10,Rush,41,1,No Huddle-Shotgun #0 A.Burnette rush middle for 1 yard gain to the LTU42 (#91 T.Brantley; #6 J.Lloyd),401757314645,35,30
+151,Louisiana Tech,Q4 3:44,2,9,Rushing Touchdown,42,58,"T. Kukuk run for 58 yds, for a TD (K. Kent KICK)",401757314650,42,30
+152,Missouri State,Q4 3:44,1,10,Kickoff,35,-65,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314657,42,30
+153,Missouri State,Q4 3:44,1,10,Touchback,100,25,"#48 J.Chance kickoff 65 yards to the MSU00, Touchback",401757314657,42,30
+154,Missouri State,Q4 3:44,1,10,Pass Incompletion,75,0,Shotgun #12 J.Clark pass incomplete deep left to #85 D.Hipp thrown to LTU50,401757314660,30,42
+155,Missouri State,Q4 3:44,2,10,Penalty,75,13,"No Huddle-Shotgun #12 J.Clark pass incomplete short left to #5 J.BlackStrain thrown to MSU35, 1ST DOWN, PENALTY LTU Pass Interference (#11 C.Woods) 13 yards from MSU25 to MSU38, 1ST DOWN. NO PLAY",401757314663,30,42
+156,Missouri State,Q4 3:44,1,10,Pass Reception,62,5,"No Huddle-Shotgun #12 J.Clark pass complete short left to #5 J.BlackStrain caught at MSU43, for 5 yards to the MSU43 (#11 C.Woods)",401757314667,30,42
+157,Missouri State,Q4 3:1,2,5,Pass Interception Return,57,21,"No Huddle-Shotgun #12 J.Clark pass intercepted by #6 J.Foster at LTU36, End Of Play",401757314672,30,42
+158,Louisiana Tech,Q4 3:1,1,10,Rush,36,0,No Huddle-Shotgun #2 T.Kukuk rush middle for 0 yards to the LTU36 (#6 J.Lloyd),401757314677,42,30
+159,Louisiana Tech,Q4 2:53,2,10,Rush,36,2,No Huddle-Shotgun #0 A.Burnette rush middle for 2 yards gain to the LTU38 (#6 J.Lloyd; #91 T.Brantley),401757314681,42,30
+160,Missouri State,Q4 2:53,1,10,Timeout,36,0,"Timeout Missouri State, clock 02:53",401757314683,30,42
+161,Louisiana Tech,Q4 2:47,3,8,Penalty,38,5,No Huddle-Shotgun #2 T.Kukuk pass incomplete short right to #1 D.Gandy thrown to MSU43 PENALTY MSU Offside (#31 C.Roy) 5 yards from LTU38 to LTU43. NO PLAY,401757314686,42,30
+162,Missouri State,Q4 2:47,2,10,Timeout,36,0,"Timeout Missouri State, clock 02:47",401757314688,30,42
+163,Louisiana Tech,Q4 2:47,3,3,Rush,43,4,"No Huddle-Shotgun #0 A.Burnette rush left for 4 yards gain to the LTU47 (#90 S.Smithson), 1ST DOWN",401757314691,42,30
+164,Louisiana Tech,Q4 2:0,1,10,Rush,47,-2,Kneel down by #2 T.Kukuk at LTU45 for loss of 2 yards,401757314695,42,30
+165,Louisiana Tech,Q4 2:0,3,3,Timeout,43,0,"Timeout Louisiana Tech, clock 02:00",401757314697,42,30
+166,Louisiana Tech,Q4 2:0,2,12,Rush,45,-1,Kneel down by #2 T.Kukuk at LTU44 for loss of 1 yard,401757314699,42,30
+167,Louisiana Tech,Q4 2:0,3,13,Rush,44,-1,Kneel down by #2 T.Kukuk at LTU43 for loss of 1 yard,401757314702,42,30
+168,Louisiana Tech,Q4 0:0,3,13,End of Game,44,-1,End of 4th quarter.,401757314707,42,30

@@ -1,0 +1,174 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,SE Louisiana,Q1 15:0,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757221101849903,0,0
+1,SE Louisiana,Q1 15:0,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757221101849903,0,0
+2,SE Louisiana,Q1 14:37,1,10,Pass Reception,75,2,Carson Camp pass complete to Jaylon Domingeaux for 2 yds to the SELA 27,401757221101856201,0,0
+3,SE Louisiana,Q1 13:55,2,8,Rush,73,-1,Carson Camp run for a loss of 1 yard to the SELA 26,401757221101864401,0,0
+4,SE Louisiana,Q1 13:34,3,9,Rush,74,10,Jaedon Henry run for 10 yds to the SELA 36 for a 1ST down,401757221101866501,0,0
+5,SE Louisiana,Q1 12:56,1,10,Rush,64,10,Jaedon Henry run for 10 yds to the SELA 46 for a 1ST down,401757221101874301,0,0
+6,SE Louisiana,Q1 12:25,1,10,Pass Incompletion,54,0,Carson Camp pass incomplete to Jaedon Henry,401757221101877401,0,0
+7,SE Louisiana,Q1 12:13,2,10,Penalty,54,-5,"(12:23) PENALTY SLU False Start (Hooper,Zane) 5 yards from SLU46 to SLU41. NO PLAY.",401757221101878601,0,0
+8,SE Louisiana,Q1 11:53,2,15,Rush,59,5,Calvin Smith Jr. run for 5 yds to the SELA 46,401757221101884601,0,0
+9,SE Louisiana,Q1 10:56,3,10,Rush,54,13,Carson Camp run for 13 yds to the LT 41 for a 1ST down,401757221101894301,0,0
+10,SE Louisiana,Q1 10:30,1,10,Pass Interception Return,41,37,Carson Camp pass intercepted,401757221101896901,0,0
+11,Louisiana Tech,Q1 10:21,1,10,Rush,4,1,Omiri Wiggins run for 1 yd to the LT 5,401757221101897801,0,0
+12,Louisiana Tech,Q1 9:38,2,9,Rush,5,9,Trey Kukuk run for 9 yds to the LT 14 for a 1ST down,401757221101906101,0,0
+13,Louisiana Tech,Q1 9:10,1,10,Rush,14,5,Trey Kukuk run for 5 yds to the LT 19,401757221101908901,0,0
+14,Louisiana Tech,Q1 8:45,2,5,Pass Reception,19,4,Trey Kukuk pass complete to Marques Singleton Jr. for 4 yds to the LT 23,401757221101915401,0,0
+15,Louisiana Tech,Q1 8:45,3,1,Timeout,23,0,"Timeout Louisiana Tech, clock 08:45",401757221101915402,0,0
+16,Louisiana Tech,Q1 7:48,3,1,Punt,23,42,"John Hoyet Chance punt for 42 yds, punt out-of-bounds at the SELA 35",401757221101925101,0,0
+17,SE Louisiana,Q1 7:32,1,10,Rush,65,-2,Carson Camp run for a loss of 2 yards to the SELA 33,401757221101926701,0,0
+18,SE Louisiana,Q1 7:1,2,12,Penalty,67,-5,"PENALTY SLU False Start (Potter,Logan) 5 yards from SLU33 to SLU28. NO PLAY.",401757221101929801,0,0
+19,SE Louisiana,Q1 6:45,2,17,Rush,72,4,Carson Camp run for 4 yds to the SELA 32,401757221101935401,0,0
+20,SE Louisiana,Q1 6:28,3,13,Rush,68,1,Brandon Hayes run for 1 yd to the SELA 33,401757221101937101,0,0
+21,SE Louisiana,Q1 5:53,4,12,Punt,67,34,"Alec Mahler punt for 34 yds, punt out-of-bounds at the LT 33",401757221101944601,0,0
+22,Louisiana Tech,Q1 5:47,1,10,Rush,33,-16,"Clay Thevenin run for a loss of 1 yard to the LT 32 Louisiana Tech Penalty, Personal Foul (Marlion Jackson) to the LT 17",401757221101945201,0,0
+23,Louisiana Tech,Q1 5:38,2,26,Pass Incompletion,17,0,Trey Kukuk pass incomplete to Marlion Jackson,401757221101946101,0,0
+24,Louisiana Tech,Q1 5:28,3,26,Rush,17,6,Clay Thevenin run for 6 yds to the LT 23,401757221101947101,0,0
+25,Louisiana Tech,Q1 4:47,4,20,Punt,23,59,"John Hoyet Chance punt for 59 yds, punt out-of-bounds at the SELA 20 , Brandon Hayes returns for 2 yds to the SELA 20",401757221101955201,0,0
+26,SE Louisiana,Q1 4:47,4,20,Punt Return,82,2,"John Hoyet Chance punt for 59 yds, punt out-of-bounds at the SELA 20 , Brandon Hayes returns for 2 yds to the SELA 20",401757221101955201,0,0
+27,SE Louisiana,Q1 4:35,1,10,Rush,80,-1,Jaedon Henry run for a loss of 1 yard to the SELA 19,401757221101956401,0,0
+28,SE Louisiana,Q1 4:5,2,11,Sack,81,-9,Kyle Lowe sacked by Mekhi Mason for a loss of 9 yards to the SELA 10,401757221101959401,0,0
+29,SE Louisiana,Q1 3:21,3,20,Penalty,90,-3,"(03:24) Shotgun Henry,Jaedon rush middle for 15 yards gain to the SLU25 (Shelby Jr.,Jhamal; Mason,Mekhi) PENALTY SLU Holding (Wilkinson,Adyn) 3 yards from SLU10 to SLU07. NO PLAY.",401757221101967801,0,0
+30,SE Louisiana,Q1 2:46,3,23,Rush,93,7,Jaedon Henry run for 7 yds to the SELA 14,401757221101975301,0,0
+31,SE Louisiana,Q1 1:59,4,16,Punt,86,51,"Alec Mahler punt for 51 yds , Dedrick Latulas returns for 25 yds to the SELA 40",401757221101984001,0,0
+32,Louisiana Tech,Q1 1:59,4,16,Punt Return,35,25,"Alec Mahler punt for 51 yds , Dedrick Latulas returns for 25 yds to the SELA 40",401757221101984001,0,0
+33,Louisiana Tech,Q1 1:56,1,10,Penalty,60,0,"(01:59) Shotgun Kukuk,Trey pass incomplete short middle to Finley,Eli thrown to SLU40 PENALTY LAT Intentional Grounding (Kukuk,Trey). NO PLAY.",401757221101984301,0,0
+34,Louisiana Tech,Q1 1:48,2,10,Rush,60,-5,Omiri Wiggins run for a loss of 5 yards to the SELA 45,401757221101985101,0,0
+35,Louisiana Tech,Q1 1:18,3,15,Pass Reception,55,11,Trey Kukuk pass complete to Eli Finley for 11 yds to the SELA 34,401757221101988101,0,0
+36,Louisiana Tech,Q1 1:4,4,4,Penalty,66,-5,"PENALTY LAT False Start (Nelson,Landon) 5 yards from SLU34 to SLU39. NO PLAY.",401757221101989501,0,0
+37,Louisiana Tech,Q1 0:46,4,9,Punt,61,30,John Hoyet Chance punt for 30 yds,401757221101995301,0,0
+38,SE Louisiana,Q1 0:35,1,10,Rush,91,-1,Brandon Hayes run for a loss of 1 yard to the SELA 8,401757221101996401,0,0
+39,SE Louisiana,Q1 0:0,2,11,Rush,92,-1,Rodeo Graham Jr. run for a loss of 1 yard to the SELA 7,401757221101999901,0,0
+40,SE Louisiana,Q1 0:0,3,12,Rush,93,1,Kyle Lowe run for 1 yd to the SELA 8,401757221101999902,0,0
+41,SE Louisiana,Q1 0:0,4,11,Punt,92,43,"Alec Mahler punt for 43 yds , Dedrick Latulas returns for no gain to the LT 49",401757221101999903,0,0
+42,SE Louisiana,Q1 0:0,0,11,End Period,92,0,End of 1st Quarter,401757221101999904,0,0
+43,SE Louisiana,Q2 10:6,4,1,Punt,64,38,"Alec Mahler punt for 38 yds, fair catch by Dedrick Latulas at the LT 26",401757221102899301,0,0
+44,Louisiana Tech,Q2 10:6,1,10,Rush,26,7,Trey Kukuk run for 7 yds to the LT 33,401757221102899303,0,0
+45,Louisiana Tech,Q2 10:6,2,3,Rush,33,-5,Trey Kukuk run for a loss of 5 yards to the LT 28,401757221102899304,0,0
+46,Louisiana Tech,Q2 10:6,3,8,Sack,28,-3,Trey Kukuk sacked for a loss of 3 yards to the LT 25,401757221102899305,0,0
+47,Louisiana Tech,Q2 8:3,1,10,Rush,49,6,Trey Kukuk run for 6 yds to the SELA 45,401757221102919601,0,0
+48,Louisiana Tech,Q2 8:3,4,11,Punt,25,57,John Hoyet Chance punt for 57 yds,401757221102919602,0,0
+49,SE Louisiana,Q2 8:3,1,10,Penalty,82,15,"Louisiana Tech Penalty, UNR: Unnecessary Roughness (Sifa Leota) to the SELA 38 for a 1ST down",401757221102919604,0,0
+50,SE Louisiana,Q2 8:3,1,10,Penalty,62,-5,"PENALTY SLU Illegal Formation (Camp,Carson) 5 yards from SLU38 to SLU33. NO PLAY.",401757221102919605,0,0
+51,SE Louisiana,Q2 8:3,1,15,Pass Reception,67,2,Carson Camp pass complete to Jaedon Henry for 2 yds to the SELA 35,401757221102919606,0,0
+52,SE Louisiana,Q2 8:3,2,13,Pass Reception,65,12,Carson Camp pass complete to Luke Besh for 12 yds to the SELA 47,401757221102919607,0,0
+53,SE Louisiana,Q2 8:3,3,1,Rush,53,1,Jaedon Henry run for 1 yd to the SELA 48 for a 1ST down,401757221102919608,0,0
+54,SE Louisiana,Q2 8:3,1,10,Pass Reception,52,7,Carson Camp pass complete to Cade Collier for 7 yds to the LT 45,401757221102919609,0,0
+55,SE Louisiana,Q2 8:3,2,3,Rush,45,1,Jaedon Henry run for 1 yd to the LT 44,401757221102919610,0,0
+56,SE Louisiana,Q2 8:3,3,2,Rush,44,3,Carson Camp run for 3 yds to the LT 41 for a 1ST down,401757221102919611,0,0
+57,SE Louisiana,Q2 8:3,1,10,Rush,41,3,Carson Camp run for 3 yds to the LT 38,401757221102919612,0,0
+58,SE Louisiana,Q2 8:3,2,7,Pass Incompletion,38,0,Carson Camp pass incomplete to Jaylon Domingeaux,401757221102919613,0,0
+59,SE Louisiana,Q2 8:3,3,7,Pass Reception,38,5,Carson Camp pass complete to Rodeo Graham Jr. for 5 yds to the LT 33,401757221102919614,0,0
+60,Louisiana Tech,Q2 7:57,2,4,Rush,55,9,Trey Kukuk run for 9 yds to the SELA 36 for a 1ST down,401757221102924201,0,0
+61,Louisiana Tech,Q2 7:57,1,10,Pass Incompletion,64,0,Trey Kukuk pass incomplete to Eli Finley,401757221102924202,0,0
+62,Louisiana Tech,Q2 7:24,2,10,Pass Reception,64,2,Trey Kukuk pass complete to Jalen Mickens for 2 yds to the SELA 34,401757221102927501,0,0
+63,SE Louisiana,Q2 6:26,4,2,Rush,33,1,Carson Camp run for 1 yd to the LT 32,401757221102937301,0,0
+64,Louisiana Tech,Q2 6:26,1,10,Pass Incompletion,32,0,Trey Kukuk pass incomplete to Omiri Wiggins,401757221102937303,0,0
+65,Louisiana Tech,Q2 6:26,2,10,Sack,32,-4,Trey Kukuk sacked by Rowan Briggs for a loss of 4 yards to the LT 28,401757221102937304,0,0
+66,Louisiana Tech,Q2 6:26,3,14,Rush,28,10,Trey Kukuk run for 10 yds to the LT 38,401757221102937305,0,0
+67,Louisiana Tech,Q2 5:36,3,8,Rush,66,5,Trey Kukuk run for 5 yds to the SELA 29,401757221102946301,0,0
+68,Louisiana Tech,Q2 4:42,4,3,Rush,71,2,Omiri Wiggins run for 2 yds to the SELA 27,401757221102955701,0,0
+69,SE Louisiana,Q2 4:42,1,10,Pass Reception,73,0,Kyle Lowe pass complete to Rodeo Graham Jr. for no gain to the SELA 27,401757221102955703,0,0
+70,SE Louisiana,Q2 4:42,2,10,Rush,73,1,Calvin Smith Jr. run for 1 yd to the SELA 28,401757221102955704,0,0
+71,SE Louisiana,Q2 4:42,3,9,Rush,72,8,Kyle Lowe run for 8 yds to the SELA 36,401757221102955705,0,0
+72,Louisiana Tech,Q2 4:25,4,4,Punt,38,44,"John Hoyet Chance punt for 44 yds , Kentrell Prejean returns for 17 yds to the SELA 35 Kentrell Prejean fumbled, recovered by SELA Brant Monistere",401757221102957401,0,0
+73,SE Louisiana,Q2 4:25,4,4,Punt Return,82,17,"John Hoyet Chance punt for 44 yds , Kentrell Prejean returns for 17 yds to the SELA 35 Kentrell Prejean fumbled, recovered by SELA Brant Monistere",401757221102957401,0,0
+74,SE Louisiana,Q2 4:25,1,10,Pass Reception,65,7,Carson Camp pass complete to Cade Collier for 7 yds to the SELA 42,401757221102957403,0,0
+75,SE Louisiana,Q2 4:25,2,3,Pass Incompletion,58,0,Carson Camp pass incomplete to Rodeo Graham Jr.,401757221102957404,0,0
+76,SE Louisiana,Q2 4:25,3,3,Pass Reception,58,15,Carson Camp pass complete to Kentrell Prejean for 15 yds to the LT 43 for a 1ST down,401757221102957405,0,0
+77,SE Louisiana,Q2 4:25,1,10,Pass Incompletion,43,0,Carson Camp pass incomplete to Cade Collier,401757221102957406,0,0
+78,SE Louisiana,Q2 4:25,2,10,Pass Incompletion,43,0,Carson Camp pass incomplete to Rodeo Graham Jr.,401757221102957407,0,0
+79,SE Louisiana,Q2 4:25,3,10,Penalty,43,0,"SE Louisiana Penalty, Offensive Holding (Yards) declined",401757221102957408,0,0
+80,SE Louisiana,Q2 0:47,4,20,Punt,53,53,Alec Mahler punt for 53 yds for a touchback,401757221102995201,0,0
+81,Louisiana Tech,Q2 0:47,4,20,Touchback,0,20,Alec Mahler punt for 53 yds for a touchback,401757221102995201,0,0
+82,Louisiana Tech,Q2 0:47,1,10,Rush,20,13,Clay Thevenin run for 13 yds to the LT 33 for a 1ST down,401757221102995203,0,0
+83,Louisiana Tech,Q2 0:47,1,10,Penalty,33,15,"PENALTY SLU UNR: Unnecessary Roughness (Moore,Khalid) 15 yards from LAT33 to LAT48, 1ST DOWN. NO PLAY.",401757221102995204,0,0
+84,Louisiana Tech,Q2 0:47,1,10,Pass Reception,48,6,Trey Kukuk pass complete to Marques Singleton Jr. for 6 yds to the SELA 46,401757221102995205,0,0
+85,Louisiana Tech,Q2 0:47,2,4,Pass Reception,54,21,Trey Kukuk pass complete to Eli Finley for 21 yds to the SELA 25 for a 1ST down,401757221102995206,0,0
+86,Louisiana Tech,Q2 0:47,1,10,Pass Reception,75,23,Trey Kukuk pass complete to Eli Finley for 23 yds to the SELA 2 for a 1ST down,401757221102995207,0,0
+87,Louisiana Tech,Q2 0:47,1,2,Pass Incompletion,98,0,Trey Kukuk pass incomplete,401757221102995208,0,0
+88,Louisiana Tech,Q2 0:0,2,2,Field Goal Good,98,18,Drew Henderson 18 yd FG GOOD,401757221102999901,3,0
+89,Louisiana Tech,Q2 0:0,0,10,End of Half,35,0,End of 2nd Quarter,401757221102999903,0,0
+90,SE Louisiana,Q3 15:0,1,10,Penalty,65,-5,"Garcia Rodriguez,Guillermo kickoff 0 yards to the SLU35 PENALTY SLU Offside (Henry,Jaedon) 5 yards from SLU35 to SLU30. NO PLAY.",401757221103849903,0,0
+91,Louisiana Tech,Q3 14:57,1,10,Kickoff,70,-69,"Guillermo Garcia Rodriguez kickoff for 69 yds , Fred Robertson return for 41 yds to the LT 42",401757221103854201,0,3
+92,Louisiana Tech,Q3 14:57,1,10,Rush,42,7,Trey Kukuk run for 7 yds to the LT 49,401757221103854203,3,0
+93,Louisiana Tech,Q3 14:57,2,3,Pass Reception,49,2,Trey Kukuk pass complete to Dane Benedix for 2 yds to the SELA 49,401757221103854204,3,0
+94,Louisiana Tech,Q3 14:57,3,1,Rush,51,4,Trey Kukuk run for 4 yds to the SELA 45 for a 1ST down,401757221103854205,3,0
+95,Louisiana Tech,Q3 14:57,1,10,Pass Reception,55,25,Trey Kukuk pass complete to Dedrick Latulas for 25 yds to the SELA 20 for a 1ST down,401757221103854206,3,0
+96,Louisiana Tech,Q3 14:57,1,10,Rush,80,3,Omiri Wiggins run for 3 yds to the SELA 17,401757221103854207,3,0
+97,Louisiana Tech,Q3 14:57,2,7,Pass Incompletion,83,0,Trey Kukuk pass incomplete to Dedrick Latulas,401757221103854208,3,0
+98,Louisiana Tech,Q3 12:24,3,7,Passing Touchdown,83,17,Trey Kukuk pass complete to Omiri Wiggins for 17 yds for a TD (Drew Henderson KICK),401757221103877501,10,0
+99,SE Louisiana,Q3 12:24,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103877503,10,0
+100,SE Louisiana,Q3 12:24,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103877503,10,0
+101,SE Louisiana,Q3 12:24,2,8,Timeout,73,0,"Timeout SE Louisiana, clock 12:24",401757221103877505,0,10
+102,SE Louisiana,Q3 12:24,1,10,Rush,75,2,Jaedon Henry run for 2 yds to the SELA 27,401757221103877506,0,10
+103,SE Louisiana,Q3 12:24,2,8,Pass Incompletion,73,0,Carson Camp pass incomplete to Adyn Wilkinson,401757221103877507,0,10
+104,SE Louisiana,Q3 12:24,3,8,Rush,73,0,Carson Camp run for no gain to the SELA 27,401757221103877508,0,10
+105,SE Louisiana,Q3 10:52,4,8,Punt,73,23,"Alec Mahler punt for 23 yds, punt out-of-bounds at the 50 yard line , Kameron Carter returns for no gain to the 50 yard line",401757221103894701,0,10
+106,Louisiana Tech,Q3 10:52,1,10,Pass Reception,50,4,Trey Kukuk pass complete to Eli Finley for 4 yds to the SELA 46,401757221103894703,10,0
+107,Louisiana Tech,Q3 10:52,2,6,Rush,54,33,Clay Thevenin run for 33 yds to the SELA 13 for a 1ST down,401757221103894704,10,0
+108,Louisiana Tech,Q3 10:52,1,10,Rush,87,1,Trey Kukuk run for 1 yd to the SELA 12,401757221103894705,10,0
+109,Louisiana Tech,Q3 10:52,2,9,Rush,88,8,Clay Thevenin run for 8 yds to the SELA 4,401757221103894706,10,0
+110,Louisiana Tech,Q3 10:52,3,1,Rush,96,2,Trey Kukuk run for 2 yds to the SELA 2 for a 1ST down,401757221103894707,10,0
+111,Louisiana Tech,Q3 10:52,1,2,Pass Incompletion,98,0,Trey Kukuk pass incomplete to Devin Gandy,401757221103894708,10,0
+112,Louisiana Tech,Q3 8:32,2,2,Rushing Touchdown,98,2,Clay Thevenin run for 2 yds for a TD (Drew Henderson KICK),401757221103916701,17,0
+113,SE Louisiana,Q3 8:32,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103916703,17,0
+114,SE Louisiana,Q3 8:32,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103916703,17,0
+115,SE Louisiana,Q3 8:32,1,10,Pass Reception,75,7,Carson Camp pass complete to Jaylon Domingeaux for 7 yds to the SELA 32,401757221103916705,0,17
+116,SE Louisiana,Q3 8:32,2,3,Rush,68,4,Rodeo Graham Jr. run for 4 yds to the SELA 36 for a 1ST down,401757221103916706,0,17
+117,SE Louisiana,Q3 8:32,1,10,Rush,64,9,Rodeo Graham Jr. run for 9 yds to the SELA 45,401757221103916707,0,17
+118,SE Louisiana,Q3 8:32,2,1,Rush,55,12,Carson Camp run for 12 yds to the LT 43 for a 1ST down,401757221103916708,0,17
+119,SE Louisiana,Q3 8:32,1,10,Timeout,43,0,"Timeout Louisiana Tech, clock 08:32",401757221103916709,0,17
+120,SE Louisiana,Q3 8:32,1,10,Rush,43,7,Kyle Lowe run for 7 yds to the LT 36,401757221103916710,0,17
+121,SE Louisiana,Q3 8:32,2,3,Rush,36,10,Kyle Lowe run for 10 yds to the LT 26 for a 1ST down,401757221103916711,0,17
+122,SE Louisiana,Q3 8:32,1,10,Rush,26,5,Kyle Lowe run for 5 yds to the LT 21,401757221103916712,0,17
+123,SE Louisiana,Q3 5:12,2,5,Fumble Return Touchdown,21,80,Kam Franklin 80 Yd Fumble Return (Drew Henderson Kick),401757221103948701,0,24
+124,SE Louisiana,Q3 5:12,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103948703,24,0
+125,SE Louisiana,Q3 5:12,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757221103948703,24,0
+126,SE Louisiana,Q3 5:12,1,10,Rush,75,10,Brandon Hayes run for 10 yds to the SELA 35 for a 1ST down,401757221103948705,0,24
+127,SE Louisiana,Q3 5:12,1,10,Rush,65,7,Kyle Lowe run for 7 yds to the SELA 42,401757221103948706,0,24
+128,SE Louisiana,Q3 5:12,2,3,Rush,58,7,Calvin Smith Jr. run for 7 yds to the SELA 49 for a 1ST down,401757221103948707,0,24
+129,SE Louisiana,Q3 5:12,1,10,Pass Incompletion,51,0,Kyle Lowe pass incomplete to Luke Besh,401757221103948708,0,24
+130,SE Louisiana,Q3 5:12,2,10,Pass Incompletion,51,0,Kyle Lowe pass incomplete to Adyn Wilkinson,401757221103948709,0,24
+131,SE Louisiana,Q3 5:12,3,10,Pass Reception,51,12,Kyle Lowe pass complete to Luke Besh for 12 yds to the LT 39 for a 1ST down,401757221103948710,0,24
+132,SE Louisiana,Q3 5:12,1,10,Pass Reception,39,4,Kyle Lowe pass complete to Kentrell Prejean for 4 yds to the LT 35,401757221103948711,0,24
+133,SE Louisiana,Q3 5:12,2,6,Penalty,35,-5,"SE Louisiana Penalty, False Start (Luke Besh) to the LT 40",401757221103948712,0,24
+134,SE Louisiana,Q3 5:12,3,11,Penalty,40,15,"Shotgun Lowe,Kyle pass incomplete short left to Domingeaux,Jaylon thrown to LAT32 PENALTY LAT Roughing The Passer (Leota,Sifa) 15 yards from LAT40 to LAT25, 1ST DOWN. NO PLAY.",401757221103948713,0,24
+135,SE Louisiana,Q3 5:12,1,10,Rush,25,11,Brandon Hayes run for 11 yds to the LT 14 for a 1ST down,401757221103948714,0,24
+136,SE Louisiana,Q3 5:12,1,10,Pass Incompletion,14,0,Kyle Lowe pass incomplete to Jaylon Domingeaux,401757221103948715,0,24
+137,SE Louisiana,Q3 5:12,2,10,Rush,14,3,Calvin Smith Jr. run for 3 yds to the LT 11,401757221103948716,0,24
+138,SE Louisiana,Q3 5:12,3,7,Pass Reception,11,7,Kyle Lowe pass complete to Cade Collier for 7 yds to the LT 4 for a 1ST down,401757221103948717,0,24
+139,SE Louisiana,Q3 0:0,1,4,Rush,4,-1,Rodeo Graham Jr. run for a loss of 1 yard to the LT 5,401757221103999901,0,24
+140,SE Louisiana,Q3 0:0,0,4,End Period,4,-1,End of 3rd Quarter,401757221103999902,0,24
+141,SE Louisiana,Q4 13:35,2,5,Pass Interception Return,5,-28,Kyle Lowe pass intercepted Zion Nason return for 25 yds to the LT 33,401757221104866401,0,24
+142,Louisiana Tech,Q4 13:35,1,10,Sack,33,-8,Trey Kukuk sacked for a loss of 8 yards to the LT 25,401757221104866403,24,0
+143,Louisiana Tech,Q4 13:35,2,18,Rush,25,-2,Fred Robertson run for a loss of 2 yards to the LT 23,401757221104866404,24,0
+144,Louisiana Tech,Q4 13:35,3,20,Pass Reception,23,2,Trey Kukuk pass complete to Marques Singleton Jr. for 2 yds to the LT 21,401757221104866405,24,0
+145,Louisiana Tech,Q4 12:41,4,22,Punt,21,52,"John Hoyet Chance punt for 52 yds , Kentrell Prejean returns for 6 yds to the SELA 33",401757221104875801,24,0
+146,SE Louisiana,Q4 12:41,4,22,Punt Return,73,6,"John Hoyet Chance punt for 52 yds , Kentrell Prejean returns for 6 yds to the SELA 33",401757221104875801,24,0
+147,SE Louisiana,Q4 12:41,1,10,Rush,67,1,Brandon Hayes run for 1 yd to the SELA 34,401757221104875803,0,24
+148,SE Louisiana,Q4 12:41,2,9,Rush,66,3,Brandon Hayes run for 3 yds to the SELA 37,401757221104875804,0,24
+149,SE Louisiana,Q4 12:41,3,6,Rush,63,0,Rodeo Graham Jr. run for no gain to the SELA 37,401757221104875805,0,24
+150,SE Louisiana,Q4 9:35,4,6,Punt,63,42,"Alec Mahler punt for 42 yds, fair catch by Kameron Carter at the LT 21",401757221104906401,0,24
+151,Louisiana Tech,Q4 9:35,1,10,Pass Reception,21,10,Trey Kukuk pass complete to Marques Singleton Jr. for 10 yds to the LT 31 for a 1ST down,401757221104906403,24,0
+152,Louisiana Tech,Q4 9:35,1,10,Pass Reception,31,3,Trey Kukuk pass complete to Jay Simon for 3 yds to the LT 34,401757221104906404,24,0
+153,Louisiana Tech,Q4 9:35,2,7,Rush,34,3,Trey Kukuk run for 3 yds to the LT 37,401757221104906405,24,0
+154,Louisiana Tech,Q4 9:35,3,4,Rush,37,2,Jay Simon run for 2 yds to the LT 39,401757221104906406,24,0
+155,Louisiana Tech,Q4 7:37,4,2,Punt,39,52,John Hoyet Chance punt for 52 yds,401757221104926201,24,0
+156,SE Louisiana,Q4 7:37,1,10,Pass Incompletion,91,0,Carson Camp pass incomplete to Lonnie Shinn Jr,401757221104926203,0,24
+157,SE Louisiana,Q4 7:37,2,10,Rush,91,2,Calvin Smith Jr. run for 2 yds to the SELA 11,401757221104926204,0,24
+158,SE Louisiana,Q4 7:37,3,8,Pass Reception,89,32,Carson Camp pass complete to Jaylon Domingeaux for 32 yds to the SELA 43 for a 1ST down,401757221104926205,0,24
+159,SE Louisiana,Q4 7:37,1,10,Pass Reception,57,2,Carson Camp pass complete to Brandon Hayes for 2 yds to the SELA 41,401757221104926206,0,24
+160,SE Louisiana,Q4 7:37,2,12,Sack,59,-7,Carson Camp sacked by Kameron Carter for a loss of 7 yards to the SELA 34,401757221104926207,0,24
+161,SE Louisiana,Q4 7:37,3,19,Pass Reception,66,35,Carson Camp pass complete to Luke Besh for 35 yds to the LT 31 for a 1ST down,401757221104926208,0,24
+162,SE Louisiana,Q4 7:37,1,10,Pass Incompletion,31,0,Carson Camp pass incomplete to Kentrell Prejean,401757221104926209,0,24
+163,SE Louisiana,Q4 7:37,2,10,Pass Incompletion,31,0,Carson Camp pass incomplete to Da'shun Hugley,401757221104926210,0,24
+164,SE Louisiana,Q4 7:37,3,10,Pass Incompletion,31,0,Carson Camp pass incomplete to Kentrell Prejean,401757221104926211,0,24
+165,SE Louisiana,Q4 4:9,4,10,Sack,31,-7,Carson Camp sacked by Mekhi Mason for a loss of 7 yards to the LT 38,401757221104959001,0,24
+166,Louisiana Tech,Q4 4:9,1,10,Rush,38,4,Andrew Burnette run for 4 yds to the LT 42,401757221104959003,24,0
+167,Louisiana Tech,Q4 4:9,2,6,Rush,42,10,Andrew Burnette run for 10 yds to the SELA 48 for a 1ST down,401757221104959004,24,0
+168,Louisiana Tech,Q4 4:9,1,10,Rush,52,6,Andrew Burnette run for 6 yds to the SELA 42,401757221104959005,24,0
+169,Louisiana Tech,Q4 4:9,2,4,Pass Reception,58,4,Trey Kukuk pass complete to Andrew Burnette for 4 yds to the SELA 38 for a 1ST down,401757221104959006,24,0
+170,Louisiana Tech,Q4 4:9,1,10,Rush,62,3,Andrew Burnette run for 3 yds to the SELA 35,401757221104959007,24,0
+171,Louisiana Tech,Q4 0:0,2,7,Rush,65,-1,T. Kukuk takes a knee,401757221104999901,24,0
+172,Louisiana Tech,Q4 0:0,0,8,End of Game,64,0,End of 4th Quarter,401757221104999903,24,0

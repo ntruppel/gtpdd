@@ -1,0 +1,215 @@
+,offense,clock,down,distance,type,start,gained,text,id,offense_score,defense_score
+0,Western Kentucky,Q1 15:0,1,10,Kickoff,35,-65,"(00:16) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",4017572863,0,0
+1,Western Kentucky,Q1 15:0,1,10,Touchback,100,25,"(00:16) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",4017572863,0,0
+2,Western Kentucky,Q1 14:43,1,10,Rush,75,-4,(14:52) Shotgun #21 M.Parrish rush middle for 4 yards loss to the WKU21 (#42 S.Leota; #22 J.Mayfield),40175728612,0,0
+3,Western Kentucky,Q1 14:6,2,14,Pass Reception,79,15,"(14:28) Shotgun #16 R.Tisdale Jr. pass complete short right to #21 M.Parrish caught at WKU20, for 15 yards to the WKU36 (#9 M.Mason), 1ST DOWN",40175728616,0,0
+4,Western Kentucky,Q1 13:27,1,10,Rush,58,13,"(13:32) Shotgun #21 M.Parrish rush left for 13 yards gain to the WKU49 (#8 J.Fields), 1ST DOWN",40175728621,0,0
+5,Western Kentucky,Q1 13:7,2,3,Rush,51,0,(13:17) Shotgun #16 R.Tisdale Jr. rush right for 0 yards to the WKU49 (#42 S.Leota),40175728625,0,0
+6,Western Kentucky,Q1 12:33,3,3,Pass Reception,51,2,"(12:52) Shotgun #16 R.Tisdale Jr. pass complete short right to #19 L.Howard caught at LAT48, for 2 yards to the LAT49 (#22 J.Mayfield)",40175728629,0,0
+7,Western Kentucky,Q1 12:1,4,1,Pass Reception,49,17,"(12:11) Shotgun #16 R.Tisdale Jr. pass complete short right to #4 C.Flowers caught at LAT45, for 17 yards to the LAT32 (#8 J.Fields), 1ST DOWN",40175728634,0,0
+8,Western Kentucky,Q1 11:30,1,10,Rush,32,-8,(11:37) Shotgun #0 M.Henry rush left for 8 yards loss to the LAT40 (#1 M.Richard),40175728639,0,0
+9,Western Kentucky,Q1 10:49,2,18,Pass Reception,40,11,"(11:02) Shotgun #16 R.Tisdale Jr. pass complete short right to #2 K.Hutchinson caught at LAT42, for 11 yards to the LAT29 (#8 J.Fields; #11 C.Woods)",40175728643,0,0
+10,Western Kentucky,Q1 10:31,3,7,Pass Incompletion,29,0,(10:31) Shotgun #16 R.Tisdale Jr. pass incomplete short right to #0 M.Henry thrown to LAT16 PENALTY WKU Ineligible Downfield on Pass declined,40175728648,0,0
+11,Western Kentucky,Q1 10:26,4,7,Field Goal Good,29,47,"(10:26) #39 J.Cannon field goal attempt from 47 yards GOOD (H: #18 C.Maynard, LS: #55 R.Robich), clock 10:26",40175728653,3,0
+12,Louisiana Tech,Q1 10:26,1,10,Kickoff,65,-65,"(10:26) #42 J.Cassidy kickoff 65 yards to the LAT00, Touchback",40175728656,3,0
+13,Louisiana Tech,Q1 10:26,1,10,Touchback,0,25,"(10:26) #42 J.Cassidy kickoff 65 yards to the LAT00, Touchback",40175728656,3,0
+14,Louisiana Tech,Q1 10:1,1,10,Pass Reception,25,11,"(10:26) Shotgun #5 B.Baker pass complete short middle to #84 E.Finley caught at LAT35, for 11 yards to the LAT36 (#34 K.Hayward), 1ST DOWN",40175728659,0,3
+15,Louisiana Tech,Q1 9:26,1,10,Pass Reception,36,-2,"(09:47) Shotgun #5 B.Baker pass complete short left to #18 M.Jackson caught at LAT36, for 2 yards loss to the LAT34 (#0 M.Malotumau)",40175728664,0,3
+16,Louisiana Tech,Q1 9:15,2,12,Pass Reception,34,41,"(09:24) Shotgun #5 B.Baker pass complete deep left to #18 M.Jackson caught at WKU40, for 41 yards to the WKU25 (#10 D.Flowers), 1ST DOWN",40175728669,0,3
+17,Louisiana Tech,Q1 8:56,1,10,Rush,75,-2,(09:00) Shotgun #4 C.Thevenin rush middle for 2 yards loss to the WKU27 (#8 M.Malone),40175728674,0,3
+18,Louisiana Tech,Q1 8:33,2,12,Pass Reception,73,4,"(08:46) Shotgun #5 B.Baker pass complete short right to #4 C.Thevenin caught at WKU29, for 4 yards to the WKU23 (#0 M.Malotumau)",40175728678,0,3
+19,Louisiana Tech,Q1 8:9,3,8,Pass Reception,77,13,"(08:18) Shotgun #5 B.Baker pass complete short right to #84 E.Finley caught at WKU12, for 13 yards to the WKU10 (#17 D.Herard), 1ST DOWN",40175728683,0,3
+20,Louisiana Tech,Q1 7:51,1,10,Rush,90,0,(07:55) Shotgun #4 C.Thevenin rush middle for 0 yards to the WKU10 (#21 J.Wester; #5 J.Emery),40175728688,0,3
+21,Louisiana Tech,Q1 7:8,2,10,Pass Reception,90,4,"(07:17) Shotgun #5 B.Baker pass complete short right to #15 D.Pierro caught at WKU06, for 4 yards to the WKU06 (#10 D.Flowers)",40175728692,0,3
+22,Louisiana Tech,Q1 6:46,3,6,Pass Reception,94,6,"(06:46) Shotgun #5 B.Baker pass complete short middle to #6 T.Averhart caught at WKU00, for 6 yards to the WKU00 TOUCHDOWN, clock 06:46, 1ST DOWN #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",40175728697,7,3
+23,Western Kentucky,Q1 6:46,1,10,Kickoff,35,-65,"(06:46) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286106,7,3
+24,Western Kentucky,Q1 6:46,1,10,Touchback,100,25,"(06:46) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286106,7,3
+25,Western Kentucky,Q1 6:41,1,10,Pass Incompletion,75,0,(06:46) Shotgun #16 R.Tisdale Jr. pass incomplete short middle to #0 M.Henry thrown to WKU38 broken up by #11 C.Woods,401757286109,3,7
+26,Western Kentucky,Q1 6:35,2,10,Rush,75,5,(06:39) Shotgun #21 M.Parrish rush middle for 5 yards gain to the WKU30 (#8 J.Fields; #97 C.Davis),401757286112,3,7
+27,Western Kentucky,Q1 5:51,3,5,Pass Reception,70,6,"(06:04) Shotgun #16 R.Tisdale Jr. pass complete short right to #13 K.Williams caught at WKU33, for 6 yards to the WKU36 (#11 C.Woods), 1ST DOWN",401757286116,3,7
+28,Western Kentucky,Q1 5:23,1,10,Rush,64,4,(05:40) Shotgun #16 R.Tisdale Jr. rush right for 4 yards gain to the WKU40 (#97 C.Davis),401757286121,3,7
+29,Western Kentucky,Q1 4:59,2,6,Rush,60,8,"(05:14) Shotgun #16 R.Tisdale Jr. rush right for 8 yards gain to the WKU48 (#8 J.Fields), out of bounds, 1ST DOWN",401757286126,3,7
+30,Western Kentucky,Q1 4:28,1,10,Pass Incompletion,52,0,(04:33) Shotgun #16 R.Tisdale Jr. pass incomplete deep left to #4 C.Flowers thrown to LAT25 broken up by #14 J.Mcrae,401757286130,3,7
+31,Western Kentucky,Q1 4:28,2,10,Penalty,52,15,"(04:28) Shotgun #16 R.Tisdale Jr. sacked for loss of 11 yards to the WKU37 (#21 Z.Hill), fumble by #16 R.Tisdale Jr. recovered by LAT #90 J.Madkins at WKU37, End Of Play PENALTY LAT Targeting (#21 Z.Hill) 15 yards from WKU48 to LAT37, 1ST DOWN. NO PLAY",401757286133,3,7
+32,Western Kentucky,Q1 2:13,1,10,Rush,37,2,(02:25) Shotgun #0 M.Henry rush middle for 2 yards gain to the LAT35 (#14 J.Mcrae; #94 E.Oguns),401757286144,3,7
+33,Western Kentucky,Q1 1:52,2,8,Pass Reception,35,15,"(02:04) Shotgun #16 R.Tisdale Jr. pass complete short right to #2 K.Hutchinson caught at LAT20, for 15 yards to the LAT20, out of bounds at LAT20, 1ST DOWN",401757286148,3,7
+34,Western Kentucky,Q1 1:37,1,10,Rush,20,-10,(01:39) Shotgun #11 L.Wright rush middle for 10 yards loss to the LAT30 (#94 E.Oguns),401757286153,3,7
+35,Western Kentucky,Q1 1:9,2,20,Pass Reception,30,15,"(01:14) Shotgun #16 R.Tisdale Jr. pass complete short middle to #15 J.Wolf caught at LAT14, for 15 yards to the LAT15 (#8 J.Fields)",401757286157,3,7
+36,Western Kentucky,Q1 1:9,3,5,Pass Reception,15,15,"(01:09) Shotgun #16 R.Tisdale Jr. pass complete short right to #11 L.Wright caught at LAT08, for 15 yards to the LAT00 TOUCHDOWN, clock 01:09, 1ST DOWN #39 J.Cannon kick attempt good (H: #18 C.Maynard, LS: #55 R.Robich)",401757286162,10,7
+37,Louisiana Tech,Q1 1:9,1,10,Kickoff,65,-65,"(01:09) #42 J.Cassidy kickoff 65 yards to the LAT00, Touchback",401757286173,10,7
+38,Louisiana Tech,Q1 1:9,1,10,Touchback,0,25,"(01:09) #42 J.Cassidy kickoff 65 yards to the LAT00, Touchback",401757286173,10,7
+39,Louisiana Tech,Q1 0:54,1,10,Pass Reception,25,6,"(01:09) Shotgun #5 B.Baker pass complete short right to #22 O.Wiggins caught at LAT22, for 6 yards to the LAT31 (#26 J.Eugene Jr.)",401757286176,7,10
+40,Louisiana Tech,Q1 0:36,2,4,Pass Reception,31,2,"(00:54) Shotgun #5 B.Baker pass complete short middle to #84 E.Finley caught at LAT29, for 2 yards to the LAT33 (#17 D.Herard)",401757286181,7,10
+41,Louisiana Tech,Q1 0:19,3,2,Rush,33,4,"(00:19) Shotgun #22 O.Wiggins rush middle for 4 yards gain to the LAT37 (#7 J.Lewis; #8 M.Malone), 1ST DOWN",401757286186,7,10
+42,Louisiana Tech,Q1 0:0,3,2,End Period,33,4,End of 1st quarter.,401757286192,7,10
+43,Louisiana Tech,Q2 15:0,1,10,Rush,37,8,(15:00) Shotgun #0 A.Burnette rush middle for 8 yards gain to the LAT45 (#44 H.Holloman),401757286196,7,10
+44,Louisiana Tech,Q2 15:0,2,2,Rush,45,2,"Shotgun #0 A.Burnette rush right for 2 yards gain to the LAT47 (#8 M.Malone), 1ST DOWN",401757286202,7,10
+45,Louisiana Tech,Q2 15:0,1,10,Pass Incompletion,47,0,Shotgun #5 B.Baker pass incomplete deep middle to #11 J.Mickens thrown to WKU30,401757286206,7,10
+46,Louisiana Tech,Q2 15:0,2,10,Pass Reception,47,6,"Shotgun #5 B.Baker pass complete short left to #22 O.Wiggins caught at LAT42, for 6 yards to the WKU47 (#12 J.Mack)",401757286209,7,10
+47,Louisiana Tech,Q2 15:0,3,4,Rush,53,3,Shotgun #5 B.Baker rush middle for 3 yards gain to the WKU44 (#21 J.Wester; #8 M.Malone),401757286214,7,10
+48,Louisiana Tech,Q2 12:43,4,1,Rush,56,0,"Shotgun #22 O.Wiggins rush middle for 0 yards to the WKU44 (#93 R.Su'a-Filo), TURNOVER ON DOWNS",401757286218,7,10
+49,Western Kentucky,Q2 12:43,1,10,Penalty,56,10,"(12:43) Shotgun #16 R.Tisdale Jr. pass incomplete short left to #19 L.Howard thrown to WKU50 PENALTY LAT Holding (#23 A.Jackson Jr.) 10 yards from WKU44 to LAT46, 1ST DOWN. NO PLAY",401757286224,10,7
+50,Western Kentucky,Q2 12:32,1,10,Rush,46,13,"(12:37) Shotgun #21 M.Parrish rush middle for 13 yards gain to the LAT33 (#23 A.Jackson Jr.; #6 J.Foster), 1ST DOWN",401757286228,10,7
+51,Western Kentucky,Q2 12:3,1,10,Pass Incompletion,33,0,(12:03) Shotgun #16 R.Tisdale Jr. pass incomplete short middle to #4 C.Flowers thrown to LAT21,401757286232,10,7
+52,Western Kentucky,Q2 11:51,2,10,Rush,33,10,"(12:03) Shotgun #16 R.Tisdale Jr. rush right for 10 yards gain to the LAT23 (#6 J.Foster), 1ST DOWN",401757286235,10,7
+53,Western Kentucky,Q2 11:23,1,10,Rush,23,6,(11:27) Shotgun #21 M.Parrish rush middle for 6 yards gain to the LAT17 (#22 J.Mayfield; #23 A.Jackson Jr.),401757286239,10,7
+54,Western Kentucky,Q2 10:49,2,4,Pass Reception,17,16,"(11:02) Shotgun #16 R.Tisdale Jr. pass complete short right to #85 J.West caught at LAT08, for 16 yards to the LAT01 (#6 J.Foster; #3 K.Carter), 1ST DOWN",401757286243,10,7
+55,Western Kentucky,Q2 10:41,1,1,Rush,1,1,"(10:49) #9 G.Hart III rush middle for 1 yard gain to the LAT00 TOUCHDOWN, clock 10:41 #39 J.Cannon kick attempt good (H: #18 C.Maynard, LS: #55 R.Robich)",401757286248,17,7
+56,Louisiana Tech,Q2 10:32,1,10,Kickoff,65,28,(10:41) #42 J.Cassidy kickoff 65 yards to the LAT00 #1 D.Gandy return 28 yards to the LAT28 (#25 X.Griffin),401757286255,17,7
+57,Louisiana Tech,Q2 10:27,1,10,Pass Incompletion,28,0,(10:32) Shotgun #5 B.Baker pass incomplete short middle to #84 E.Finley thrown to LAT35,401757286260,7,17
+58,Louisiana Tech,Q2 10:15,2,10,Rush,28,18,"(10:27) Shotgun #5 B.Baker rush middle for 18 yards gain to the LAT46 (#7 J.Lewis), 1ST DOWN",401757286263,7,17
+59,Louisiana Tech,Q2 9:52,1,10,Rush,46,0,(10:01) Shotgun #4 C.Thevenin rush left for 0 yards to the LAT46 (#7 J.Lewis),401757286267,7,17
+60,Louisiana Tech,Q2 9:17,2,10,Rush,46,4,(09:21) Shotgun #4 C.Thevenin rush left for 4 yards gain to the LAT50 (#8 M.Malone),401757286271,7,17
+61,Louisiana Tech,Q2 8:35,3,6,Pass Reception,50,18,"(08:46) Shotgun #5 B.Baker pass complete short left to #1 D.Gandy caught at WKU35, for 18 yards to the WKU32 (#12 J.Mack), 1ST DOWN",401757286275,7,17
+62,Louisiana Tech,Q2 8:7,1,10,Rush,68,2,(08:13) Shotgun #0 A.Burnette rush left for 2 yards gain to the WKU30 (#12 J.Mack; #21 J.Wester),401757286280,7,17
+63,Louisiana Tech,Q2 7:27,2,8,Rush,70,2,(07:50) Shotgun #0 A.Burnette rush left for 2 yards gain to the WKU28 (#21 J.Wester),401757286284,7,17
+64,Louisiana Tech,Q2 6:50,3,6,Rush,72,3,(06:56) Shotgun #5 B.Baker rush middle for 3 yards gain to the WKU25 (#21 J.Wester),401757286288,7,17
+65,Louisiana Tech,Q2 6:12,4,3,Field Goal Missed,75,44,"(06:21) #48 J.Chance field goal attempt from 44 yards NO GOOD (H: #29 L.Matthews, LS: #41 E.Burch), clock 06:12",401757286292,7,17
+66,Western Kentucky,Q2 6:5,1,10,Rush,75,2,(06:09) #11 L.Wright rush middle for 2 yards gain to the WKU27 (#8 J.Fields; #96 Z.Nason),401757286296,17,7
+67,Western Kentucky,Q2 5:18,2,8,Pass Reception,73,21,"(05:35) #16 R.Tisdale Jr. pass complete short right to #2 K.Hutchinson caught at WKU30, for 21 yards to the WKU48 (#8 J.Fields), 1ST DOWN",401757286300,17,7
+68,Western Kentucky,Q2 5:5,1,10,Rush,52,1,(05:08) #11 L.Wright rush middle for 1 yard gain to the WKU49 (#6 J.Foster),401757286305,17,7
+69,Western Kentucky,Q2 4:53,2,9,Penalty,51,5,PENALTY LAT Offside (#96 Z.Nason) 5 yards from WKU49 to LAT46. NO PLAY,401757286311,17,7
+70,Western Kentucky,Q2 4:35,2,4,Pass Incompletion,46,0,(04:37) #16 R.Tisdale Jr. pass incomplete short left to #12 Q.Burroughs thrown to LAT42,401757286314,17,7
+71,Western Kentucky,Q2 4:31,3,4,Pass Incompletion,46,0,(04:32) #16 R.Tisdale Jr. pass incomplete deep left to #3 M.Barry thrown to LAT20,401757286317,17,7
+72,Western Kentucky,Q2 4:31,3,4,Timeout,46,0,"Timeout Western Kentucky, clock 04:31",401757286322,17,7
+73,Western Kentucky,Q2 4:23,4,4,Pass Reception,46,6,"(04:31) Shotgun #16 R.Tisdale Jr. pass complete short left to #0 M.Henry caught at LAT41, for 6 yards to the LAT40 (#7 J.Shelby Jr.), out of bounds, 1ST DOWN",401757286323,17,7
+74,Western Kentucky,Q2 3:57,1,10,Rush,40,5,(04:07) Shotgun #9 G.Hart III rush left for 5 yards gain to the LAT35 (#6 J.Foster; #7 J.Shelby Jr.),401757286328,17,7
+75,Western Kentucky,Q2 3:36,2,5,Pass Incompletion,35,0,(03:36) Shotgun #16 R.Tisdale Jr. pass incomplete short middle to #2 K.Hutchinson thrown to LAT25,401757286332,17,7
+76,Western Kentucky,Q2 3:24,3,5,Rush,35,0,(03:30) Shotgun #9 G.Hart III rush middle for 0 yards to the LAT35 (#94 E.Oguns; #7 J.Shelby Jr.),401757286336,17,7
+77,Western Kentucky,Q2 2:28,4,5,Field Goal Good,35,53,"(02:44) #42 J.Cassidy field goal attempt from 53 yards GOOD (H: #18 C.Maynard, LS: #55 R.Robich), clock 02:28",401757286345,20,7
+78,Louisiana Tech,Q2 2:28,1,10,Kickoff,65,0,"(02:28) #42 J.Cassidy kickoff 0 yards to the WKU35, out of bounds at WKU35 PENALTY LAT Personal Foul (#4 C.Thevenin) 15 yards from LAT35 to LAT20",401757286348,20,7
+79,Louisiana Tech,Q2 2:23,1,10,Pass Incompletion,20,0,(02:26) Shotgun #5 B.Baker pass incomplete short middle to #4 C.Thevenin thrown to LAT20,401757286353,7,20
+80,Louisiana Tech,Q2 2:6,2,10,Pass Reception,20,8,"(02:21) Shotgun #5 B.Baker pass complete short left to #4 C.Thevenin caught at LAT20, for 8 yards to the LAT28 (#93 R.Su'a-Filo)",401757286356,7,20
+81,Louisiana Tech,Q2 2:0,3,2,Penalty,28,5,"PENALTY WKU Offside (#93 R.Su'a-Filo) 5 yards from LAT28 to LAT33, 1ST DOWN. NO PLAY",401757286361,7,20
+82,Louisiana Tech,Q2 2:0,1,10,Pass Reception,33,14,"(02:00) Shotgun #5 B.Baker pass complete short middle to #18 M.Jackson caught at LAT45, for 14 yards to the LAT47, out of bounds at LAT47, 1ST DOWN",401757286927,7,20
+83,Louisiana Tech,Q2 1:56,1,10,Pass Reception,33,14,"(02:00) Shotgun #5 B.Baker pass complete short left to #18 M.Jackson caught at LAT45, for 14 yards to the LAT47 (), out of bounds, 1ST DOWN",401757286364,7,20
+84,Louisiana Tech,Q2 1:52,1,10,Pass Incompletion,47,0,(01:56) Shotgun #5 B.Baker pass incomplete short right to #1 D.Gandy thrown to WKU35,401757286369,7,20
+85,Louisiana Tech,Q2 1:44,2,10,Rush,47,6,(01:50) Shotgun #5 B.Baker rush right for 6 yards gain to the WKU47 (#2 A.Ali),401757286372,7,20
+86,Louisiana Tech,Q2 1:37,3,4,Pass Reception,53,8,"(01:44) Shotgun #5 B.Baker pass complete short middle to #18 M.Jackson caught at WKU42, for 8 yards to the WKU39 (#5 J.Emery), 1ST DOWN",401757286377,7,20
+87,Louisiana Tech,Q2 1:19,1,10,Pass Reception,61,11,"(01:27) No Huddle-Shotgun #5 B.Baker pass complete short middle to #11 J.Mickens caught at WKU27, for 11 yards to the WKU28, End Of Play, 1ST DOWN",401757286382,7,20
+88,Louisiana Tech,Q2 1:6,1,10,Rush,73,4,(01:09) No Huddle-Shotgun #5 B.Baker rush middle for 4 yards gain to the WKU24 (#9 D.Oliver; #98 J.Hardy),401757286387,7,20
+89,Louisiana Tech,Q2 1:6,1,10,Timeout,73,0,"Timeout Louisiana Tech, clock 01:06",401757286393,7,20
+90,Louisiana Tech,Q2 1:5,2,6,Penalty,76,10,"(01:05) Shotgun #5 B.Baker rush right for 9 yards gain to the WKU15, out of bounds at WKU15 PENALTY LAT Holding (#55 L.Nelson) 10 yards from WKU24 to WKU34. NO PLAY",401757286391,7,20
+91,Louisiana Tech,Q2 0:47,3,15,Pass Reception,67,20,"(00:54) Shotgun #5 B.Baker pass complete short left to #4 C.Thevenin caught at WKU34, for 20 yards to the WKU13, out of bounds at WKU13, 1ST DOWN",401757286401,7,20
+92,Louisiana Tech,Q2 0:46,2,16,Rush,66,1,(00:59) Shotgun #5 B.Baker rush middle for 1 yard gain to the WKU33 (#93 R.Su'a-Filo),401757286397,7,20
+93,Louisiana Tech,Q2 0:45,1,10,Pass Reception,87,3,"(00:45) Shotgun #5 B.Baker pass complete short middle to #15 D.Pierro caught at WKU12, for 3 yards to the WKU10, out of bounds at WKU10",401757286932,7,20
+94,Louisiana Tech,Q2 0:43,1,10,Pass Reception,87,3,"(00:45) Shotgun #5 B.Baker pass complete short right to #15 D.Pierro caught at WKU12, for 3 yards to the WKU10 (), out of bounds",401757286406,7,20
+95,Louisiana Tech,Q2 0:36,2,7,Rush,90,2,(00:41) Shotgun #4 C.Thevenin rush middle for 2 yards gain to the WKU08 (#26 J.Eugene Jr.; #3 A.Brackenridge),401757286411,7,20
+96,Louisiana Tech,Q2 0:36,2,7,Timeout,90,0,"Timeout Louisiana Tech, clock 00:36",401757286417,7,20
+97,Louisiana Tech,Q2 0:16,3,5,Pass Reception,92,3,"(00:30) Shotgun #5 B.Baker pass complete short middle to #11 J.Mickens caught at WKU05, for 3 yards to the WKU05 (#26 J.Eugene Jr.)",401757286415,7,20
+98,Louisiana Tech,Q2 0:16,3,5,Timeout,92,0,"Timeout Louisiana Tech, clock 00:16",401757286423,7,20
+99,Louisiana Tech,Q2 0:1,4,2,Rush,95,-8,"(00:01) #29 L.Matthews rush middle for 8 yards loss to the WKU13, End Of Play, TURNOVER ON DOWNS",401757286421,7,20
+100,Louisiana Tech,Q2 0:0,4,2,End Period,95,-3,End of 2nd quarter.,401757286430,7,20
+101,Louisiana Tech,Q3 14:45,1,10,Kickoff,65,85,"(15:00) #42 J.Cassidy kickoff 57 yards to the LAT08 #4 C.Thevenin return 7 yards to the LAT15 lateral to #1 D.Gandy TOUCHDOWN, clock 14:45 #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757286437,20,14
+102,Western Kentucky,Q3 14:45,1,10,Kickoff,35,-65,"(14:45) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286445,14,20
+103,Western Kentucky,Q3 14:45,1,10,Touchback,100,25,"(14:45) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286445,14,20
+104,Western Kentucky,Q3 14:13,1,10,Rush,75,4,(14:38) Shotgun #16 R.Tisdale Jr. rush middle for 4 yards gain to the WKU29 (#17 A.Butler),401757286448,20,14
+105,Western Kentucky,Q3 14:13,2,6,Pass Incompletion,71,0,(14:13) Shotgun #16 R.Tisdale Jr. pass incomplete deep middle to #0 M.Henry thrown to WKU50,401757286452,20,14
+106,Western Kentucky,Q3 14:8,3,6,Pass Incompletion,71,0,(14:08) Shotgun #16 R.Tisdale Jr. pass incomplete short middle to #0 M.Henry thrown to WKU40 broken up by #42 S.Leota,401757286455,20,14
+107,Western Kentucky,Q3 14:1,4,6,Punt,71,0,(14:01) #18 C.Maynard punt 42 yards to the LAT29 fair catch by #11 C.Woods at LAT29,401757286459,20,14
+108,Louisiana Tech,Q3 13:54,1,10,Rush,29,-3,(14:01) Shotgun #22 O.Wiggins rush left for 3 yards loss to the LAT26 (#12 J.Mack),401757286463,14,20
+109,Louisiana Tech,Q3 13:16,2,13,Pass Reception,26,15,"(13:33) Shotgun #5 B.Baker pass complete short right to #11 J.Mickens caught at LAT39, for 15 yards to the LAT41 (#6 N.Ward), 1ST DOWN",401757286467,14,20
+110,Louisiana Tech,Q3 12:34,1,10,Pass Reception,41,27,"(12:52) Shotgun #5 B.Baker pass complete short middle to #8 J.Simon caught at WKU45, for 27 yards to the WKU32 (#8 M.Malone; #21 J.Wester), 1ST DOWN",401757286472,14,20
+111,Louisiana Tech,Q3 12:1,1,10,Rush,68,2,(12:12) Shotgun #0 A.Burnette rush middle for 2 yards gain to the WKU30 (#0 M.Malotumau; #98 J.Hardy),401757286477,14,20
+112,Louisiana Tech,Q3 11:44,2,8,Penalty,70,5,PENALTY LAT Illegal Snap (#55 L.Nelson) 5 yards from WKU30 to WKU35. NO PLAY,401757286481,14,20
+113,Louisiana Tech,Q3 11:26,2,13,Pass Interception Return,65,24,"(11:37) Shotgun #5 B.Baker pass intercepted by #12 J.Mack at WKU11, End Of Play",401757286484,14,20
+114,Western Kentucky,Q3 11:23,1,10,Pass Incompletion,89,0,(11:26) Shotgun #16 R.Tisdale Jr. pass incomplete short right to #2 K.Hutchinson thrown to WKU11 broken up by #42 S.Leota,401757286489,20,14
+115,Western Kentucky,Q3 11:13,2,10,Rush,89,-1,(11:21) Shotgun #4 C.Flowers rush left for 1 yard loss to the WKU10 (#11 C.Woods),401757286492,20,14
+116,Western Kentucky,Q3 11:13,2,10,Timeout,89,0,"Timeout Western Kentucky, clock 11:13",401757286498,20,14
+117,Western Kentucky,Q3 10:23,3,11,Rush,90,14,"(10:39) Shotgun #16 R.Tisdale Jr. rush left for 14 yards gain to the WKU24 (#8 J.Fields), 1ST DOWN",401757286496,20,14
+118,Western Kentucky,Q3 9:56,1,10,Rush,76,-1,(10:06) Shotgun #9 G.Hart III rush middle for 1 yard loss to the WKU23 (#42 S.Leota; #94 E.Oguns),401757286501,20,14
+119,Western Kentucky,Q3 9:24,2,11,Pass Reception,77,3,"(09:34) Shotgun #16 R.Tisdale Jr. pass complete short left to #21 M.Parrish caught at WKU20, for 3 yards to the WKU26 (#6 J.Foster)",401757286505,20,14
+120,Western Kentucky,Q3 8:48,3,8,Pass Reception,74,5,"(08:54) Shotgun #16 R.Tisdale Jr. pass complete short right to #0 M.Henry caught at WKU25, for 5 yards to the WKU31 (#9 M.Mason; #8 J.Fields)",401757286510,20,14
+121,Western Kentucky,Q3 8:13,4,3,Punt Return,69,0,(08:19) #18 C.Maynard punt 37 yards to the LAT32 #3 D.Latulas return 0 yards to the LAT32,401757286517,20,14
+122,Louisiana Tech,Q3 8:7,1,10,Rush,32,7,(08:10) Shotgun #4 C.Thevenin rush middle for 7 yards gain to the LAT39 (#21 J.Wester; #34 K.Hayward),401757286522,14,20
+123,Louisiana Tech,Q3 7:51,2,3,Pass Incompletion,39,0,(07:57) Shotgun #5 B.Baker pass incomplete short middle to #18 M.Jackson thrown to WKU45,401757286526,14,20
+124,Louisiana Tech,Q3 7:41,3,3,Rush,39,-1,(07:48) Shotgun #4 C.Thevenin rush middle for 1 yard loss to the LAT38 (#21 J.Wester; #98 J.Hardy),401757286529,14,20
+125,Louisiana Tech,Q3 7:1,4,4,Penalty,38,5,PENALTY LAT Delay Of Game (#41 E.Burch) 5 yards from LAT38 to LAT33. NO PLAY,401757286533,14,20
+126,Louisiana Tech,Q3 6:48,4,9,Punt,33,0,(06:59) #48 J.Chance punt 50 yards to the WKU17,401757286536,14,20
+127,Western Kentucky,Q3 6:29,1,10,Rush,83,-6,"(06:44) Shotgun #16 R.Tisdale Jr. rush middle for 6 yards loss to the WKU11, End Of Play",401757286540,20,14
+128,Western Kentucky,Q3 6:9,2,16,Penalty,89,5,"(06:09) Shotgun #16 R.Tisdale Jr. pass complete short middle to #21 M.Parrish caught at WKU11, for 4 yards to the WKU15 (#22 J.Mayfield; #6 J.Foster) PENALTY WKU False Start (#50 L.Seymore) 5 yards from WKU11 to WKU06. NO PLAY",401757286544,20,14
+129,Western Kentucky,Q3 4:58,2,21,Rush,94,15,(05:14) Shotgun #9 G.Hart III rush left for 15 yards gain to the WKU21 (#6 J.Foster),401757286552,20,14
+130,Western Kentucky,Q3 4:25,3,6,Punt,79,0,"(04:41) #18 C.Maynard punt 49 yards to the LAT30 #11 C.Woods return 70 yards to the WKU00 TOUCHDOWN nullified by penalty, clock 04:25 PENALTY LAT Illegal Block in Back (#82 L.Seib) 5 yards from LAT40 to LAT35",401757286556,20,14
+131,Louisiana Tech,Q3 4:21,1,10,Pass Incompletion,35,0,(04:21) Shotgun #5 B.Baker pass incomplete short left to #18 M.Jackson thrown to LAT45,401757286568,14,20
+132,Louisiana Tech,Q3 4:10,2,10,Rush,35,1,(04:17) Shotgun #5 B.Baker rush middle for 1 yard gain to the LAT36 (#44 H.Holloman; #13 R.Harrison),401757286571,14,20
+133,Louisiana Tech,Q3 3:26,3,9,Pass Reception,36,19,"(03:42) Shotgun #5 B.Baker pass complete short middle to #83 L.Watkins caught at LAT48, for 19 yards to the WKU45 (#34 K.Hayward; #16 A.Cole), 1ST DOWN",401757286575,14,20
+134,Louisiana Tech,Q3 3:17,1,10,Penalty,55,10,(03:17) Shotgun #2 T.Kukuk rush left for 1 yard loss to the WKU46 (#3 A.Brackenridge; #12 J.Mack) PENALTY LAT Holding (#58 J.Denis) 10 yards from WKU45 to LAT45. NO PLAY,401757286582,14,20
+135,Louisiana Tech,Q3 2:48,1,20,Pass Reception,45,15,"(03:03) Shotgun #5 B.Baker pass complete short left to #18 M.Jackson caught at LAT48, for 15 yards to the WKU40 (#22 J.Donald), out of bounds",401757286587,14,20
+136,Louisiana Tech,Q3 2:10,2,5,Pass Reception,60,20,"(02:29) Shotgun #5 B.Baker pass complete deep middle to #83 L.Watkins caught at WKU20, for 20 yards to the WKU20 (#6 N.Ward), 1ST DOWN",401757286592,14,20
+137,Louisiana Tech,Q3 1:37,1,10,Rush,80,8,(01:40) Shotgun #0 A.Burnette rush middle for 8 yards gain to the WKU12 (#7 J.Lewis; #6 N.Ward),401757286597,14,20
+138,Louisiana Tech,Q3 1:20,2,2,Rush,88,1,(01:26) Shotgun #0 A.Burnette rush left for 1 yard gain to the WKU11 (#3 A.Brackenridge; #44 H.Holloman),401757286601,14,20
+139,Louisiana Tech,Q3 0:47,3,1,Pass Incompletion,89,0,(00:49) Shotgun #5 B.Baker pass incomplete short middle to #84 E.Finley thrown to WKU00,401757286605,14,20
+140,Louisiana Tech,Q3 0:47,3,1,Timeout,89,0,"Timeout Louisiana Tech, clock 00:47",401757286612,14,20
+141,Louisiana Tech,Q3 0:39,4,1,Rush,89,1,"(00:47) #0 A.Burnette rush right for 1 yard gain to the WKU10 (#21 J.Wester; #34 K.Hayward), 1ST DOWN",401757286610,14,20
+142,Louisiana Tech,Q3 0:19,1,10,Pass Reception,90,4,"(00:19) #5 B.Baker pass complete short middle to #84 E.Finley caught at WKU07, for 4 yards to the WKU06 (#21 J.Wester; #17 D.Herard)",401757286615,14,20
+143,Louisiana Tech,Q3 0:0,1,10,End Period,90,4,End of 3rd quarter.,401757286622,14,20
+144,Louisiana Tech,Q4 14:56,2,6,Pass Incompletion,94,0,(15:00) Shotgun #5 B.Baker pass incomplete short right to #18 M.Jackson thrown to WKU00 broken up by #12 J.Mack,401757286626,14,20
+145,Louisiana Tech,Q4 14:53,3,6,Pass Incompletion,94,0,(14:56) Shotgun #5 B.Baker pass incomplete short middle to #18 M.Jackson thrown to WKU00 broken up by #12 J.Mack,401757286631,14,20
+146,Louisiana Tech,Q4 14:49,4,6,Field Goal Good,94,24,"(14:49) #48 J.Chance field goal attempt from 24 yards GOOD (H: #29 L.Matthews, LS: #41 E.Burch), clock 14:49",401757286634,17,20
+147,Western Kentucky,Q4 14:49,1,10,Kickoff,35,-65,"(14:49) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286637,17,20
+148,Western Kentucky,Q4 14:49,1,10,Touchback,100,25,"(14:49) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286637,17,20
+149,Western Kentucky,Q4 14:41,1,10,Rush,75,-1,"(14:49) Shotgun #11 L.Wright rush right for 1 yard loss to the WKU24, End Of Play",401757286640,20,17
+150,Western Kentucky,Q4 14:7,2,11,Pass Reception,76,6,"(14:21) Shotgun #16 R.Tisdale Jr. pass complete short left to #85 J.West caught at WKU30, for 6 yards to the WKU30, End Of Play",401757286644,20,17
+151,Western Kentucky,Q4 13:41,3,5,Pass Incompletion,70,0,(13:46) Shotgun #16 R.Tisdale Jr. pass incomplete short middle to #3 M.Barry thrown to WKU30 broken up by #1 M.Richard,401757286649,20,17
+152,Western Kentucky,Q4 13:28,4,5,Punt,70,16,(13:41) #18 C.Maynard punt 50 yards to the LAT20 #3 D.Latulas return 16 yards to the LAT36 (#0 M.Henry),401757286652,20,17
+153,Louisiana Tech,Q4 13:20,1,10,Pass Reception,36,21,"(13:28) Shotgun #5 B.Baker pass complete short left to #4 C.Thevenin caught at LAT32, for 21 yards to the WKU43 (#7 J.Lewis), 1ST DOWN",401757286658,17,20
+154,Louisiana Tech,Q4 12:40,1,10,Pass Reception,57,-4,"(12:51) Shotgun #5 B.Baker pass complete short right to #4 C.Thevenin caught at WKU47, for 4 yards loss to the WKU47 (#8 M.Malone)",401757286663,17,20
+155,Louisiana Tech,Q4 12:7,2,14,Rush,53,-1,(12:11) Shotgun #4 C.Thevenin rush right for 1 yard loss to the WKU48 (#0 M.Malotumau; #13 R.Harrison),401757286668,17,20
+156,Louisiana Tech,Q4 11:26,3,15,Rush,52,3,(11:40) Shotgun #5 B.Baker rush middle for 3 yards gain to the WKU45 (#50 E.Jones; #0 M.Malotumau),401757286672,17,20
+157,Louisiana Tech,Q4 10:49,4,12,Punt,55,0,(11:06) #48 J.Chance punt 30 yards to the WKU15 fair catch by #2 K.Hutchinson at WKU15,401757286676,17,20
+158,Western Kentucky,Q4 10:42,1,10,Rush,85,-4,(10:49) Shotgun #2 K.Hutchinson rush right for 4 yards loss to the WKU11 (#42 S.Leota; #23 A.Jackson Jr.),401757286680,20,17
+159,Western Kentucky,Q4 9:50,2,14,Pass Reception,89,13,"(10:12) Shotgun #16 R.Tisdale Jr. pass complete short right to #0 M.Henry caught at WKU24, for 13 yards to the WKU24, End Of Play",401757286684,20,17
+160,Western Kentucky,Q4 9:16,3,1,Rush,76,12,"(09:30) Shotgun #16 R.Tisdale Jr. rush middle for 12 yards gain to the WKU36 (#93 J.Bradford; #6 J.Foster), 1ST DOWN",401757286689,20,17
+161,Western Kentucky,Q4 8:43,1,10,Penalty,64,10,"(08:43) Shotgun #9 G.Hart III rush right for 3 yards gain to the WKU39 (#6 J.Foster), out of bounds PENALTY WKU Holding (#0 M.Henry) 10 yards from WKU36 to WKU26. NO PLAY",401757286693,20,17
+162,Western Kentucky,Q4 8:11,1,20,Pass Reception,74,8,"(08:26) Shotgun #16 R.Tisdale Jr. pass complete short middle to #2 K.Hutchinson caught at WKU30, for 8 yards to the WKU34 (#14 J.Mcrae)",401757286698,20,17
+163,Western Kentucky,Q4 7:43,2,12,Pass Interception Return,66,7,(07:51) Shotgun #16 R.Tisdale Jr. pass intercepted by #3 K.Carter at WKU41 #3 K.Carter return 0 yards to the WKU41,401757286703,20,17
+164,Louisiana Tech,Q4 7:36,1,10,Rush,59,20,"(07:43) Shotgun #4 C.Thevenin rush right for 20 yards gain to the WKU21 (#12 J.Mack), out of bounds, 1ST DOWN",401757286708,17,20
+165,Louisiana Tech,Q4 7:18,1,10,Rush,79,0,(07:22) Shotgun #4 C.Thevenin rush right for 0 yards to the WKU21 (#17 D.Herard),401757286712,17,20
+166,Louisiana Tech,Q4 7:9,2,10,Penalty,79,11,"PENALTY WKU Face Mask (#21 J.Wester) 11 yard from WKU21 to WKU10, 1ST DOWN. NO PLAY",401757286716,17,20
+167,Louisiana Tech,Q4 7:5,1,10,Pass Incompletion,90,0,(07:05) Shotgun #5 B.Baker pass incomplete short left to #18 M.Jackson thrown to WKU00,401757286719,17,20
+168,Louisiana Tech,Q4 6:57,2,10,Rush,90,3,(07:05) Shotgun #4 C.Thevenin rush middle for 3 yards gain to the WKU07 (#8 M.Malone; #21 J.Wester),401757286722,17,20
+169,Louisiana Tech,Q4 6:23,3,7,Pass Incompletion,93,0,(06:23) Shotgun #5 B.Baker pass incomplete short middle to #1 D.Gandy thrown to WKU00,401757286726,17,20
+170,Louisiana Tech,Q4 6:20,4,7,Field Goal Good,93,24,"(06:20) #48 J.Chance field goal attempt from 24 yards GOOD (H: #29 L.Matthews, LS: #41 E.Burch), clock 06:20",401757286729,20,20
+171,Western Kentucky,Q4 6:20,1,10,Kickoff,35,-65,"(06:20) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286732,20,20
+172,Western Kentucky,Q4 6:20,1,10,Touchback,100,25,"(06:20) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286732,20,20
+173,Western Kentucky,Q4 6:15,1,10,Rush,75,3,(06:18) Shotgun #9 G.Hart III rush middle for 3 yards gain to the WKU28 (#22 J.Mayfield; #6 J.Foster),401757286735,20,20
+174,Western Kentucky,Q4 6:15,1,10,Timeout,75,0,"Timeout Western Kentucky, clock 06:15",401757286743,20,20
+175,Western Kentucky,Q4 5:42,2,7,Rush,72,-1,(05:49) Shotgun #9 G.Hart III rush middle for 1 yard loss to the WKU27 (#42 S.Leota; #7 J.Shelby Jr.),401757286741,20,20
+176,Western Kentucky,Q4 4:55,3,8,Pass Reception,73,15,"(05:22) Shotgun #16 R.Tisdale Jr. pass complete short middle to #2 K.Hutchinson caught at WKU42, for 15 yards to the WKU42, End Of Play, 1ST DOWN",401757286746,20,20
+177,Western Kentucky,Q4 4:37,1,10,Rush,58,-2,(04:45) Shotgun #9 G.Hart III rush right for 2 yards loss to the WKU40 (#9 M.Mason; #1 M.Richard),401757286751,20,20
+178,Western Kentucky,Q4 3:51,2,12,Rush,60,15,"(04:01) Shotgun #16 R.Tisdale Jr. rush right for 15 yards gain to the LAT45 (#8 J.Fields), 1ST DOWN",401757286755,20,20
+179,Western Kentucky,Q4 3:25,1,10,Rush,45,3,(03:29) Shotgun #9 G.Hart III rush middle for 3 yards gain to the LAT42 (#97 C.Davis; #98 D.Rieman),401757286759,20,20
+180,Western Kentucky,Q4 2:54,2,7,Pass Reception,42,17,"(02:55) Shotgun #16 R.Tisdale Jr. pass complete short middle to #0 M.Henry caught at LAT30, for 17 yards to the LAT25 (#11 C.Woods), 1ST DOWN, PENALTY LAT Holding declined",401757286763,20,20
+181,Western Kentucky,Q4 2:34,1,10,Rush,25,-4,(02:37) Shotgun #9 G.Hart III rush left for 4 yards loss to the LAT29 (#42 S.Leota; #9 M.Mason),401757286769,20,20
+182,Western Kentucky,Q4 1:55,2,14,Rush,29,0,(02:00) Shotgun #9 G.Hart III rush left for 0 yards to the LAT29 (#22 J.Mayfield; #90 J.Madkins),401757286773,20,20
+183,Louisiana Tech,Q4 1:55,2,14,Timeout,29,0,"Timeout Louisiana Tech, clock 01:55",401757286779,20,20
+184,Western Kentucky,Q4 1:47,3,14,Rush,29,10,(01:55) Shotgun #16 R.Tisdale Jr. rush middle for 10 yards gain to the LAT19 (#42 S.Leota; #7 J.Shelby Jr.),401757286777,20,20
+185,Western Kentucky,Q4 1:44,4,4,Blocked Field Goal,19,37,"(01:48) #39 J.Cannon field goal attempt from 37 yards NO GOOD blocked by #9 M.Mason (H: #18 C.Maynard, LS: #55 R.Robich), clock 01:44, out of bounds at LAT20",401757286782,20,20
+186,Louisiana Tech,Q4 1:34,1,10,Pass Reception,20,6,"(01:34) Shotgun #5 B.Baker pass complete short middle to #84 E.Finley caught at LAT23, for 6 yards to the LAT26 (#93 R.Su'a-Filo; #21 J.Wester)",401757286788,20,20
+187,Louisiana Tech,Q4 1:16,2,4,Pass Incompletion,26,0,(01:16) Shotgun #5 B.Baker pass incomplete short middle to #11 J.Mickens thrown to LAT43,401757286793,20,20
+188,Louisiana Tech,Q4 1:11,3,4,Rush,26,7,"(01:13) Shotgun #5 B.Baker rush right for 7 yards gain to the LAT33, out of bounds at LAT33, 1ST DOWN",401757286796,20,20
+189,Louisiana Tech,Q4 1:6,1,10,Pass Incompletion,33,0,(01:10) Shotgun #5 B.Baker pass incomplete short right to #1 D.Gandy thrown to LAT45,401757286800,20,20
+190,Louisiana Tech,Q4 1:0,2,10,Pass Reception,33,3,"(01:05) Shotgun #5 B.Baker pass complete short left to #4 C.Thevenin caught at LAT30, for 3 yards to the LAT36 (#8 M.Malone), out of bounds",401757286803,20,20
+191,Louisiana Tech,Q4 0:53,3,7,Pass Reception,36,19,"(00:57) Shotgun #5 B.Baker pass complete short right to #1 D.Gandy caught at LAT45, for 19 yards to the WKU45 (#21 J.Wester; #12 J.Mack), 1ST DOWN",401757286808,20,20
+192,Louisiana Tech,Q4 0:37,1,10,Rush,55,3,(00:42) Shotgun #5 B.Baker rush middle for 3 yards gain to the WKU42 (#21 J.Wester; #0 M.Henry),401757286813,20,20
+193,Louisiana Tech,Q4 0:31,2,7,Pass Incompletion,58,0,"(00:31) No Huddle #5 B.Baker pass incomplete, Spike",401757286817,20,20
+194,Louisiana Tech,Q4 0:24,3,7,Rush,58,3,(00:31) No Huddle #4 C.Thevenin rush middle for 3 yards gain to the WKU39 (#93 R.Su'a-Filo; #8 M.Malone),401757286820,20,20
+195,Louisiana Tech,Q4 0:5,4,4,Blocked Field Goal,61,57,"(00:05) #48 J.Chance field goal attempt from 57 yards NO GOOD blocked by #34 K.Hayward (H: #29 L.Matthews, LS: #41 E.Burch), clock 00:00 recovered by LAT #52 T.Smith at WKU15, End Of Play",401757286824,20,20
+196,Louisiana Tech,Q4 0:0,4,4,End Period,61,24,End of 4th quarter.,401757286828,20,20
+197,Louisiana Tech,Q5 0:19,3,2,Timeout,33,0,"Timeout Louisiana Tech, clock 00:19",401757286871,27,20
+198,Western Kentucky,Q5 0:19,3,2,Timeout,33,0,"Timeout Western Kentucky, clock 00:19",401757286878,20,27
+199,Louisiana Tech,Q5 0:0,1,10,Pass Reception,75,3,"(00:00) Shotgun #5 B.Baker pass complete short middle to #1 D.Gandy caught at WKU25, for 3 yards to the WKU22 (#7 J.Lewis)",401757286836,20,20
+200,Louisiana Tech,Q5 0:0,2,7,Fumble Recovery (Own),78,16,"(00:00) Shotgun #5 B.Baker pass complete short left to #1 D.Gandy caught at WKU14, for 16 yards to the WKU06 fumbled by #1 D.Gandy at WKU06 forced by #21 J.Wester recovered by LAT #84 E.Finley at WKU06, End Of Play, 1ST DOWN",401757286841,20,20
+201,Louisiana Tech,Q5 0:0,1,6,Rush,94,4,(00:00) Shotgun #0 A.Burnette rush middle for 4 yards gain to the WKU02 (#6 N.Ward; #93 R.Su'a-Filo),401757286848,20,20
+202,Louisiana Tech,Q5 0:0,2,2,Rush,98,0,(00:00) Shotgun #0 A.Burnette rush middle for 0 yards to the WKU02 (#17 D.Herard; #93 R.Su'a-Filo),401757286852,20,20
+203,Louisiana Tech,Q5 0:0,3,2,Rush,98,2,"(00:00) Shotgun #0 A.Burnette rush middle for 2 yards gain to the WKU00 TOUCHDOWN, clock 00:00 #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757286856,27,20
+204,Western Kentucky,Q5 0:0,1,10,Pass Reception,25,3,"(00:00) Shotgun #16 R.Tisdale Jr. pass complete short left to #85 J.West caught at LAT22, for 3 yards to the LAT22 (#11 C.Woods; #22 J.Mayfield), out of bounds",401757286864,20,27
+205,Western Kentucky,Q5 0:0,2,7,Rush,22,5,(00:00) Shotgun #16 R.Tisdale Jr. rush middle for 5 yards gain to the LAT17 (#96 Z.Nason),401757286869,20,27
+206,Western Kentucky,Q5 0:0,3,2,Penalty,17,5,PENALTY WKU False Start (#85 J.West) 5 yards from LAT17 to LAT22. NO PLAY,401757286879,20,27
+207,Western Kentucky,Q5 0:0,3,7,Sack,22,-3,"(00:00) Shotgun #16 R.Tisdale Jr. sacked for loss of 3 yards to the LAT25 (#42 S.Leota, #9 M.Mason)",401757286882,20,27
+208,Western Kentucky,Q5 0:0,4,10,Pass Reception,25,11,"(00:00) Shotgun #16 R.Tisdale Jr. pass complete short right to #0 M.Henry caught at LAT14, for 11 yards to the LAT14, End Of Play, 1ST DOWN",401757286887,20,27
+209,Western Kentucky,Q5 0:0,1,10,Rush,14,3,(00:00) Shotgun #9 G.Hart III rush middle for 3 yards gain to the LAT11 (#98 D.Rieman; #7 J.Shelby Jr.),401757286892,20,27
+210,Western Kentucky,Q5 0:0,2,7,Pass Incompletion,11,0,(00:00) Shotgun #16 R.Tisdale Jr. pass incomplete short right to #21 M.Parrish thrown to LAT01,401757286896,20,27
+211,Western Kentucky,Q5 0:0,3,7,Pass Reception,11,7,"(00:00) Shotgun #16 R.Tisdale Jr. pass complete short left to #2 K.Hutchinson caught at LAT10, for 7 yards to the LAT04 (#6 J.Foster), out of bounds, 1ST DOWN",401757286899,20,27
+212,Western Kentucky,Q5 0:0,1,4,Rush,4,4,"(00:00) Shotgun #9 G.Hart III rush middle for 4 yards gain to the LAT00 TOUCHDOWN, clock 00:00 #16 R.Tisdale Jr. pass attempt Successful #2 K.Hutchinson pass attempt Successful #3 M.Barry pass attempt Successful",401757286904,28,27
+213,Western Kentucky,Q5 0:0,3,2,End Period,67,67,End of OT.,401757286920,28,27
