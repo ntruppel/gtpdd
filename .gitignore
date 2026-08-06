@@ -9,6 +9,8 @@ logo/*
 # Remove Google Drive ini files
 **/*.ini
 __pycache__/*
+lib/__pycache__/*
+
 
 fbTest.py
 output.txt
