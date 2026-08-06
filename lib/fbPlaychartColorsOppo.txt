@@ -1,7 +1,0 @@
-{
-    "pass": "#231f20",
-    "run": "#ffc72c",
-    "penalty": "gold",
-    "safety": "navy",
-    "fumble": "navy"
-}
