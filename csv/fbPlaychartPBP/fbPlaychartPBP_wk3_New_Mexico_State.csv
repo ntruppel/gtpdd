@@ -83,7 +83,7 @@
 81,Louisiana Tech,Q2 9:40,3,13,Rush,67,19,Blake Baker run for 19 yds to the NMSU 14 for a 1ST down,401757257102905913,24,7
 82,Louisiana Tech,Q2 9:40,1,10,Rush,86,4,Trey Kukuk run for 4 yds to the NMSU 10,401757257102905914,24,7
 83,Louisiana Tech,Q2 9:40,2,6,Pass Reception,90,2,Trey Kukuk pass complete to David Pierro for 2 yds to the NMSU 8,401757257102905915,24,7
-84,Louisiana Tech,Q2 3:49,3,4,Pass Interception Return,92,0,Trey Kukuk pass intercepted Tyler Martinez return for no gain to the NMSU 2,401757257102965001,24,7
+84,Louisiana Tech,Q2 3:49,3,4,Pass Interception Return,92,6,Trey Kukuk pass intercepted Tyler Martinez return for no gain to the NMSU 2,401757257102965001,24,7
 85,New Mexico State,Q2 3:49,1,10,Rush,98,3,Kadarius Calloway run for 3 yds to the NMSU 5,401757257102965003,7,24
 86,New Mexico State,Q2 3:49,2,7,Pass Reception,95,40,Logan Fife pass complete to PJ Johnson III for 40 yds to the NMSU 45 for a 1ST down,401757257102965004,7,24
 87,New Mexico State,Q2 3:49,1,10,Pass Reception,55,17,Logan Fife pass complete to PJ Johnson III for 17 yds to the LT 38 for a 1ST down,401757257102965005,7,24
@@ -113,7 +113,7 @@
 111,Louisiana Tech,Q3 14:54,3,8,Sack,21,-7,Blake Baker sacked by Tory Gethers for a loss of 7 yards to the LT 14,401757257103854505,27,14
 112,Louisiana Tech,Q3 13:32,4,15,Punt,14,50,"John Hoyet Chance punt for 50 yds , TJ Pride returns for no gain to the NMSU 35",401757257103866701,27,14
 113,New Mexico State,Q3 13:32,1,10,Pass Incompletion,65,0,Logan Fife pass incomplete to PJ Johnson III,401757257103866703,14,27
-114,New Mexico State,Q3 13:20,2,10,Pass Interception Return,65,0,Logan Fife pass intercepted Jakari Foster return for no gain to the LT 25,401757257103867901,14,27
+114,New Mexico State,Q3 13:20,2,10,Pass Interception Return,65,40,Logan Fife pass intercepted Jakari Foster return for no gain to the LT 25,401757257103867901,14,27
 115,Louisiana Tech,Q3 13:20,1,10,Pass Incompletion,25,0,Blake Baker pass incomplete to Luke Watkins,401757257103867903,27,14
 116,Louisiana Tech,Q3 13:20,2,10,Rush,25,5,Blake Baker run for 5 yds to the LT 30,401757257103867904,27,14
 117,Louisiana Tech,Q3 13:20,3,5,Pass Incompletion,30,0,Blake Baker pass incomplete to Devin Gandy,401757257103867905,27,14
@@ -137,63 +137,64 @@
 135,Louisiana Tech,Q3 7:2,2,6,Rush,50,-3,Omiri Wiggins run for a loss of 3 yards to the LT 47,401757257103929706,27,14
 136,Louisiana Tech,Q3 7:2,3,9,Pass Incompletion,47,0,Blake Baker pass incomplete to Marlion Jackson,401757257103929707,27,14
 137,Louisiana Tech,Q3 5:40,4,9,Punt,47,53,John Hoyet Chance punt for 53 yds for a touchback,401757257103945901,27,14
-138,New Mexico State,Q3 5:40,1,10,Pass Reception,80,9,Logan Fife pass complete to Dakerric Hobbs for 9 yds to the NMSU 29,401757257103945903,14,27
-139,New Mexico State,Q3 5:40,2,1,Rush,71,8,Dijon Stanley run for 8 yds to the NMSU 37 for a 1ST down,401757257103945904,14,27
-140,New Mexico State,Q3 5:40,1,10,Penalty,63,-15,"New Mexico State Penalty, (-15 Yards) to the NMSU 26",401757257103945905,14,27
-141,New Mexico State,Q3 5:40,1,21,Penalty,74,-12,"Shotgun Fife,Logan rush left for 4 yards gain to the NMSU30 (Mason,Mekhi; Carter,Kameron) PENALTY NMSU Illegal Use Of Hands (Nieves,Armando) 12 yards from NMSU26 to NMSU14. NO PLAY.",401757257103945906,14,27
-142,New Mexico State,Q3 5:40,1,33,Rush,86,1,Dijon Stanley run for 1 yd to the NMSU 15,401757257103945907,14,27
-143,New Mexico State,Q3 5:40,2,32,Pass Reception,85,9,Logan Fife pass complete to PJ Johnson III for 9 yds to the NMSU 24,401757257103945908,14,27
-144,New Mexico State,Q3 5:40,3,23,Pass Incompletion,76,0,Logan Fife pass incomplete to Gavin Harris,401757257103945909,14,27
-145,New Mexico State,Q3 1:55,4,23,Punt,76,44,"Max Dean punt for 44 yds , Dedrick Latulas returns for no gain to the LT 31",401757257103984401,14,27
-146,Louisiana Tech,Q3 1:55,1,10,Rush,31,1,Andrew Burnette run for 1 yd to the LT 32,401757257103984403,27,14
-147,Louisiana Tech,Q3 1:55,2,9,Rush,32,7,Clay Thevenin run for 7 yds to the LT 39,401757257103984404,27,14
-148,Louisiana Tech,Q3 1:55,3,2,Timeout,39,0,"Timeout New Mexico State, clock 01:55",401757257103984405,27,14
-149,Louisiana Tech,Q3 1:55,3,2,Rush,39,15,Clay Thevenin run for 15 yds to the NMSU 46 for a 1ST down,401757257103984406,27,14
-150,Louisiana Tech,Q3 0:0,1,10,Rush,54,8,Clay Thevenin run for 8 yds to the NMSU 38,401757257103999901,27,14
-151,Louisiana Tech,Q3 0:0,0,10,End Period,54,8,End of 3rd Quarter,401757257103999902,27,14
-152,Louisiana Tech,Q4 15:0,2,2,Penalty,62,-10,"Shotgun Thevenin,Clay rush left for 7 yards gain to the NMSU31 (Smith,Lorenzo) PENALTY LAT Holding (Ellis,Austin) 10 yards from NMSU38 to NMSU48. NO PLAY.",401757257104849902,27,14
-153,Louisiana Tech,Q4 15:0,2,12,Rush,52,9,Blake Baker run for 9 yds to the NMSU 39,401757257104849903,27,14
-154,Louisiana Tech,Q4 15:0,3,3,Rush,61,6,Omiri Wiggins run for 6 yds to the NMSU 33 for a 1ST down,401757257104849904,27,14
-155,Louisiana Tech,Q4 15:0,1,10,Rush,67,1,Omiri Wiggins run for 1 yd to the NMSU 32,401757257104849905,27,14
-156,Louisiana Tech,Q4 15:0,2,9,Rush,68,1,Blake Baker run for 1 yd to the NMSU 31,401757257104849906,27,14
-157,Louisiana Tech,Q4 15:0,3,8,Pass Incompletion,69,0,Blake Baker pass incomplete to Devin Gandy,401757257104849907,27,14
-158,Louisiana Tech,Q4 12:32,4,8,Field Goal Missed,69,49,Drew Henderson 49 yd FG MISSED,401757257104876701,27,14
-159,New Mexico State,Q4 12:24,1,10,Fumble Return Touchdown,69,20,Jacob Bradford 20 Yd Fumble Return (Drew Henderson Kick),401757257104877501,14,34
-160,New Mexico State,Q4 12:24,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104877503,34,14
-161,New Mexico State,Q4 12:24,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104877503,34,14
-162,New Mexico State,Q4 12:24,1,10,Pass Reception,75,6,Logan Fife pass complete to Kadarius Calloway for 6 yds to the NMSU 31,401757257104877505,14,34
-163,New Mexico State,Q4 12:24,2,4,Pass Incompletion,69,0,Logan Fife pass incomplete to Kadarius Calloway,401757257104877506,14,34
-164,New Mexico State,Q4 12:24,3,4,Timeout,69,0,"Timeout Louisiana Tech, clock 12:24",401757257104877507,14,34
-165,New Mexico State,Q4 12:24,3,4,Pass Incompletion,69,0,Logan Fife pass incomplete to Gavin Harris,401757257104877508,14,34
-166,New Mexico State,Q4 11:40,4,4,Punt,69,44,"Max Dean punt for 44 yds , Marques Singleton Jr. returns for 26 yds to the NMSU 49",401757257104885901,14,34
-167,Louisiana Tech,Q4 11:40,4,4,Punt Return,25,26,"Max Dean punt for 44 yds , Marques Singleton Jr. returns for 26 yds to the NMSU 49",401757257104885901,14,34
-168,Louisiana Tech,Q4 11:40,1,10,Rush,51,37,"Trey Kukuk run for 24 yds to the NMSU 25 for a 1ST down New Mexico State Penalty, (13 Yards) to the NMSU 12 for a 1ST down",401757257104885903,34,14
-169,Louisiana Tech,Q4 11:40,1,10,Penalty,88,-5,"PENALTY LAT False Start (Ellis,Austin) 5 yards from NMSU12 to NMSU17. NO PLAY.",401757257104885904,34,14
-170,Louisiana Tech,Q4 11:40,1,15,Rush,83,7,Blake Baker run for 7 yds to the NMSU 10,401757257104885905,34,14
-171,Louisiana Tech,Q4 11:40,2,8,Rush,90,9,Amani Givens run for 9 yds to the NMSU 1 for a 1ST down,401757257104885906,34,14
-172,Louisiana Tech,Q4 9:34,1,1,Rushing Touchdown,99,1,Blake Baker 1 Yd Run (Blake Baker Pass to Clay Thevenin for Two-Point Conversion),401757257104906501,42,14
-173,New Mexico State,Q4 9:34,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104906503,42,14
-174,New Mexico State,Q4 9:34,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104906503,42,14
-175,New Mexico State,Q4 9:34,1,10,Pass Incompletion,75,0,Logan Fife pass incomplete to Gavin Harris,401757257104906505,14,42
-176,New Mexico State,Q4 9:34,2,10,Penalty,75,6,"Shotgun Fife,Logan pass incomplete short middle to Ungar,Lukas thrown to NMSU29 broken up by Cobbs,Joshua PENALTY LAT Pass Interference (Cobbs,Joshua) 6 yards from NMSU25 to NMSU31, 1ST DOWN. NO PLAY.",401757257104906506,14,42
-177,New Mexico State,Q4 9:13,1,10,Pass Interception Return,69,29,Logan Fife pass intercepted Kam Franklin return for 29 yds to the NMSU 17,401757257104908601,14,42
-178,Louisiana Tech,Q4 9:6,1,10,Rushing Touchdown,83,17,Omiri Wiggins run for 17 yds for a TD (Drew Henderson KICK),401757257104909301,49,14
-179,New Mexico State,Q4 9:6,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104909303,49,14
-180,New Mexico State,Q4 9:6,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104909303,49,14
-181,New Mexico State,Q4 9:6,1,10,Rush,75,2,Isaiah Rudison run for 2 yds to the NMSU 27,401757257104909305,14,49
-182,New Mexico State,Q4 9:6,2,8,Pass Reception,73,3,Logan Fife pass complete to Gavin Harris for 3 yds to the NMSU 30,401757257104909306,14,49
-183,New Mexico State,Q4 9:6,3,5,Penalty,70,-5,"PENALTY NMSU False Start (Nieves,Armando) 5 yards from NMSU30 to NMSU25. NO PLAY.",401757257104909307,14,49
-184,New Mexico State,Q4 9:6,3,10,Rush,75,1,Logan Fife run for 1 yd to the NMSU 26,401757257104909308,14,49
-185,New Mexico State,Q4 7:1,4,9,Punt,74,36,"Max Dean punt for 36 yds, fair catch by Marques Singleton Jr. at the LT 38",401757257104929801,14,49
-186,Louisiana Tech,Q4 7:1,1,10,Rush,38,2,Andrew Burnette run for 2 yds to the LT 40,401757257104929803,49,14
-187,Louisiana Tech,Q4 7:1,2,8,Rush,40,6,Andrew Burnette run for 6 yds to the LT 46,401757257104929804,49,14
-188,Louisiana Tech,Q4 7:1,3,2,Rush,46,4,Andrew Burnette run for 4 yds to the 50 yard line for a 1ST down,401757257104929805,49,14
-189,Louisiana Tech,Q4 7:1,1,10,Rush,50,4,Andrew Burnette run for 4 yds to the NMSU 46,401757257104929806,49,14
-190,Louisiana Tech,Q4 7:1,2,6,Rush,54,2,Andrew Burnette run for 2 yds to the NMSU 44,401757257104929807,49,14
-191,Louisiana Tech,Q4 7:1,3,4,Rush,56,5,Amani Givens run for 5 yds to the NMSU 39 for a 1ST down,401757257104929808,49,14
-192,Louisiana Tech,Q4 7:1,1,10,Rush,61,5,Amani Givens run for 5 yds to the NMSU 34,401757257104929809,49,14
-193,Louisiana Tech,Q4 7:1,2,5,Rush,66,4,Mason Welch run for 4 yds to the NMSU 30,401757257104929810,49,14
-194,Louisiana Tech,Q4 7:1,3,1,Rush,70,6,Mason Welch run for 6 yds to the NMSU 24 for a 1ST down,401757257104929811,49,14
-195,Louisiana Tech,Q4 7:1,1,10,Rush,76,-1,M. Welch takes a knee,401757257104929812,49,14
-196,Louisiana Tech,Q4 0:0,2,11,Rush,75,0,M. Welch takes a knee,401757257104999901,49,14
-197,Louisiana Tech,Q4 0:0,0,11,End of Game,75,0,End of 4th Quarter,401757257104999903,49,14
+138,New Mexico State,Q3 5:40,4,9,Touchback,100,20,John Hoyet Chance punt for 53 yds for a touchback,401757257103945901,27,14
+139,New Mexico State,Q3 5:40,1,10,Pass Reception,80,9,Logan Fife pass complete to Dakerric Hobbs for 9 yds to the NMSU 29,401757257103945903,14,27
+140,New Mexico State,Q3 5:40,2,1,Rush,71,8,Dijon Stanley run for 8 yds to the NMSU 37 for a 1ST down,401757257103945904,14,27
+141,New Mexico State,Q3 5:40,1,10,Penalty,63,-15,"New Mexico State Penalty, (-15 Yards) to the NMSU 26",401757257103945905,14,27
+142,New Mexico State,Q3 5:40,1,21,Penalty,74,-12,"Shotgun Fife,Logan rush left for 4 yards gain to the NMSU30 (Mason,Mekhi; Carter,Kameron) PENALTY NMSU Illegal Use Of Hands (Nieves,Armando) 12 yards from NMSU26 to NMSU14. NO PLAY.",401757257103945906,14,27
+143,New Mexico State,Q3 5:40,1,33,Rush,86,1,Dijon Stanley run for 1 yd to the NMSU 15,401757257103945907,14,27
+144,New Mexico State,Q3 5:40,2,32,Pass Reception,85,9,Logan Fife pass complete to PJ Johnson III for 9 yds to the NMSU 24,401757257103945908,14,27
+145,New Mexico State,Q3 5:40,3,23,Pass Incompletion,76,0,Logan Fife pass incomplete to Gavin Harris,401757257103945909,14,27
+146,New Mexico State,Q3 1:55,4,23,Punt,76,44,"Max Dean punt for 44 yds , Dedrick Latulas returns for no gain to the LT 31",401757257103984401,14,27
+147,Louisiana Tech,Q3 1:55,1,10,Rush,31,1,Andrew Burnette run for 1 yd to the LT 32,401757257103984403,27,14
+148,Louisiana Tech,Q3 1:55,2,9,Rush,32,7,Clay Thevenin run for 7 yds to the LT 39,401757257103984404,27,14
+149,Louisiana Tech,Q3 1:55,3,2,Timeout,39,0,"Timeout New Mexico State, clock 01:55",401757257103984405,27,14
+150,Louisiana Tech,Q3 1:55,3,2,Rush,39,15,Clay Thevenin run for 15 yds to the NMSU 46 for a 1ST down,401757257103984406,27,14
+151,Louisiana Tech,Q3 0:0,1,10,Rush,54,8,Clay Thevenin run for 8 yds to the NMSU 38,401757257103999901,27,14
+152,Louisiana Tech,Q3 0:0,0,10,End Period,54,8,End of 3rd Quarter,401757257103999902,27,14
+153,Louisiana Tech,Q4 15:0,2,2,Penalty,62,-10,"Shotgun Thevenin,Clay rush left for 7 yards gain to the NMSU31 (Smith,Lorenzo) PENALTY LAT Holding (Ellis,Austin) 10 yards from NMSU38 to NMSU48. NO PLAY.",401757257104849902,27,14
+154,Louisiana Tech,Q4 15:0,2,12,Rush,52,9,Blake Baker run for 9 yds to the NMSU 39,401757257104849903,27,14
+155,Louisiana Tech,Q4 15:0,3,3,Rush,61,6,Omiri Wiggins run for 6 yds to the NMSU 33 for a 1ST down,401757257104849904,27,14
+156,Louisiana Tech,Q4 15:0,1,10,Rush,67,1,Omiri Wiggins run for 1 yd to the NMSU 32,401757257104849905,27,14
+157,Louisiana Tech,Q4 15:0,2,9,Rush,68,1,Blake Baker run for 1 yd to the NMSU 31,401757257104849906,27,14
+158,Louisiana Tech,Q4 15:0,3,8,Pass Incompletion,69,0,Blake Baker pass incomplete to Devin Gandy,401757257104849907,27,14
+159,Louisiana Tech,Q4 12:32,4,8,Field Goal Missed,69,49,Drew Henderson 49 yd FG MISSED,401757257104876701,27,14
+160,New Mexico State,Q4 12:24,1,10,Fumble Return Touchdown,69,20,Jacob Bradford 20 Yd Fumble Return (Drew Henderson Kick),401757257104877501,14,34
+161,New Mexico State,Q4 12:24,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104877503,34,14
+162,New Mexico State,Q4 12:24,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104877503,34,14
+163,New Mexico State,Q4 12:24,1,10,Pass Reception,75,6,Logan Fife pass complete to Kadarius Calloway for 6 yds to the NMSU 31,401757257104877505,14,34
+164,New Mexico State,Q4 12:24,2,4,Pass Incompletion,69,0,Logan Fife pass incomplete to Kadarius Calloway,401757257104877506,14,34
+165,New Mexico State,Q4 12:24,3,4,Timeout,69,0,"Timeout Louisiana Tech, clock 12:24",401757257104877507,14,34
+166,New Mexico State,Q4 12:24,3,4,Pass Incompletion,69,0,Logan Fife pass incomplete to Gavin Harris,401757257104877508,14,34
+167,New Mexico State,Q4 11:40,4,4,Punt,69,44,"Max Dean punt for 44 yds , Marques Singleton Jr. returns for 26 yds to the NMSU 49",401757257104885901,14,34
+168,Louisiana Tech,Q4 11:40,4,4,Punt Return,25,26,"Max Dean punt for 44 yds , Marques Singleton Jr. returns for 26 yds to the NMSU 49",401757257104885901,14,34
+169,Louisiana Tech,Q4 11:40,1,10,Rush,51,37,"Trey Kukuk run for 24 yds to the NMSU 25 for a 1ST down New Mexico State Penalty, (13 Yards) to the NMSU 12 for a 1ST down",401757257104885903,34,14
+170,Louisiana Tech,Q4 11:40,1,10,Penalty,88,-5,"PENALTY LAT False Start (Ellis,Austin) 5 yards from NMSU12 to NMSU17. NO PLAY.",401757257104885904,34,14
+171,Louisiana Tech,Q4 11:40,1,15,Rush,83,7,Blake Baker run for 7 yds to the NMSU 10,401757257104885905,34,14
+172,Louisiana Tech,Q4 11:40,2,8,Rush,90,9,Amani Givens run for 9 yds to the NMSU 1 for a 1ST down,401757257104885906,34,14
+173,Louisiana Tech,Q4 9:34,1,1,Rushing Touchdown,99,1,Blake Baker 1 Yd Run (Blake Baker Pass to Clay Thevenin for Two-Point Conversion),401757257104906501,42,14
+174,New Mexico State,Q4 9:34,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104906503,42,14
+175,New Mexico State,Q4 9:34,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104906503,42,14
+176,New Mexico State,Q4 9:34,1,10,Pass Incompletion,75,0,Logan Fife pass incomplete to Gavin Harris,401757257104906505,14,42
+177,New Mexico State,Q4 9:34,2,10,Penalty,75,6,"Shotgun Fife,Logan pass incomplete short middle to Ungar,Lukas thrown to NMSU29 broken up by Cobbs,Joshua PENALTY LAT Pass Interference (Cobbs,Joshua) 6 yards from NMSU25 to NMSU31, 1ST DOWN. NO PLAY.",401757257104906506,14,42
+178,New Mexico State,Q4 9:13,1,10,Pass Interception Return,69,-14,Logan Fife pass intercepted Kam Franklin return for 29 yds to the NMSU 17,401757257104908601,14,42
+179,Louisiana Tech,Q4 9:6,1,10,Rushing Touchdown,83,17,Omiri Wiggins run for 17 yds for a TD (Drew Henderson KICK),401757257104909301,49,14
+180,New Mexico State,Q4 9:6,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104909303,49,14
+181,New Mexico State,Q4 9:6,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401757257104909303,49,14
+182,New Mexico State,Q4 9:6,1,10,Rush,75,2,Isaiah Rudison run for 2 yds to the NMSU 27,401757257104909305,14,49
+183,New Mexico State,Q4 9:6,2,8,Pass Reception,73,3,Logan Fife pass complete to Gavin Harris for 3 yds to the NMSU 30,401757257104909306,14,49
+184,New Mexico State,Q4 9:6,3,5,Penalty,70,-5,"PENALTY NMSU False Start (Nieves,Armando) 5 yards from NMSU30 to NMSU25. NO PLAY.",401757257104909307,14,49
+185,New Mexico State,Q4 9:6,3,10,Rush,75,1,Logan Fife run for 1 yd to the NMSU 26,401757257104909308,14,49
+186,New Mexico State,Q4 7:1,4,9,Punt,74,36,"Max Dean punt for 36 yds, fair catch by Marques Singleton Jr. at the LT 38",401757257104929801,14,49
+187,Louisiana Tech,Q4 7:1,1,10,Rush,38,2,Andrew Burnette run for 2 yds to the LT 40,401757257104929803,49,14
+188,Louisiana Tech,Q4 7:1,2,8,Rush,40,6,Andrew Burnette run for 6 yds to the LT 46,401757257104929804,49,14
+189,Louisiana Tech,Q4 7:1,3,2,Rush,46,4,Andrew Burnette run for 4 yds to the 50 yard line for a 1ST down,401757257104929805,49,14
+190,Louisiana Tech,Q4 7:1,1,10,Rush,50,4,Andrew Burnette run for 4 yds to the NMSU 46,401757257104929806,49,14
+191,Louisiana Tech,Q4 7:1,2,6,Rush,54,2,Andrew Burnette run for 2 yds to the NMSU 44,401757257104929807,49,14
+192,Louisiana Tech,Q4 7:1,3,4,Rush,56,5,Amani Givens run for 5 yds to the NMSU 39 for a 1ST down,401757257104929808,49,14
+193,Louisiana Tech,Q4 7:1,1,10,Rush,61,5,Amani Givens run for 5 yds to the NMSU 34,401757257104929809,49,14
+194,Louisiana Tech,Q4 7:1,2,5,Rush,66,4,Mason Welch run for 4 yds to the NMSU 30,401757257104929810,49,14
+195,Louisiana Tech,Q4 7:1,3,1,Rush,70,6,Mason Welch run for 6 yds to the NMSU 24 for a 1ST down,401757257104929811,49,14
+196,Louisiana Tech,Q4 7:1,1,10,Rush,76,-1,M. Welch takes a knee,401757257104929812,49,14
+197,Louisiana Tech,Q4 0:0,2,11,Rush,75,0,M. Welch takes a knee,401757257104999901,49,14
+198,Louisiana Tech,Q4 0:0,0,11,End of Game,75,0,End of 4th Quarter,401757257104999903,49,14

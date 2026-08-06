@@ -38,9 +38,15 @@ PLAY_COLOR_KEYS = {
     'Pass Interception Return': 'pass',   # interceptions reuse the pass color
     'Interception Return Touchdown': 'pass',
     'Safety': 'safety',
-    'Fumble Recovery (Opponent)': 'fumble'
+    'Fumble Recovery (Opponent)': 'fumble',
+    'Fumble Return Touchdown': 'fumble',
 
 }
+
+## Non-scoring fumble turnover (the other team recovered): drawn hatched like an
+## interception and labeled "Fumble!". (A fumble returned for a TD has its own
+## branch that also spots the ball in the endzone.)
+FUMBLE_TURNOVER_TYPES = ('Fumble Recovery (Opponent)',)
 
 
 def getPBPData(year=2024, week=1, team='Louisiana Tech'):
@@ -269,6 +275,13 @@ def lookupEspnId(name, team_id_csv='csv/espnTeamIDs.csv'):
     return None
 
 
+def hexLuminance(hex_color):
+    """Perceived brightness (0-255) of a #RRGGBB color; lower is darker."""
+    h = str(hex_color).lstrip('#')
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    return 0.299 * r + 0.587 * g + 0.114 * b
+
+
 def updateOppoColors(opponent, oppo_color_path):
     ## When refreshData=True, updates the team's colors in lib/fbPlaychartColorsOppo.txt
     team_id = lookupEspnId(opponent)
@@ -282,8 +295,12 @@ def updateOppoColors(opponent, oppo_color_path):
         print(f"Could not fetch ESPN colors for '{opponent}' ({type(e).__name__}: {e}); keeping existing.")
         return
     colors = loadColors(oppo_color_path)
-    colors['pass'] = '#' + str(color1).lstrip('#')
-    colors['run'] = '#' + str(color2).lstrip('#')
+    ## Use the darker of the two team colors for "pass" and the lighter for "run".
+    c1, c2 = '#' + str(color1).lstrip('#'), '#' + str(color2).lstrip('#')
+    try:
+        colors['pass'], colors['run'] = sorted((c1, c2), key=hexLuminance)
+    except (ValueError, IndexError):
+        colors['pass'], colors['run'] = c1, c2  # non-hex color: keep color1/color2 order
     with open(oppo_color_path, 'w') as f:
         json.dump(colors, f, indent=4)
     print(f"Opponent colors from ESPN ({opponent}): pass={colors['pass']}, run={colors['run']}")
@@ -385,10 +402,10 @@ PENALTY_HATCH = 'xxx'
 PENALTY_HATCH_COLOR = 'black'
 
 
-def drawArrow(ax, x, y, dx, color, interception=False, penalty=False):
+def drawArrow(ax, x, y, dx, color, interception=False, penalty=False, fumble=False):
     ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
              facecolor=color, edgecolor='black', linewidth=0.5)
-    if interception:
+    if interception or fumble:  # fumble turnovers reuse the interception hatch
         ax.arrow(x, y, dx, 0, width=3.5, head_width=3.5, head_length=0.9,
                  facecolor='none', edgecolor=INTERCEPTION_HATCH_COLOR,
                  linewidth=0, hatch=INTERCEPTION_HATCH, zorder=3)
@@ -469,18 +486,40 @@ def drawPlay(ax, row, i, geo):
             path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
             path_effects.withStroke(linewidth=1, foreground="black")
         ])
-    else:
+
+    ## Fumble returned for a TD — same as an interception-return TD (arrow to the
+    ## returning team's endzone, "TD!" there), but labeled "Fumble!".
+    elif playType == 'Fumble Return Touchdown':
         color = playColor(playType, geo['colors'])
+        drawArrow(ax, start, i, -1 * (start - geo['oppo_endzone']), color, fumble=True)
+        ax.text(start, i+2, " Fumble! ", fontsize=8, va='top', ha=geo['zha'])
+        text_obj=ax.text(geo['oppo_endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
+
+        text_obj.set_path_effects([
+            path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
+            path_effects.withStroke(linewidth=1, foreground="black")
+        ])
+    else:
+        if playType == 'Fumble Recovery (Own)':
+            ## Own-fumble kept possession — color it by whether the text was a run
+            ## or pass (a sack that fumbled has neither, so it defaults to run).
+            color = geo['colors']['pass' if 'pass' in str(row.text).lower() else 'run']
+        else:
+            color = playColor(playType, geo['colors'])
         is_int = 'Interception' in playType
         is_pen = playType == 'Penalty'
+        is_fum = playType in FUMBLE_TURNOVER_TYPES
         if row.gained > 0:
-            drawArrow(ax, start, i, geo['pos_gained'], color, interception=is_int, penalty=is_pen)
+            drawArrow(ax, start, i, geo['pos_gained'], color, interception=is_int, penalty=is_pen, fumble=is_fum)
         elif row.gained < 0:
-            drawArrow(ax, start, i, geo['neg_gained'], color, interception=is_int, penalty=is_pen)
+            drawArrow(ax, start, i, geo['neg_gained'], color, interception=is_int, penalty=is_pen, fumble=is_fum)
         else:
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
-        if 'Touchdown' in playType:
+        if is_fum:
+            ## Fumble turnover — hatched like an interception, labeled below the arrow.
+            ax.text(start, i+2, " Fumble! ", fontsize=8, va='top', ha=geo['zha'])
+        elif 'Touchdown' in playType:
             text_obj=ax.text(geo['endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
 
             text_obj.set_path_effects([
@@ -498,21 +537,8 @@ def drawPlay(ax, row, i, geo):
             ax.text(geo['int_endzone'], i, " Safety! ", color="white", fontsize=10, va='center', ha=geo['zha'])
 
         elif 'Fumble Recovery' in playType:
-            ## Label on the arrow's pointing (head) end, unless that text would run
-            ## into an endzone (x<0 or x>100) — then put it on the flat (tail) end.
-            dx = geo['pos_gained'] if row.gained > 0 else (geo['neg_gained'] if row.gained < 0 else 0)
-            head_x = start + dx
-            fumble_w = 11  # approx width of " Fumble! " in data units
-            if dx >= 0:  # arrow points right, head text extends right
-                head_ha, tail_ha = 'left', 'right'
-                overlaps = head_x + fumble_w > 100
-            else:  # arrow points left, head text extends left
-                head_ha, tail_ha = 'right', 'left'
-                overlaps = head_x - fumble_w < 0
-            if overlaps:
-                ax.text(start, i, ' Fumble! ', color='black', fontsize=12, ha=tail_ha, va='center')
-            else:
-                ax.text(head_x+1, i, ' Fumble! ', color='black', fontsize=12, ha=head_ha, va='center')
+            ## Printed the same way as "Sack!" — small, below the arrow's head.
+            ax.text(start+geo['neg_gained'], i, '  Fumble!  ', color='black', fontsize='8', ha=geo['zha'], va='top')
             
 
     return 0
@@ -576,7 +602,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     techColors = loadColors(techColorPath)
     oppoColors = loadColors(oppoColorPath)
 
-    fig, ax = setupChart(techColors['pass'], oppoColors['pass'])
+    fig, ax = setupChart(techColors['pass'], oppoColors['run'])
 
     i = 0
     offense = ''
@@ -771,5 +797,5 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     print("Done.")
 
 
-fbPlaychart(year=2025, week=2, refreshData=True)
+fbPlaychart(year=2025, week=4, refreshData=True)
 #df = getPBPData(2025, 4, 'Louisiana Tech')
