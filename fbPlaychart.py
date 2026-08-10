@@ -24,8 +24,8 @@ BACKGROUND_COLOR = "#d6e8cf"  # muted light green
 EDGE_COLOR = "#222021"
 
 HOME_URL = "index.html"           # TODO: replace with gtpdd home page
-HTML_DIR = "html/fbPlaychart"     # per-game HTML pages
-PBP_DIR = "csv/fbPlaychartPBP"    # per-game play-by-play CSVs
+HTML_DIR = "html/fbPlaychart"     # per-game HTML pages, kept in a per-season subdirectory
+PBP_DIR = "csv/fbPlaychartPBP"    # per-game play-by-play CSVs, also split by season
 
 PLAY_COLOR_KEYS = {
     'Pass Reception': 'pass',
@@ -38,8 +38,8 @@ PLAY_COLOR_KEYS = {
     'Pass Interception Return': 'pass',   # interceptions reuse the pass color
     'Interception Return Touchdown': 'pass',
     'Safety': 'safety',
-    'Fumble Recovery (Opponent)': 'fumble',
-    'Fumble Return Touchdown': 'fumble',
+    'Fumble Recovery (Opponent)': 'run',
+    'Fumble Return Touchdown': 'run',
 
 }
 
@@ -47,6 +47,11 @@ PLAY_COLOR_KEYS = {
 ## interception and labeled "Fumble!". (A fumble returned for a TD has its own
 ## branch that also spots the ball in the endzone.)
 FUMBLE_TURNOVER_TYPES = ('Fumble Recovery (Opponent)',)
+
+
+def pbpDir(year):
+    ## Cached play-by-play is grouped by season, e.g. 2025 -> 'csv/fbPlaychartPBP/2025'
+    return os.path.join(PBP_DIR, str(year))
 
 
 def getPBPData(year=2024, week=1, team='Louisiana Tech'):
@@ -95,11 +100,11 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     games = {}
     for d in dictList:
         games.setdefault(d['game_id'], []).append(d)
-    built = [buildGame(plays, team, week) for plays in games.values()]
+    built = [buildGame(plays, team, week, year) for plays in games.values()]
     if len(built) > 1:
         print(f"\nWARNING: the Week {week} pull returned {len(built)} games (the data source merged them):")
         for g_df, g_opp in built:
-            path = os.path.join(PBP_DIR, f"fbPlaychartPBP_{gameSlug(week, g_opp)}.csv")
+            path = os.path.join(pbpDir(year), f"fbPlaychartPBP_{gameSlug(week, g_opp)}.csv")
             print(f"  - vs {g_opp}: {len(g_df)} plays -> {path}")
         print(f"Each was split into its own CSV (all named wk{week}). Rename the extra game(s)\n"
               "to the correct week, then re-run with refreshData=False for the game you want.\n")
@@ -107,7 +112,7 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     return built[0][0]
 
 
-def buildGame(plays, team, week):
+def buildGame(plays, team, week, year):
     ## Process a single game's plays
     opponent = next((d['offense'] for d in plays if d['offense'] and d['offense'] != team), team)
 
@@ -235,10 +240,11 @@ def buildGame(plays, team, week):
         gains[i] = (end_x - start_i) if offs[i] == team else (start_i - end_x)
     df['gained'] = gains
 
-    ## Per-game CSV: csv/fbPlaychartPBP/fbPlaychartPBP_wk<week>_<opponent>.csv
+    ## Per-game CSV: csv/fbPlaychartPBP/<year>/fbPlaychartPBP_wk<week>_<opponent>.csv
     df = df.drop(columns=['game_id'], errors='ignore')
-    os.makedirs(PBP_DIR, exist_ok=True)
-    df.to_csv(os.path.join(PBP_DIR, f"fbPlaychartPBP_{gameSlug(week, opponent)}.csv"))
+    csv_dir = pbpDir(year)
+    os.makedirs(csv_dir, exist_ok=True)
+    df.to_csv(os.path.join(csv_dir, f"fbPlaychartPBP_{gameSlug(week, opponent)}.csv"))
     return df, opponent
 
 
@@ -428,14 +434,18 @@ def ordinalDown(down):
     return {1: '1', 2: '2', 3: '3', 4: '4'}.get(int(down), '')
 
 
+## Yards of clearance between the flat tail of the arrow and the down label
+DOWN_LABEL_PAD = 0.8
+
+
 ## Interceptions get a contrasting hatch overlay so they stand out by texture,
 ## independent of the team's fill color (which varies game to game).
-INTERCEPTION_HATCH = '//'
+INTERCEPTION_HATCH = '///'
 INTERCEPTION_HATCH_COLOR = 'white'
 ## Penalties are drawn as patterned gold so they don't blend into a team whose
 ## color happens to be gold (e.g. LSU): a black cross-hatch over the gold fill.
-PENALTY_HATCH = 'xxx'
-PENALTY_HATCH_COLOR = 'black'
+PENALTY_HATCH = '/////'
+PENALTY_HATCH_COLOR = 'goldenrod'
 
 
 def drawArrow(ax, x, y, dx, color, interception=False, penalty=False, fumble=False):
@@ -461,12 +471,15 @@ def drawPlay(ax, row, i, geo):
         ax.plot([first_down, first_down], [i - 1.8, i + 1.8],
                 color='orange', alpha=0.2, linewidth=2, zorder=1)
 
-    ## Small down label inside the arrow, on its bottom edge
+    ## Small down label just outside the flat tail of the arrow. Keeping it off the
+    ## fill means it never has to contrast with a team color, so it's always black.
     if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.down):
-        down_ha = geo['zha'] if row.gained < 0 else geo['ha']
-        down_color = 'black' if (row.gained == 0 or playType in ('Penalty')) else 'white'
-        ax.text(start, i + 1.6, ordinalDown(row.down), fontsize=6, color=down_color,
-                va='bottom', ha=down_ha, zorder=6)
+        arrow_sign = 1 if geo['pos_gained'] >= 0 else -1  # which way the arrow points
+        label = ax.text(start - arrow_sign * DOWN_LABEL_PAD, i, ordinalDown(row.down),
+                        fontsize=6, color='black', va='center',
+                        ha='right' if arrow_sign > 0 else 'left', zorder=6)
+        ## Thin white halo for the goal-line case, where the label lands on an endzone
+        label.set_path_effects([path_effects.withStroke(linewidth=0.8, foreground='white')])
 
     ## KICKOFF (drawn as a dashed line, like a punt)
     if playType == 'Kickoff':
@@ -591,13 +604,19 @@ def gameFilename(week, opponent):
     return f"fbPlaychart_{gameSlug(week, opponent)}.html"
 
 
-def findPbpCsv(week):
-    ## Path to the cached play-by-play CSV for a week
+def htmlDir(year):
+    ## Pages are grouped by season, e.g. 2025 -> 'html/fbPlaychart/2025'
+    return os.path.join(HTML_DIR, str(year))
+
+
+def findPbpCsv(year, week):
+    ## Path to the cached play-by-play CSV for a week of a season
     prefix = f"fbPlaychartPBP_wk{week}_"
-    if os.path.isdir(PBP_DIR):
-        for fn in sorted(os.listdir(PBP_DIR)):
+    csv_dir = pbpDir(year)
+    if os.path.isdir(csv_dir):
+        for fn in sorted(os.listdir(csv_dir)):
             if fn.startswith(prefix) and fn.endswith('.csv'):
-                return os.path.join(PBP_DIR, fn)
+                return os.path.join(csv_dir, fn)
     return None
 
 
@@ -616,16 +635,28 @@ def loadGames(html_dir, current=None):
     return sorted(games.values(), key=lambda g: g['week'])
 
 
+def loadYears(base_dir, current=None):
+    ## Available seasons are the four-digit subdirectories of base_dir, newest first
+    years = set()
+    listing = os.listdir(base_dir) if os.path.isdir(base_dir) else []
+    for fn in listing:
+        if re.fullmatch(r'\d{4}', fn) and os.path.isdir(os.path.join(base_dir, fn)):
+            years.add(int(fn))
+    if current is not None:
+        years.add(int(current))
+    return sorted(years, reverse=True)
+
+
 def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
                  oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
                  refreshColors=False, year=2025, week=4):
     if refreshData:
         df = getPBPData(year, week, team)
     else:
-        csv_path = findPbpCsv(week)
+        csv_path = findPbpCsv(year, week)
         if csv_path is None:
             raise FileNotFoundError(
-                f"No cached play-by-play CSV for week {week} in {PBP_DIR}/. "
+                f"No cached play-by-play CSV for week {week} in {pbpDir(year)}/. "
                 "Run with refreshData=True first.")
         df = pd.read_csv(csv_path)
 
@@ -720,8 +751,9 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     ## Per-game output filenames: fbPlaychart_wk<week>_<opponent>.(png|html)
     html_filename = gameFilename(week, opponent)
     slug = html_filename[:-len('.html')]
+    html_dir = htmlDir(year)
     os.makedirs('out', exist_ok=True)
-    os.makedirs(HTML_DIR, exist_ok=True)
+    os.makedirs(html_dir, exist_ok=True)
 
     fig_path = os.path.join('out', slug + '.png')
     fig.savefig(fig_path, bbox_inches='tight', pad_inches=0, dpi=200,
@@ -729,7 +761,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     ## Also export an HTML version by embedding matplotlib's OWN SVG of the figure.
     import io
-    html_path = os.path.join(HTML_DIR, html_filename)
+    html_path = os.path.join(html_dir, html_filename)
     buf = io.StringIO()
     fig.savefig(buf, format='svg', bbox_inches='tight', pad_inches=0, facecolor='none')
     svg = buf.getvalue()
@@ -756,8 +788,9 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         " #gtpdd-nav { gap: 6px; padding: 6px 8px; }"
         " #gtpdd-nav .nav-text { display: none; }"        # drop "Back to" / "home"
         " #gtpdd-nav .nav-arrow { display: inline; }"     # show the left arrow instead
-        " #gtpdd-nav label { display: none; }"            # drop the "Game:" label
+        " #gtpdd-nav label { display: none; }"            # drop the "Year:"/"Game:" labels
         " #gtpdd-nav select { max-width: 120px; }"        # much narrower dropdown
+        " #gtpdd-nav #gtpdd-year { max-width: 80px; }"    # the year only needs four digits
         " #gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select { padding: 6px 8px; } }"
         " #pbp-tooltip { position: fixed; pointer-events: none; z-index: 30;"
         " max-width: 380px; padding: 6px 9px; border-radius: 5px; display: none;"
@@ -766,16 +799,22 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         " box-shadow: 0 2px 8px rgba(0,0,0,0.3); }"
     )
 
-    ## Nav header: home button + a game selector
+    ## Nav header: home button + year and game selectors
     current_href = html_filename
-    games = loadGames(HTML_DIR, current={'week': week, 'opponent': opponent, 'href': current_href})
-    with open(os.path.join(HTML_DIR, 'games.json'), 'w') as f:
+    games = loadGames(html_dir, current={'week': week, 'opponent': opponent, 'href': current_href})
+    with open(os.path.join(html_dir, 'games.json'), 'w') as f:
         json.dump(games, f, indent=2)
+    ## Season manifest lives one level up, shared by every year's pages.
+    years = loadYears(HTML_DIR, current=year)
+    with open(os.path.join(HTML_DIR, 'years.json'), 'w') as f:
+        json.dump(years, f, indent=2)
     current_label = f"Wk {week} — {opponent}"
     options = "<option value='{}' selected>{}</option>".format(
         html_escape(current_href, quote=True), html_escape(current_label))
+    year_options = "<option value='{0}' selected>{0}</option>".format(year)
     ## "Back to <gtpdd logo> home" — embed the logo (falls back to a relative path).
-    logo_src = logoDataUri('img/gtpdd_logo.png') or '../img/gtpdd_logo.png'
+    ## Fallback path is relative to html/fbPlaychart/<year>/, i.e. two levels under html/
+    logo_src = logoDataUri('img/gtpdd_logo.png') or '../../img/gtpdd_logo.png'
     logo_img = "<img class='navlogo' src='" + html_escape(logo_src, quote=True) + "' alt='gtpdd'>"
     navbar = (
         "<div id='gtpdd-nav'>"
@@ -784,6 +823,8 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         "<span class='nav-text'>Back to</span>" + logo_img +
         "<span class='nav-text'>home</span></a>"
         "<span class='spacer'></span>"
+        "<label for='gtpdd-year'>Year:</label>"
+        "<select id='gtpdd-year'>" + year_options + "</select>"
         "<label for='gtpdd-game'>Game:</label>"
         "<select id='gtpdd-game'>" + options + "</select>"
         "<button id='gtpdd-go'>Load</button>"
@@ -792,16 +833,30 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     nav_js = (
         "<script>(function(){"
         "var cur=" + json.dumps(current_href) + ";"
+        "var curYear=" + json.dumps(str(year)) + ";"
+        "var ysel=document.getElementById('gtpdd-year');"
         "var sel=document.getElementById('gtpdd-game');"
         "document.getElementById('gtpdd-go').addEventListener('click',function(){"
         "if(sel.value)window.location.href=sel.value;});"
-        ## Populate the selector from the shared manifest so it lists every game.
-        "fetch('games.json').then(function(r){return r.json();}).then(function(gs){"
+        ## Each year's games come from that year's manifest; hrefs are relative to
+        ## this page, which sits in html/fbPlaychart/<year>/.
+        "function fillGames(y){return fetch('../'+y+'/games.json')"
+        ".then(function(r){return r.json();}).then(function(gs){"
         "sel.innerHTML='';"
         "gs.forEach(function(g){var o=document.createElement('option');"
-        "o.value=g.href;o.textContent=g.label;if(g.href===cur)o.selected=true;"
+        "o.value='../'+y+'/'+g.href;o.textContent=g.label;"
+        "if(y===curYear&&g.href===cur)o.selected=true;"
         "sel.appendChild(o);});"
+        "}).catch(function(){});}"
+        "ysel.addEventListener('change',function(){fillGames(ysel.value);});"
+        ## Populate the year selector from the manifest shared by every season.
+        "fetch('../years.json').then(function(r){return r.json();}).then(function(ys){"
+        "ysel.innerHTML='';"
+        "ys.forEach(function(y){var o=document.createElement('option');"
+        "o.value=y;o.textContent=y;if(String(y)===curYear)o.selected=true;"
+        "ysel.appendChild(o);});"
         "}).catch(function(){});"
+        "fillGames(curYear);"
         "})();</script>"
     )
 

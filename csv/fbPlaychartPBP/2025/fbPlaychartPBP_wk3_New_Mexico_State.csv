@@ -34,6 +34,7 @@
 32,Louisiana Tech,Q1 5:36,2,10,Passing Touchdown,60,40,"Blake Baker pass complete to Jalen Mickens for 40 yds for a TD Louisiana Tech Penalty, UNS: Unsportsmanlike Conduct (Devin Gandy) to the NMSU 0 (Drew Henderson KICK)",401757257101946301,10,0
 33,New Mexico State,Q1 5:36,1,10,Kickoff,20,-78,"John Hoyet Chance kickoff for 78 yds , Dijon Stanley return for 19 yds to the NMSU 39 Louisiana Tech Penalty, Fighting (John Hoyet Chance) to the 50 yard line",401757257101946303,3,0
 34,New Mexico State,Q1 5:36,1,10,Kickoff Return (Offense),98,19,"John Hoyet Chance kickoff for 78 yds , Dijon Stanley return for 19 yds to the NMSU 39 Louisiana Tech Penalty, Fighting (John Hoyet Chance) to the 50 yard line",401757257101946303,3,0
+36,New Mexico State,Q1 5:36,1,10,Penalty,79,29,"John Hoyet Chance kickoff for 78 yds , Dijon Stanley return for 19 yds to the NMSU 39 Louisiana Tech Penalty, Fighting (John Hoyet Chance) to the 50 yard line",401757257101946303,3,0
 35,New Mexico State,Q1 3:43,1,10,Pass Incompletion,50,0,Logan Fife pass incomplete to Dijon Stanley,401757257101965601,0,10
 36,New Mexico State,Q1 3:43,2,10,Penalty,50,15,"Shotgun Fife,Logan pass incomplete deep left to Malone,Brodrick thrown to LAT28 PENALTY LAT Roughing The Passer (Mayfield,Jadon) 15 yards from NMSU50 to LAT35, 1ST DOWN. NO PLAY.",401757257101965602,0,10
 37,New Mexico State,Q1 3:43,1,10,Pass Incompletion,35,0,Logan Fife pass incomplete to Donovan Faupel,401757257101965603,0,10
@@ -130,8 +131,8 @@
 128,New Mexico State,Q3 9:5,1,10,Rush,84,-4,Kadarius Calloway run for a loss of 4 yards to the NMSU 12,401757257103909403,14,27
 129,New Mexico State,Q3 9:5,2,14,Pass Reception,88,0,Logan Fife pass complete to Dakerric Hobbs for no gain to the NMSU 12,401757257103909404,14,27
 130,New Mexico State,Q3 9:5,3,14,Rush,88,11,Logan Fife run for 11 yds to the NMSU 23,401757257103909405,14,27
-131,New Mexico State,Q3 7:2,4,3,Punt,77,46,"Max Dean punt for 46 yds , Dedrick Latulas returns for 12 yds to the LT 26",401757257103929701,14,27
-132,Louisiana Tech,Q3 7:2,4,3,Punt Return,31,12,"Max Dean punt for 46 yds , Dedrick Latulas returns for 12 yds to the LT 26",401757257103929701,14,27
+131,New Mexico State,Q3 7:2,4,3,Punt,77,63,"Max Dean punt for 46 yds , Dedrick Latulas returns for 12 yds to the LT 26",401757257103929701,14,27
+132,Louisiana Tech,Q3 7:2,4,3,Punt Return,14,12,"Max Dean punt for 46 yds , Dedrick Latulas returns for 12 yds to the LT 26",401757257103929701,14,27
 133,Louisiana Tech,Q3 7:2,1,10,Pass Reception,26,20,Blake Baker pass complete to Devin Gandy for 20 yds to the LT 46 for a 1ST down,401757257103929704,27,14
 134,Louisiana Tech,Q3 7:2,1,10,Rush,46,4,Omiri Wiggins run for 4 yds to the 50 yard line,401757257103929705,27,14
 135,Louisiana Tech,Q3 7:2,2,6,Rush,50,-3,Omiri Wiggins run for a loss of 3 yards to the LT 47,401757257103929706,27,14
