@@ -32,10 +32,8 @@
 30,UTEP,Q1 6:8,1,10,Rush,75,2,Hahsaun Wilson run for 2 yds to the UTEP 27,401757272101939101,0,7
 31,UTEP,Q1 5:40,2,8,Pass Incompletion,73,0,Malachi Nelson pass incomplete to Josh Schuchts,401757272101945901,0,7
 32,UTEP,Q1 5:36,3,8,Pass Incompletion,73,0,Malachi Nelson pass incomplete to Jaylan Brown,401757272101946301,0,7
-33,UTEP,Q1 5:24,4,8,Punt,73,39,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 46",401757272101947501,0,7
-34,Louisiana Tech,Q1 5:24,4,8,Punt Return,34,12,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 46",401757272101947501,0,7
-35,UTEP,Q1 5:24,4,8,Punt,73,39,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 23",401757272101947502,0,7
-36,Louisiana Tech,Q1 5:24,4,8,Punt Return,34,12,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 23",401757272101947502,0,7
+35,UTEP,Q1 5:24,4,8,Punt,73,62,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 23",401757272101947502,0,7
+36,Louisiana Tech,Q1 5:24,4,8,Punt Return,11,12,"Noah Botsford punt for 39 yds , Dedrick Latulas returns for 12 yds to the LT 23",401757272101947502,0,7
 37,Louisiana Tech,Q1 5:18,1,10,Sack,23,-4,Blake Baker sacked by Cole Gustafson for a loss of 4 yards to the LT 19,401757272101948101,7,0
 38,Louisiana Tech,Q1 4:47,2,14,Rush,19,5,Clay Thevenin run for 5 yds to the LT 24,401757272101955201,7,0
 39,Louisiana Tech,Q1 4:9,3,9,Pass Incompletion,24,0,Blake Baker pass incomplete to David Pierro,401757272101959001,7,0
@@ -69,8 +67,7 @@
 67,UTEP,Q2 9:56,3,8,Pass Incompletion,75,0,Malachi Nelson pass incomplete to Wondame Davis Jr.,401757272102904301,0,7
 68,UTEP,Q2 9:43,4,8,Punt,75,58,"Noah Botsford punt for 58 yds , Dedrick Latulas returns for 21 yds to the LT 38",401757272102905601,0,7
 69,Louisiana Tech,Q2 9:43,4,8,Punt Return,17,21,"Noah Botsford punt for 58 yds , Dedrick Latulas returns for 21 yds to the LT 38",401757272102905601,0,7
-70,UTEP,Q2 9:43,4,8,Punt,75,58,"Noah Botsford punt for 58 yds , Dedrick Latulas returns for 21 yds to the LT 9",401757272102905603,0,7
-71,Louisiana Tech,Q2 9:43,4,8,Punt Return,17,21,"Noah Botsford punt for 58 yds , Dedrick Latulas returns for 21 yds to the LT 9",401757272102905603,0,7
+70,Louisiana Tech,Q2 9:42,1,10,Penalty,38,-29,"Exact play missing from box score",401757257101946303,10,10
 72,Louisiana Tech,Q2 9:31,1,10,Pass Reception,9,9,Blake Baker pass complete to Marques Singleton Jr. for 9 yds to the LT 18,401757272102906801,7,0
 73,Louisiana Tech,Q2 9:15,2,1,Rush,18,6,Omiri Wiggins run for 6 yds to the LT 24 for a 1ST down,401757272102908401,7,0
 74,Louisiana Tech,Q2 8:52,1,10,Rush,24,0,Omiri Wiggins run for no gain to the LT 24,401757272102914701,7,0
@@ -97,7 +94,7 @@
 95,Louisiana Tech,Q2 0:43,1,10,Timeout,73,0,"Timeout UTEP, clock 00:43",401757272102995603,7,0
 96,Louisiana Tech,Q2 0:39,1,10,Rush,73,2,Blake Baker run for 2 yds to the UTEP 25,401757272102996001,7,0
 97,Louisiana Tech,Q2 0:17,2,8,Pass Reception,75,2,Blake Baker pass complete to Dane Benedix for 2 yds to the UTEP 23,401757272102998201,7,0
-98,Louisiana Tech,Q2 0:3,3,6,Fumble Recovery (Own),77,-13,"Blake Baker sacked by Udoka Ezeani for a loss of 13 yards to the LT 30 Blake Baker fumbled, recovered by LT Jayden Wilson , return for 0 yards",401757272102999601,7,0
+98,Louisiana Tech,Q2 0:3,3,6,Fumble Recovery (Opponent),77,-47,"Blake Baker sacked by Udoka Ezeani for a loss of 13 yards to the LT 30 Blake Baker fumbled, recovered by LT Jayden Wilson , return for 0 yards",401757272102999601,7,0
 99,Louisiana Tech,Q2 0:3,1,10,Timeout,30,0,"Timeout Louisiana Tech, clock 00:03",401757272102999605,7,0
 100,UTEP,Q2 0:0,1,10,Blocked Field Goal,30,47,Carlos Arreola 47 yd FG BLOCKED blocked by Kameron Carter,401757272102999901,0,7
 101,UTEP,Q2 0:0,0,0,End of Half,100,-70,End of 2nd Quarter,401757272102999903,0,7
@@ -109,7 +106,7 @@
 107,Louisiana Tech,Q3 13:31,2,6,Pass Incompletion,41,0,Blake Baker pass incomplete to Devin Gandy,401757272103866801,7,0
 108,Louisiana Tech,Q3 13:23,3,6,Pass Reception,41,5,Blake Baker pass complete to Marques Singleton Jr. for 5 yds to the LT 46,401757272103867601,7,0
 109,Louisiana Tech,Q3 12:41,4,1,Fumble Recovery (Own),46,-9,"Blake Baker sacked by Udoka Ezeani for a loss of 9 yards to the LT 37 Blake Baker fumbled, recovered by LT Micah Davey , return for 0 yards",401757272103875801,7,0
-110,UTEP,Q3 12:32,1,10,Pass Reception,37,2,Malachi Nelson pass complete to Josh Schuchts for 2 yds to the LT 20 for a 1ST down,401757272103876702,0,7
+110,UTEP,Q3 12:32,1,10,Pass Reception,37,17,Malachi Nelson pass complete to Josh Schuchts for 2 yds to the LT 20 for a 1ST down,401757272103876702,0,7
 111,UTEP,Q3 11:31,1,10,Pass Incompletion,20,0,Malachi Nelson pass incomplete to Kenny Odom,401757272103886801,0,7
 112,UTEP,Q3 11:23,2,10,Pass Interception Return,20,14,Malachi Nelson pass intercepted Kolbe Fields return for a loss of 8 yards to the LT 6,401757272103887601,0,7
 113,Louisiana Tech,Q3 11:16,1,10,Rush,6,13,Clay Thevenin run for 13 yds to the LT 19 for a 1ST down,401757272103888301,7,0
@@ -160,7 +157,7 @@
 158,UTEP,Q4 11:13,4,7,Punt,77,46,"Noah Botsford punt for 46 yds , Dedrick Latulas returns for no gain to the LT 29",401757272104888601,3,10
 159,Louisiana Tech,Q4 11:13,2,8,Timeout,31,0,"Timeout UTEP, clock 11:13",401757272104888604,10,3
 160,Louisiana Tech,Q4 11:5,1,10,Pass Reception,29,2,Blake Baker pass complete to Devin Gandy for 2 yds to the LT 31,401757272104889401,10,3
-161,Louisiana Tech,Q4 10:30,2,8,Fumble Recovery (Own),31,7,"Blake Baker pass complete to Jalen Mickens for 7 yds Jalen Mickens fumbled, recovered by LT Solo Barnes",401757272104896901,10,3
+161,Louisiana Tech,Q4 10:30,2,8,Fumble Recovery (Opponent),31,7,"Blake Baker pass complete to Jalen Mickens for 7 yds Jalen Mickens fumbled, recovered by LT Solo Barnes",401757272104896901,10,3
 162,UTEP,Q4 10:27,1,10,Pass Incompletion,38,0,Malachi Nelson pass incomplete to Trevon Tate,401757272104897201,3,10
 163,UTEP,Q4 10:22,2,10,Interception Return Touchdown,38,67,Malachi Nelson pass intercepted Jakari Foster return for 67 yds for a TD (Drew Henderson KICK),401757272104897701,3,17
 164,UTEP,Q4 10:15,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757272104898401,17,3
@@ -178,7 +175,7 @@
 176,Louisiana Tech,Q4 7:27,1,10,Rush,72,8,Clay Thevenin run for 8 yds to the UTEP 20,401757272104927201,17,3
 177,Louisiana Tech,Q4 6:49,2,2,Rush,80,-4,Clay Thevenin run for a loss of 4 yards to the UTEP 24,401757272104935001,17,3
 178,Louisiana Tech,Q4 6:5,3,6,Rush,76,9,Blake Baker run for 9 yds to the UTEP 15 for a 1ST down,401757272104939401,17,3
-179,Louisiana Tech,Q4 5:21,1,10,Penalty,85,5,"UTEP Penalty, Face Mask (5 yards) (Ashton Coker) to the UTEP 4 for a 1ST down",401757272104947801,17,3
+179,Louisiana Tech,Q4 5:21,1,10,Penalty,85,11,"UTEP Penalty, Face Mask (5 yards) (Ashton Coker) to the UTEP 4 for a 1ST down",401757272104947801,17,3
 180,Louisiana Tech,Q4 4:58,1,4,Rushing Touchdown,96,4,Clay Thevenin run for 4 yds for a TD (Drew Henderson KICK),401757272104954101,24,3
 181,UTEP,Q4 4:58,1,10,Timeout,75,0,"Timeout UTEP, clock 04:58",401757272104954104,3,17
 182,UTEP,Q4 4:58,1,10,Kickoff,35,-65,John Hoyet Chance kickoff for 65 yds for a touchback,401757272104954105,24,3

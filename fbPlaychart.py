@@ -24,8 +24,12 @@ BACKGROUND_COLOR = "#d6e8cf"  # muted light green
 EDGE_COLOR = "#222021"
 
 HOME_URL = "index.html"           # TODO: replace with gtpdd home page
-HTML_DIR = "html/fbPlaychart"     # per-game HTML pages, kept in a per-season subdirectory
-PBP_DIR = "csv/fbPlaychartPBP"    # per-game play-by-play CSVs, also split by season
+SITE_TITLE = "gtpdd's Football Playcharts"  
+HTML_DIR = "html/fbPlaychart"     
+PBP_DIR = "csv/fbPlaychartPBP"    
+TEAM_COLORS_CSV = "csv/fbPlaychartPBP/fbPlaychartTeamColors.csv"
+NON_TEAM_COLORS = {'penalty': 'white', 'safety': 'navy', 'fumble': 'navy'}
+FALLBACK_TEAM_COLORS = {'pass': '#4d4d4d', 'run': '#a6a6a6'}
 
 PLAY_COLOR_KEYS = {
     'Pass Reception': 'pass',
@@ -43,9 +47,6 @@ PLAY_COLOR_KEYS = {
 
 }
 
-## Non-scoring fumble turnover (the other team recovered): drawn hatched like an
-## interception and labeled "Fumble!". (A fumble returned for a TD has its own
-## branch that also spots the ball in the endzone.)
 FUMBLE_TURNOVER_TYPES = ('Fumble Recovery (Opponent)',)
 
 
@@ -59,7 +60,6 @@ def getPBPData(year=2024, week=1, team='Louisiana Tech'):
     configuration = cfbd.Configuration(access_token=os.environ["cfbdAuth"])
     api_instance = cfbd.PlaysApi(cfbd.ApiClient(configuration))
 
-    ## TODO: Grab the most recent game automatically
     api_response = api_instance.get_plays(year, week=week, team=team)
 
     dictList = []
@@ -159,8 +159,8 @@ def buildGame(plays, team, week, year):
                 kick_return['gained'] = int(return_match.group(1))
                 processed.append(kick_return)
 
-        ## Punts: CFBD's "gained" is unreliable — take the punt distance from the text ("punt for N yds")
-        ## Touchback: add a row for the receiving team at its own 20 (like the kickoff
+        ## Punts: CFBD's "gained" is unreliable, take the punt distance from the text ("punt for N yds")
+        ## Touchback: add a row for the receiving team at its own 20 (like the kickoff)
         ## Return:  add a following "Punt Return" row for the receiving team, starting where the punt was caught.
         elif d['type'] == 'Punt':
             punt_match = re.search(r'punt for (\d+)', text, re.IGNORECASE)
@@ -205,10 +205,8 @@ def buildGame(plays, team, week, year):
 
     df = pd.DataFrame(processed)
 
-    ## CFBD can return plays out of game order — sort chronologically from the
-    ## clock string "Q<period> M:SS": quarter ascending, then time remaining
-    ## descending (the clock counts down within a quarter), then play id ascending
-    ## to break same-clock ties.
+    ## CFBD can return plays out of game order
+    ## Sort by clock, then by play id
     clock_parts = df['clock'].str.extract(r'Q(\d+)\s+(\d+):(\d+)').astype(float)
     df['_period'] = clock_parts[0]
     df['_secs_remaining'] = clock_parts[1] * 60 + clock_parts[2]
@@ -309,7 +307,7 @@ def lookupEspnId(name, team_id_csv='csv/espnTeamIDs.csv'):
 
 
 def hexLuminance(hex_color):
-    """Perceived brightness (0-255) of a #RRGGBB color; lower is darker."""
+    ## Perceived brightness (0-255) of a #RRGGBB color; lower is darker.
     h = str(hex_color).lstrip('#')
     r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
     return 0.299 * r + 0.587 * g + 0.114 * b
@@ -323,29 +321,64 @@ def whiteToBlack(hex_color):
     return hex_color
 
 
-def updateOppoColors(opponent, oppo_color_path):
-    ## When refreshColors=True, updates the team's colors in lib/fbPlaychartColorsOppo.txt
-    team_id = lookupEspnId(opponent)
+def loadTeamColorsCsv(path=TEAM_COLORS_CSV):
+    ## team (lowercased) -> {'pass': ..., 'run': ...} from the saved color table
+    table = {}
+    if not os.path.isfile(path):
+        return table
+    with open(path, newline='') as f:
+        for row in csv.DictReader(f):
+            name = (row.get('team') or '').strip()
+            if name:
+                table[name.lower()] = {'pass': (row.get('passColor') or '').strip(),
+                                       'run': (row.get('runColor') or '').strip()}
+    return table
+
+
+def appendTeamColors(team, pass_color, run_color, path=TEAM_COLORS_CSV):
+    ## Add one team to the color table, writing the header if the file is new
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    is_new = not os.path.isfile(path)
+    with open(path, 'a', newline='') as f:
+        writer = csv.writer(f)
+        if is_new:
+            writer.writerow(['team', 'passColor', 'runColor'])
+        writer.writerow([team, pass_color, run_color])
+
+
+def fetchTeamColors(team):
+    ## (pass, run) from ESPN — darker color for pass, lighter for run — or None
+    team_id = lookupEspnId(team)
     if team_id is None:
-        print(f"No ESPN id for '{opponent}' in csv/espnTeamIDs.csv; keeping existing opponent colors.")
-        return
+        print(f"No ESPN id for '{team}' in csv/espnTeamIDs.csv.")
+        return None
     try:
         from lib.fbCommon import getTeamInfo
         _, color1, color2 = getTeamInfo(str(team_id))
     except Exception as e:
-        print(f"Could not fetch ESPN colors for '{opponent}' ({type(e).__name__}: {e}); keeping existing.")
-        return
-    colors = loadColors(oppo_color_path)
-    ## Use the darker of the two team colors for "pass" and the lighter for "run".
-    c1, c2 = '#' + str(color1).lstrip('#'), '#' + str(color2).lstrip('#')
-    c1, c2 = whiteToBlack(c1), whiteToBlack(c2)
+        print(f"Could not fetch ESPN colors for '{team}' ({type(e).__name__}: {e}).")
+        return None
+    c1 = whiteToBlack('#' + str(color1).lstrip('#'))
+    c2 = whiteToBlack('#' + str(color2).lstrip('#'))
     try:
-        colors['pass'], colors['run'] = sorted((c1, c2), key=hexLuminance)
+        return tuple(sorted((c1, c2), key=hexLuminance))
     except (ValueError, IndexError):
-        colors['pass'], colors['run'] = c1, c2  # non-hex color: keep color1/color2 order
-    with open(oppo_color_path, 'w') as f:
-        json.dump(colors, f, indent=4)
-    print(f"Opponent colors from ESPN ({opponent}): pass={colors['pass']}, run={colors['run']}")
+        return c1, c2  # non-hex color: keep color1/color2 order
+
+
+def teamColors(team, path=TEAM_COLORS_CSV):
+    ## A team's chart colors.
+    entry = loadTeamColorsCsv(path).get(str(team).strip().lower())
+    if entry is None:
+        fetched = fetchTeamColors(team)
+        if fetched is None:
+            entry = dict(FALLBACK_TEAM_COLORS)
+            print(f"Wrote placeholder colors for '{team}' to {path} — edit that row to fix them.")
+        else:
+            entry = {'pass': fetched[0], 'run': fetched[1]}
+            print(f"Added '{team}' to {path}: pass={entry['pass']}, run={entry['run']}")
+        appendTeamColors(team, entry['pass'], entry['run'], path)
+    return {**NON_TEAM_COLORS, **entry}
 
 
 def logoDataUri(path, height_px=64):
@@ -370,6 +403,36 @@ def formatClock(clock):
         return f"{head}:{int(secs):02d}"
     except (ValueError, AttributeError):
         return str(clock)
+
+
+def finalScore(df, team):
+    ## (tech score, opponent score) from the last row that carries a score
+    for row in reversed(list(df.itertuples())):
+        if pd.isna(row.offense_score) or pd.isna(row.defense_score):
+            continue
+        if row.offense == team:
+            return int(row.offense_score), int(row.defense_score)
+        return int(row.defense_score), int(row.offense_score)
+    return None
+
+
+def quarterOf(clock):
+    ## Period number from a clock string like 'Q5 0:19'; None if it doesn't parse
+    m = re.match(r'\s*Q(\d+)', str(clock))
+    return int(m.group(1)) if m else None
+
+
+def overtimeLabel(period):
+    ## Periods past the 4th are overtimes: Q5 -> 'OT1', Q6 -> 'OT2', ...
+    return f"OT{period - 4}"
+
+
+def drawDivider(ax, y, label):
+    ## Full-width rule with a boxed label, used for halftime and each overtime
+    ax.axhline(y, color='black', linewidth=3, zorder=5)
+    ax.text(50, y, f" {label} ", fontsize=12, fontweight='bold',
+            va='center', ha='center', color='black',
+            bbox=dict(facecolor=BACKGROUND_COLOR, edgecolor='black', pad=3), zorder=6)
 
 
 def playColor(playType, colors):
@@ -424,7 +487,7 @@ def playGeometry(row, team, techColors, oppoColors):
 
 ## Don't draw first down lines for Special-teams / non-scrimmage rows
 NO_FIRST_DOWN_TYPES = {
-    'Kickoff', 'Kickoff Return (Offense)', 'Touchback',
+    'Kickoff', 'Kickoff Return (Offense)', 'Return Touchdown', 'Touchback',
     'Punt', 'Punt Return', 'Field Goal Good', 'Field Goal Missed', 'Blocked Field Goal',
 }
 
@@ -491,6 +554,17 @@ def drawPlay(ax, row, i, geo):
         ax.text(start, i+0.5, " Return ", fontsize=8, va='top', ha=geo['ha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
 
+    elif playType == 'Return Touchdown':
+        ax.text(start, i+0.5, " Return ", fontsize=8, va='top', ha=geo['ha'])
+        ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
+
+        text_obj=ax.text(geo['endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
+        
+        text_obj.set_path_effects([
+            path_effects.PathPatchEffect(offset=(2, -2), hatch='xxxx', facecolor='gray'),
+            path_effects.withStroke(linewidth=1, foreground="black")
+        ])
+
     elif playType == 'Touchback':
             ax.text(start, i+0.5, " Touchback ", fontsize=8, va='top', ha=geo['ha'])
             ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=geo['marker'], markersize=1, linewidth=2, color='black')
@@ -536,8 +610,7 @@ def drawPlay(ax, row, i, geo):
             path_effects.withStroke(linewidth=1, foreground="black")
         ])
 
-    ## Fumble returned for a TD — same as an interception-return TD (arrow to the
-    ## returning team's endzone, "TD!" there), but labeled "Fumble!".
+    ## Fumble returned for a TD — same as an interception-return TD, but labeled "Fumble!".
     elif playType == 'Fumble Return Touchdown':
         color = playColor(playType, geo['colors'])
         drawArrow(ax, start, i, -1 * (start - geo['oppo_endzone']), color, fumble=True)
@@ -648,8 +721,7 @@ def loadYears(base_dir, current=None):
 
 
 def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.txt',
-                 oppoColorPath='lib/fbPlaychartColorsOppo.txt', refreshData=False,
-                 refreshColors=False, year=2025, week=4):
+                 teamColorsCsv=TEAM_COLORS_CSV, refreshData=False, year=2025, week=4):
     if refreshData:
         df = getPBPData(year, week, team)
     else:
@@ -662,33 +734,37 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     opponent = next((o for o in df['offense'].dropna().unique() if o != team), 'Opponent')
 
-    ## Pull the opponent's team colors from ESPN.
-    if refreshColors:
-        updateOppoColors(opponent, oppoColorPath)
-
     techColors = loadColors(techColorPath)
-    oppoColors = loadColors(oppoColorPath)
+    ## Saved colors for this opponent, pulled from ESPN the first time we chart them.
+    oppoColors = teamColors(opponent, teamColorsCsv)
 
     fig, ax = setupChart(techColors['pass'], oppoColors['run'])
 
     i = 0
     offense = ''
     prev_row = None
+    last_overtime = 4  # highest period we've already drawn an overtime divider for
     hover_texts = {}  # gid -> play text, for the HTML tooltips
     for row in df.itertuples():
         if row.type == 'End of Half':
             ## Draw a full-width divider between the two halves.
             i += 4
-            ax.axhline(i, color='black', linewidth=3, zorder=5)
-            ax.text(50, i, " Halftime ", fontsize=12, fontweight='bold',
-                    va='center', ha='center', color='black',
-                    bbox=dict(facecolor=BACKGROUND_COLOR, edgecolor='black', pad=3), zorder=6)
+            drawDivider(ax, i, 'Halftime')
             i += 4
             prev_row = row
             continue
 
         if row.type in ('End Period', 'Timeout', 'End of Game'):
             continue
+
+        ## Each overtime period gets its own divider, then starts a fresh drive.
+        period = quarterOf(row.clock)
+        if period is not None and period > 4 and period > last_overtime:
+            last_overtime = period
+            i += 4
+            drawDivider(ax, i, overtimeLabel(period))
+            i += 4
+            offense = ''  # force a drive header for the first possession of the period
 
         if row.offense != offense or row.type == 'Kickoff':
             offense = row.offense
@@ -731,6 +807,22 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
         i += 4
         prev_row = row
+
+    ## Final score below the last play, in the winner's color
+    final = finalScore(df, team)
+    if final is not None:
+        tech_final, oppo_final = final
+        if tech_final == oppo_final:
+            winner, winnerColors = None, techColors
+            finalString = f"Final: {team} {tech_final}, {opponent} {oppo_final}"
+        else:
+            winner = team if tech_final > oppo_final else opponent
+            winnerColors = techColors if winner == team else oppoColors
+            finalString = f"{winner} won {max(final)}-{min(final)}"
+        i += 12
+        ax.text(50, i, finalString, fontsize=18, fontweight='bold',
+                va='center', ha='center', color=winnerColors['pass'])
+        i += 6
 
     ## Size the figure so vertical spacing matches the horizontal scale,
     y_extent = i + 10
@@ -784,11 +876,14 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         " #gtpdd-nav a.navbtn:hover, #gtpdd-nav button:hover { background: #3a3d41; }"
         " #gtpdd-nav .navlogo { height: 20px; width: auto; vertical-align: middle; }"
         " #gtpdd-nav .nav-arrow { display: none; font-size: 16px; line-height: 1; }"
+        " #gtpdd-nav .nav-title { color: #eee; font-size: 15px; font-weight: 600;"
+        " white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }"
         " @media (max-width: 640px) {"
         " #gtpdd-nav { gap: 6px; padding: 6px 8px; }"
         " #gtpdd-nav .nav-text { display: none; }"        # drop "Back to" / "home"
         " #gtpdd-nav .nav-arrow { display: inline; }"     # show the left arrow instead
         " #gtpdd-nav label { display: none; }"            # drop the "Year:"/"Game:" labels
+        " #gtpdd-nav .nav-title { display: none; }"       # the game dropdown already names the game
         " #gtpdd-nav select { max-width: 120px; }"        # much narrower dropdown
         " #gtpdd-nav #gtpdd-year { max-width: 80px; }"    # the year only needs four digits
         " #gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select { padding: 6px 8px; } }"
@@ -809,6 +904,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     with open(os.path.join(HTML_DIR, 'years.json'), 'w') as f:
         json.dump(years, f, indent=2)
     current_label = f"Wk {week} — {opponent}"
+    page_title = f"{team} vs {opponent} — Wk {week}, {year}"
     options = "<option value='{}' selected>{}</option>".format(
         html_escape(current_href, quote=True), html_escape(current_label))
     year_options = "<option value='{0}' selected>{0}</option>".format(year)
@@ -822,6 +918,8 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         "<span class='nav-arrow'>&#8592;</span>"
         "<span class='nav-text'>Back to</span>" + logo_img +
         "<span class='nav-text'>home</span></a>"
+        "<span class='spacer'></span>"
+        "<span class='nav-title'>" + html_escape(SITE_TITLE) + "</span>"
         "<span class='spacer'></span>"
         "<label for='gtpdd-year'>Year:</label>"
         "<select id='gtpdd-year'>" + year_options + "</select>"
@@ -876,7 +974,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         "<!DOCTYPE html>\n<html lang='en'>\n<head>\n"
         "<meta charset='utf-8'>\n"
         "<meta name='viewport' content='width=device-width, initial-scale=1'>\n"
-        "<title>" + html_escape(f"{team} vs {opponent} — Wk {week} Play Chart") + "</title>\n"
+        "<title>" + html_escape(page_title + " Play Chart") + "</title>\n"
         "<style>" + style + "</style>\n"
         "</head>\n<body>\n" + navbar + "\n" + svg + "\n"
         "<div id='pbp-tooltip'></div>\n" + nav_js + tooltip_js + "\n</body>\n</html>\n"
@@ -897,9 +995,6 @@ if __name__ == "__main__":
     parser.add_argument("--week", type=int, default=1, help="Week number (default: 1)")
     parser.add_argument("--refresh-data", action="store_true",
                         help="Re-fetch play-by-play from CFBD (otherwise read the cached CSV)")
-    parser.add_argument("--refresh-colors", action="store_true",
-                        help="Pull the opponent's colors from ESPN into the opponent color file")
     args = parser.parse_args()
 
-    fbPlaychart(year=args.year, week=args.week,
-                refreshData=args.refresh_data, refreshColors=args.refresh_colors)
+    fbPlaychart(year=args.year, week=args.week, refreshData=args.refresh_data)
