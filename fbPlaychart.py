@@ -14,7 +14,11 @@ import cfbd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import matplotlib.patheffects as path_effects
+from matplotlib.font_manager import FontProperties
 from matplotlib.patches import Rectangle
+from matplotlib.path import Path
+from matplotlib.textpath import TextPath
+import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
 
@@ -28,6 +32,23 @@ SITE_TITLE = "gtpdd's Football Playcharts"
 HTML_DIR = "html/fbPlaychart"     
 PBP_DIR = "csv/fbPlaychartPBP"    
 TEAM_COLORS_CSV = "csv/fbPlaychartPBP/fbPlaychartTeamColors.csv"
+LOGO_DIR = "logo"                 # team logo cache, shared with the other gtpdd scripts
+ESPN_LOGO_URL = "https://a.espncdn.com/i/teamlogos/ncaa/500/{}.png"
+LOGO_DRAW_PX = 72                 # logos are shrunk to this before drawing; every drive header embeds a copy
+## Logos are sized by height so square marks and wide wordmarks read alike, with a
+## width cap so a wordmark can't run away with the line.
+SCOREBOARD_LOGO_H = 4.2           # yards tall for a logo in the drive header
+SCOREBOARD_LOGO_W = 7.0           # yards wide at most
+SCOREBOARD_GAP = 1.8              # yards between the pieces of a drive header
+POSSESSION_GAP = 2.0              # yards below the logo row for the clock/possession line
+## Clock and possession arrow share a line under the logos
+SCOREBOARD_SUBLINE = SCOREBOARD_LOGO_H / 2 + POSSESSION_GAP
+CLOCK_FONTSIZE = 8               # smaller than the score above it
+HEADER_TEXT_COLOR = 'black'       # the logos carry the team colors, so the text stays neutral
+POSSESSION_ARROW_H = 2 / 3        # arrow height as a fraction of its length
+POSSESSION_ARROW_PT = 8           # arrow length in points
+DRIVE_GAP = 14                    # vertical room reserved above a drive for its header
+DRIVE_HEADER_Y = 9.0              # header sits this far above the drive's first play
 NON_TEAM_COLORS = {'penalty': 'white', 'safety': 'navy', 'fumble': 'navy'}
 FALLBACK_TEAM_COLORS = {'pass': '#4d4d4d', 'run': '#a6a6a6'}
 
@@ -48,6 +69,14 @@ PLAY_COLOR_KEYS = {
 }
 
 FUMBLE_TURNOVER_TYPES = ('Fumble Recovery (Opponent)',)
+
+## CFBD writes kick and punt text two different ways
+KICKOFF_YARDS_RE = re.compile(r'kickoff\s+(?:for\s+)?(\d+)', re.IGNORECASE)
+PUNT_YARDS_RE = re.compile(r'punt\s+(?:for\s+)?(\d+)', re.IGNORECASE)
+RETURN_YARDS_RE = re.compile(r'return(?:ed|s)?\s+(?:for\s+)?(\d+)', re.IGNORECASE)
+
+KICKOFF_TYPES = ('Kickoff', 'Kickoff Return (Offense)')
+PUNT_TYPES = ('Punt', 'Punt Return')
 
 
 def pbpDir(year):
@@ -120,10 +149,11 @@ def buildGame(plays, team, week, year):
     for d in plays:
         text = str(d.get('text') or '')
 
-        ## Kickoff touchbacks: the CFBD "Kickoff" row is credited to the kicking team
+        ## Kickoff touchbacks: the CFBD kickoff row is credited to the kicking team
         ## Flip it to the receiving team.
-        if d['type'] == 'Kickoff' and 'touchback' in text.lower():
+        if d['type'] in KICKOFF_TYPES and 'touchback' in text.lower():
             d['offense'] = opponent if d['offense'] == team else team
+            d['type'] = 'Kickoff'
             d['gained'] = -65
             processed.append(d)
 
@@ -133,24 +163,16 @@ def buildGame(plays, team, week, year):
             touchback['gained'] = 25
             processed.append(touchback)
 
-        ## Kickoffs without a touchback
-        elif d['type'] == 'Kickoff':
-            d['offense'] = opponent if d['offense'] == team else team
-            ko_match = re.search(r'kickoff for (\d+)', text, re.IGNORECASE)
-            if ko_match:
-                d['gained'] = -int(ko_match.group(1))
-            processed.append(d)
-
-        ## Returned kickoffs: split the CFBD "Kickoff Return (Offense)" row into the kick and return
-        elif d['type'] == 'Kickoff Return (Offense)':
+        ## Every other kickoff
+        elif d['type'] in KICKOFF_TYPES:
             d['offense'] = opponent if d['offense'] == team else team
             d['type'] = 'Kickoff'
-            ko_match = re.search(r'kickoff for (\d+)', text, re.IGNORECASE)
+            ko_match = KICKOFF_YARDS_RE.search(text)
             if ko_match:
                 d['gained'] = -int(ko_match.group(1))
             processed.append(d)
 
-            return_match = re.search(r'return(?:ed|s)? for (\d+)', text, re.IGNORECASE)
+            return_match = RETURN_YARDS_RE.search(text)
             if return_match:
                 catch = d['start'] + d['gained'] if d['offense'] == team else d['start'] - d['gained']
                 kick_return = dict(d)
@@ -159,11 +181,12 @@ def buildGame(plays, team, week, year):
                 kick_return['gained'] = int(return_match.group(1))
                 processed.append(kick_return)
 
-        ## Punts: CFBD's "gained" is unreliable, take the punt distance from the text ("punt for N yds")
+        ## Punts: CFBD's "gained" is unreliable, take the punt distance from the text
         ## Touchback: add a row for the receiving team at its own 20 (like the kickoff)
         ## Return:  add a following "Punt Return" row for the receiving team, starting where the punt was caught.
-        elif d['type'] == 'Punt':
-            punt_match = re.search(r'punt for (\d+)', text, re.IGNORECASE)
+        elif d['type'] in PUNT_TYPES:
+            d['type'] = 'Punt'
+            punt_match = PUNT_YARDS_RE.search(text)
             if punt_match:
                 d['gained'] = int(punt_match.group(1))
             processed.append(d)
@@ -177,7 +200,7 @@ def buildGame(plays, team, week, year):
                 touchback['gained'] = 20
                 processed.append(touchback)
             else:
-                return_match = re.search(r'returns? for (\d+)', text, re.IGNORECASE)
+                return_match = RETURN_YARDS_RE.search(text)
                 if return_match:
                     ## Catch point is direction-aware: the punting team's own punts
                     ## travel toward x=100 (start+gained), the opponent's toward x=0.
@@ -250,6 +273,104 @@ def buildGame(plays, team, week, year):
 ## fixed-width play arrows keep their proportions instead of squishing.
 UNITS_PER_INCH = 13.0
 X_RANGE = 126  # xlim spans -13 .. 113
+
+
+def teamLogo(team, draw_px=LOGO_DRAW_PX):
+    ## A team's ESPN logo, downloaded once into logo/ and shrunk to chart size.
+    from PIL import Image as PILImage
+    path = os.path.join(LOGO_DIR, f"{team}.png")
+    if not os.path.isfile(path):
+        team_id = lookupEspnId(team)
+        if team_id is None:
+            print(f"No ESPN id for '{team}' in csv/espnTeamIDs.csv; drive headers will use text scores.")
+            return None
+        try:
+            import requests
+            response = requests.get(ESPN_LOGO_URL.format(team_id), timeout=15)
+            response.raise_for_status()
+            os.makedirs(LOGO_DIR, exist_ok=True)
+            with open(path, 'wb') as f:
+                f.write(response.content)
+            print(f"Saved {team} logo to {path}")
+        except Exception as e:
+            print(f"Could not fetch the logo for '{team}' ({type(e).__name__}: {e}).")
+            return None
+    try:
+        img = PILImage.open(path).convert('RGBA')
+        ## Trim to the artwork so every team's mark comes out the same visual size.
+        bbox = img.split()[3].getbbox()
+        if bbox:
+            img = img.crop(bbox)
+        img.thumbnail((draw_px, draw_px), PILImage.LANCZOS)
+        return np.asarray(img)
+    except Exception as e:
+        print(f"Could not read {path} ({type(e).__name__}: {e}).")
+        return None
+
+
+def textWidthYards(text, fontsize, weight='bold'):
+    ## Width of a rendered string in field yards, so header pieces can be laid out by hand
+    if not text:
+        return 0.0
+    path = TextPath((0, 0), text, size=fontsize, prop=FontProperties(weight=weight))
+    return path.get_extents().width / 72.0 * UNITS_PER_INCH
+
+
+def possessionArrow(direction):
+    ## Marker triangle pointing the way this offense drives, flattened vertically.
+    tip, base, half = 0.5 * direction, -0.5 * direction, POSSESSION_ARROW_H / 2
+    return Path([(base, -half), (tip, 0.0), (base, half), (base, -half)],
+                [Path.MOVETO, Path.LINETO, Path.LINETO, Path.CLOSEPOLY])
+
+
+def logoSize(logo):
+    ## Drawn (width, height) in yards, at the logo's own aspect ratio
+    height_px, width_px = logo.shape[0], logo.shape[1]
+    scale = min(SCOREBOARD_LOGO_H / height_px, SCOREBOARD_LOGO_W / width_px)
+    return width_px * scale, height_px * scale
+
+
+def drawLogo(ax, logo, x, y):
+    ## Logo centered on (x, y).
+    width, height = logoSize(logo)
+    ax.imshow(logo, extent=(x - width / 2, x + width / 2, y + height / 2, y - height / 2),
+              aspect='auto', zorder=6, interpolation='antialiased')
+
+
+def drawScoreboard(ax, y, clock_text, poss_text, tech_score, oppo_score,
+                   techLogo, oppoLogo, color, fallback_text, techHasBall, fontsize=12):
+    ## Drive header
+    ax.text(50, y + SCOREBOARD_SUBLINE, clock_text, fontsize=CLOCK_FONTSIZE,
+            fontweight='bold', va='center', ha='center', color=HEADER_TEXT_COLOR)
+
+    if techLogo is None or oppoLogo is None:
+        ## No logos to point at, so name the team that has the ball instead
+        ax.text(50, y, f"{fallback_text} | {poss_text}", fontsize=fontsize,
+                fontweight='bold', va='center', ha='center', color=color)
+        return
+
+    score_text = f"{tech_score} - {oppo_score}"
+    score_half = textWidthYards(score_text, fontsize) / 2
+    tech_width, oppo_width = logoSize(techLogo)[0], logoSize(oppoLogo)[0]
+
+    tech_x = 50 - score_half - SCOREBOARD_GAP - tech_width / 2
+    oppo_x = 50 + score_half + SCOREBOARD_GAP + oppo_width / 2
+    ax.text(50, y, score_text, fontsize=fontsize, fontweight='bold',
+            va='center', ha='center', color=HEADER_TEXT_COLOR)
+    drawLogo(ax, techLogo, tech_x, y)
+    drawLogo(ax, oppoLogo, oppo_x, y)
+
+    ## Possession arrow
+    arrow_x = tech_x if techHasBall else oppo_x
+    arrow_half = POSSESSION_ARROW_PT / 72.0 * UNITS_PER_INCH / 2
+    ## TextPath measures ink, which runs a little narrower than the rendered string,
+    ## so pad the clock before deciding how far out the arrow has to sit.
+    clear = textWidthYards(clock_text, CLOCK_FONTSIZE) * 1.1 / 2 + arrow_half + SCOREBOARD_GAP
+    if abs(arrow_x - 50) < clear:
+        arrow_x = 50 + clear * (1 if arrow_x >= 50 else -1)
+    ax.plot([arrow_x], [y + SCOREBOARD_SUBLINE],
+            marker=possessionArrow(1 if techHasBall else -1), markersize=POSSESSION_ARROW_PT,
+            color=color, alpha=0.75, linestyle='None', zorder=6)
 
 
 def drawYardNumbers(ax, y, upside_down):
@@ -537,7 +658,10 @@ def drawPlay(ax, row, i, geo):
     ## Small down label just outside the flat tail of the arrow. Keeping it off the
     ## fill means it never has to contrast with a team color, so it's always black.
     if playType not in NO_FIRST_DOWN_TYPES and pd.notna(row.down):
-        arrow_sign = 1 if geo['pos_gained'] >= 0 else -1  # which way the arrow points
+        if row.gained == 0:
+            arrow_sign = geo['direction']
+        else:
+            arrow_sign = 1 if geo['pos_gained'] >= 0 else -1
         label = ax.text(start - arrow_sign * DOWN_LABEL_PAD, i, ordinalDown(row.down),
                         fontsize=6, color='black', va='center',
                         ha='right' if arrow_sign > 0 else 'left', zorder=6)
@@ -738,6 +862,9 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     ## Saved colors for this opponent, pulled from ESPN the first time we chart them.
     oppoColors = teamColors(opponent, teamColorsCsv)
 
+    ## Logos for the drive-header scoreboards, fetched once per game
+    techLogo, oppoLogo = teamLogo(team), teamLogo(opponent)
+
     fig, ax = setupChart(techColors['pass'], oppoColors['run'])
 
     i = 0
@@ -768,7 +895,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
         if row.offense != offense or row.type == 'Kickoff':
             offense = row.offense
-            i += 10
+            i += DRIVE_GAP
             ## Drive header: who has the ball, the clock, and the score
             if prev_row is not None:
                 if prev_row.offense == team:
@@ -782,10 +909,9 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
             elif tech_score < oppo_score: scoreString = f"Tech down {oppo_score}-{tech_score}"
             else: scoreString = f"Tied at {tech_score}-{oppo_score}"
 
-
-            ax.text(50, i - 5, f"{formatClock(row.clock)} | {scoreString} | {offense} Ball",
-                    fontsize=12, fontweight='bold', va='center', ha='center',
-                    color=headerColors['pass'])
+            drawScoreboard(ax, i - DRIVE_HEADER_Y, formatClock(row.clock), f"{offense} Ball",
+                           int(tech_score), int(oppo_score), techLogo, oppoLogo,
+                           headerColors['pass'], scoreString, offense == team)
 
         geo = playGeometry(row, team, techColors, oppoColors)
         play_y = i

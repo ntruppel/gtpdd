@@ -31,13 +31,13 @@
   },
   {
     "week": 9,
-    "href": "fbPlaychart_wk9_Western_Kentucky.html",
-    "label": "Wk 9 \u2014 Western Kentucky"
+    "label": "Wk 9 \u2014 Western Kentucky",
+    "href": "fbPlaychart_wk9_Western_Kentucky.html"
   },
   {
     "week": 10,
-    "label": "Wk 10 \u2014 Sam Houston",
-    "href": "fbPlaychart_wk10_Sam_Houston.html"
+    "href": "fbPlaychart_wk10_Sam_Houston.html",
+    "label": "Wk 10 \u2014 Sam Houston"
   },
   {
     "week": 11,

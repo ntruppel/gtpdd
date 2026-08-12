@@ -55,7 +55,7 @@
 53,Western Kentucky,Q2 11:23,1,10,Rush,23,6,(11:27) Shotgun #21 M.Parrish rush middle for 6 yards gain to the LAT17 (#22 J.Mayfield; #23 A.Jackson Jr.),401757286239,10,7
 54,Western Kentucky,Q2 10:49,2,4,Pass Reception,17,16,"(11:02) Shotgun #16 R.Tisdale Jr. pass complete short right to #85 J.West caught at LAT08, for 16 yards to the LAT01 (#6 J.Foster; #3 K.Carter), 1ST DOWN",401757286243,10,7
 55,Western Kentucky,Q2 10:41,1,1,Rushing Touchdown,1,1,"(10:49) #9 G.Hart III rush middle for 1 yard gain to the LAT00 TOUCHDOWN, clock 10:41 #39 J.Cannon kick attempt good (H: #18 C.Maynard, LS: #55 R.Robich)",401757286248,17,7
-56,Louisiana Tech,Q2 10:32,1,10,Kickoff,65,-37,(10:41) #42 J.Cassidy kickoff 65 yards to the LAT00 #1 D.Gandy return 28 yards to the LAT28 (#25 X.Griffin),401757286255,17,7
+56,Louisiana Tech,Q2 10:32,1,10,Kickoff,65,-65,(10:41) #42 J.Cassidy kickoff 65 yards to the LAT00 #1 D.Gandy return 28 yards to the LAT28 (#25 X.Griffin),401757286255,17,7
 57,Louisiana Tech,Q2 10:32,1,10,Kickoff Return (Offense),0,28,"#1 D.Gandy return 28 yards to the LAT28 (#25 X.Griffin)",401757257101946303,10,10
 57,Louisiana Tech,Q2 10:27,1,10,Pass Incompletion,28,0,(10:32) Shotgun #5 B.Baker pass incomplete short middle to #84 E.Finley thrown to LAT35,401757286260,7,17
 58,Louisiana Tech,Q2 10:15,2,10,Rush,28,18,"(10:27) Shotgun #5 B.Baker rush middle for 18 yards gain to the LAT46 (#7 J.Lewis), 1ST DOWN",401757286263,7,17
@@ -101,7 +101,7 @@
 99,Louisiana Tech,Q2 0:1,4,2,Rush,95,-8,"(00:01) #29 L.Matthews rush middle for 8 yards loss to the WKU13, End Of Play, TURNOVER ON DOWNS",401757286421,7,20
 100,Louisiana Tech,Q2 0:0,4,2,End of Half,95,-3,End of 2nd quarter.,401757286430,7,20
 101,Louisiana Tech,Q3 14:45,1,10,Kickoff,65,-57,"(15:00) #42 J.Cassidy kickoff 57 yards to the LAT08 #4 C.Thevenin return 7 yards to the LAT15 lateral to #1 D.Gandy TOUCHDOWN, clock 14:45 #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757286437,20,14
-102,Louisiana Tech,Q3 14:45,0,10,Return Touchdown,8,92,"#4 C.Thevenin return 7 yards to the LAT15 lateral to #1 D.Gandy TOUCHDOWN, clock 14:45 #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757257101946303,20,14
+102,Louisiana Tech,Q3 14:45,0,10,Return Touchdown,8,92,"#4 C.Thevenin return 7 yards to the LAT15 lateral to #1 D.Gandy TOUCHDOWN, clock 14:45 #48 J.Chance kick attempt good (H: #29 L.Matthews, LS: #41 E.Burch)",401757257101946303,14,20
 102,Western Kentucky,Q3 14:45,1,10,Kickoff,35,-65,"(14:45) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286445,14,20
 103,Western Kentucky,Q3 14:45,1,10,Touchback,100,25,"(14:45) #48 J.Chance kickoff 65 yards to the WKU00, Touchback",401757286445,14,20
 104,Western Kentucky,Q3 14:13,1,10,Rush,75,4,(14:38) Shotgun #16 R.Tisdale Jr. rush middle for 4 yards gain to the WKU29 (#17 A.Butler),401757286448,20,14
