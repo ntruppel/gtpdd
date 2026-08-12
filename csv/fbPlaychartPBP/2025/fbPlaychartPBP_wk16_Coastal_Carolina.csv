@@ -10,11 +10,12 @@
 8,Coastal Carolina,Q1 13:15,2,3,Rush,51,4,Ja'Vin Simpkins run for 4 yds to the LT 47 for a 1ST down,401778325101868401,0,0
 9,Coastal Carolina,Q1 13:0,1,10,Pass Reception,47,4,Tad Hudson pass complete to Bryson Graves for 4 yds to the LT 43,401778325101869901,0,0
 10,Coastal Carolina,Q1 12:50,2,6,Penalty,43,-5,"Coastal Carolina Penalty, False Start (-5 Yards) to the LT 48",401778325101874901,0,0
-11,Coastal Carolina,Q1 12:30,2,11,Pass Reception,48,7,"Tad Hudson pass complete to Robby Washington for 21 yds to the LT 27 for a 1ST down Coastal Carolina Penalty, Personal Foul (-14 Yards) to the LT 41 for a 1ST down",401778325101876901,0,0
-12,Coastal Carolina,Q1 12:15,1,10,Pass Incompletion,41,0,Tad Hudson pass incomplete,401778325101878403,0,0
-13,Coastal Carolina,Q1 12:0,2,10,Penalty,41,-5,"Coastal Carolina Penalty, Delay of Game (-5 Yards) to the LT 18 for a 1ST down",401778325101879901,0,0
-14,Coastal Carolina,Q1 11:30,1,10,Rush,18,6,Dominic Knicely run for 6 yds to the LT 12,401778325101886901,0,0
-15,Coastal Carolina,Q1 11:0,2,4,Pass Incompletion,12,0,Tad Hudson pass incomplete,401778325101889902,0,0
+11,Coastal Carolina,Q1 12:30,2,11,Pass Reception,48,25,"Tad Hudson pass complete to Robby Washington for 21 yds to the LT 27 for a 1ST down Coastal Carolina Penalty, Personal Foul (-14 Yards) to the LT 41 for a 1ST down",401778325101876901,0,0
+11,Coastal Carolina,Q1 12:30,2,11,Penalty,23,10,"Tad Hudson pass complete to Robby Washington for 21 yds to the LT 27 for a 1ST down Coastal Carolina Penalty, Personal Foul (14 Yards) to the LT 14 for a 1ST down",401778325101876901,0,0
+12,Coastal Carolina,Q1 12:15,1,10,Pass Incompletion,14,0,Tad Hudson pass incomplete,401778325101878403,0,0
+13,Coastal Carolina,Q1 12:0,2,10,Penalty,14,-5,"Coastal Carolina Penalty, Delay of Game (-5 Yards) to the LT 18 for a 1ST down",401778325101879901,0,0
+14,Coastal Carolina,Q1 11:30,2,10,Rush,18,6,Dominic Knicely run for 6 yds to the LT 12,401778325101886901,0,0
+15,Coastal Carolina,Q1 11:0,3,4,Pass Incompletion,12,0,Tad Hudson pass incomplete,401778325101889902,0,0
 16,Coastal Carolina,Q1 10:58,3,4,Field Goal Missed,12,29,Kian Afrookhteh 29 yd FG MISSED,401778325101894101,0,0
 17,Louisiana Tech,Q1 10:58,1,10,Penalty,20,-5,"Louisiana Tech Penalty, False Start (-5 Yards) to the LT 15",401778325101894102,0,0
 18,Louisiana Tech,Q1 10:50,1,15,Rush,15,6,Clay Thevenin run for 6 yds to the LT 21,401778325101894901,0,0
@@ -31,6 +32,7 @@
 29,Louisiana Tech,Q1 5:52,3,10,Pass Incompletion,15,0,Trey Kukuk pass incomplete,401778325101944701,0,0
 30,Louisiana Tech,Q1 5:38,4,10,Punt,15,56,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 1 yd to the CCU 16 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 20",401778325101946101,0,0
 31,Coastal Carolina,Q1 5:38,4,10,Punt Return,71,1,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 1 yd to the CCU 16 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 20",401778325101946101,0,0
+31,Coastal Carolina,Q1 5:38,0,10,Penalty,70,-10,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 1 yd to the CCU 16 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 20",401778325101946101,0,0
 32,Coastal Carolina,Q1 5:30,1,10,Rush,80,3,Jevon Edwards run for 3 yds to the CCU 23,401778325101946901,0,0
 33,Coastal Carolina,Q1 4:50,2,7,Penalty,77,15,"PENALTY LATECH pass interference 15 yards to the COASTALCAR38, NO PLAY, 1ST DOWN COASTALCAR.",401778325101954902,0,0
 34,Coastal Carolina,Q1 4:40,1,10,Rush,62,5,Jevon Edwards run for 5 yds to the CCU 43,401778325101955901,0,0
@@ -41,7 +43,6 @@
 39,Coastal Carolina,Q1 2:5,2,9,Pass Reception,21,6,Tad Hudson pass complete to Robby Washington for 6 yds to the LT 15,401778325101979401,0,0
 40,Coastal Carolina,Q1 1:39,3,3,Penalty,15,-5,"Coastal Carolina Penalty, False Start (-5 Yards) to the LT 20",401778325101986001,0,0
 41,Coastal Carolina,Q1 1:12,3,8,Passing Touchdown,20,20,Tad Hudson pass complete to Dominic Knicely for 20 yds for a TD (Kian Afrookhteh KICK),401778325101988701,7,0
-42,Coastal Carolina,Q1 1:12,3,0,Penalty,3,-10,"PENALTY COASTALCAR holding 10 yards to the LATECH13, NO PLAY.",401778325101988702,0,0
 43,Louisiana Tech,Q1 1:12,3,18,Kickoff,65,-65,Philippe Laforge kickoff for 65 yds for a touchback,401778325101988704,7,0
 44,Louisiana Tech,Q1 1:12,3,18,Touchback,0,25,Philippe Laforge kickoff for 65 yds for a touchback,401778325101988704,7,0
 45,Louisiana Tech,Q1 1:0,1,10,Rush,25,16,"Clay Thevenin run for 1 yd to the LT 26 for a 1ST down Coastal Carolina Penalty, Personal Foul (15 Yards) to the LT 41 for a 1ST down",401778325101989901,0,7
@@ -99,12 +100,13 @@
 97,Coastal Carolina,Q2 1:16,2,12,Passing Touchdown,16,16,Tad Hudson pass complete to Robby Washington for 16 yds for a TD (Kian Afrookhteh KICK),401778325102988303,14,3
 98,Louisiana Tech,Q2 1:16,2,12,Kickoff,65,-64,"Philippe Laforge kickoff for 64 yds , Devin Gandy return for 7 yds to the LT 8",401778325102988305,14,3
 99,Louisiana Tech,Q2 1:16,2,12,Kickoff Return (Offense),1,7,"Philippe Laforge kickoff for 64 yds , Devin Gandy return for 7 yds to the LT 8",401778325102988305,14,3
-100,Coastal Carolina,Q2 1:16,1,10,Rush,65,5,Jevon Edwards run for 5 yds to the CCU 40,401778325102999901,14,3
 101,Louisiana Tech,Q2 1:5,1,10,Pass Reception,8,1,Trey Kukuk pass complete to Clay Thevenin for 1 yd to the LT 9,401778325102989401,3,14
 102,Louisiana Tech,Q2 1:0,2,9,Pass Incompletion,9,0,Trey Kukuk pass incomplete,401778325102989901,3,14
 103,Louisiana Tech,Q2 0:55,3,9,Pass Incompletion,9,0,Trey Kukuk pass incomplete,401778325102994401,3,14
 104,Louisiana Tech,Q2 0:37,4,9,Punt,9,56,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 10 yds to the CCU 19 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 35",401778325102996201,3,14
 105,Coastal Carolina,Q2 0:37,4,9,Punt Return,65,10,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 10 yds to the CCU 19 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 35",401778325102996201,3,14
+105,Coastal Carolina,Q2 0:37,0,0,Penalty,55,-10,"John Hoyet Chance punt for 56 yds , Bryson Graves returns for 10 yds to the CCU 19 Coastal Carolina Penalty, Illegal Block (10 Yards) to the CCU 35",401778325102996201,3,14
+100,Coastal Carolina,Q2 0:37,1,10,Rush,65,5,Jevon Edwards run for 5 yds to the CCU 40,401778325102999901,14,3
 106,Coastal Carolina,Q2 0:0,0,10,End of Half,65,5,End of 2nd Quarter,401778325102999902,14,3
 107,Coastal Carolina,Q3 15:0,1,10,Kickoff,35,-64,"John Hoyet Chance kickoff for 64 yds , Malcolm Gillie return for 24 yds to the CCU 25",401778325103849901,3,14
 108,Coastal Carolina,Q3 15:0,1,10,Kickoff Return (Offense),99,24,"John Hoyet Chance kickoff for 64 yds , Malcolm Gillie return for 24 yds to the CCU 25",401778325103849901,3,14
@@ -118,14 +120,14 @@
 116,Louisiana Tech,Q3 12:45,3,6,Rush,72,0,Trey Kukuk run for no gain to the CCU 28,401778325103875401,3,14
 117,Louisiana Tech,Q3 12:8,4,6,Penalty,72,-5,"Louisiana Tech Penalty, False Start (-5 Yards) to the CCU 33",401778325103879101,3,14
 118,Louisiana Tech,Q3 11:45,4,11,Field Goal Good,67,51,John Hoyet Chance 51 yd FG GOOD,401778325103885401,6,14
-119,Coastal Carolina,Q3 11:45,4,11,Kickoff,35,-47,John Hoyet Chance kickoff for 47 yds,401778325103885402,6,14
+119,Coastal Carolina,Q3 11:45,4,11,Kickoff,35,-30,John Hoyet Chance kickoff for 47 yds,401778325103885402,6,14
 120,Coastal Carolina,Q3 11:36,1,10,Fumble Recovery (Opponent),65,5,"Tad Hudson pass complete to Robby Washington for 5 yds Robby Washington fumbled, recovered by LT Donovan Rieman",401778325103886301,14,6
 121,Louisiana Tech,Q3 11:30,1,10,Rush,60,13,Trey Kukuk run for 13 yds to the CCU 27 for a 1ST down,401778325103886901,6,14
 122,Louisiana Tech,Q3 11:15,1,10,Rush,73,0,Trey Kukuk run for no gain to the CCU 27,401778325103888402,6,14
 123,Louisiana Tech,Q3 10:30,2,10,Rush,73,14,Andrew Burnette run for 14 yds to the CCU 13 for a 1ST down,401778325103896901,6,14
 124,Louisiana Tech,Q3 10:30,1,10,Penalty,87,-15,"Louisiana Tech Penalty, Unsportsmanlike Conduct (-15 Yards) to the CCU 28",401778325103896902,6,14
 125,Louisiana Tech,Q3 9:53,1,10,Rush,72,6,Andrew Burnette run for 6 yds to the CCU 22,401778325103904603,6,14
-126,Louisiana Tech,Q3 9:28,2,4,Sack,78,-4,"Trey Kukuk sacked by Tray Brown for a loss of 4 yards to the CCU 23 Trey Kukuk fumbled, recovered by CCU",401778325103907101,6,14
+126,Louisiana Tech,Q3 9:28,2,4,Fumble Recovery (Opponent),78,-4,"Trey Kukuk sacked by Tray Brown for a loss of 4 yards to the CCU 23 Trey Kukuk fumbled, recovered by CCU",401778325103907101,6,14
 127,Coastal Carolina,Q3 9:20,1,10,Rush,77,1,Dominic Knicely run for 1 yd to the CCU 24,401778325103907901,14,6
 128,Coastal Carolina,Q3 8:45,2,9,Pass Reception,76,28,Tad Hudson pass complete to Bryson Graves for 28 yds to the LT 48 for a 1ST down,401778325103915401,14,6
 129,Coastal Carolina,Q3 8:15,1,10,Rush,48,1,Dominic Knicely run for 1 yd to the LT 47,401778325103918401,14,6
@@ -134,11 +136,12 @@
 132,Coastal Carolina,Q3 7:5,2,8,Rush,8,3,Jevon Edwards run for 3 yds to the LT 5,401778325103929401,14,6
 133,Coastal Carolina,Q3 6:37,3,5,Pass Incompletion,5,0,Tad Hudson pass incomplete,401778325103936201,14,6
 134,Coastal Carolina,Q3 6:23,4,0,Blocked Field Goal,5,22,"Kian Afrookhteh 22 yd FG BLOCKED blocked by Kenyatta McNeese Afrookhteh, Kian field goal attempt from 22 blocked, recovered by LATECH Foster, Jakari at LATECH20 spot at LATECH20 (blocked by McNeese, Kenyatta), Foster, Jakari for 13 yards to the LATECH33. Jakari Foster return for 13 yds to the LT 33",401778325103937601,14,6
+134,Coastal Carolina,Q3 6:23,0,0,FG Recovery (Opponent),5,-28,"Kian Afrookhteh 22 yd FG BLOCKED blocked by Kenyatta McNeese Afrookhteh, Kian field goal attempt from 22 blocked, recovered by LATECH Foster, Jakari at LATECH20 spot at LATECH20 (blocked by McNeese, Kenyatta), Foster, Jakari for 13 yards to the LATECH33. Jakari Foster return for 13 yds to the LT 33",401778325103937601,14,6
 135,Louisiana Tech,Q3 6:20,1,10,Rush,33,7,Clay Thevenin run for 7 yds to the LT 40,401778325103937901,6,14
 136,Louisiana Tech,Q3 5:45,2,3,Penalty,40,-10,"Thevenin, Clay rush for 5 yards to the LATECH45, PENALTY LATECH holding 10 yards to the LATECH30, NO PLAY.",401778325103945402,6,14
 137,Louisiana Tech,Q3 5:34,2,13,Pass Incompletion,30,0,Trey Kukuk pass incomplete,401778325103946501,6,14
 138,Louisiana Tech,Q3 5:26,3,13,Pass Reception,30,2,Trey Kukuk pass complete to Clay Thevenin for 2 yds to the LT 32,401778325103947301,6,14
-139,Louisiana Tech,Q3 4:51,4,11,Punt,32,40,"John Hoyet Chance punt for 40 yds for a touchback , Bryson Graves returns for no gain Bryson Graves fumbled, recovered by CCU",401778325103954801,6,14
+139,Louisiana Tech,Q3 4:51,4,11,Punt,32,68,"John Hoyet Chance punt for 40 yds for a touchback , Bryson Graves returns for no gain Bryson Graves fumbled, recovered by CCU",401778325103954801,6,14
 140,Coastal Carolina,Q3 4:51,4,11,Touchback,100,20,"John Hoyet Chance punt for 40 yds for a touchback , Bryson Graves returns for no gain Bryson Graves fumbled, recovered by CCU",401778325103954801,6,14
 141,Coastal Carolina,Q3 4:45,1,10,Rush,80,3,Ja'Vin Simpkins run for 3 yds to the CCU 23,401778325103955401,14,6
 142,Coastal Carolina,Q3 4:30,2,7,Pass Reception,77,11,Tad Hudson pass complete to Bryson Graves for 11 yds to the CCU 34 for a 1ST down,401778325103956901,14,6
@@ -167,7 +170,7 @@
 165,Coastal Carolina,Q4 11:45,1,10,Touchback,100,25,John Hoyet Chance kickoff for 65 yds for a touchback,401778325104885403,12,14
 166,Coastal Carolina,Q4 11:45,1,10,Penalty,75,-5,"Coastal Carolina Penalty, False Start (-5 Yards) to the CCU 20",401778325104885404,14,12
 167,Coastal Carolina,Q4 11:30,1,15,Rush,80,8,Jevon Edwards run for 8 yds to the CCU 28,401778325104886901,14,12
-168,Coastal Carolina,Q4 11:20,2,7,Sack,72,0,"Tad Hudson sacked by Sifa Leota for 0 yards to the CCU 28 Coastal Carolina Penalty, Intentional Grounding (Yards) to the CCU 19",401778325104887901,14,12
+168,Coastal Carolina,Q4 11:20,2,7,Penalty,72,-10,"Tad Hudson sacked by Sifa Leota for 0 yards to the CCU 28 Coastal Carolina Penalty, Intentional Grounding (Yards) to the CCU 19",401778325104887901,14,12
 169,Coastal Carolina,Q4 11:14,3,16,Penalty,81,15,"Hudson, Tad pass incomplete, PENALTY LATECH roughing passer 15 yards to the COASTALCAR34, NO PLAY, 1ST DOWN COASTALCAR.",401778325104888501,14,12
 170,Coastal Carolina,Q4 11:0,1,10,Rush,66,-4,Jevon Edwards run for a loss of 4 yards to the CCU 30,401778325104889901,14,12
 171,Coastal Carolina,Q4 10:25,2,14,Pass Incompletion,70,0,Tad Hudson pass incomplete,401778325104897401,14,12
@@ -188,7 +191,7 @@
 186,Louisiana Tech,Q4 6:20,2,7,Rush,43,1,Andrew Burnette run for 1 yd to the LT 44,401778325104937901,20,14
 187,Louisiana Tech,Q4 5:35,3,6,Rush,44,7,Trey Kukuk run for 7 yds to the CCU 49 for a 1ST down,401778325104946401,20,14
 188,Louisiana Tech,Q4 4:50,1,10,Rush,51,2,Clay Thevenin run for 2 yds to the CCU 47,401778325104954901,20,14
-189,Louisiana Tech,Q4 4:10,2,8,Rush,53,-1,"Andrew Burnette run for a loss of 1 yard to the CCU 48 Andrew Burnette fumbled, recovered by CCU",401778325104958901,20,14
+189,Louisiana Tech,Q4 4:10,2,8,Fumble Recovery (Opponent),53,-1,"Andrew Burnette run for a loss of 1 yard to the CCU 48 Andrew Burnette fumbled, recovered by CCU",401778325104958901,20,14
 190,Coastal Carolina,Q4 4:5,1,10,Pass Incompletion,52,0,Tad Hudson pass incomplete,401778325104959401,14,20
 191,Coastal Carolina,Q4 4:0,2,10,Pass Incompletion,52,0,Tad Hudson pass incomplete,401778325104959901,14,20
 192,Coastal Carolina,Q4 3:56,3,10,Pass Incompletion,52,0,Tad Hudson pass incomplete,401778325104964301,14,20
@@ -198,6 +201,7 @@
 196,Louisiana Tech,Q4 2:20,3,2,Rush,20,1,Trey Kukuk run for 1 yd to the LT 21,401778325104977901,20,14
 197,Louisiana Tech,Q4 2:20,4,1,Timeout,21,0,"Timeout Coastal Carolina, clock 02:20",401778325104977902,20,14
 198,Louisiana Tech,Q4 2:13,4,1,Punt,21,49,"John Hoyet Chance punt for 49 yds, fair catch by Bryson Graves at the CCU 30 Coastal Carolina Penalty, Offensive Holding (10 Yards) to the CCU 20",401778325104978601,20,14
+198,Louisiana Tech,Q4 2:13,0,1,Penalty,70,10,"John Hoyet Chance punt for 49 yds, fair catch by Bryson Graves at the CCU 30 Coastal Carolina Penalty, Offensive Holding (10 Yards) to the CCU 20",401778325104978601,20,14
 199,Coastal Carolina,Q4 2:8,1,10,Pass Incompletion,80,0,Tad Hudson pass incomplete,401778325104979101,14,20
 200,Coastal Carolina,Q4 2:4,2,10,Pass Incompletion,80,0,Tad Hudson pass incomplete,401778325104979501,14,20
 201,Coastal Carolina,Q4 1:59,3,10,Pass Incompletion,80,0,Tad Hudson pass incomplete,401778325104984001,14,20

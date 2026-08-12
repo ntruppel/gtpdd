@@ -34,6 +34,8 @@ PBP_DIR = "csv/fbPlaychartPBP"
 TEAM_COLORS_CSV = "csv/fbPlaychartPBP/fbPlaychartTeamColors.csv"
 LOGO_DIR = "logo"                 # team logo cache, shared with the other gtpdd scripts
 ESPN_LOGO_URL = "https://a.espncdn.com/i/teamlogos/ncaa/500/{}.png"
+ESPN_CONF_LOGO_URL = "https://a.espncdn.com/i/teamlogos/ncaa_conf/500/{}.png"
+ESPN_CONFERENCE_IDS_CSV = "csv/espnConferenceIDs.csv"
 LOGO_DRAW_PX = 72                 # logos are shrunk to this before drawing; every drive header embeds a copy
 ## Logos are sized by height so square marks and wide wordmarks read alike, with a
 ## width cap so a wordmark can't run away with the line.
@@ -47,8 +49,28 @@ CLOCK_FONTSIZE = 8               # smaller than the score above it
 HEADER_TEXT_COLOR = 'black'       # the logos carry the team colors, so the text stays neutral
 POSSESSION_ARROW_H = 2 / 3        # arrow height as a fraction of its length
 POSSESSION_ARROW_PT = 8           # arrow length in points
+PLAY_GAP = 4                      # vertical pitch from one play row to the next
+DIVIDER_GAP = 6                   # clear yards on each side of a divider, centering it between plays
 DRIVE_GAP = 14                    # vertical room reserved above a drive for its header
 DRIVE_HEADER_Y = 9.0              # header sits this far above the drive's first play
+FINAL_SCALE = 2
+FINAL_LOGO_PX = LOGO_DRAW_PX * FINAL_SCALE  # re-read the marks bigger rather than upscaling
+FINAL_FONTSIZE = 24
+FINAL_LABEL = "Final"
+FINAL_SUBLINE = SCOREBOARD_LOGO_H * FINAL_SCALE / 2 + POSSESSION_GAP
+## Venue/kickoff/attendance block, drawn between the top yard numbers and the first drive
+VENUES_CACHE = os.path.join(PBP_DIR, "fbPlaychartVenues.json")
+GAME_INFO_TOP = -2.0              # first info line, just below the top yard numbers
+GAME_INFO_LINE_GAP = 3.6
+GAME_INFO_FONTSIZE = 9
+## The conference mark is sized on its own: drive-header logos share a narrow width
+## cap so team marks stay comparable, but a conference wordmark is much wider than tall.
+GAME_INFO_LOGO_H = 4.0            # yards tall at most
+GAME_INFO_LOGO_W = 20.0           # yards wide at most
+GAME_INFO_LOGO_PX = 300           # raster size, so a wide wordmark doesn't come out soft
+GAME_INFO_BOTTOM_GAP = 6.0        # clear yards between the last info line and the first drive header
+DIVIDER_COLOR = 'black'           # halftime and overtime rules, with their labels
+QUARTER_DIVIDER_COLOR = 'dimgray' # quarter breaks are the same rule, a shade lighter
 NON_TEAM_COLORS = {'penalty': 'white', 'safety': 'navy', 'fumble': 'navy'}
 FALLBACK_TEAM_COLORS = {'pass': '#4d4d4d', 'run': '#a6a6a6'}
 
@@ -64,11 +86,17 @@ PLAY_COLOR_KEYS = {
     'Interception Return Touchdown': 'pass',
     'Safety': 'safety',
     'Fumble Recovery (Opponent)': 'run',
+    'FG Recovery (Opponent)': 'run',       # a blocked kick the defense picks up
     'Fumble Return Touchdown': 'run',
 
 }
 
-FUMBLE_TURNOVER_TYPES = ('Fumble Recovery (Opponent)',)
+## Turnovers drawn as a hatched arrow, each with the label it carries below the head
+FUMBLE_TURNOVER_LABELS = {
+    'Fumble Recovery (Opponent)': ' Fumble! ',
+    'FG Recovery (Opponent)': ' Block FG Return! ',
+}
+FUMBLE_TURNOVER_TYPES = tuple(FUMBLE_TURNOVER_LABELS)
 
 ## CFBD writes kick and punt text two different ways
 KICKOFF_YARDS_RE = re.compile(r'kickoff\s+(?:for\s+)?(\d+)', re.IGNORECASE)
@@ -269,35 +297,202 @@ def buildGame(plays, team, week, year):
     return df, opponent
 
 
+def gameInfoPath(year, week, opponent):
+    ## Cached game record: csv/fbPlaychartPBP/<year>/fbPlaychartGame_wk<week>_<opponent>.json
+    return os.path.join(pbpDir(year), f"fbPlaychartGame_{gameSlug(week, opponent)}.json")
+
+
+def loadVenues(refresh=False):
+    ## venue id -> city/state/timezone/capacity
+    if not refresh and os.path.isfile(VENUES_CACHE):
+        try:
+            with open(VENUES_CACHE) as f:
+                return {int(k): v for k, v in json.load(f).items()}
+        except (ValueError, OSError):
+            pass  # unreadable cache: pull a fresh copy below
+    try:
+        configuration = cfbd.Configuration(access_token=os.environ["cfbdAuth"])
+        venues = cfbd.VenuesApi(cfbd.ApiClient(configuration)).get_venues()
+    except Exception as e:
+        print(f"Could not fetch venues from CFBD ({type(e).__name__}: {e}).")
+        return {}
+    table = {v.id: {'city': v.city, 'state': v.state, 'timezone': v.timezone,
+                    'capacity': v.capacity, 'dome': v.dome}
+             for v in venues if v.id is not None}
+    os.makedirs(os.path.dirname(VENUES_CACHE), exist_ok=True)
+    with open(VENUES_CACHE, 'w') as f:
+        json.dump(table, f, indent=2, sort_keys=True)
+    return table
+
+
+def fetchGameInfo(year, week, team, opponent):
+    ## The CFBD Games record for one game, flattened to the fields the header shows
+    try:
+        configuration = cfbd.Configuration(access_token=os.environ["cfbdAuth"])
+        games = cfbd.GamesApi(cfbd.ApiClient(configuration)).get_games(year=year, team=team)
+    except Exception as e:
+        print(f"Could not fetch game info from CFBD ({type(e).__name__}: {e}).")
+        return None
+
+    ## Match on opponent instead of week
+    want = str(opponent).strip().lower()
+    matches = [g for g in games
+               if want in (str(g.home_team).strip().lower(), str(g.away_team).strip().lower())]
+    if not matches:
+        print(f"CFBD has no {year} {team} game against '{opponent}'; the info header is skipped.")
+        return None
+    game = next((g for g in matches if g.week == week), matches[0])
+
+    venue = loadVenues().get(game.venue_id, {})
+    conference = game.home_conference if game.home_team == team else game.away_conference
+    return {
+        'venue': game.venue,
+        'city': venue.get('city'),
+        'state': venue.get('state'),
+        'timezone': venue.get('timezone'),
+        'capacity': venue.get('capacity'),
+        'attendance': game.attendance,
+        'startDate': game.start_date.isoformat() if game.start_date else None,
+        'startTimeTbd': bool(game.start_time_tbd),
+        'neutralSite': bool(game.neutral_site),
+        'conferenceGame': bool(game.conference_game),
+        'conference': conference,
+        'notes': game.notes,
+        'homeTeam': game.home_team,
+        'awayTeam': game.away_team,
+    }
+
+
+def gameInfo(year, week, team, opponent, refresh=False):
+    ## Cached game record, pulled from CFBD the first time we chart the game
+    path = gameInfoPath(year, week, opponent)
+    if not refresh and os.path.isfile(path):
+        try:
+            with open(path) as f:
+                return json.load(f)
+        except (ValueError, OSError):
+            pass  # unreadable cache: pull a fresh copy below
+    info = fetchGameInfo(year, week, team, opponent)
+    if info is not None:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'w') as f:
+            json.dump(info, f, indent=2)
+        print(f"Wrote {path}")
+    return info
+
+
+def kickoffText(info):
+    ## 'Saturday, August 30, 2025 - 6:30 PM CDT', in the venue's local time
+    iso = info.get('startDate')
+    if not iso:
+        return None
+    from datetime import datetime
+    try:
+        when = datetime.fromisoformat(iso)
+    except (TypeError, ValueError):
+        return None
+    ## CFBD hands back UTC; the venue's zone is what a fan would have seen on a ticket.
+    if info.get('timezone'):
+        try:
+            from zoneinfo import ZoneInfo
+            when = when.astimezone(ZoneInfo(info['timezone']))
+        except Exception:
+            pass
+    day = f"{when:%A, %B} {when.day}, {when.year}"
+    if info.get('startTimeTbd'):
+        return day
+    ## %-d/%-I aren't portable, so strip the padding by hand.
+    clock = f"{when:%I:%M %p}".lstrip('0')
+    zone = when.strftime('%Z')
+    return f"{day} • {clock} {zone}".rstrip()
+
+
+def gameInfoRows(info):
+    ## The info header
+    rows = []
+    notes = str(info.get('notes') or '').strip()
+    if notes:
+        rows.append(notes)  # bowl or championship game name
+
+    home, away = info.get('homeTeam'), info.get('awayTeam')
+    conference = info.get('conference') if info.get('conferenceGame') else None
+    if home and away:
+        matchup = f"{away} vs. {home}" if info.get('neutralSite') else f"{away} at {home}"
+        if info.get('neutralSite'):
+            matchup += " (neutral site)"
+        rows.append(matchup)
+
+    ## League games are marked with the conference logo 
+    if conference:
+        logo = conferenceLogo(conference, GAME_INFO_LOGO_PX)
+        rows.append(('logo', logo) if logo is not None else f"{conference} game")
+
+    kickoff = kickoffText(info)
+    if kickoff:
+        rows.append(kickoff)
+
+    where = ', '.join(x for x in (info.get('city'), info.get('state')) if x)
+    venue = ' • '.join(x for x in (info.get('venue'), where) if x)
+    if venue:
+        rows.append(venue)
+
+    attendance, capacity = info.get('attendance'), info.get('capacity')
+    if attendance:
+        line = f"Attendance: {attendance:,}"
+        if capacity:
+            line += f" ({attendance / capacity:.0%} of {capacity:,})"
+        rows.append(line)
+    return rows
+
+
+def drawGameInfo(ax, rows):
+    ## Info header centered above the first drive; returns the y of its last row
+    y = GAME_INFO_TOP
+    first_text = True
+    for row in rows:
+        if isinstance(row, tuple):
+            ## The conference mark needs the room its own height asks for.
+            size = fitLogo(row[1], GAME_INFO_LOGO_W, GAME_INFO_LOGO_H)
+            y += (size[1] - GAME_INFO_LINE_GAP) / 2
+            drawLogo(ax, row[1], 50, y, size=size)
+            y += (size[1] + GAME_INFO_LINE_GAP) / 2
+            continue
+        ax.text(50, y, row, fontsize=GAME_INFO_FONTSIZE + (1 if first_text else 0),
+                fontweight='bold' if first_text else 'normal',
+                va='center', ha='center', color=HEADER_TEXT_COLOR)
+        first_text = False
+        y += GAME_INFO_LINE_GAP
+    return y - GAME_INFO_LINE_GAP
+
+
 ## Inches of figure per data-unit, kept roughly equal on both axes so the
 ## fixed-width play arrows keep their proportions instead of squishing.
 UNITS_PER_INCH = 13.0
 X_RANGE = 126  # xlim spans -13 .. 113
 
 
-def teamLogo(team, draw_px=LOGO_DRAW_PX):
-    ## A team's ESPN logo, downloaded once into logo/ and shrunk to chart size.
+def downloadLogo(url, path, name):
+    ## Cache one ESPN mark in logo/; True once the file is there
+    try:
+        import requests
+        response = requests.get(url, timeout=15)
+        response.raise_for_status()
+        os.makedirs(LOGO_DIR, exist_ok=True)
+        with open(path, 'wb') as f:
+            f.write(response.content)
+        print(f"Saved {name} logo to {path}")
+        return True
+    except Exception as e:
+        print(f"Could not fetch the logo for '{name}' ({type(e).__name__}: {e}).")
+        return False
+
+
+def readLogo(path, draw_px):
+    ## A cached PNG as an RGBA array, trimmed and shrunk to chart size
     from PIL import Image as PILImage
-    path = os.path.join(LOGO_DIR, f"{team}.png")
-    if not os.path.isfile(path):
-        team_id = lookupEspnId(team)
-        if team_id is None:
-            print(f"No ESPN id for '{team}' in csv/espnTeamIDs.csv; drive headers will use text scores.")
-            return None
-        try:
-            import requests
-            response = requests.get(ESPN_LOGO_URL.format(team_id), timeout=15)
-            response.raise_for_status()
-            os.makedirs(LOGO_DIR, exist_ok=True)
-            with open(path, 'wb') as f:
-                f.write(response.content)
-            print(f"Saved {team} logo to {path}")
-        except Exception as e:
-            print(f"Could not fetch the logo for '{team}' ({type(e).__name__}: {e}).")
-            return None
     try:
         img = PILImage.open(path).convert('RGBA')
-        ## Trim to the artwork so every team's mark comes out the same visual size.
+        ## Trim to the artwork so every mark comes out the same visual size.
         bbox = img.split()[3].getbbox()
         if bbox:
             img = img.crop(bbox)
@@ -306,6 +501,33 @@ def teamLogo(team, draw_px=LOGO_DRAW_PX):
     except Exception as e:
         print(f"Could not read {path} ({type(e).__name__}: {e}).")
         return None
+
+
+def teamLogo(team, draw_px=LOGO_DRAW_PX):
+    ## A team's ESPN logo, downloaded once into logo/ and shrunk to chart size.
+    path = os.path.join(LOGO_DIR, f"{team}.png")
+    if not os.path.isfile(path):
+        team_id = lookupEspnId(team)
+        if team_id is None:
+            print(f"No ESPN id for '{team}' in csv/espnTeamIDs.csv; drive headers will use text scores.")
+            return None
+        if not downloadLogo(ESPN_LOGO_URL.format(team_id), path, team):
+            return None
+    return readLogo(path, draw_px)
+
+
+def conferenceLogo(conference, draw_px=LOGO_DRAW_PX):
+    ## A conference's ESPN mark, cached in logo/ alongside the team logos.
+    path = os.path.join(LOGO_DIR, f"{conference}.png")
+    if not os.path.isfile(path):
+        conf_id = lookupEspnId(conference, ESPN_CONFERENCE_IDS_CSV)
+        if conf_id is None:
+            print(f"No ESPN id for '{conference}' in {ESPN_CONFERENCE_IDS_CSV}; "
+                  "the info header will name the conference instead.")
+            return None
+        if not downloadLogo(ESPN_CONF_LOGO_URL.format(conf_id), path, conference):
+            return None
+    return readLogo(path, draw_px)
 
 
 def textWidthYards(text, fontsize, weight='bold'):
@@ -323,16 +545,29 @@ def possessionArrow(direction):
                 [Path.MOVETO, Path.LINETO, Path.LINETO, Path.CLOSEPOLY])
 
 
-def logoSize(logo):
-    ## Drawn (width, height) in yards, at the logo's own aspect ratio
+def fitLogo(logo, max_w, max_h):
+    ## Drawn (width, height) in yards: the logo's own aspect ratio, inside a box
     height_px, width_px = logo.shape[0], logo.shape[1]
-    scale = min(SCOREBOARD_LOGO_H / height_px, SCOREBOARD_LOGO_W / width_px)
+    scale = min(max_h / height_px, max_w / width_px)
     return width_px * scale, height_px * scale
 
 
-def drawLogo(ax, logo, x, y):
-    ## Logo centered on (x, y).
-    width, height = logoSize(logo)
+def logoSize(logo, scale=1.0):
+    ## Drive-header size for a team's mark
+    return fitLogo(logo, SCOREBOARD_LOGO_W * scale, SCOREBOARD_LOGO_H * scale)
+
+
+def grayscaleLogo(logo):
+    ## Luminance copy of a logo, transparency untouched, for the team that lost
+    gray = logo[..., :3].astype(float) @ np.array([0.299, 0.587, 0.114])
+    out = logo.copy()
+    out[..., :3] = gray[..., None].astype(logo.dtype)
+    return out
+
+
+def drawLogo(ax, logo, x, y, scale=1.0, size=None):
+    ## Logo centered on (x, y), at drive-header size unless one is given.
+    width, height = size if size is not None else logoSize(logo, scale)
     ax.imshow(logo, extent=(x - width / 2, x + width / 2, y + height / 2, y - height / 2),
               aspect='auto', zorder=6, interpolation='antialiased')
 
@@ -371,6 +606,31 @@ def drawScoreboard(ax, y, clock_text, poss_text, tech_score, oppo_score,
     ax.plot([arrow_x], [y + SCOREBOARD_SUBLINE],
             marker=possessionArrow(1 if techHasBall else -1), markersize=POSSESSION_ARROW_PT,
             color=color, alpha=0.75, linestyle='None', zorder=6)
+
+
+def drawFinalScoreboard(ax, y, tech_score, oppo_score, techLogo, oppoLogo,
+                        techWon, oppoWon, color, fallback_text):
+    ## Final score: a drive header at twice the size
+    if techLogo is None or oppoLogo is None:
+        ## No logos to gray out, so fall back to naming the winner in its own color
+        ax.text(50, y, fallback_text, fontsize=18, fontweight='bold',
+                va='center', ha='center', color=color)
+        return
+
+    score_text = f"{tech_score} - {oppo_score}"
+    score_half = textWidthYards(score_text, FINAL_FONTSIZE) / 2
+    tech_width = logoSize(techLogo, FINAL_SCALE)[0]
+    oppo_width = logoSize(oppoLogo, FINAL_SCALE)[0]
+    gap = SCOREBOARD_GAP * FINAL_SCALE
+
+    ax.text(50, y, score_text, fontsize=FINAL_FONTSIZE, fontweight='bold',
+            va='center', ha='center', color=HEADER_TEXT_COLOR)
+    drawLogo(ax, techLogo if techWon else grayscaleLogo(techLogo),
+             50 - score_half - gap - tech_width / 2, y, FINAL_SCALE)
+    drawLogo(ax, oppoLogo if oppoWon else grayscaleLogo(oppoLogo),
+             50 + score_half + gap + oppo_width / 2, y, FINAL_SCALE)
+    ax.text(50, y + FINAL_SUBLINE, FINAL_LABEL, fontsize=CLOCK_FONTSIZE * FINAL_SCALE,
+            fontweight='bold', va='center', ha='center', color=HEADER_TEXT_COLOR)
 
 
 def drawYardNumbers(ax, y, upside_down):
@@ -548,12 +808,21 @@ def overtimeLabel(period):
     return f"OT{period - 4}"
 
 
-def drawDivider(ax, y, label):
-    ## Full-width rule with a boxed label, used for halftime and each overtime
-    ax.axhline(y, color='black', linewidth=3, zorder=5)
+def drawDivider(ax, y, label, color=DIVIDER_COLOR):
+    ## Full-width rule with a boxed label, used for halftime, quarter breaks and each overtime
+    ax.axhline(y, color=color, linewidth=3, zorder=5)
     ax.text(50, y, f" {label} ", fontsize=12, fontweight='bold',
-            va='center', ha='center', color='black',
-            bbox=dict(facecolor=BACKGROUND_COLOR, edgecolor='black', pad=3), zorder=6)
+            va='center', ha='center', color=color,
+            bbox=dict(facecolor=BACKGROUND_COLOR, edgecolor=color, pad=3), zorder=6)
+
+
+def periodBreak(row):
+    period = quarterOf(row.clock)
+    if row.type == 'End of Half' or period == 2:
+        return 'Halftime', DIVIDER_COLOR
+    if period in (1, 3):
+        return f"Start Q{period + 1}", QUARTER_DIVIDER_COLOR
+    return None
 
 
 def playColor(playType, colors):
@@ -608,9 +877,12 @@ def playGeometry(row, team, techColors, oppoColors):
 
 ## Don't draw first down lines for Special-teams / non-scrimmage rows
 NO_FIRST_DOWN_TYPES = {
-    'Kickoff', 'Kickoff Return (Offense)', 'Return Touchdown', 'Touchback',
+    'Kickoff', 'Onside Kickoff', 'Kickoff Return (Offense)', 'Return Touchdown', 'Touchback',
     'Punt', 'Punt Return', 'Field Goal Good', 'Field Goal Missed', 'Blocked Field Goal',
 }
+
+## Any kickoff starts a new drive
+KICKOFF_DRIVE_TYPES = ('Kickoff', 'Onside Kickoff')
 
 
 def ordinalDown(down):
@@ -673,6 +945,15 @@ def drawPlay(ax, row, i, geo):
         ko_marker = '<' if geo['marker'] == '>' else '>'
         ax.text(start, i+0.5, " Kickoff ", fontsize=8, va='top', ha=geo['zha'])
         ax.plot([start, start + geo['pos_gained']], [i, i], '--', marker=ko_marker, markersize=1, linewidth=2, color='black')
+
+    ## ONSIDE KICKOFF
+    elif playType == 'Onside Kickoff':
+        dx = geo['pos_gained']
+        ko_marker = '>' if dx >= 0 else '<'
+        ax.text(start, i+0.5, " Kickoff ", fontsize=8, va='top', ha=geo['zha'])
+        ax.plot([start, start + dx], [i, i], '--', marker=ko_marker, markersize=1, linewidth=2, color='black')
+        ax.text(start + dx, i+0.5, " Onside! ", fontsize=8, fontweight='bold', va='top',
+                ha='right' if dx < 0 else 'left')
 
     elif playType == 'Kickoff Return (Offense)':
         ax.text(start, i+0.5, " Return ", fontsize=8, va='top', ha=geo['ha'])
@@ -763,8 +1044,8 @@ def drawPlay(ax, row, i, geo):
             ax.plot([start, start], [i - 1.75, i + 1.75], color=color, linewidth=1)
 
         if is_fum:
-            ## Fumble turnover — hatched like an interception, labeled below the arrow.
-            ax.text(start, i+2, " Fumble! ", fontsize=8, va='top', ha=geo['zha'])
+            ## Turnover — hatched like an interception, labeled below the arrow.
+            ax.text(start, i+2, FUMBLE_TURNOVER_LABELS[playType], fontsize=8, va='top', ha=geo['zha'])
         elif 'Touchdown' in playType:
             text_obj=ax.text(geo['endzone_mid'], i, "  TD!  ", weight='bold', fontsize=20, color='white', va='center', ha='center')
 
@@ -864,36 +1145,46 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     ## Logos for the drive-header scoreboards, fetched once per game
     techLogo, oppoLogo = teamLogo(team), teamLogo(opponent)
+    techLogoBig = teamLogo(team, FINAL_LOGO_PX) if techLogo is not None else None
+    oppoLogoBig = teamLogo(opponent, FINAL_LOGO_PX) if oppoLogo is not None else None
 
     fig, ax = setupChart(techColors['pass'], oppoColors['run'])
 
+    ## Venue, kickoff and attendance, between the top yard numbers and the first drive
+    info = gameInfo(year, week, team, opponent, refresh=refreshData)
+    info_rows = gameInfoRows(info) if info else []
+
     i = 0
+    if info_rows:
+        i = drawGameInfo(ax, info_rows) + GAME_INFO_BOTTOM_GAP
     offense = ''
     prev_row = None
     last_overtime = 4  # highest period we've already drawn an overtime divider for
     hover_texts = {}  # gid -> play text, for the HTML tooltips
     for row in df.itertuples():
-        if row.type == 'End of Half':
-            ## Draw a full-width divider between the two halves.
-            i += 4
-            drawDivider(ax, i, 'Halftime')
-            i += 4
-            prev_row = row
+        if row.type in ('End of Half', 'End Period'):
+            ## Full-width divider between quarters, and a heavier one at halftime
+            divider = periodBreak(row)
+            if divider is not None:
+                i += DIVIDER_GAP - PLAY_GAP
+                drawDivider(ax, i, divider[0], divider[1])
+                i += DIVIDER_GAP
+                prev_row = row
             continue
 
-        if row.type in ('End Period', 'Timeout', 'End of Game'):
+        if row.type in ('Timeout', 'End of Game'):
             continue
 
         ## Each overtime period gets its own divider, then starts a fresh drive.
         period = quarterOf(row.clock)
         if period is not None and period > 4 and period > last_overtime:
             last_overtime = period
-            i += 4
+            i += DIVIDER_GAP - PLAY_GAP
             drawDivider(ax, i, overtimeLabel(period))
-            i += 4
+            i += DIVIDER_GAP
             offense = ''  # force a drive header for the first possession of the period
 
-        if row.offense != offense or row.type == 'Kickoff':
+        if row.offense != offense or row.type in KICKOFF_DRIVE_TYPES:
             offense = row.offense
             i += DRIVE_GAP
             ## Drive header: who has the ball, the clock, and the score
@@ -931,24 +1222,25 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         rect.set_gid(gid)
         hover_texts[gid] = '' if pd.isna(row.text) else str(row.text)
 
-        i += 4
+        i += PLAY_GAP
         prev_row = row
 
-    ## Final score below the last play, in the winner's color
+    ## Final score below the last play: both logos flanking the score, loser in gray
     final = finalScore(df, team)
     if final is not None:
         tech_final, oppo_final = final
         if tech_final == oppo_final:
-            winner, winnerColors = None, techColors
+            winnerColors = techColors
             finalString = f"Final: {team} {tech_final}, {opponent} {oppo_final}"
         else:
             winner = team if tech_final > oppo_final else opponent
             winnerColors = techColors if winner == team else oppoColors
             finalString = f"{winner} won {max(final)}-{min(final)}"
-        i += 12
-        ax.text(50, i, finalString, fontsize=18, fontweight='bold',
-                va='center', ha='center', color=winnerColors['pass'])
-        i += 6
+        i += 14
+        drawFinalScoreboard(ax, i, tech_final, oppo_final, techLogoBig, oppoLogoBig,
+                            tech_final >= oppo_final, oppo_final >= tech_final,
+                            winnerColors['pass'], finalString)
+        i += FINAL_SUBLINE + 6
 
     ## Size the figure so vertical spacing matches the horizontal scale,
     y_extent = i + 10

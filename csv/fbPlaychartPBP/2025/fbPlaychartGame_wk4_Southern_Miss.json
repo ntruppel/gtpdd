@@ -1,0 +1,16 @@
+{
+  "venue": "Joe Aillet Stadium",
+  "city": "Ruston",
+  "state": "LA",
+  "timezone": "America/Chicago",
+  "capacity": 28019,
+  "attendance": 17108,
+  "startDate": "2025-09-20T23:30:00+00:00",
+  "startTimeTbd": false,
+  "neutralSite": false,
+  "conferenceGame": false,
+  "conference": "Conference USA",
+  "notes": null,
+  "homeTeam": "Louisiana Tech",
+  "awayTeam": "Southern Miss"
+}

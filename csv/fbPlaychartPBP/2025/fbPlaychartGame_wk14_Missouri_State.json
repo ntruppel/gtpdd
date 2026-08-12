@@ -1,0 +1,16 @@
+{
+  "venue": "Plaster Sports Complex",
+  "city": "Springfield",
+  "state": "MO",
+  "timezone": "America/Chicago",
+  "capacity": 17337,
+  "attendance": 7656,
+  "startDate": "2025-11-29T19:00:00+00:00",
+  "startTimeTbd": false,
+  "neutralSite": false,
+  "conferenceGame": true,
+  "conference": "Conference USA",
+  "notes": null,
+  "homeTeam": "Missouri State",
+  "awayTeam": "Louisiana Tech"
+}
