@@ -1,0 +1,127 @@
+:root {
+	--blue-color: #002F8B;
+	--red-color: #E31B23;
+}
+
+body {
+	font-family: sans-serif;
+	background: var(--blue-color);
+	margin: 0;
+	padding: 20px 10px;
+}
+
+#wrapper {
+	max-width: 600px;
+	margin: 0 auto;
+	background: white;
+	padding: 10px 15px 20px;
+	border-radius: 10px;
+}
+
+h1 { text-align: center; }
+h2 { margin: 5px 0; }
+p { text-align: center; }
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.progress {
+	margin-top: -10px;
+	color: #555;
+	font-size: 14px;
+}
+
+.error {
+	border: 1px dashed #ccc;
+	background: #eee;
+	color: var(--red-color);
+	padding: 10px;
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+button {
+	padding: 10px;
+	margin: 20px 0;
+	color: white;
+	background: gray;
+	border: 0;
+	border-radius: 10px;
+	border-bottom: 3px solid #333;
+	cursor: pointer;
+}
+
+button:hover { filter: brightness(1.15); }
+
+/* The schedule page stacks its three helpers on a narrow screen. */
+.controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+}
+
+.controls button { margin: 10px 0; }
+
+#submit {
+	display: block;
+	font-size: 14px;
+	background: green;
+}
+
+#selectAll,
+#selectHome,
+#unselectAll { font-size: 10px; }
+
+#selectHome { background: var(--blue-color); }
+#unselectAll { background: var(--red-color); }
+#reset { background: var(--red-color); }
+
+/* Form fields ------------------------------------------------------------ */
+
+input { margin: 5px 10px; }
+
+#fname,
+.selectYear {
+	font-size: 20px;
+	border: 1px dashed #ccc;
+	padding: 10px;
+	max-width: 100%;
+}
+
+#luck {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* Schedule list ---------------------------------------------------------- */
+
+.game-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.game-list li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 4px 0;
+}
+
+.game-list label { cursor: pointer; }
+
+input[type='checkbox'] {
+	flex: none;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	background: white;
+	border-radius: 5px;
+	border: 2px solid #555;
+}
+
+input[type='checkbox']:checked { background: #abd; }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tech Luck Test</title>
+	<link rel="stylesheet" href="TechLuck.css">
+</head>
+<body data-page="schedule">
+
+	<div id="wrapper">
+		<h1 id="yearHeader">Season</h1>
+		<p id="progress" class="progress"></p>
+		<p>Select the games you went to:</p>
+
+		<div class="controls">
+			<button type="button" id="selectAll">Select All Games</button>
+			<button type="button" id="selectHome">Select Home Games</button>
+			<button type="button" id="unselectAll">Un-Select All Games</button>
+		</div>
+
+		<!-- Rows are built from games.js, so a season of any length fits. -->
+		<ul id="gameList" class="game-list"></ul>
+
+		<button type="button" id="submit">Next Season</button>
+	</div>
+
+	<script src="games.js"></script>
+	<script src="TechLuck.js"></script>
+</body>
+</html>

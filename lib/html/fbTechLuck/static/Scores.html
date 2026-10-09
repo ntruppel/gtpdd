@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tech Luck Test</title>
+	<link rel="stylesheet" href="TechLuck.css">
+</head>
+<body data-page="scores">
+
+	<div id="wrapper">
+		<h1 id="scoreTitle">Here's your final score!</h1>
+		<img src="site icon trans.png" alt="gtpdd logo" width="80" height="80" class="center">
+
+		<p id="noGames" class="error" hidden>You didn't select any games, so there is nothing to score yet.</p>
+
+		<p id="luck">Luck Score: <span id="luckScore">0.00</span></p>
+		<p>Overall Record: <span id="overallRecord">0-0</span></p>
+		<p>Home Record: <span id="homeRecord">0-0</span></p>
+		<p>Away Record: <span id="awayRecord">0-0</span></p>
+		<p>Neutral Site / Bowl Record: <span id="neutRecord">0-0</span></p>
+
+		<p>Points For: <span id="luckPF">0</span></p>
+		<p>Points Against: <span id="luckPA">0</span></p>
+
+		<div class="controls">
+			<button type="button" id="reset">Reset Form</button>
+			<button type="button" id="gtpdd">Back to gtpdd.dog</button>
+		</div>
+
+		<h5>The higher the luck score, the better Tech has performed while you've been in the building. A negative score means you are unlucky and it might be best if you were banned from the stadium.</h5>
+		<h5>Post a screenshot of this page on Twitter using the hashtag #TechLuck to compare your luckiness with other Tech fans!</h5>
+	</div>
+
+	<script src="games.js"></script>
+	<script src="TechLuck.js"></script>
+</body>
+</html>
