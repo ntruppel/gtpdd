@@ -24,7 +24,10 @@ __pycache__/*
 fbTest.py
 output.txt
 
+# fbPlaychart Generated Data
 csv/fbPlaychartPBP/20*
+csv/cfbdVenues.json
+fbPlaychartTeamColors.csv
 
 lib/fbPlaychartColorsOppo.txt
 syncScript.sh
