@@ -2,17 +2,27 @@
 out/*
 tmp/*
 logo/*
+html/*
 
 # Remove files with key info
 .env
 
-# Remove Google Drive ini files
-**/*.ini
-__pycache__/*
-lib/__pycache__/*
+# Don't Include BTB scripts
+btb*
 
+##Ignore Mac Finder stuff
+.DS_Store
+**/.DS_Store
+._.DS_Store
+**/._.DS_Store
+
+
+# Remove config files
+__pycache__/*
+**.pyc
 
 fbTest.py
 output.txt
 
 lib/fbPlaychartColorsOppo.txt
+syncScript.sh
