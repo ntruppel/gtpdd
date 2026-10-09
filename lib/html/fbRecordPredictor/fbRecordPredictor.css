@@ -1,0 +1,134 @@
+:root {
+  --page:           #003087;   /* Tech blue, the plane the whole page sits on */
+  --surface-1:      #ffffff;   /* chart / card surface */
+  --nav:            #17181a;   /* the top bar keeps the dark chrome */
+  --nav-ink:        #eeeeee;
+  --nav-muted:      #aaaaaa;
+  --surface-2:      #2a2c2f;   /* nav controls, on the dark bar */
+  --on-page:        #ffffff;   /* text directly on the blue (11.9:1) */
+  --on-page-muted:  #c9d7f2;   /* secondary text on the blue (8.2:1) */
+  --text-primary:   #0b0b0b;   /* ink on a card */
+  --text-secondary: #52514e;
+  --text-muted:     #6f6d68;
+  --grid:           #e4e3dd;   /* hairline gridlines */
+  --axis:           #b9b7b0;   /* baseline */
+  --border:         rgba(11,11,11,0.12);
+  --series-1:       #003087;   /* Tech blue */
+  --series-2:       #cb333b;   /* Tech red */
+  --accent:         #cb333b;   /* the run you're looking at, on the trend line */
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--on-page);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+h1, h2 { margin: 0; font-weight: 600; }
+h1 { font-size: 30px; letter-spacing: -0.01em; }
+h2 { font-size: 17px; }
+/* Links inherit whichever ground they are standing on. */
+a { color: inherit; text-underline-offset: 2px; }
+
+/* ------------------------------------------------------------------ nav */
+#rp-nav { position: sticky; top: 0; z-index: 20; display: flex; gap: 10px;
+  align-items: center; padding: 8px 12px; background: var(--nav);
+  border-bottom: 1px solid #333; color: var(--nav-ink); font-size: 14px; }
+#rp-nav .spacer { flex: 1; }
+#rp-nav label { color: var(--nav-muted); }
+#rp-nav a.navbtn, #rp-nav button, #rp-nav select {
+  font: inherit; color: var(--nav-ink); background: var(--surface-2);
+  border: 1px solid #444; border-radius: 6px; padding: 6px 12px;
+  cursor: pointer; text-decoration: none; }
+/* Selects size to their widest option by default, which on a phone is a run label
+   wide enough to push the whole page sideways. */
+#rp-nav select { min-width: 0; }
+#rp-nav a.navbtn { display: inline-flex; align-items: center; gap: 5px; }
+#rp-nav a.navbtn:hover, #rp-nav button:hover:not(:disabled) { background: #3a3d41; }
+#rp-nav button:disabled { opacity: 0.4; cursor: default; }
+#rp-nav .stepbtn { padding: 6px 10px; font-size: 15px; line-height: 1; }
+#rp-nav .navlogo { height: 20px; width: auto; vertical-align: middle; }
+#rp-nav .nav-arrow { display: none; font-size: 16px; line-height: 1; }
+#rp-nav .nav-title { color: var(--nav-ink); font-size: 15px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 720px) {
+  #rp-nav { gap: 6px; padding: 6px 8px; }
+  #rp-nav .nav-text { display: none; }        /* drop "Back to" / "home" */
+  #rp-nav .nav-arrow { display: inline; }     /* show the left arrow instead */
+  #rp-nav label { display: none; }            /* the dropdowns label themselves */
+  #rp-nav .nav-title { display: none; }       /* the <h1> below already says it */
+  #rp-nav .spacer { display: none; }           /* pack the controls, don't centre them */
+  #rp-nav select { max-width: 150px; }
+  #rp-nav #rp-year { max-width: 84px; }       /* a year only needs four digits */
+  #rp-nav a.navbtn, #rp-nav button, #rp-nav select { padding: 6px 8px; }
+}
+@media (max-width: 430px) {
+  #rp-nav select { max-width: 128px; }
+  #rp-nav #rp-year { max-width: 74px; }
+}
+
+/* ----------------------------------------------------------------- page */
+main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 56px; }
+.pagehead { margin-bottom: 20px; }
+.pagehead .sub { margin: 6px 0 0; color: var(--on-page-muted); font-size: 14px; }
+
+section { margin-top: 28px; }
+section > header { display: flex; align-items: baseline; gap: 10px;
+  flex-wrap: wrap; margin-bottom: 10px; }
+section > header p { margin: 0; color: var(--on-page-muted); font-size: 13px; }
+
+.card { background: var(--surface-1); color: var(--text-primary);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 8px 8px; }
+.scroller { overflow-x: auto; }
+.scroller svg { display: block; width: 100%; height: auto; min-width: 620px; }
+.scroller table { min-width: 460px; }
+
+/* ---------------------------------------------------------- stat tiles */
+/* Flex rather than an auto-fit grid: at the width where three tiles wrap to
+   2 + 1, a grid leaves the odd one in its old cell with a hole beside it that
+   reads as a missing fourth tile. Flex lets whatever lands on the last row grow
+   to fill it, so the row always looks deliberate. */
+.tiles { display: flex; flex-wrap: wrap; gap: 12px; }
+.tile { flex: 1 1 190px; background: var(--surface-1); color: var(--text-primary);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px;
+  text-align: center; }
+.tile .label { color: var(--text-muted); font-size: 13px; }
+.tile .value { font-size: 30px; font-weight: 600; line-height: 1.15; margin-top: 2px; }
+.tile .delta { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+/* -------------------------------------------------------------- tables */
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--grid); }
+th { color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+tr.is-final td { color: var(--text-secondary); }
+/* Opponents are marks, not names -- alt text carries the name for anyone who
+   can't see them, and title shows it on hover. Sized by height so a square mark
+   and a wide wordmark read alike, with a width cap and object-fit so a wordmark
+   scales down rather than running away with the row. */
+td.mark, th.mark { text-align: center; }
+.teamlogo { display: block; margin: 0 auto; height: 26px; width: auto;
+  max-width: 64px; object-fit: contain; }
+/* The away '@' hangs off the left of the mark in its own narrow column: inside
+   the opponent cell it would be centred along with the logo. */
+td.at, th.at { width: 1%; padding-right: 0; text-align: right;
+  color: var(--text-muted); white-space: nowrap; }
+
+footer { margin-top: 36px; color: var(--on-page-muted); font-size: 13px; }
+
+/* ------------------------------------------------------------- tooltip */
+#rp-tooltip { position: fixed; pointer-events: none; z-index: 30;
+  max-width: 300px; padding: 7px 10px; border-radius: 6px; display: none;
+  background: rgba(0,22,62,0.96); color: #fff;
+  font-size: 13px; line-height: 1.4; box-shadow: 0 4px 14px rgba(0,20,60,0.35); }
+#rp-tooltip .tip-title { font-weight: 600; }
+#rp-tooltip .tip-row { color: var(--on-page-muted); }
+
+/* SVG chrome */
+.axis-label { fill: var(--text-muted); font-size: 13px;
+  font-variant-numeric: tabular-nums; }
+.value-label { fill: var(--text-secondary); font-size: 13px; }
+.note-label { fill: var(--text-muted); font-size: 12px; }
+.hit { fill: transparent; cursor: pointer; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.baseline { stroke: var(--axis); stroke-width: 1; }

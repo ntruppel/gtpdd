@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>$title</title>
+$headLinks
+<link rel='stylesheet' href='$cssHref'>
+</head>
+<body>
+<div id='rp-nav'>
+  <a class='navbtn' href='$homeUrl'>
+    <span class='nav-arrow'>&#8592;</span>
+    <span class='nav-text'>Back to</span>
+    $logoImg
+    <span class='nav-text'>home</span>
+  </a>
+  <span class='spacer'></span>
+  <span class='nav-title'>$siteTitle</span>
+  <span class='spacer'></span>
+  <label for='rp-year'>Year:</label><select id='rp-year'></select>
+  <label for='rp-run'>Run:</label><select id='rp-run'></select>
+  <button id='rp-prev' class='stepbtn' title='Previous run' aria-label='Previous run'>&#8249;</button>
+  <button id='rp-next' class='stepbtn' title='Next run' aria-label='Next run'>&#8250;</button>
+</div>
+<main>
+<div class='pagehead'>
+<h1>Louisiana Tech Record Predictor</h1>
+<p class='sub' id='rp-runline'></p>
+</div>
+<noscript><p class='sub'>This page draws its charts in the browser, so it needs
+JavaScript on. The same numbers are in the image card above.</p></noscript>
+
+<div class='tiles' id='rp-tiles'></div>
+
+<section>
+<header><h2>Final Record Odds</h2><p id='rp-odds-note'></p></header>
+<div class='card scroller'><svg id='rp-odds' role='img'
+  aria-label='Chance of each possible final record'></svg></div>
+</section>
+
+<section>
+<header><h2>Bowl Eligibility Chance Over Time</h2>
+</header>
+<div class='card scroller'><svg id='rp-trend' role='img'
+  aria-label='Chance of a bowl, run by run'></svg></div>
+</section>
+
+<section>
+<header><h2>Game by Game</h2><p id='rp-games-note'></p></header>
+<div class='card scroller'>
+<table id='rp-games'>
+<thead><tr><th>Date</th><th class='at'></th><th class='mark'>Opponent</th>
+<th class='num'>Result / win odds</th><th class='num'>Change</th></tr></thead>
+<tbody></tbody></table>
+</div>
+</section>
+
+<footer>Odds come from ESPN's FPI matchup projections, combined across the schedule.
+Provided by <a href='$homeUrl'>gtpdd</a>.</footer>
+</main>
+<div id='rp-tooltip'></div>
+<script src='$runsSrc'></script>
+<script src='$jsSrc'></script>
+</body>
+</html>
