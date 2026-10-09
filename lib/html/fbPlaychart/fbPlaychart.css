@@ -1,0 +1,35 @@
+body { margin: 0; background: #222021; }
+svg { display: block; margin: 0 auto; height: auto; max-width: 100%; }
+svg g[id^='pbp'] path { pointer-events: all; cursor: pointer; }
+
+#gtpdd-nav { position: sticky; top: 0; z-index: 20; display: flex; gap: 10px;
+  align-items: center; padding: 8px 12px; background: #17181a;
+  border-bottom: 1px solid #333; font: 14px -apple-system, Segoe UI, sans-serif; }
+#gtpdd-nav .spacer { flex: 1; }
+#gtpdd-nav label { color: #aaa; }
+#gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select {
+  font: inherit; color: #eee; background: #2a2c2f; border: 1px solid #444;
+  border-radius: 6px; padding: 6px 12px; cursor: pointer; text-decoration: none; }
+#gtpdd-nav a.navbtn { display: inline-flex; align-items: center; gap: 5px; }
+#gtpdd-nav a.navbtn:hover, #gtpdd-nav button:hover { background: #3a3d41; }
+#gtpdd-nav .navlogo { height: 20px; width: auto; vertical-align: middle; }
+#gtpdd-nav .nav-arrow { display: none; font-size: 16px; line-height: 1; }
+#gtpdd-nav .nav-title { color: #eee; font-size: 15px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 640px) {
+  #gtpdd-nav { gap: 6px; padding: 6px 8px; }
+  #gtpdd-nav .nav-text { display: none; }        /* drop "Back to" / "home" */
+  #gtpdd-nav .nav-arrow { display: inline; }     /* show the left arrow instead */
+  #gtpdd-nav label { display: none; }            /* drop the "Year:"/"Game:" labels */
+  #gtpdd-nav .nav-title { display: none; }       /* the game dropdown already names the game */
+  #gtpdd-nav select { max-width: 120px; }        /* much narrower dropdown */
+  #gtpdd-nav #gtpdd-year { max-width: 80px; }    /* the year only needs four digits */
+  #gtpdd-nav a.navbtn, #gtpdd-nav button, #gtpdd-nav select { padding: 6px 8px; }
+}
+
+#pbp-tooltip { position: fixed; pointer-events: none; z-index: 30;
+  max-width: 380px; padding: 6px 9px; border-radius: 5px; display: none;
+  background: rgba(20,20,20,0.92); color: #fff;
+  font: 13px/1.35 -apple-system, Segoe UI, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3); }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>$title</title>
+$metaTags
+<link rel='stylesheet' href='$cssHref'>
+</head>
+<body>
+<div id='gtpdd-nav' data-current='$current' data-year='$year'>
+  <a class='navbtn' href='$homeUrl'>
+    <span class='nav-arrow'>&#8592;</span>
+    <span class='nav-text'>Back to</span>
+    $logoImg
+    <span class='nav-text'>home</span>
+  </a>
+  <span class='spacer'></span>
+  <span class='nav-title'>$siteTitle</span>
+  <span class='spacer'></span>
+  <label for='gtpdd-year'>Year:</label>
+  <select id='gtpdd-year'><option value='$year' selected>$year</option></select>
+  <label for='gtpdd-game'>Game:</label>
+  <select id='gtpdd-game'><option value='$current' selected>$currentLabel</option></select>
+  <button id='gtpdd-go'>Load</button>
+</div>
+$svg
+<div id='pbp-tooltip'></div>
+<script src='$manifestSrc'></script>
+<script src='$jsSrc'></script>
+</body>
+</html>

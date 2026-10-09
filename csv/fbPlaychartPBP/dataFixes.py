@@ -15,7 +15,7 @@ Command line:
     python csv/fbPlaychartPBP/dataFixes.py --dry-run -v    ## show edits, write nothing
 
 Adding fixes for a new game: write a function taking a PbpFile, decorate it with
-@gameFix(year, week, opponent), and use the five edit primitives (idempotent, so the
+@gameFix(year, week, opponent), and use the six edit primitives (idempotent, so the
 whole script can safely be re-run over an already-fixed CSV):
 
     @gameFix(2025, 11, 'Delaware')
@@ -25,6 +25,7 @@ whole script can safely be re-run over an already-fixed CSV):
         f.insertRow(94, '92,Delaware,...')    ## insert after line 94 (1-based, header is line 1)
         f.setRow(95, '91,Delaware,...')       ## overwrite line 95
         f.swapRows(94, 95, first='Q2 0:46')   ## put two out-of-order plays back in order
+        f.moveRow(10, 2, 'Q1 15:0,1,10')      ## line 10 becomes line 2, lines 2-9 shift down
 
 Edits run top to bottom exactly as written, and the line numbers refer to the file as it
 stands at that point, so order matters once rows are added or deleted. swapRows is the
@@ -162,6 +163,27 @@ class PbpFile:
         self.lines[a], self.lines[b] = self.lines[b], self.lines[a]
         note = '' if first is not None else ' (unguarded: re-running undoes it)'
         self._record('applied', f"swap lines {lineA} and {lineB}{note}")
+        return True
+
+    def moveRow(self, fromLine, toLine, match):
+        ## Pull line fromLine out and reinsert it so it becomes line toLine (1-based,
+        ## header is line 1); the rows in between shift up or down by one to close the
+        ## gap. match is a snippet of the row being moved, so a re-run finds it already
+        ## sitting at toLine instead of moving whatever has since landed on fromLine.
+        for lineNo in (fromLine, toLine):
+            if not 0 < lineNo <= len(self.lines):
+                self._record('MISSING', f"move line {fromLine} to {toLine}: no line {lineNo} "
+                                        f"(file has {len(self.lines)} lines)")
+                return False
+        if match in self.lines[toLine - 1]:
+            self._record('already', f"move line {fromLine} to {toLine}: {match!r} already there")
+            return False
+        if match not in self.lines[fromLine - 1]:
+            self._record('MISSING', f"move line {fromLine} to {toLine}: line {fromLine} "
+                                    f"does not hold {match!r}")
+            return False
+        self.lines.insert(toLine - 1, self.lines.pop(fromLine - 1))
+        self._record('applied', f"move line {fromLine} to {toLine}: {match!r}")
         return True
 
     def changed(self):
@@ -371,7 +393,45 @@ def fix2025Wk16CoastalCarolina(f):
     f.replace('Q4 4:10,2,8,Rush,53,-1','Q4 4:10,2,8,Fumble Recovery (Opponent),53,-1')
     f.insertRow(203,'198,Louisiana Tech,Q4 2:13,0,1,Penalty,70,10,"John Hoyet Chance punt for 49 yds, fair catch by Bryson Graves at the CCU 30 Coastal Carolina Penalty, Offensive Holding (10 Yards) to the CCU 20",401778325104978601,20,14')
 
-    ## ---------------------------------------------------------------- run ----
+@gameFix(2026, 1, 'Northwestern_State')
+def fix2026Wk1NorthwesternState(f):
+    f.replace('Q1 7:52,1,10,Pass Reception','Q1 7:52,1,10,Passing Touchdown')
+
+@gameFix(2026, 2, 'LSU')
+def fix2026Wk2LSU(f):
+    f.replace('Q1 0:8,1,10,Pass Reception,56,8','Q1 0:8,1,10,Penalty,56,-2')
+    f.replace('Q2 14:59,1,12,Fumble Recovery (Opponent),58,35','Q2 14:59,1,12,Fumble Recovery (Opponent),58,-23')
+    f.replace('Q3 10:12,4,6,Field Goal Good,6,25','Q3 10:12,4,6,Field Goal Good,11,25')
+    f.replace('Q3 6:46,1,10,Rush,60,3','Q3 6:46,1,10,Penalty,60,18')
+    f.replace('Q4 9:31,1,10,Kickoff,0,-65','Q4 9:31,1,10,Kickoff,65,-65')
+    f.replace('Q4 9:31,1,10,Kickoff Return (Offense),-65,32','Q4 9:31,1,10,Kickoff Return (Offense),0,32')
+    f.replace('Q4 2:37,1,10,Rush,34,-22','Q4 2:37,1,10,Penalty,34,-10')
+
+@gameFix(2026, 3, 'Baylor')
+def fix2026Wk3Baylor(f):
+    f.replace('Q2 7:21,1,10,Pass Reception,59,5','Q2 7:21,1,10,Penalty,59,-5')
+    f.replace('Q2 6:55,1,15,Rush,49,7','Q2 6:55,1,15,Rush,54,7')
+    f.replace('Q2 5:48,2,10,Pass Incompletion,75,-75','Q2 5:48,2,10,Pass Incompletion,75,0')
+    f.replace('Q3 8:41,2,8,Pass Reception,81,3','Q3 8:41,2,8,Penalty,81,18')
+    f.insertRow(169,'167,Louisiana Tech,Q4 6:21,0,10,Penalty,74,15,"(06:32) No Huddle #2 T.Kukuk pass complete deep right to #84 E.Finley caught at BAYLOR27, for 21 yards to the BAYLOR26 (#24 M.Gifford; #41 K.Burns), 1ST DOWN, PENALTY BAYLOR Roughing The Passer (#91 T.Mitchell) 13 yards from BAYLOR26 to BAYLOR13, 1ST DOWN",401867804755,13,29')
+    f.deleteRows('401867804787')
+    f.replace('Q4 1:1,2,8,Rush,46,1','Q4 1:1,2,8,Penalty,46,-10')
+    
+    
+@gameFix(2026, 5, 'Army')
+def fix2026Wk5Army(f):
+    f.moveRow(13,2,'Q1 14:54,1,10,Kickoff,65,-63')
+    f.moveRow(14,3,'Q1 14:54,1,10,Kickoff Return')
+    f.moveRow(28,4,'Q1 3:42,1,10,Rush')
+    f.moveRow(31,39,'Q1 1:20,1,10,Rush,61,14')
+    f.moveRow(31,39,'Q1 1:20,1,10,Penalty,47,-15')
+    f.moveRow(31,39,'Q1 1:20,1,25,Rush,62,2')
+    f.deleteRows('401869842232')
+    f.insertRow(102,'101,Army,Q3 11:39,0,0,Penalty,63,-23,#31 H.Rioux kickoff 59 yards to the AWP06 #27 S.Howard return 31 yards to the AWP37 (#31 H.Rioux) PENALTY AWP Illegal Block in Back declined AWP Holding (#20 T.Kloska) 10 yards from AWP24 to AWP14,401869842425,22,15')
+    f.insertRow(147,'146,Army,Q4 7:28,0,0,Penalty,61,15,"#27 S.Howard rush left for 6 yards gain to the AWP39 (#22 J.Mayfield), 1ST DOWN, PENALTY LAT Horse Collar Tackle (#22 J.Mayfield) 15 yards from AWP39 to LAT46, 1ST DOWN",401869842607,22,31')
+    f.insertRow(160,'156,Louisiana Tech,Q4 3:52,0,0,Penalty,39,15,"(03:52) Shotgun #2 T.Kukuk rush left for 8 yards gain to the LAT39 (#50 D.Miller; #42 E.Walton), 1ST DOWN, PENALTY AWP Face Mask (#11 D.Thom-Rogers) 15 yards from LAT39 to AWP46, 1ST DOWN",401869842651,31,22')
+    f.moveRow(180,178,'Q4 1:6,1,10,Kickoff,65,-10')
+      ## ---------------------------------------------------------------- run ----
 
 
 def applyGameFixes(year, week, dryRun=False, verbose=False):
