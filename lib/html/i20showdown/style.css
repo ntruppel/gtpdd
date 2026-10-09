@@ -1,0 +1,454 @@
+/* I-20 Showdown page styles. i20showdown.py copies this file to html/i20showdown/style.css. */
+
+/* Overpass is an open-source take on Highway Gothic, the lettering on interstate signs (OFL 1.1) */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('fonts/overpass-latin.woff2') format('woff2');
+}
+/* Doto is drawn out of dots, for the lettering of a highway message board (OFL 1.1) */
+@font-face {
+  font-family: 'Doto';
+  font-style: normal;
+  font-weight: 100 300;
+  font-display: swap;
+  src: url('fonts/doto-latin.woff2') format('woff2');
+}
+
+:root {
+  --tech: #002F8B;
+  --tech-deep: #001a52;
+  --tech-red: #E31B23;
+  --ulm: #840029;
+  --ulm-deep: #4f0018;
+  --ulm-gold: #BA9B37;
+  --tie: #6b7280;
+  /* Interstate guide-sign green, asphalt, and the yellow of a center line */
+  --sign: #006b4f;
+  --asphalt: #2b2d31;
+  --lane: #f2c230;
+  --ink: #16181d;
+  --muted: #5f6570;
+  --line: #e3e6eb;
+  --card: #ffffff;
+  --ground: #efeeea;
+  --road-font: 'Overpass', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --board-font: 'Doto', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--road-font);
+  color: var(--ink);
+  background: var(--ground);
+}
+
+a { color: inherit; }
+small { display: block; color: var(--muted); font-weight: normal; font-size: 0.76rem; }
+
+/* Hero: Tech's half and ULM's half, with a stretch of highway along the bottom ----- */
+
+.hero {
+  position: relative;
+  padding: 28px 16px 58px;
+  color: #fff;
+  background: linear-gradient(100deg, var(--tech-deep) 0%, var(--tech) 42%, var(--ulm) 58%, var(--ulm-deep) 100%);
+}
+/* Asphalt with white edge lines and a dashed yellow center line */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26px;
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  background:
+    repeating-linear-gradient(90deg, var(--lane) 0 34px, transparent 34px 58px) center / 100% 4px no-repeat,
+    var(--asphalt);
+}
+.hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas:
+    "title title title"
+    "techsign shield ulmsign"
+    "standing standing standing";
+  align-items: center;
+  gap: 20px 22px;
+}
+.title { grid-area: title; text-align: center; }
+/* The shield sits on the road between the two signs */
+.shield {
+  grid-area: shield;
+  width: 108px;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgb(0 0 0 / 0.35));
+}
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-shadow: 0 3px 12px rgb(0 0 0 / 0.35);
+}
+.eyebrow, .season {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.season { color: #f3dc8f; opacity: 1; }
+
+
+/* Each team's logo sign, like a blue "FOOD—EXIT 44" sign, with a white panel for every point won */
+.logo-sign {
+  --panel: var(--tech);
+  align-self: start;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px 26px 26px;
+  border-radius: 16px;
+  background: var(--panel);
+  color: #fff;
+  outline: 3px solid #fff;
+  outline-offset: -8px;
+  box-shadow: 0 10px 26px rgb(0 0 0 / 0.35);
+}
+.logo-sign.tech { grid-area: techsign; justify-self: end; }
+.logo-sign.ulm { grid-area: ulmsign; justify-self: start; --panel: var(--ulm); }
+.logo-sign h2 {
+  margin: 4px 0 16px;
+  font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.panels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+.panel {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px;
+  /* Stretch so a panel with a two-line label doesn't leave its row neighbors shorter */
+  align-self: stretch;
+  background: #fff;
+  color: var(--panel);
+  text-align: center;
+}
+.panel-icon { width: 46%; height: auto; max-width: 52px; }
+.panel .label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+/* A split point shows on both signs in gray, with a ½ tag in the corner */
+.panel.split { color: var(--tie); }
+.half {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  padding: 1px 4px 0;
+  border-radius: 3px;
+  background: var(--tie);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+/* Slots not yet earned are faint outlines around a ghosted team logo */
+.panel.empty {
+  background: transparent;
+  outline: 2px dashed rgb(255 255 255 / 0.35);
+  outline-offset: -2px;
+}
+/* Washing the logo out keeps its light and dark detail; painting it flat white loses it */
+.ghost {
+  width: 62%;
+  height: auto;
+  filter: grayscale(1) brightness(1.9) contrast(0.9);
+  opacity: 0.5;
+}
+
+/* An overhead variable message sign: amber lettering on a black board in a gray frame */
+.standing { grid-area: standing; display: flex; justify-content: center; }
+.status {
+  position: relative;
+  max-width: 560px;
+  margin: 0;
+  padding: clamp(10px, 1.6vw, 16px) clamp(16px, 2.6vw, 30px) clamp(8px, 1.4vw, 14px);
+  border: 5px solid #8b8f96;
+  border-radius: 6px;
+  background: #0a0a0b;
+  color: #ffb703;
+  font-family: var(--board-font);
+  font-weight: 300;
+  font-size: clamp(0.85rem, 3vw, 1.9rem);
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-align: center;
+  /* The board reads as one row of lamps, so the message never wraps */
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.4), inset 0 0 0 2px #2a2c30;
+}
+
+main { max-width: 1080px; margin: 0 auto; padding: 44px 16px 40px; }
+
+/* Sport cards: each card is a whole exit sign, with an exit tab over each event --- */
+
+.sports {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
+  gap: 50px 16px;
+}
+.sport {
+  --panel: var(--sign);
+  position: relative;
+  padding: 10px 8px 8px;
+  border-radius: 14px;
+  background: var(--panel);
+  color: #fff;
+  outline: 3px solid #fff;
+  outline-offset: -8px;
+  box-shadow: 0 2px 3px rgb(0 0 0 / 0.15), 0 10px 22px rgb(0 0 0 / 0.12);
+}
+/* A decided point repaints the whole sign and its tabs in the winner's colors */
+.sport.tech { --panel: var(--tech); }
+.sport.ulm { --panel: var(--ulm); }
+.sport.tie { --panel: linear-gradient(100deg, var(--tech) 0 50%, var(--ulm) 50% 100%); }
+
+/* One equal column per event, each tab flush right in its column: 6A ends at the center, 6B at the edge */
+.exits {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+.exit { justify-self: end; }
+/* Tabs overlap the sign slightly, so the tab's bottom border lands just above the sign's top border */
+/* Square off the sign's top-right corner so the rightmost tab's side runs straight down into the sign */
+.sport:has(.exits) { border-top-right-radius: 0; }
+.exit {
+  padding: 12px 18px 7px;
+  border-radius: 14px 14px 0 0;
+  background: var(--panel);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  outline: 3px solid #fff;
+  outline-offset: -8px;
+}
+
+/* Keep signs in realistic proportions: no wider than 460px, and never more than 1.6 times as wide as tall */
+.sport {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+  container-type: inline-size;
+}
+/* cqw is a percentage of the sign's inner width, so add back its 16px side padding before dividing */
+/* by 1.6, then take off its 18px top and bottom padding */
+.sign {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: calc((100cqw + 16px) / 1.6 - 18px);
+}
+
+/* Header, stacked and centered like a guide sign: route marker, then the destination-sized name */
+.sport header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px;
+  padding: 16px 6px 12px;
+  text-align: center;
+}
+/* A generic state route marker: a white circle on a black square */
+.marker {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 7px;
+  background: #111;
+  box-shadow: 0 0 0 2px #fff;
+}
+.marker .icon {
+  width: 45px;
+  height: 45px;
+  padding: 8px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+}
+.sport .heading { min-width: 0; }
+.sport h3 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.6vw, 2rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+.sport h3 a { text-decoration: none; }
+.sport h3 a:hover { text-decoration: underline; }
+
+/* A decided point gets a small white plaque, like a supplemental sign under the main legend */
+.badge {
+  padding: 5px 10px 3px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #fff;
+  color: var(--ink);
+}
+.sport.tech .badge { color: var(--tech); }
+.sport.ulm .badge { color: var(--ulm); }
+
+.series {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 16px;
+  padding: 10px 0 0;
+  border-top: 2px solid #fff;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.series .dash, .series .ties { opacity: 0.8; }
+.series .ties { font-size: 0.8rem; font-weight: 600; }
+
+/* Events fill the rest of the sign, so signs in a row end at the same place */
+.games {
+  flex: 1;
+  list-style: none;
+  margin: 0 16px;
+  padding: 12px 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  border-top: 2px solid #fff;
+}
+/* A header with a series line already has its rule above it */
+.series + .games { border-top: 0; }
+/* Each event reads like a destination: place name large, date and time smaller underneath */
+.game {
+  flex: 1 1 0;
+  min-width: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px 10px;
+  text-align: center;
+}
+/* Side-by-side events split by a white rule like the dividers on a guide sign */
+.game + .game { border-left: 2px solid #fff; }
+.game .caption {
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.game .city { font-size: 1.35rem; font-weight: 600; line-height: 1.1; }
+.game .when {
+  margin-top: 2px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+.game .when small { font-size: 0.78rem; letter-spacing: 0.08em; }
+.game small { color: inherit; opacity: 0.9; }
+.game.tba .city, .game.tba .when { opacity: 0.8; }
+.game .result { margin-top: 8px; font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.game .result a { text-decoration: none; }
+.game .result a:hover { text-decoration: underline; }
+.game .result small { margin-top: 1px; letter-spacing: 0.04em; }
+
+/* Result pills get a white edge so a blue or maroon pill still shows on a sign of the same color */
+.pill {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.7em;
+  padding: 3px 5px 1px;
+  margin-right: 3px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.8rem;
+  box-shadow: 0 0 0 2px #fff;
+}
+.pill.w { background: var(--tech); }
+.pill.l { background: var(--ulm); }
+.pill.t { background: var(--tie); }
+.place { display: block; }
+
+/* The footer starts with another center line */
+footer {
+  margin-top: 40px;
+  padding-top: 22px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  background: repeating-linear-gradient(90deg, var(--lane) 0 34px, transparent 34px 58px) top / 100% 4px no-repeat;
+}
+footer p { max-width: 720px; margin: 8px auto; text-align: center; }
+/* The gtpdd logo closes out the page, linking home */
+footer .gtpdd { display: block; width: fit-content; margin: 24px auto 32px; }
+footer .gtpdd img { display: block; width: 160px; height: auto; }
+
+@media (max-width: 680px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "title title" "techsign techsign" "shield shield" "ulmsign ulmsign" "standing standing";
+  }
+  /* Stacked on a phone, so each sign keeps panels big enough to read */
+  .logo-sign.tech, .logo-sign.ulm { justify-self: center; }
+  .logo-sign { padding: 16px 20px 22px; }
+  .panels { gap: 10px 12px; }
+  .shield { width: 76px; justify-self: center; }
+}
