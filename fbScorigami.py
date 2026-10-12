@@ -295,6 +295,8 @@ def fbScorigami(platform, year=None):
 
     # This season's games, with dates in Central time
     df2 = pd.DataFrame({"Date":dates, "Tech":techs, "Tech Score": tech_scores, "Opponent":oppos, "Opponent Score":oppo_scores})
+    df2['Opponent'] = df2['Opponent'].replace('Louisiana', 'Louisiana-Lafayette')
+    print(df2)
     if not df2.empty:
         df2['Date'] = pd.to_datetime(df2['Date'], utc=True).dt.tz_convert('US/Central')
         df2['Date'] = df2['Date'].dt.strftime('%B %d, %Y')
@@ -313,7 +315,6 @@ def fbScorigami(platform, year=None):
     jsonString += df_s.to_json(index=False, orient="records")
     dateString = datetime.today().strftime('%B %d, %Y')
     jsonString += ',"updated": "' + dateString + '"}' + "';\nexport default json;\n"
-    print(jsonString)
     print(jsonString,  file=open('html/fbScorigami/json.js', 'w'))
 
     # Upload the data file to the site's S3 bucket
