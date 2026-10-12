@@ -425,10 +425,14 @@ def drawScoreboard(ax, names, points, colors, logos, date_text):
         # Logo sized by height with a width cap so tall or wide logos aren't stretched
         drawLogo(ax, logos[side], cx, HEADER_TOP - 14.0, 9.6, max_width=15.0)
         # Team name in ink, since light team colors are unreadable at this size
-        ax.text(cx, HEADER_TOP - 20.4, names[side], fontsize=15, fontweight='bold',
+        if names[side] != 'Louisiana':
+            teamName = names[side]
+        else:
+            teamName = 'Louisiana-Lafayette'
+        ax.text(cx, HEADER_TOP - 20.4, teamName, fontsize=15, fontweight='bold',
                 color=INK, va='center', ha='center', zorder=4)
         # Underline in the team's bar color, sized to the name's length
-        rule_w = 3.0 + 0.82 * len(names[side])
+        rule_w = 3.0 + 0.82 * len(teamName)
         ax.add_patch(Rectangle((cx - rule_w / 2, HEADER_TOP - 22.0), rule_w, 0.55,
                                facecolor=colors[side], edgecolor='none', zorder=4))
 
