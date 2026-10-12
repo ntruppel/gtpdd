@@ -497,6 +497,9 @@ def gameInfoRows(info):
 
     # Matchup line
     home, away = info.get('homeTeam'), info.get('awayTeam')
+    # CFBD calls ULL "Louisiana"
+    home = 'Louisiana-Lafayette' if home == 'Louisiana' else home
+    away = 'Louisiana-Lafayette' if away == 'Louisiana' else away
     conference = info.get('conference') if info.get('conferenceGame') else None
     if home and away:
         matchup = f"{away} vs. {home}" if info.get('neutralSite') else f"{away} at {home}"
@@ -611,7 +614,9 @@ def publishLogo(name, gray=False):
     img = trimmedLogo(src)
     if img is None:
         return None
-    filename = assetSlug(name) + ('_gray' if gray else '') + '.png'
+    # CFBD calls ULL "Louisiana"; publish its logo under the full name
+    slug = 'Louisiana-Lafayette' if name == 'Louisiana' else assetSlug(name)
+    filename = slug + ('_gray' if gray else '') + '.png'
     # Grayscale copy for the losing team on the final scoreboard
     if gray:
         from PIL import Image as PILImage
@@ -1305,6 +1310,8 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     fixPenaltyYards(df, team)
 
     opponent = next((o for o in df['offense'].dropna().unique() if o != team), 'Opponent')
+    # CFBD calls ULL "Louisiana"; show the full name everywhere it's printed
+    oppoName = 'Louisiana-Lafayette' if opponent == 'Louisiana' else opponent
 
     techColors = loadColors(techColorPath)
     # Saved colors for this opponent, pulled from ESPN the first time we chart them
@@ -1337,7 +1344,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     header_bottom = max(header_bottom,
                         drawColorKey(ax, techColors, key_top, techLogo, team, 1,
                                      href=logoFiles['tech']),
-                        drawColorKey(ax, oppoColors, key_top, oppoLogo, opponent, -1,
+                        drawColorKey(ax, oppoColors, key_top, oppoLogo, oppoName, -1,
                                      href=logoFiles['oppo']))
     i = header_bottom + GAME_INFO_BOTTOM_GAP
     offense = ''
@@ -1384,7 +1391,8 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
             elif tech_score < oppo_score: scoreString = f"Tech down {oppo_score}-{tech_score}"
             else: scoreString = f"Tied at {tech_score}-{oppo_score}"
 
-            drawScoreboard(ax, i - DRIVE_HEADER_Y, formatClock(row.clock), f"{offense} Ball",
+            drawScoreboard(ax, i - DRIVE_HEADER_Y, formatClock(row.clock),
+                           f"{team if offense == team else oppoName} Ball",
                            int(tech_score), int(oppo_score), techLogo, oppoLogo,
                            headerColors['pass'], scoreString, offense == team,
                            logoFiles=logoFiles)
@@ -1416,9 +1424,9 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
         tech_final, oppo_final = final
         if tech_final == oppo_final:
             winnerColors = techColors
-            finalString = f"Final: {team} {tech_final}, {opponent} {oppo_final}"
+            finalString = f"Final: {team} {tech_final}, {oppoName} {oppo_final}"
         else:
-            winner = team if tech_final > oppo_final else opponent
+            winner = team if tech_final > oppo_final else oppoName
             winnerColors = techColors if winner == team else oppoColors
             finalString = f"{winner} won {max(final)}-{min(final)}"
         i += 14
@@ -1444,7 +1452,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     fig.set_size_inches(width, height)
 
     # Per-game output filenames: <MM_DD_opponent>.html, and fbPlaychart_<MM_DD_opponent>.png
-    html_filename = gameFilename(info, week, opponent)
+    html_filename = gameFilename(info, week, oppoName)
     slug = 'fbPlaychart_' + html_filename[:-len('.html')]
     html_dir = htmlDir(year)
     os.makedirs('out', exist_ok=True)
@@ -1470,7 +1478,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     current_label = gameEntry(html_filename)['label']
     # Link-preview title and description; the date stays out of the short title
     kickoff = gameDateTime(info)
-    matchup = f"{team} vs {opponent}"
+    matchup = f"{team} vs {oppoName}"
     date_text = f"{kickoff:%B} {kickoff.day}, {year}" if kickoff else f"Wk {week}, {year}"
     card_title = f"Playchart | {matchup}"
     card_description = f"Every play of {matchup}, {date_text}."

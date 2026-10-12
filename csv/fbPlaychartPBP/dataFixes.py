@@ -431,6 +431,13 @@ def fix2026Wk5Army(f):
     f.insertRow(147,'146,Army,Q4 7:28,0,0,Penalty,61,15,"#27 S.Howard rush left for 6 yards gain to the AWP39 (#22 J.Mayfield), 1ST DOWN, PENALTY LAT Horse Collar Tackle (#22 J.Mayfield) 15 yards from AWP39 to LAT46, 1ST DOWN",401869842607,22,31')
     f.insertRow(160,'156,Louisiana Tech,Q4 3:52,0,0,Penalty,39,15,"(03:52) Shotgun #2 T.Kukuk rush left for 8 yards gain to the LAT39 (#50 D.Miller; #42 E.Walton), 1ST DOWN, PENALTY AWP Face Mask (#11 D.Thom-Rogers) 15 yards from LAT39 to AWP46, 1ST DOWN",401869842651,31,22')
     f.moveRow(180,178,'Q4 1:6,1,10,Kickoff,65,-10')
+
+@gameFix(2026, 6, 'Louisiana')
+def fix2026Wk6Louisiana(f):
+    f.insertRow(10,'8,Louisiana,Q1 12:8,1,10,Penalty,10,-5,"(12:21) PENALTY ULL False Start (#71 G.Jackson) 5 yards from TECH10 to TECH15",40186996539,0,0')
+    f.replace('Q2 12:59,1,10,Pass Incompletion,38,0','Q2 12:59,1,10,Penalty,38,15')
+    f.deleteRows('401869965327')
+    f.moveRow(92,91,'Q2 0:12,3,5,Rush,65,3')
       ## ---------------------------------------------------------------- run ----
 
 
