@@ -121,6 +121,25 @@ window.GTPDD_RECORD_RUNS = {
           {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.666, "source": "fpi", "logo": "logo/Arkansas_State.png"},
           {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.463, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
         ]
+      },
+      {
+        "date": "2026-10-15", "label": "Before Game 6", "dateLabel": "October 15, 2026", "record": "3-2",
+        "expectedWins": 7.555, "bowlOdds": 0.95861,
+        "odds": [0.0, 0.0, 0.0, 0.00023, 0.00471, 0.03645, 0.14, 0.2878, 0.31698, 0.17553, 0.03831, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 0.89, "source": "fpi", "logo": "logo/UL_Monroe.png"},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 0.792, "source": "fpi", "logo": "logo/Old_Dominion.png"},
+          {"date": "Oct 30", "opponent": "South Alabama", "setting": "Away", "odds": 0.493, "source": "fpi", "logo": "logo/South_Alabama.png"},
+          {"date": "Nov 6", "opponent": "Troy", "setting": "Away", "odds": 0.47, "source": "fpi", "logo": "logo/Troy.png"},
+          {"date": "Nov 13", "opponent": "Southern Miss", "setting": "Home", "odds": 0.781, "source": "fpi", "logo": "logo/Southern_Miss.png"},
+          {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.7, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.429, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
       }
     ]
   }
