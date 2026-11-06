@@ -3,8 +3,8 @@
 One NFL week's stats for every former Louisiana Tech player, as trading cards.
 
 Alumni are found by scanning today's NFL rosters for ESPN college = Louisiana Tech,
-so anyone who has left the league since is missed. Only players with a stat in a
-box score get a card.
+plus a college lookup for any box score player no longer on a roster (e.g. released
+after the game). Only players with a stat in a box score get a card.
 
 Cards go to out/fbNFLStats/ (cleared each run), plus one fanned-hand image per
 player in out/fbNFLStats/fanned/ with that player's card on top. Action shots are
@@ -41,6 +41,7 @@ from lib.fbCommon import assetSlug
 # ESPN ids and season types
 COLLEGE_ID = '2348'               # ESPN's id for Louisiana Tech
 NFL_URL = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl'
+CORE_URL = 'https://sports.core.api.espn.com/v2/sports/football/leagues/nfl'
 REGULAR_SEASON = 2
 POSTSEASON = 3
 SKIPPED_WEEKS = {'Pro Bowl'}
@@ -154,9 +155,21 @@ def getJson(url, params=None):
     return r.json()
 
 
+def playerInfo(athlete, position, team):
+    # The fields a card needs, from an ESPN athlete and team
+    return {
+        'name': athlete['displayName'],
+        'position': position,
+        'jersey': athlete.get('jersey', ''),
+        'team': team['abbreviation'],
+        'teamName': team['name'],
+        'color': '#' + team.get('color', '333333'),
+    }
+
+
 def getCollegeAlumni(college_id=COLLEGE_ID):
-    # Returns athlete id -> player info for everyone on an NFL roster from that college
-    alumni = {}
+    # Returns (athlete id -> player info for that college's rostered alumni, every rostered athlete id)
+    alumni, known = {}, set()
     # Walk every NFL team's roster
     for league in getJson(NFL_URL + '/teams')['sports'][0]['leagues']:
         for entry in league['teams']:
@@ -164,16 +177,21 @@ def getCollegeAlumni(college_id=COLLEGE_ID):
             roster = getJson(NFL_URL + '/teams/' + team['id'] + '/roster')
             for group in roster['athletes']:
                 for athlete in group['items']:
+                    known.add(athlete['id'])
                     if (athlete.get('college') or {}).get('id') == college_id:
-                        alumni[athlete['id']] = {
-                            'name': athlete['displayName'],
-                            'position': athlete.get('position', {}).get('abbreviation', ''),
-                            'jersey': athlete.get('jersey', ''),
-                            'team': team['abbreviation'],
-                            'teamName': team['name'],
-                            'color': '#' + team.get('color', '333333'),
-                        }
-    return alumni
+                        position = athlete.get('position', {}).get('abbreviation', '')
+                        alumni[athlete['id']] = playerInfo(athlete, position, team)
+    return alumni, known
+
+
+def getUnrosteredAlum(athlete, team, college_id=COLLEGE_ID):
+    # Returns player info if an athlete off every roster went to that college, else None
+    record = getJson(CORE_URL + '/athletes/' + athlete['id'])
+    # College comes back as a link ending in its id, e.g. .../colleges/2348?lang=en
+    college = (record.get('college') or {}).get('$ref', '')
+    if re.search(r'/colleges/%s\b' % college_id, college) is None:
+        return None
+    return playerInfo(athlete, record.get('position', {}).get('abbreviation', ''), team)
 
 
 def getWeekGames(year, season_type, week):
@@ -215,15 +233,21 @@ def findLatestWeek():
     raise RuntimeError('No completed NFL games found this season or last')
 
 
-def getPlayerStats(game_id, athlete_ids):
-    # Returns {athlete id: [(category, {label: value})]} for the given players in one game
+def getPlayerStats(game_id, alumni, known):
+    # Returns {athlete id: [(category, {label: value})]} for alumni in one game
     summary = getJson(NFL_URL + '/summary', {'event': game_id})
     found = {}
     for team in summary['boxscore'].get('players', []):
         for category in team['statistics']:
             for line in category['athletes']:
                 athlete_id = line['athlete']['id']
-                if athlete_id in athlete_ids:
+                # Not on any roster now (e.g. released after the game), so look up their college once
+                if athlete_id not in known:
+                    known.add(athlete_id)
+                    alum = getUnrosteredAlum(line['athlete'], team['team'])
+                    if alum:
+                        alumni[athlete_id] = alum
+                if athlete_id in alumni:
                     stats = dict(zip(category['labels'], line['stats']))
                     found.setdefault(athlete_id, []).append((category['name'], stats))
     return found
@@ -615,7 +639,7 @@ def main():
     print('%d %s\n' % (year, label))
 
     print('Finding former Louisiana Tech players on NFL rosters...')
-    alumni = getCollegeAlumni()
+    alumni, known = getCollegeAlumni()
     print('Found %d: %s\n' % (len(alumni), ', '.join(sorted(a['name'] for a in alumni.values()))))
 
     games = getWeekGames(year, season_type, week)
@@ -627,7 +651,7 @@ def main():
             print('Skipping %s (%s)' % (event['shortName'],
                                         event['status']['type']['description']))
             continue
-        for athlete_id, categories in getPlayerStats(event['id'], alumni).items():
+        for athlete_id, categories in getPlayerStats(event['id'], alumni, known).items():
             player = alumni[athlete_id]
             game = gameResult(event, player['team'])
             played.add(athlete_id)
