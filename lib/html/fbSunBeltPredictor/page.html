@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>$title</title>
+$headLinks
+<link rel='stylesheet' href='$cssHref'>
+</head>
+<body data-highlight='$highlightId' data-assets='$assetBase'>
+<main>
+<div class='pagehead'>
+<h1>$confLogo<span>Sun Belt Conference</span><span>Division Predictor</span></h1>
+<p class='sub'>Using ESPN's FPI</p>
+<!-- Which season and run the page shows -->
+<div class='pickers'>
+  <select id='sb-year' aria-label='Season'></select>
+  <select id='sb-run' aria-label='Run'></select>
+</div>
+</div>
+<noscript><p class='sub'>This page draws its tables and charts in the browser, so it
+needs JavaScript on.</p></noscript>
+
+<section class='card matchup' id='sb-matchup' aria-live='polite'></section>
+
+<!-- One column per division, West first: standings over the odds-over-time flow -->
+<div class='divgrid' id='sb-standings'></div>
+<div class='divgrid' id='sb-flows'></div>
+
+<section>
+<header><h2 id='sb-games-title'>This Week's Conference Games</h2><p id='sb-games-note'></p></header>
+<div class='card scroller'>
+<table id='sb-games'>
+<thead><tr><th>Date</th><th class='mark'>Away</th><th class='at'></th><th class='mark'>Home</th>
+<th colspan='3'>Impact to Title Game Odds</th></tr></thead>
+<tbody></tbody></table>
+</div>
+</section>
+
+<footer><a class='gtpdd' href='$homeUrl'>$footerLogo</a></footer>
+</main>
+<div id='sb-tooltip'></div>
+<script src='$runsSrc'></script>
+<script src='$jsSrc'></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -117 200 117" preserveAspectRatio="xMidYMax meet">
+<!-- The Sun Belt logo's starburst, measured from the full-size logo: a half sun (radius 33)
+     with three mirrored pairs of tapered rays, carried out to the points they taper toward -->
+<defs>
+  <path id="ray-inner" d="M-8.8 -28L0 -114.7L8.8 -28Z"/>
+  <path id="ray-middle" d="M-7.6 -28L0 -110.1L7.6 -28Z"/>
+  <path id="ray-outer" d="M-6.9 -28L0 -94L6.9 -28Z"/>
+</defs>
+<!-- Same Sun Belt gold as the stylesheet uses for card outlines -->
+<g fill="#f5a706" opacity="0.22">
+  <path d="M-33 0A33 33 0 0 1 33 0Z"/>
+  <use href="#ray-inner" transform="rotate(-16.3)"/>
+  <use href="#ray-inner" transform="rotate(16.3)"/>
+  <use href="#ray-middle" transform="rotate(-44.8)"/>
+  <use href="#ray-middle" transform="rotate(44.8)"/>
+  <use href="#ray-outer" transform="rotate(-70.7)"/>
+  <use href="#ray-outer" transform="rotate(70.7)"/>
+</g>
+</svg>
