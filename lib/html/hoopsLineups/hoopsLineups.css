@@ -1,0 +1,217 @@
+/* Lineup tracker page styles. hoopsLineups.py copies this file to html/stats/hoopsLineups/. */
+
+:root {
+  --page:           #003087;   /* Tech navy */
+  --surface-1:      #ffffff;   /* card surface */
+  --on-page:        #ffffff;
+  --on-page-muted:  #c3d0ea;
+  --text-primary:   #0b0b0b;
+  --text-secondary: #4b4a47;
+  --text-muted:     #6f6d68;
+  --grid:           #e4e3dd;   /* hairlines */
+  --axis:           #b9b7b0;
+  --track:          #e6e8ec;   /* a player's row when he's on the bench */
+  --accent:         #cb333b;   /* Tech red */
+  --plus:           #15803d;
+  --minus:          #b91c1c;
+  /* Stat lines: five hues kept far apart, each edged in white so it shows on any team color */
+  --stat-reb:       #facc15;
+  --stat-stl:       #22c55e;
+  --stat-blk:       #22d3ee;
+  --stat-to:        #d946ef;
+  --stat-pf:        #ef4444;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--on-page);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+h1, h2 { margin: 0; font-weight: 600; }
+h1 { font-size: 30px; letter-spacing: -0.01em; }
+h2 { font-size: 17px; }
+a { color: inherit; text-underline-offset: 2px; }
+
+/* ----------------------------------------------------------------- page */
+main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 56px; }
+.pagehead { margin-bottom: 18px; text-align: center; }
+.pagehead .eyebrow { margin: 0 0 2px; color: var(--on-page-muted); font-size: 13px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+/* A short red rule under the title */
+.pagehead h1::after { content: ''; display: block; width: 44px; height: 3px;
+  margin: 8px auto 0; border-radius: 2px; background: var(--accent); }
+.sub { color: var(--on-page-muted); font-size: 14px; text-align: center; }
+.pickers { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 10px;
+  margin-top: 14px; }
+.pickers select { font: inherit; font-size: 14px; color: var(--text-primary);
+  background: var(--surface-1); border: 2px solid var(--accent); border-radius: 8px;
+  padding: 5px 10px; cursor: pointer; min-width: 0; max-width: 100%; }
+.pickers select:focus-visible { outline: 2px solid var(--on-page); outline-offset: 2px; }
+
+.card { background: var(--surface-1); color: var(--text-primary); border-radius: 10px;
+  padding: 14px 12px 10px; margin-top: 18px; }
+.cardhead { display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 4px 12px; margin: 0 4px 8px; }
+.cardhead .hint { margin: 0; color: var(--text-muted); font-size: 13px; }
+.cardhead.team { align-items: center; justify-content: flex-start; }
+.cardhead.team img { height: 32px; width: auto; max-width: 64px; object-fit: contain; }
+.cardhead.team .note { margin-left: auto; color: var(--text-muted); font-size: 13px; }
+.scroller { overflow-x: auto; }
+.scroller svg { min-width: 760px; }
+svg { display: block; width: 100%; height: auto; }
+
+/* ----------------------------------------------------------- scoreboard */
+.board { padding: 18px 16px; }
+/* The middle column is a fixed width, so a longer play never nudges the logos or scores */
+.board-row { display: grid; grid-template-columns: minmax(0, 1fr) 240px minmax(0, 1fr);
+  align-items: center; gap: 12px; }
+.board-team { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.board-team.home { flex-direction: row-reverse; text-align: right; }
+.board-logo { height: 72px; width: auto; max-width: 110px; object-fit: contain; flex: none; }
+.board-name { min-width: 0; flex: 1; }
+.board-name .name { font-size: 20px; font-weight: 600; line-height: 1.2; }
+.board-name .sub { color: var(--text-muted); font-size: 13px; text-align: inherit; margin-top: 2px; }
+/* Scores sit in a fixed two-digit box, so 9 turning into 10 doesn't shift them either */
+.board-score { font-size: 48px; font-weight: 700; line-height: 1; min-width: 2ch; text-align: center;
+  font-variant-numeric: tabular-nums; flex: none; }
+.board-score.trailing { color: var(--text-muted); }
+.board-mid { text-align: center; min-width: 0; }
+.board-mid .status { font-size: 15px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.board-mid .detail { color: var(--text-muted); font-size: 13px; line-height: 1.4;
+  min-height: 4.2em; margin: 2px auto 0; }
+/* One line each, trimmed rather than wrapped, so the block stays three lines tall */
+.board-mid .detail div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 640px) {
+  .board-row { gap: 8px; grid-template-columns: minmax(0, 1fr) 130px minmax(0, 1fr); }
+  .board-team { flex-direction: column; text-align: center; gap: 6px; }
+  .board-team.home { flex-direction: column; text-align: center; }
+  .board-logo { height: 48px; }
+  .board-name .name { font-size: 15px; }
+  .board-score { font-size: 34px; }
+}
+
+/* ------------------------------------------------------ game stats */
+.flowstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px; margin: 16px 0 0; }
+.stat { border: 1px solid var(--grid); border-radius: 8px; padding: 8px 10px; }
+.stat .label { color: var(--text-muted); font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.04em; }
+.stat .value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat .value small { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+
+/* ---------------------------------------------------------- SVG chrome */
+.axis-label { fill: var(--text-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.lead-label { font-size: 12px; font-weight: 700; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.baseline { stroke: var(--axis); stroke-width: 1.5; }
+.flow-line { fill: none; stroke: var(--text-primary); stroke-width: 1.5; }
+.cursor-line { stroke: var(--text-primary); stroke-width: 1.5; pointer-events: none; }
+.cursor-dot { fill: var(--surface-1); stroke: var(--text-primary); stroke-width: 2; pointer-events: none; }
+.cursor-label { fill: var(--text-primary); font-size: 12px; font-weight: 700; pointer-events: none; }
+
+/* -------------------------------------------------------- lineup charts */
+svg.lineup { touch-action: pan-x pan-y; }
+/* Names pinned to the left edge get a white outline, so they read over period and cursor lines */
+.pinned text { stroke: var(--surface-1); stroke-width: 3px; stroke-linejoin: round; paint-order: stroke;
+  pointer-events: none; }
+.col-head { fill: var(--text-muted); font-size: 12px; font-weight: 600; }
+.section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.p-num { fill: var(--text-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.p-name { fill: var(--text-primary); font-size: 14px; font-weight: 600; }
+.p-stat { fill: var(--text-secondary); font-size: 13px; font-variant-numeric: tabular-nums; }
+.p-stat.plus { fill: var(--plus); font-weight: 600; }
+.p-stat.minus { fill: var(--minus); font-weight: 600; }
+.rowline { stroke: var(--grid); stroke-width: 1; }
+.track { fill: var(--track); }
+/* Period breaks in solid black, so they never read as a substitution */
+.break { stroke: var(--text-primary); stroke-width: 1.5; pointer-events: none; }
+.shot { stroke-width: 1.5; }
+.shot.made { fill: #fff; stroke: #fff; }
+/* Missed shots take the stripe's color as their fill (set by the script), or the bench gray */
+.shot.miss { stroke: #fff; }
+.shot.miss.off { fill: var(--track); stroke: var(--text-muted); }
+.shot-num { font-size: 11px; font-weight: 800; text-anchor: middle; dominant-baseline: central;
+  pointer-events: none; }
+.shot-num.miss { fill: #fff; }
+.shot-num.miss.off { fill: var(--text-muted); }
+.ft { fill: #fff; }
+.ft-num { font-size: 9px; font-weight: 800; text-anchor: middle; dominant-baseline: central;
+  pointer-events: none; fill: var(--text-primary); }
+.ft-bar { stroke: var(--text-primary); stroke-width: 1; }
+/* An and-one's +1/+0, haloed in the team color so it lifts off the shot it rides on */
+.andone { fill: #fff; font-size: 9.5px; font-weight: 800; dominant-baseline: central;
+  stroke-width: 2.5; stroke-linejoin: round; paint-order: stroke; pointer-events: none; }
+.marker { cursor: pointer; }
+.hit { fill: transparent; }
+.statline { stroke: #fff; stroke-width: 1; }
+.stat-REB { fill: var(--stat-reb); }
+.stat-STL { fill: var(--stat-stl); }
+.stat-BLK { fill: var(--stat-blk); }
+.stat-TO  { fill: var(--stat-to); }
+.stat-PF  { fill: var(--stat-pf); }
+/* The foul number, haloed in white so it reads on any team color */
+.foul-num { fill: var(--stat-pf); font-size: 10px; font-weight: 800; dominant-baseline: central;
+  stroke: #fff; stroke-width: 2.5; stroke-linejoin: round; paint-order: stroke; pointer-events: none; }
+
+/* ------------------------------------------------------------------ key */
+.legend ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px;
+  padding: 0; margin: 10px 0 8px; font-size: 13px; color: var(--text-secondary); }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.legend li svg { width: auto; height: 22px; overflow: visible; }
+.legend .leg-track { fill: var(--track); }
+.legend .leg-bar { fill: #003087; }
+.legend .shot.miss { fill: #003087; }
+.legend .andone { stroke: #003087; }
+.legend .shot-num.made { fill: #003087; }
+.legend p { margin: 4px 0 0; color: var(--text-muted); font-size: 13px; }
+
+/* ----------------------------------------------------------- plus/minus */
+/* The two teams side by side, stacked when narrow */
+.pmgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 28px; margin: 0 4px; }
+@media (max-width: 860px) {
+  .pmgrid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+.pmhead { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.pmhead img { height: 26px; width: auto; max-width: 52px; object-fit: contain; }
+.pmhead h3 { margin: 0; font-size: 15px; font-weight: 600; }
+table.pm { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.pm th, table.pm td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+table.pm th { color: var(--text-muted); font-size: 12px; font-weight: 600; }
+table.pm tbody tr:last-child td { border-bottom: 0; }
+table.pm .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.pm .player { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 0; width: 45%; }
+table.pm .pnum { display: inline-block; min-width: 26px; color: var(--text-muted); font-size: 12px;
+  font-variant-numeric: tabular-nums; }
+table.pm .pmval { font-weight: 700; }
+table.pm .pmval.plus { color: var(--plus); }
+table.pm .pmval.minus { color: var(--minus); }
+table.pm .bar { width: 35%; }
+/* A center line with gains to its right and losses to its left */
+.pmtrack { position: relative; height: 12px; }
+.pmtrack::before { content: ''; position: absolute; left: 50%; top: -3px; bottom: -3px;
+  width: 1px; background: var(--axis); }
+.pmfill { position: absolute; top: 0; bottom: 0; border-radius: 2px; }
+.pmfill.plus { left: 50%; background: var(--plus); }
+.pmfill.minus { right: 50%; background: var(--minus); }
+
+footer { margin-top: 28px; text-align: center; }
+/* The gtpdd logo closes out the page, linking home (sized as on i20showdown) */
+footer .gtpdd { display: block; width: fit-content; margin: 24px auto 32px; }
+footer .gtpdd img { display: block; width: 160px; height: auto; }
+
+/* ------------------------------------------------------------- tooltip */
+#hl-tooltip { position: fixed; pointer-events: none; z-index: 30;
+  max-width: 300px; padding: 7px 10px; border-radius: 6px; display: none;
+  background: rgba(10,31,68,0.96); color: #fff;
+  font-size: 13px; line-height: 1.4; box-shadow: 0 4px 14px rgba(0,20,60,0.35); }
+#hl-tooltip .tip-title { font-weight: 600; }
+#hl-tooltip .tip-row { color: var(--on-page-muted); }
+
+/* ------------------------------------------------------- preview mode */
+/* '?preview': the title, scoreboard and the top of Tech's lineup chart at the card's
+   1200x630, for the script's link-preview screenshot */
+.preview main { padding: 16px 24px; }
+.preview .pagehead { margin-bottom: 4px; }
+.preview .pickers, .preview .hint, .preview .flowstats, .preview .lineup + .lineup,
+.preview .cardhead.team .note, .preview .legend, .preview .plusminus, .preview footer, .preview #hl-tooltip { display: none; }
+.preview .card { margin-top: 12px; }

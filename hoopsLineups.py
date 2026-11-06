@@ -1,638 +1,715 @@
-from bs4 import BeautifulSoup as Soup
+# -*- coding: utf-8 -*-
+"""
+Lineup tracker for Louisiana Tech men's basketball: who was on the floor, what each
+player did, and how the score moved through the game.
+
+Play-by-play comes from the latechsports.com box score, team colors and logos from
+ESPN. Each game gets a page at html/stats/hoops/lineups/<season>/<game>.html
+(stats.gtpdd.dog), and html/stats/hoops/lineups.html always shows the latest game.
+Page templates live in lib/html/hoopsLineups/.
+
+Run from the repo root:
+
+    python hoopsLineups.py                        # the latest completed game
+    python hoopsLineups.py --game 5               # the season's 6th game (negatives count back)
+    python hoopsLineups.py --season 2025 --all    # every completed game of 2025-26
+    python hoopsLineups.py --refresh              # refetch pages instead of using the cache
+"""
+
+####
+# IMPORTS
+####
+
+import json
+import os
+import re
+import shutil
+from collections import Counter
+from datetime import date, datetime
+from html import escape as html_escape
+from string import Template
+from zoneinfo import ZoneInfo
+
 import requests
-import numpy as np
-import pandas as pd
-from pandas import DataFrame
-import matplotlib.pyplot as plt
-import matplotlib.colors as mc
-import colorsys
 from PIL import Image
-from lib.common import parse_th_row, parse_mod_th_row, parse_td_row, parse_mod_td_row
-from lib.hoopsCommon import getESPNAPI, getESPNGameID
-    
-def get_pbp_table(table):
-    with pd.option_context('future.no_silent_downcasting', True):
-        stat_rows = table.find_all('tr')
-        list_of_parsed_stat_rows = [parse_td_row(row) for row in stat_rows[1:]]
-        stat_df = DataFrame(list_of_parsed_stat_rows)
-        stat_df = stat_df.drop(columns=[2,6,7,8])
-        stat_df.columns = ['time','visitor_play','visitor_score','home_score','home_play']
-        df = stat_df.replace('--', np.nan)
-        df = df.replace(r'^\s*$', np.nan, regex=True)
-        df = df.ffill()
-        df = df.replace('None', np.nan)
-    return df
 
-def get_subs(df,team):
-    if team == 'visitor': play,score,n_play,n_score = 'visitor_play','visitor_score','home_play','home_score'
-    else: n_play,n_score,play,score = 'visitor_play','visitor_score','home_play','home_score'
-    subs_df = df[df[play].str.contains('SUB',na = False)]
-    subs_df = subs_df.drop(columns=[score,n_score,n_play])
-    subs_df['action'] = np.nan
-    
-    ## Needed to wrap this in a try/except because there may be a half (or probably an OT) where no subs were made
+from lib.common import nuxtPayload, screenshotPage
+from lib.fbCommon import (LOGO_DIR, assetSlug, downloadLogo, hexLuminance, previewMetaTags,
+                          publishAsset, readJsGlobal, trimmedLogo, writeJsGlobal)
+
+####
+# CONSTANTS
+####
+
+# Athletics site and the sport's pages on it
+SITE = 'https://latechsports.com'
+SPORT_SLUG = 'mens-basketball'
+# Sidearm serves its team logos from this CDN, given the path the box score lists
+SIDEARM_CDN = 'https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/latechsports.com'
+# Requests identify as a normal desktop browser
+UA = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+                    'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36'}
+
+# ESPN endpoints, for team colors and logos
+ESPN_TEAM = 'latech'
+ESPN_TECH_ID = '2348'
+ESPN_SCHEDULE_URL = ('https://site.api.espn.com/apis/site/v2/sports/basketball/'
+                     'mens-college-basketball/teams/{}/schedule?season={}')
+ESPN_SUMMARY_URL = ('https://site.api.espn.com/apis/site/v2/sports/basketball/'
+                    'mens-college-basketball/summary?event={}')
+
+# Game dates and times are shown in Central time
+TIMEZONE = ZoneInfo('America/Chicago')
+# Schedules are cached for a few hours; finished box scores never change, so they're kept for good
+CACHE_DIR = 'tmp/hoopsLineups'
+SCHEDULE_CACHE_HOURS = 3
+
+# Box score sides, and the key each team sits under in the box score
+SIDES = ('away', 'home')
+TEAM_KEYS = {'away': 'visitingTeam', 'home': 'homeTeam'}
+
+# Points for each made-shot type; anything else made is a two
+POINTS = {'3PTR': 3, 'FT': 1}
+
+# Team colors: fallbacks, and the limits that keep both readable on a white card
+FALLBACK_COLORS = {'tech': '#003087', 'other': '#5f6570'}
+MAX_LUMINANCE = 170                   # brighter colors vanish against white
+MIN_COLOR_DISTANCE = 90               # closer than this and the two teams look alike
+
+# Site and file locations
+HOME_URL = 'https://gtpdd.dog'
+SITE_URL = 'https://stats.gtpdd.dog'  # the published root of html/stats/
+TWITTER_HANDLE = '@gotechplsdntdie'
+HTML_DIR = 'html/stats'               # shared by several gtpdd stat pages
+SITE_SECTION = 'hoops'                # the page publishes under stats.gtpdd.dog/hoops/
+PAGE_DIR = os.path.join(HTML_DIR, SITE_SECTION)
+ASSET_DIR_NAME = 'lineups'            # this page's own files, grouped beside it
+ASSET_DIR = os.path.join(PAGE_DIR, ASSET_DIR_NAME)
+ASSET_URL = f"{SITE_URL}/{SITE_SECTION}/{ASSET_DIR_NAME}"
+LOGO_WEB_DIR = os.path.join(ASSET_DIR, 'logo')
+WEB_IMG_DIR = os.path.join(ASSET_DIR, 'img')
+LOGO_HEIGHT = 160                     # published at 2x the scoreboard's drawn height
+GTPDD_LOGO = 'img/gtpdd_logo.png'     # the footer logo, published alongside the page
+PAGE_FILENAME = 'lineups.html'        # always the latest game
+CSS_FILENAME = 'hoopsLineups.css'
+JS_FILENAME = 'hoopsLineups.js'
+MANIFEST_FILENAME = 'manifest.js'     # every game on file, for the pickers
+GAME_GLOBAL = 'GTPDD_HOOPS_GAME'
+MANIFEST_GLOBAL = 'GTPDD_HOOPS_GAMES'
+PREVIEW_SIZE = (1200, 630)            # a summary_large_image card
+
+# Page skeleton, stylesheet and script live in lib/html/hoopsLineups/
+TEMPLATE_DIR = 'lib/html/hoopsLineups'
+PAGE_TEMPLATE = os.path.join(TEMPLATE_DIR, 'page.html')
+PAGE_CSS = os.path.join(TEMPLATE_DIR, CSS_FILENAME)
+PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
+
+# Comment blocks written at the top of the data files
+GAME_JS_HEADER = "// One game for hoops/lineups.html. Generated by hoopsLineups.py -- rerun it to rebuild."
+MANIFEST_JS_HEADER = "// Every game hoopsLineups.py has built, newest season first. Generated -- don't edit."
+
+
+####
+# SEASONS
+####
+
+def currentSeason(today=None):
+    # Seasons are named for the year they start; July onward counts toward the coming one
+    today = today or date.today()
+    return today.year if today.month >= 7 else today.year - 1
+
+
+def seasonSlug(season):
+    # 2025 -> '2025-26', as latechsports.com names its basketball seasons
+    return f"{season}-{str(season + 1)[-2:]}"
+
+
+####
+# SIDEARM FEEDS
+####
+
+def fetchText(url, max_age_hours=None, refresh=False):
+    # A page from the cache when fresh enough (max_age_hours=None keeps it forever), else from the site
+    name = re.sub(r'[^0-9A-Za-z]+', '_', url.split(SITE, 1)[-1]).strip('_') + '.html'
+    path = os.path.join(CACHE_DIR, name)
+    if not refresh and os.path.isfile(path):
+        age = datetime.now().timestamp() - os.path.getmtime(path)
+        if max_age_hours is None or age < max_age_hours * 3600:
+            with open(path) as f:
+                return f.read()
+
+    r = requests.get(url, headers=UA, timeout=30)
+    r.raise_for_status()
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(path, 'w') as f:
+        f.write(r.text)
+    return r.text
+
+
+def findDicts(o, keys):
+    # Every dict in a nested payload that has all of keys; stops descending once one matches
+    found = []
+    if isinstance(o, dict):
+        if keys <= o.keys():
+            return [o]
+        for v in o.values():
+            found += findDicts(v, keys)
+    elif isinstance(o, list):
+        for v in o:
+            found += findDicts(v, keys)
+    return found
+
+
+def completedGames(season, refresh=False):
+    # Every game of the season with a box score, in date order
+    url = f'{SITE}/sports/{SPORT_SLUG}/schedule/{seasonSlug(season)}'
+    payload = nuxtPayload(fetchText(url, SCHEDULE_CACHE_HOURS, refresh))
+    # The same event shows up in several parts of the page, so key them by id
+    events = {e.get('id'): e for e in findDicts(payload, {'game_state', 'opponent', 'date', 'result'})}
+    # Unplayed games carry -1 (an empty payload slot) where the result would be
+    games = [e for e in events.values() if isinstance(e.get('result'), dict)
+             and isinstance(e['result'].get('boxscore'), dict) and e['result']['boxscore'].get('url')]
+    return sorted(games, key=lambda e: e.get('date') or '')
+
+
+def boxScore(event, refresh=False):
+    # The box score behind a schedule event: rosters, starters and every play
+    url = SITE + event['result']['boxscore']['url']
+    # A box score is only safe to keep for good once the game is over
+    final = event.get('game_state_display') == 'GAMECOMPLETE'
+    payload = nuxtPayload(fetchText(url, None if final else SCHEDULE_CACHE_HOURS, refresh))
+    boxes = findDicts(payload, {'periodsWithPlays', 'homeTeam', 'visitingTeam'})
+    if not boxes:
+        raise ValueError(f"{url} has no play-by-play; did the site change?")
+    return boxes[0]
+
+
+####
+# ESPN FEEDS
+####
+
+def espnJson(url):
+    # GETs an ESPN endpoint as JSON
+    r = requests.get(url, timeout=20)
+    r.raise_for_status()
+    return r.json()
+
+
+def espnTeams(season, day):
+    # ESPN's names, colors and logos for both teams of the Tech game on day, keyed 'tech'/'other'
     try:
-        subs_df[['action','player']] = subs_df[play].str.split("b", n=2, expand=True)
-        subs_df['player'] = subs_df['player'].str[2:]
-        subs_df = subs_df.drop(columns=play)
-        subs_df['player'] = subs_df['player'].str.split(',').str[::-1].str.join(' ')
-    except:
-        0
-    return subs_df
+        schedule = espnJson(ESPN_SCHEDULE_URL.format(ESPN_TEAM, season + 1))
+        # ESPN dates are UTC, so convert to Central before comparing days
+        game_id = next((e['id'] for e in schedule.get('events', [])
+                        if datetime.fromisoformat(e['date'].replace('Z', '+00:00'))
+                        .astimezone(TIMEZONE).date().isoformat() == day), None)
+        if game_id is None:
+            print(f"ESPN has no Louisiana Tech game on {day}; using fallback colors.")
+            return {}
+        summary = espnJson(ESPN_SUMMARY_URL.format(game_id))
+    except Exception as e:
+        print(f"Could not read ESPN ({type(e).__name__}: {e}); using fallback colors.")
+        return {}
+
+    teams = {}
+    for entry in summary.get('boxscore', {}).get('teams', []):
+        t = entry['team']
+        teams['tech' if t['id'] == ESPN_TECH_ID else 'other'] = {
+            'name': t.get('location') or t.get('displayName'),
+            'abbr': t.get('abbreviation'),
+            'color': '#' + t['color'] if t.get('color') else None,
+            'alt': '#' + t['alternateColor'] if t.get('alternateColor') else None,
+            'logo': t.get('logo'),
+        }
+    return teams
 
 
-def getShots(df,team):
-    searchfor = ['GOOD', 'MISS', 'REBOUND', 'FOUL', 'TURNOVER', 'ASSIST']    
-    if team == 'visitor': play,score,n_play,n_score = 'visitor_play','visitor_score','home_play','home_score'
-    else: n_play,n_score,play,score = 'visitor_play','visitor_score','home_play','home_score'
-    
-    ## Seperate out the made shots
-    shots_df = df[df[play].str.contains('|'.join(searchfor),na = False)]
-    shots_df = shots_df.drop(columns=[score,n_score, n_play])
-    shots_df['action'] = np.nan
-    shots_df[['action','player']] = shots_df[play].str.split("by", n=2, expand=True)
-    shots_df['player'] = shots_df['player'].str[1:]
-    shots_df = shots_df.drop(columns=play)
-    shots_df['player'] = shots_df['player'].str.split(',').str[::-1].str.join(' ')
-    shots_df['player'] = shots_df['player'].str.replace('\(.*\)','',regex=True)
+####
+# TEAM COLORS & LOGOS
+####
 
-    ## Convert Timestamp to seconds count
-    time_secs = []
-    for time in shots_df['time']: time_secs.append(int(time.split(':')[0])*60 + int(time.split(':')[1]))
-    shots_df['time'] = time_secs
-    shots_df = shots_df.sort_values(by=['time'], ascending=False)
-    shots_df['player'] = shots_df['player'].str.title()
-        
-    return shots_df
-
-def getLineup(subs_df, statTable, startTime, endSubs):
-
-    ### For the first half, we need to grab the starters to see who's on the court at the beginning of the game
-    ### This is done by grabbing the box score table and grabbing the first 5 players
-    ### As far as I've seen, these are always the starters, but it may be worth grabbing the players with a * instead in the future
-    def getStarters():
-        name_rows = statTable.find_all('tr')
-        list_of_parsed_name_rows = [parse_mod_td_row(row) for row in name_rows[1:]]
-        
-        name_df = DataFrame(list_of_parsed_name_rows)
-        name_df[1] = name_df[1].str.replace('</a>', '')
-        name_df[1] = name_df[1].str.split('</td>').str[0]
-        name_df[1] = name_df[1].str.rsplit('>').str[-1]
-        name_df[1] = name_df[1].str.upper()
-        name_df[1] = name_df[1].str.strip()
-        name_df = name_df[[1]]
-        name_df = name_df.head(5)
-        print(name_df)
-
-        name_df[1] = name_df[1].str.split(',').str[1] + ' ' + name_df[1].str.split(',').str[0]
-        name_df[1] = name_df[1].str.strip()
-        nameList = name_df[1].to_list() 
-        nameList = ["SCOOTER WILLIAMS JR." if item == "SCOOTER WILLIAMS" else item for item in nameList]
+def colorDistance(a, b):
+    # Plain RGB distance between two #RRGGBB colors
+    rgb = lambda h: [int(h.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4)]
+    return sum((x - y) ** 2 for x, y in zip(rgb(a), rgb(b))) ** 0.5
 
 
-        print(nameList)
-        return nameList  
-    
-    ## Create a df with rows for each sub time, filled with the starters. They will be removed as they are subbed out
-    ## TODO: No reason to do the first iterrows here, just grab unique time values from subs_df
-    if len(endSubs):
-        lineup = [[startTime, endSubs['P1'].upper(), endSubs['P2'].upper(), endSubs['P3'].upper(), endSubs['P4'].upper(), endSubs['P5'].upper()]]
-    else:
-        nameList = getStarters()
-        lineup = [[startTime,nameList[0].strip(),nameList[1].strip(),nameList[2].strip(),nameList[3].strip(),nameList[4].strip()]]
-    lineup_df = pd.DataFrame(lineup, columns = ['Time','P1','P2','P3','P4','P5'])
-    lineup_df = lineup_df.set_index('Time')
-    for index, row in subs_df.iterrows(): 
-        if row['time'] != startTime: lineup_df.loc[row['time']] = [np.nan,np.nan,np.nan,np.nan,np.nan]
-    lineup_df = lineup_df.ffill()
-
-    ## Go through each sub action
-    i=0
-    for index, row in subs_df.iterrows():
-        if row['action'] == 'SUB OUT ':
-            for pNum in ['P1', 'P2', 'P3', 'P4', 'P5']:
-                if lineup_df.loc[row['time'],pNum] == row['player']:
-                    lineup_df.loc[row['time']:,pNum] = np.nan
-                    break          
-
-        elif row['action'] == 'SUB IN ':
-            for pNum in ['P1', 'P2', 'P3', 'P4', 'P5']:
-                if pd.isnull(lineup_df.loc[row['time'],pNum]):
-                    lineup_df.loc[row['time'],pNum] = row['player']
-                    lineup_df[pNum] = lineup_df[pNum].ffill()  
-                    break  
-    
-    ## Change timestamp in Time column to seconds
-    lineup_df = lineup_df.reset_index(level=0)
-    lineup_df[['Minutes','Seconds']] = lineup_df['Time'].str.split(':', expand=True)# + int(lineup_df['Time'].str.split(':').str[1])
-    lineup_df['Time'] = lineup_df['Minutes'].astype(int)*60 + lineup_df['Seconds'].astype(int)
-    lineup_df = lineup_df.drop(columns=['Minutes','Seconds'])
-
-    for col in lineup_df.columns:
-        if lineup_df[col].dtype == 'object':
-            lineup_df[col] = lineup_df[col].str.title()
-
-    return lineup_df
+def readable(color):
+    # True when a color shows up well on the white cards
+    return bool(color) and hexLuminance(color) <= MAX_LUMINANCE
 
 
-def renderLineupChart(lineup_df, shots_df, team, oppo, color_code, color2, filename, maxTime, platform):
-    lineup_df = lineup_df.set_index('Time')
-    
-    ## Get list of starters and add 'gaps' for STARTERS and BENCH text
-    starters = lineup_df.loc[maxTime].tolist()
-    starters.insert(0,"")
-    starters.append(" ")
-    
-    ## Get list of all players who played in the game (without duplicates)
-    player_list = lineup_df.values.tolist()
-    player_list = np.concatenate(player_list).tolist()
-    player_list = list(set(player_list))
-    player_list.sort()
+def pickColors(tech, other):
+    # One color per team: readable on white, and different enough from each other
+    techColor = next((c for c in (tech.get('color'), tech.get('alt')) if readable(c)),
+                     FALLBACK_COLORS['tech'])
+    # The opponent gives way when the two teams wear similar colors
+    for c in (other.get('color'), other.get('alt'), FALLBACK_COLORS['other']):
+        if readable(c) and colorDistance(c, techColor) >= MIN_COLOR_DISTANCE:
+            return techColor, c
+    return techColor, FALLBACK_COLORS['other']
 
-    
-    ## Seperate out the starters at the top of the chart
-    player_list_temp = starters + player_list
-    player_list = []
-    [player_list.append(x) for x in player_list_temp if x not in player_list]
-    
-    ## Remove Empty items from list
-    if 'nan' in player_list: player_list.remove('nan')
-    
-    ## Get a list of whether each player was on the court at what intervals
-    master_list = []
-    temp_list = []
-    for name in player_list:
-        for index, row in lineup_df.iterrows():
-            if row['P1'] == name or row['P2'] == name or row['P3'] == name or row['P4'] == name or row['P5'] == name:
-                temp_list.append(color_code)
+
+def publishLogo(name, url):
+    # Caches a team's logo in logo/, then publishes a trimmed copy; returns its link from the asset folder
+    cache = os.path.join(LOGO_DIR, f"{name}.png")
+    if not os.path.isfile(cache) and not (url and downloadLogo(url, cache, name)):
+        return None
+    img = trimmedLogo(cache)
+    if img is None:
+        return None
+    # Sized by height, so square marks and wide wordmarks sit alike on the scoreboard
+    img.thumbnail((LOGO_HEIGHT * 3, LOGO_HEIGHT), Image.LANCZOS)
+    os.makedirs(LOGO_WEB_DIR, exist_ok=True)
+    filename = assetSlug(name) + '.png'
+    img.save(os.path.join(LOGO_WEB_DIR, filename))
+    return 'logo/' + filename
+
+
+####
+# PLAYERS
+####
+
+# Name parts that stay upper case: suffixes and initials like DJ or AJ
+UPPER_PARTS = {'II', 'III', 'IV', 'V'}
+
+
+def titleWord(word):
+    # 'MCDONALD' -> 'McDonald', 'DJ' -> 'DJ', 'JR.' -> 'Jr.'
+    if word in UPPER_PARTS or re.fullmatch(r'[A-Z]J', word):
+        return word
+    word = word.capitalize()
+    if word.startswith('Mc') and len(word) > 2:
+        word = 'Mc' + word[2:].capitalize()
+    # Capitalize after hyphens and apostrophes too (O'Neal, Smith-Jones)
+    return re.sub(r"([-'])(\w)", lambda m: m.group(1) + m.group(2).upper(), word)
+
+
+def displayName(player):
+    # A player's 'First Last' name, from the roster link when there is one, else the 'LAST,FIRST' check name
+    if player.get('playerFirstLastName'):
+        return player['playerFirstLastName']
+    last, _, first = player['checkName'].partition(',')
+    return ' '.join(titleWord(w) for w in f"{first} {last}".split())
+
+
+def inferStarters(players, plays):
+    # Fallback when the box score's starter flags don't name five: whoever acted before first subbing in
+    starters = []
+    seen = set()
+    for p in plays:
+        name = p['name']
+        if name in seen or name == 'TEAM':
+            continue
+        seen.add(name)
+        if not (p['action'] == 'SUB' and p['type'] == 'IN'):
+            starters.append(name)
+    return [n for n in starters if n in players][:5]
+
+
+####
+# GAME DATA
+####
+
+def periodLayout(box):
+    # Start and length (in seconds of game time) of every period played, with its label
+    rules = (box.get('venue') or {}).get('rules') or {}
+    regulation = int(rules.get('periods') or 2)
+    minutes = int(rules.get('minutes') or (20 if regulation == 2 else 10))
+    ot_minutes = int(rules.get('minutesOfOvertime') or 5)
+    periods, start = [], 0
+    for i in range(len(box['periodsWithPlays'])):
+        if i < regulation:
+            label = f"{i + 1}H" if regulation == 2 else f"Q{i + 1}"
+            length = minutes * 60
+        else:
+            ot = i - regulation + 1
+            label = 'OT' if ot == 1 else f"{ot}OT"
+            length = ot_minutes * 60
+        periods.append({'label': label, 'start': start, 'length': length})
+        start += length
+    return periods
+
+
+def gamePlays(box, periods):
+    # Every play in feed order, timed in seconds since tip-off
+    plays = []
+    for period, block in zip(periods, box['periodsWithPlays']):
+        for p in block['plays']:
+            mins, _, secs = (p.get('time') or '0:00').partition(':')
+            clock = int(mins or 0) * 60 + int(secs or 0)
+            plays.append({'t': period['start'] + period['length'] - clock,
+                          'side': 'home' if p.get('isHomeTeam') else 'away',
+                          'name': p.get('checkname') or 'TEAM',
+                          'action': (p.get('action') or '').upper(),
+                          'type': (p.get('type') or '').upper()})
+    return plays
+
+
+def shotEvent(play, made):
+    # A field goal or free throw as the page draws it: [t, kind, made, shot type]
+    if play['type'] == '3PTR':
+        return [play['t'], 'FG3', made, '3PTR']
+    return [play['t'], 'FG2', made, play['type'] or 'SHOT']
+
+
+def buildGame(box, periods, plays):
+    # Lineup stints, per-player events and the running score, from one pass over the plays
+    length = periods[-1]['start'] + periods[-1]['length']
+    teams = {}
+    for side in SIDES:
+        roster = [p for p in box[TEAM_KEYS[side]]['players'] if p.get('checkName') not in (None, 'TEAM')]
+        teams[side] = {p['checkName']: {'name': displayName(p), 'num': p.get('uniform', ''),
+                                        'starter': p.get('gameStarted') == '1',
+                                        'stints': [], 'events': [], 'pts': 0}
+                       for p in roster}
+        # Five starters from the box score, or worked out from the plays if it doesn't flag five
+        if sum(p['starter'] for p in teams[side].values()) != 5:
+            starters = inferStarters(teams[side], [p for p in plays if p['side'] == side])
+            for name, p in teams[side].items():
+                p['starter'] = name in starters
+
+    # Who's on the floor: name -> their open stint, [start, end, +/-]
+    onCourt = {side: {n: [0, None, 0] for n, p in teams[side].items() if p['starter']} for side in SIDES}
+    # Stints closed at this very second, still credited if a basket lands mid-substitution
+    leaving = {side: [] for side in SIDES}
+    score = {'away': 0, 'home': 0}
+    scores = [[0, 0, 0, None, '']]
+    fouls = Counter()
+    lastT = 0
+
+    for play in plays:
+        side, name, t = play['side'], play['name'], play['t']
+        other = 'home' if side == 'away' else 'away'
+        if t != lastT:
+            leaving, lastT = {s: [] for s in SIDES}, t
+        if name == 'TEAM':
+            continue
+        # Someone missing from the roster still gets a row
+        player = teams[side].setdefault(name, {'name': displayName({'checkName': name}), 'num': '',
+                                               'starter': False, 'stints': [], 'events': [], 'pts': 0})
+
+        # Substitutions open and close stints
+        if play['action'] == 'SUB':
+            if play['type'] == 'IN' and name not in onCourt[side]:
+                onCourt[side][name] = [t, None, 0]
+            elif play['type'] == 'OUT' and name in onCourt[side]:
+                stint = onCourt[side].pop(name)
+                stint[1] = t
+                leaving[side].append(stint)
+                # A zero-length stint still counts when a free throw landed during it
+                if t > stint[0] or stint[2]:
+                    player['stints'].append(stint)
+            continue
+
+        # Made shots move the score and every on-court player's +/-
+        if play['action'] == 'GOOD':
+            pts = POINTS.get(play['type'], 2)
+            score[side] += pts
+            player['pts'] += pts
+            for s, change in ((side, pts), (other, -pts)):
+                # Feeds sometimes log a free throw between a SUB OUT and its SUB IN; the leaver still counts
+                stints = list(onCourt[s].values())
+                stints += leaving[s][:max(0, 5 - len(stints))]
+                for stint in stints:
+                    stint[2] += change
+            scores.append([t, score['away'], score['home'], side,
+                           f"{player['name']} {shotLabel(play['type'], pts)}"])
+
+        # Everything else becomes a marker on the player's row
+        events = player['events']
+        if play['action'] in ('GOOD', 'MISS') and play['type'] == 'FT':
+            # Free throws at the same moment group into one 'made/attempted' marker
+            made = int(play['action'] == 'GOOD')
+            if events and events[-1][1] == 'FT' and events[-1][0] == t:
+                events[-1][2] += made
+                events[-1][3] += 1
             else:
-                temp_list.append('#B2BEB5')
-        master_list.append(temp_list)
-        temp_list = []
-                    
-    ## Get length of time periods
-    times = list(lineup_df.index.values)
-    
-    diff_secs = [i-j for i, j in zip(times[:-1], times[1:])]
-    diff_secs.append(int(maxTime)-sum(diff_secs))
-    
-    ## (So, I'm dumb and did the master list backwards. So rather than fix that logic, I'm just transposing the list of lists because I'm lazy)
-    t_master_list = list(map(list, zip(*master_list)))
-    
-    ## Setup chart
-    plt.rcParams["font.family"] = "Century Gothic"
-    fig, ax = plt.subplots(figsize=(10, 4), dpi=200)
-    
-    ## Create bars
-    x = 0
-    for i in range(0,len(diff_secs)):
-        ax.barh(player_list,diff_secs[i],left=x,color=t_master_list[i])
-        x = x + diff_secs[i]
-    
-    ## Put shots on chart
-    foul_count = []
-    i = 0
-    for player in player_list:
-        foul_count.append(0)
-        ft_flag = 0
-        ft_num = 0
-        ft_den = 0
-        ft_time = ""
-        player_shots = shots_df.loc[shots_df['player'] == player]
-        for k, (index,row) in enumerate(player_shots.iterrows()):
-            if ft_flag == 1:
-                if 'GOOD FT' in row['action'] and ft_time <= row['time']+2 and ft_time >= row['time']-2:
-                    ft_num = ft_num + 1
-                    ft_den = ft_den + 1
-                elif 'MISS FT' in row['action'] and ft_time <= row['time']+2 and ft_time >= row['time']-2:
-                    ft_den = ft_den + 1
-                else:
-                    ## See if this was a shooting foul (Need to check the second before the FT since box scores are weird sometimes)
-                    searchfor = ['GOOD', 'MISS']
-                    player_shot_attempts = player_shots[player_shots['action'].str.contains('|'.join(searchfor),na = False)]
-                    times_num = len(player_shot_attempts[player_shot_attempts['time'] == ft_time]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 1]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time + 2]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time - 1]) + len(player_shot_attempts[player_shot_attempts['time'] == ft_time - 2])
-                                                                                                         
-                    if times_num == ft_den:
-                        ax.text(int(maxTime) - int(ft_time),i, str(ft_num) + "\n" + "—" + "\n" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center', linespacing=0.5)
-                    else:
-                        ax.text(int(maxTime) - int(ft_time),i, "\n\n+" + str(ft_num), fontsize=4, color='white', weight='bold', va='center', ha='center')
-                    
-                    ft_flag = 0
-                    
-                ## Need to go ahead and print if this is the player's last shot
-                if k == len(player_shots) - 1:
-                    ax.text(int(maxTime) - int(ft_time),i, str(ft_num) + "\n" + "—" + "\n" + str(ft_den), fontsize=6, color='white', weight='bold', va='center', ha='center', linespacing=0.5)
-                    ft_flag = 0
-                    
-            if 'GOOD 3PTR' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"3", fontsize=10, color='lime', weight='bold', va='center', ha='center')
-            elif 'MISS 3PTR' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"3", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
-            elif 'GOOD JUMPER' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
-            elif 'GOOD TIPIN' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
-            elif 'GOOD LAYUP' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
-            elif 'GOOD DUNK' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lime', weight='bold', va='center', ha='center')
-            elif 'MISS JUMPER' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
-            elif 'MISS LAYUP' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
-            elif 'MISS DUNK' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"2", fontsize=10, color='lightpink', weight='bold', va='center', ha='center')
-            elif 'REBOUND' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='darkorange', weight='heavy', va='center', ha='center')
-            elif 'TURNOVER' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='lightpink', weight='heavy', va='center', ha='center')
-            elif 'ASSIST' in row['action']:
-                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='green', weight='heavy', va='center', ha='center')
-            elif 'FOUL' in row['action']:
-                foul_count[i] = foul_count[i] + 1
-                ax.text(int(maxTime) - int(row['time']),i,"|", fontsize=14, color='#FF3131', weight='bold', va='center', ha='center')
-                ax.text(int(maxTime) - int(row['time']),i+0.4,"  " + str(foul_count[i]), fontsize=4, color='#FF3131', weight='bold', va='top', ha='center')
-            elif 'FT' in row['action'] and ft_flag == 0:
-                ft_flag = 1
-                ft_num = 0
-                ft_den = 1
-                ft_time = row['time']
-                if 'GOOD FT' in row['action']:
-                    ft_num = 1
-                else:
-                    ft_num = 0
-        i = i+1
-    
-    ## Add text to chart
-    ax.text(1200,0,"STARTERS", fontsize=10, color=color_code, weight='bold', va='center', ha='center')
-    ax.text(1200,6,"BENCH", fontsize=10, color=color_code, weight='bold', va='center', ha='center')
-    ax.text(1200,-1.5,"vs " + oppo, fontsize=10, color='black', va='center', ha='center')
+                events.append([t, 'FT', made, 1])
+        elif play['action'] in ('GOOD', 'MISS'):
+            events.append(shotEvent(play, int(play['action'] == 'GOOD')))
+        elif play['action'] == 'REBOUND':
+            events.append([t, 'REB', play['type']])
+        elif play['action'] == 'FOUL':
+            fouls[(side, name)] += 1
+            events.append([t, 'PF', fouls[(side, name)]])
+        elif play['action'] in ('ASSIST', 'TURNOVER', 'STEAL', 'BLOCK'):
+            events.append([t, {'ASSIST': 'AST', 'TURNOVER': 'TO', 'STEAL': 'STL', 'BLOCK': 'BLK'}[play['action']]])
+
+    # Close out whoever was on the floor at the final horn
+    for side in SIDES:
+        for name, stint in onCourt[side].items():
+            stint[1] = length
+            if length > stint[0]:
+                teams[side][name]['stints'].append(stint)
+
+    return teams, scores, length
 
 
-
-    ## Finalize Chart
-    ax.set_xlim(0,int(maxTime))
-    xticks = [0,240,480,720,960,1200,1440,1680,1920,2160,2400]
-    xticklabels = ['Start','16:00\n1H','12:00\n1H','8:00\n1H','4:00\n1H','Halftime','16:00\n2H','12:00\n2H','8:00\n2H','4:00\n2H','End of\nRegulation']
-
-    if maxTime >= 2700:
-        xticks.append(2700)
-        xticklabels.append('End of\nOT1')
-        plt.axvline(x=2400, color='white', linewidth=1.5)
-
-    if maxTime >= 3000:
-        xticks.append(3000)
-        xticklabels.append('End of\nOT2')
-        plt.axvline(x=3000, color='white', linewidth=1.5)
-
-    ax.set_xticks(xticks)
-    ax.set_xticklabels(xticklabels)
-
-    plt.axvline(x=1200, color='white', linewidth=1.5)
-    ax.grid(axis="x", color="white", alpha=.5, linewidth=.5)
-    plt.gca().invert_yaxis()
-    ax.text(0,-5," ")
-    ax.tick_params(axis=u'y', which=u'both',length=0)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    fig.patch.set_facecolor(color2) 
-    ax.set_facecolor(color2)
- 
-
-    if platform == "AWS":
-        fig_path = '/tmp/out.png'
-        team_logo_path = '/tmp/'+team+'.png'
-        oppo_logo_path = '/tmp/'+oppo+'.png'
-        out_path = '/tmp/' + filename + '.png'     
-    
-    else:
-        fig_path = 'tmp/hoopsLineupsTemp.png'
-        team_logo_path = 'logo/'+team+'.png'
-        out_path = 'out/' + filename + '.png'        
-        
-    plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
-    
-    img = Image.open(fig_path)
-    team_logo = Image.open(team_logo_path)
-    if team == 'Louisiana Tech': logo_size=300
-    else: logo_size = 250
-    team_logo = team_logo.resize((logo_size,logo_size))
-    
-    img_w, img_h = img.size
-    offset = (int(img_w-1271-(logo_size//2)), 2)
-    img.paste(team_logo, offset, team_logo)
-    img.save(out_path)
-    
-    
-    if platform == 'AWS':
-        import boto3
-        s3 = boto3.resource("s3")
-        s3.meta.client.upload_file('/tmp/' + filename + '.png', 'gtpdd', filename + '.png')
-        
-    return 0
+def shotLabel(shotType, pts):
+    # 'LAYUP' -> 'layup', '3PTR' -> '3-pointer', for the score tracker's play text
+    if pts == 3:
+        return '3-pointer'
+    if shotType == 'FT':
+        return 'free throw'
+    return {'TIPIN': 'tip-in', 'JUMPER': 'jumper'}.get(shotType, shotType.lower() or 'basket')
 
 
-def getPlusMinus(lineup_df,scores_df,team,oppo, hFlag, color, color2, platform): 
-    ## Get list of all players who played in the game (without duplicates)
-    lineup_df2 = lineup_df.drop(columns=['Time'])
-    player_list = lineup_df2.values.tolist()
-    player_list = list(np.concatenate(player_list).flat)
-    player_list = list(set(player_list))
-    player_list.sort()
-        
-    pm_list = [0]*len(player_list)
-    
-    ## Get timestamps for subs
-    sub_times = lineup_df['Time'].tolist()
-    sub_times.append(0)
-    v_score = [0]
-    h_score = [0]
-    
-    ## Add substitution times to the scores_df from ESPN
-    for sub_time in sub_times:
-        temp_df = pd.DataFrame({'Away': np.nan, 'Home': np.nan, 'Time': sub_time }, index=[0])
-        #temp_df = pd.DataFrame.from_dict(temp_df)
-        #scores_df = scores_df.append(temp_df, ignore_index = True)
-        scores_df= pd.concat([scores_df,temp_df])
-
-    scores_df = scores_df.sort_values(by = ['Time'], ascending = False)
-    scores_df = scores_df.reset_index(drop=True)
-    scores_df = scores_df.ffill()
-    scores_df = scores_df.fillna(value=0)
-        
-    
-    k = 0
-    for i in range(0,len(sub_times)-1):
-        ## Get score at those timestamps
-        scores_df2 = scores_df.loc[scores_df['Time'] == sub_times[i+1]]
-        v_score.append(scores_df2['Away'].max())
-        h_score.append(scores_df2['Home'].max())
-                
-        ## Get point diff for each sub period
-        if hFlag == 0:
-            score_dif = (int(v_score[k+1]) -int(v_score[k])) - (int(h_score[k+1]) - int(h_score[k]))
-            filename='hoopsPlusMinusVisitor'
+def mergeStints(stints):
+    # Joins stints where a player checked out and straight back in, so each run on the floor is one bar
+    merged = []
+    for s, e, pm in sorted(stints):
+        if merged and merged[-1][1] >= s:
+            merged[-1][1] = max(merged[-1][1], e)
+            merged[-1][2] += pm
         else:
-            score_dif = (int(h_score[k+1]) -int(h_score[k])) - (int(v_score[k+1]) - int(v_score[k]))
-            filename='hoopsPlusMinusHome'
-                
-        ## For each timestamp, go player by player and add the pointdiff to their total
-        lineup_df_list = lineup_df.values.tolist()
-        j = 0
-        for player in player_list:
-            if player in lineup_df_list[i]:
-                pm_list[j] = pm_list[j] + score_dif
-            j = j + 1
-        k = k + 1
+            merged.append([s, e, pm])
+    return merged
 
-    df = pd.DataFrame({'Player': player_list, '+/-': pm_list})
-    df = df.sort_values(by=['+/-'], ascending=False)
-    df = df.reset_index(drop=True)
-    
-    fig, ax = plt.subplots(dpi=200)
-    ax.barh(df['Player'], df['+/-'], align='center', color=color)
-    plt.gca().invert_yaxis()
-    
-    for i in range(0,len(df['Player'])):
-        if len(df['Player'][i])/2 < df['+/-'][i] or len(df['Player'][i])/-2 > df['+/-'][i]:
-            ax.text(df['+/-'][i]/2,i,df['Player'][i], ha='center', va='center', fontweight = 'bold',color=color2)
-        elif df['+/-'][i] >= 0:
-            ax.text(0,i,df['Player'][i] + ' ', ha='right', va='center',fontweight = 'bold', color=color)
-        else:
-            ax.text(0,i,' ' + df['Player'][i], ha='left', va='center',fontweight = 'bold', color=color)
-            
-        if df['+/-'][i] >= 0:
-            ax.text(df['+/-'][i],i,' +' + str(df['+/-'][i]), ha='left', va='center', color=color)
-        else:
-            ax.text(df['+/-'][i],i,str(df['+/-'][i]) + ' ', ha='right', va='center', color=color)
 
-    
-    ## Finalize Chart
-    plt.axis('off')
-    fig.patch.set_facecolor(color2) 
-    ax.set_facecolor(color2)
-    plt.axvline(x=0, color=color)
-    ax.text(0,-4,' ')
-    
-    if platform == "AWS":
-        fig_path = '/tmp/out.png'
-        team_logo_path = '/tmp/'+team+'.png'
-        oppo_logo_path = '/tmp/'+oppo+'.png'
-        at_path = '/tmp/plusminus.png'
-        out_path = '/tmp/' + filename + '_plusminus.png'
+def playerRows(players):
+    # Players who saw the floor or the stat sheet: starters first, then the bench by minutes
+    rows = []
+    for p in players.values():
+        if not p['stints'] and not p['events']:
+            continue
+        stints = mergeStints(p['stints'])
+        rows.append({'name': p['name'], 'num': p['num'], 'starter': p['starter'],
+                     'secs': sum(e - s for s, e, _ in stints), 'pts': p['pts'],
+                     'pm': sum(pm for _, _, pm in stints), 'stints': stints, 'events': p['events']})
+    starters = sorted((r for r in rows if r['starter']), key=lambda r: r['num'])
+    bench = sorted((r for r in rows if not r['starter']), key=lambda r: -r['secs'])
+    return starters + bench
 
-        import boto3
-        s3 = boto3.client('s3')
-        s3.download_file('gtpdd', 'plusminus.png', '/tmp/plusminus.png')
-    
-    else:
-        fig_path = 'tmp/hoopsLineupsTemp.png'
-        team_logo_path = 'logo/'+team+'.png'
-        oppo_logo_path = 'logo/'+oppo+'.png'
-        at_path = 'img/plusminus.png'
-        out_path = 'out/' + filename + '.png'
-        
-    plt.savefig(fig_path, bbox_inches='tight', pad_inches = 0, dpi=300)
-    
 
-    img = Image.open(fig_path)
-    
-    if filename == 'visitor':
-        logo_path = oppo_logo_path
+def gameRecord(season, event, box):
+    # Packages one game as the page reads it
+    periods = periodLayout(box)
+    plays = gamePlays(box, periods)
+    teams, scores, length = buildGame(box, periods, plays)
 
-    else:
-        logo_path = team_logo_path
-        
-    team_logo = Image.open(logo_path)
-    logo_size = 250
-    team_logo = team_logo.resize((logo_size,logo_size))
-    oppo_logo = oppo_logo.resize((logo_size,logo_size))
-    img_w, img_h = img.size
-    v_offset = (int(img_w/2 - logo_size - 40) , -2)
-    h_offset = (int(img_w/2) + 40 , -2)
-    img.paste(team_logo, v_offset, team_logo)
+    # Tech's side, then ESPN's names, colors and logos for each team
+    techSide = 'away' if box['visitingTeam'].get('isTenantTeam') else 'home'
+    day = (event.get('date') or box.get('gameDate') or '')[:10]
+    espn = espnTeams(season, day)
+    techColor, otherColor = pickColors(espn.get('tech', {}), espn.get('other', {}))
 
-    '''
-    team_logo = Image.open(team_logo_path)
-    oppo_logo = Image.open(oppo_logo_path)
-    at = Image.open(at_path)
-    logo_size = 250
-    
-    team_logo = team_logo.resize((logo_size,logo_size))
-    oppo_logo = oppo_logo.resize((logo_size,logo_size))
-    
-    
-    at_offset = (int(img_w/2)-40, 95)
-    
+    sides = {}
+    for side in SIDES:
+        team = box[TEAM_KEYS[side]]
+        isTech = side == techSide
+        info = espn.get('tech' if isTech else 'other', {})
+        name = info.get('name') or team.get('name')
+        logoUrl = info.get('logo') or (SIDEARM_CDN + team['logo'] if team.get('logo') else None)
+        final = int(team.get('scoreSummary', {}).get('score') or scores[-1][1 if side == 'away' else 2])
+        sides[side] = {'name': name, 'abbr': info.get('abbr') or team.get('id', '')[:4].upper(),
+                       'tech': isTech, 'record': (team.get('record') or '').split(',')[0],
+                       'color': techColor if isTech else otherColor,
+                       'logo': publishLogo(name, logoUrl), 'score': final,
+                       'players': playerRows(teams[side])}
 
-    if filename == 'visitor':        
-        img.paste(team_logo, v_offset, team_logo)
-        img.paste(at, at_offset, at)
-        img.paste(oppo_logo.convert('L'), h_offset, oppo_logo)
-        
-    else:
-        img.paste(team_logo, h_offset, team_logo)
-        img.paste(at, at_offset, at)
-        img.paste(oppo_logo.convert('L'), v_offset, oppo_logo)
-    '''    
-    img.save(out_path)
-    
-    if platform == 'AWS':
-        import boto3
-        s3 = boto3.resource("s3")
-        s3.meta.client.upload_file('/tmp/' + filename + '_plusminus.png', 'gtpdd', filename + '_plusminus.png')
+    # Shout if the plays don't add up to the final score
+    tracked = {'away': scores[-1][1], 'home': scores[-1][2]}
+    for side in SIDES:
+        if tracked[side] != sides[side]['score']:
+            print(f"Warning: plays give {sides[side]['name']} {tracked[side]}, "
+                  f"the box score says {sides[side]['score']}.")
 
-    return df
- 
-def hoopsLineups(team, gameNum, platform):
-    ## TODO: Try/except with the pbp tables to detect an OT/2OT game
-    otFlag = 0
-    ot2Flag = 0
-    
-    home_soup = Soup((requests.get('https://latechsports.com/sports/mens-basketball/schedule')).text, features="lxml")
-    box_scores = []
-    lis = home_soup.find_all('li', {"class":"sidearm-schedule-game-links-boxscore"})
-    for li in lis:
-        box_scores.append(li.a.get("href"))
-    box_scores = list(dict.fromkeys(box_scores))
-    
-    box_url = 'https://latechsports.com' + str(box_scores[gameNum])
-    box_soup = Soup((requests.get(box_url)).text, features="lxml")
-    tables = box_soup.find_all('table')
-    
-    visitorStatTable = tables[1]
-    homeStatTable = tables[4]
-    half1PBP = tables[7]
-    half2PBP = tables[8]
+    # Labels for the pickers and the page title
+    when = datetime.fromisoformat(day)
+    tech, other = sides[techSide], sides['home' if techSide == 'away' else 'away']
+    result = 'W' if tech['score'] > other['score'] else 'L'
+    venue = box.get('venue') or {}
+    where = 'vs' if venue.get('isNeutral') or techSide == 'home' else 'at'
+    slug = event['result']['boxscore']['url'].rstrip('/').split('/')[-3]
+    return {
+        'id': str(event.get('id')),
+        'season': seasonSlug(season),
+        'href': f"{seasonSlug(season)}/{day}-{slug}.html",
+        'date': day,
+        'dateLabel': f"{when:%B} {when.day}, {when.year}",
+        'label': f"{when:%b} {when.day} {where} {other['name']} ({result} {tech['score']}-{other['score']})",
+        'venue': venue.get('location') or '',
+        'attendance': venue.get('attendance') or '',
+        'length': length,
+        'periods': periods,
+        'teams': sides,
+        'scores': scores,
+    }
 
-    half1_df = get_pbp_table(half1PBP)
-    half2_df = get_pbp_table(half2PBP)
 
-    if otFlag:
-        half3PBP = tables[9]
-        half3_df = get_pbp_table(half3PBP)
+####
+# WEB PAGE
+####
 
-    if ot2Flag:
-        half4PBP = tables[10]
-        half4_df = get_pbp_table(half4PBP)
+def gameJs(game):
+    # Lays out a game file by hand, one line per player and score, so it stays readable
+    out = ['{']
+    for key in ('id', 'season', 'href', 'date', 'dateLabel', 'label', 'venue', 'attendance', 'length'):
+        out.append(f'  {json.dumps(key)}: {json.dumps(game[key])},')
+    out.append('  "periods": ' + json.dumps(game['periods']) + ',')
+    out.append('  "teams": {')
+    for si, side in enumerate(SIDES):
+        team = {k: v for k, v in game['teams'][side].items() if k != 'players'}
+        out.append(f'    "{side}": ' + json.dumps(team)[:-1] + ', "players": [')
+        players = game['teams'][side]['players']
+        out += ['      ' + json.dumps(p) + (',' if i < len(players) - 1 else '') for i, p in enumerate(players)]
+        out.append('    ]}' + (',' if si == 0 else ''))
+    out.append('  },')
+    out.append('  "scores": [')
+    out += ['    ' + json.dumps(s) + (',' if i < len(game['scores']) - 1 else '')
+            for i, s in enumerate(game['scores'])]
+    out += ['  ]', '}']
+    return '\n'.join(out)
 
-    ## TODO: Combine these three functions. Too much repeated
-    def generateDataframes(half1_df,half2_df,statTable,label):
-        shots1_df = getShots(half1_df,label)
-        shots2_df = getShots(half2_df,label)
-        shots1_df['time'] = shots1_df['time'].astype(int) + 1200
-        shots_df = pd.concat([shots1_df,shots2_df])
-        
-        subs1_df = get_subs(half1_df,label)
-        subs2_df = get_subs(half2_df,label)
 
-        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
-        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
-        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1200
-        lineup_df= pd.concat([lineup1_df,lineup2_df])
-        return lineup_df, shots_df
-    
-    def generateDataframesOT(half1_df,half2_df,half3_df,statTable,label):
-        shots1_df = getShots(half1_df,label)
-        shots2_df = getShots(half2_df,label)
-        shots3_df = getShots(half3_df,label)
-        shots1_df['time'] = shots1_df['time'].astype(int) + 1500
-        shots2_df['time'] = shots2_df['time'].astype(int) + 300
-        shots_df = pd.concat([shots1_df,shots2_df,shots3_df])
-        
-        subs1_df = get_subs(half1_df,label)
-        subs2_df = get_subs(half2_df,label)
-        subs3_df = get_subs(half3_df,label)
+def writeManifest():
+    # Rebuilds the game list from every game file on disk, newest season and game first
+    games = {}
+    for season in sorted(os.listdir(ASSET_DIR) if os.path.isdir(ASSET_DIR) else []):
+        folder = os.path.join(ASSET_DIR, season)
+        if not re.fullmatch(r'\d{4}-\d{2}', season) or not os.path.isdir(folder):
+            continue
+        for fn in sorted(os.listdir(folder)):
+            if fn.endswith('.js'):
+                g = readJsGlobal(os.path.join(folder, fn), GAME_GLOBAL)
+                games.setdefault(season, []).append({'href': g['href'], 'label': g['label'], 'date': g['date']})
+    for season in games:
+        games[season].sort(key=lambda g: g['date'], reverse=True)
+    years = sorted(games, reverse=True)
+    path = os.path.join(ASSET_DIR, MANIFEST_FILENAME)
+    writeJsGlobal(path, MANIFEST_GLOBAL, {'years': years, 'games': games}, header=MANIFEST_JS_HEADER)
+    return path
 
-        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
-        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
-        lineup3_df = getLineup(subs3_df, statTable, '05:00', lineup2_df.iloc[-1])
-        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1500
-        lineup2_df['Time'] = lineup2_df['Time'].astype(int) + 300
-        lineup_df= pd.concat([lineup1_df,lineup2_df,lineup3_df])
-        return lineup_df, shots_df
-    
-    def generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,statTable,label):
-        shots1_df = getShots(half1_df,label)
-        shots2_df = getShots(half2_df,label)
-        shots3_df = getShots(half3_df,label)
-        shots4_df = getShots(half4_df,label)
-        shots1_df['time'] = shots1_df['time'].astype(int) + 1800
-        shots2_df['time'] = shots2_df['time'].astype(int) + 600
-        shots3_df['time'] = shots3_df['time'].astype(int) + 300
-        shots_df = pd.concat([shots1_df,shots2_df,shots3_df,shots4_df])
-        
-        subs1_df = get_subs(half1_df,label)
-        subs2_df = get_subs(half2_df,label)
-        subs3_df = get_subs(half3_df,label)
-        subs4_df = get_subs(half4_df,label)
 
-        lineup1_df = getLineup(subs1_df, statTable, '20:00', '')
-        lineup2_df = getLineup(subs2_df, statTable, '20:00', lineup1_df.iloc[-1])
-        lineup3_df = getLineup(subs3_df, statTable, '05:00', lineup2_df.iloc[-1])
-        lineup4_df = getLineup(subs4_df, statTable, '05:00', lineup3_df.iloc[-1])
-        lineup1_df['Time'] = lineup1_df['Time'].astype(int) + 1800
-        lineup2_df['Time'] = lineup2_df['Time'].astype(int) + 600
-        lineup3_df['Time'] = lineup3_df['Time'].astype(int) + 300
-        lineup_df= pd.concat([lineup1_df,lineup2_df,lineup3_df,lineup4_df])
-        return lineup_df, shots_df
+def fillPage(game, root, gameSrc, footerHref):
+    # Fills the page template for one game; root is the asset folder's path from the page
+    other = next(t for t in game['teams'].values() if not t['tech'])
+    away, home = game['teams']['away'], game['teams']['home']
+    title = f"{away['name']} {away['score']}, {home['name']} {home['score']} | Lineup Tracker"
+    description = (f"Every Louisiana Tech and {other['name']} lineup from {game['dateLabel']}, "
+                   f"with each player's minutes, +/- and plays, and the score throughout.")
+    pageUrl = f"{ASSET_URL}/{game['href']}"
+    cardImage = f"{ASSET_URL}/{game['href'][:-len('.html')]}.jpg"
 
-    if ot2Flag:
-        vlineup_df,vshots_df = generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,visitorStatTable,'visitor')
-        hlineup_df,hshots_df = generateDataframes2OT(half1_df,half2_df,half3_df,half4_df,homeStatTable,'home')
-        maxTime=3000
-    elif otFlag:
-        vlineup_df,vshots_df = generateDataframesOT(half1_df,half2_df,half3_df,visitorStatTable,'visitor')
-        hlineup_df,hshots_df = generateDataframesOT(half1_df,half2_df,half3_df,homeStatTable,'home')
-        maxTime=2700
-    else:
-        vlineup_df,vshots_df = generateDataframes(half1_df,half2_df,visitorStatTable,'visitor')
-        hlineup_df,hshots_df = generateDataframes(half1_df,half2_df,homeStatTable,'home')
-        maxTime=2400
-    
-    #vpm_df = getPlusMinus(vlineup_df,scores_df,visitor,home,0, v_color, v_color2, platform)
-    #hpm_df = getPlusMinus(hlineup_df,scores_df,home,visitor,1, h_color, h_color2, platform)   
+    # The gtpdd logo closes out the page and doubles as the tab icon
+    esc = lambda text: html_escape(str(text), quote=True)
+    footerLogo = (f"<img src='{esc(footerHref)}' alt='gtpdd' width='160'>" if footerHref else 'gtpdd')
+    icon = f"<link rel='icon' href='{esc(footerHref)}'>\n" if footerHref else ''
 
-    if gameNum < 0:
-        gamesPlayed = len(box_scores)
-        gameNum = gamesPlayed + gameNum
+    with open(PAGE_TEMPLATE) as f:
+        template = Template(f.read())
+    # substitute, not safe_substitute: an unfilled placeholder fails the run instead of shipping
+    return template.substitute(
+        title=esc(title),
+        headLinks=(previewMetaTags(title, description, pageUrl, cardImage,
+                                   twitter_handle=TWITTER_HANDLE) + icon).rstrip('\n'),
+        root=esc(root),
+        current=esc(game['href']),
+        cssHref=esc(root + CSS_FILENAME),
+        manifestSrc=esc(root + MANIFEST_FILENAME),
+        gameSrc=esc(gameSrc),
+        jsSrc=esc(root + JS_FILENAME),
+        homeUrl=esc(HOME_URL),
+        footerLogo=footerLogo,
+    )
 
-    gameId = getESPNGameID(team,gameNum)
-    print(gameId)
-    x,visitorId,homeId,visitor,home,v_color,v_color2,h_color,h_color2,scores_df = getESPNAPI(platform, gameId)
-    def getBackgroundColors(color,color2):
-        if color == "#002d65":
-            color2 = "lightgray"
-        else:
-            color = "black"
-            color2 = "lightgray"
-        return color,color2
-    v_color, v_color2 = getBackgroundColors(v_color,v_color2)
-    h_color, h_color2 = getBackgroundColors(h_color,h_color2)
-    print(visitor,home,h_color,v_color) 
-    
-    renderLineupChart(vlineup_df,vshots_df,visitor,home,v_color, v_color2,'hoopsLineupsVisitor',maxTime,platform)
-    renderLineupChart(hlineup_df,hshots_df,home,visitor,h_color, h_color2,'hoopsLineupsHome',maxTime,platform)
 
-    '''
-    df = pd.read_csv('tmp/plusminus.csv')
-    df = df.set_index('Player')
-    if visitorId == '2348':
-        pm_df = vpm_df
-    else:
-        pm_df = hpm_df
-    pm_df = pm_df.set_index('Player')
-    pm_df = pm_df.rename(columns={"+/-": gameId})
+def writeGame(game, preview=True):
+    # Writes one game's data file, page and link-preview image into html/stats/hoops/lineups/<season>/
+    base = os.path.join(ASSET_DIR, game['href'][:-len('.html')])
+    os.makedirs(os.path.dirname(base), exist_ok=True)
+    writeJsGlobal(base + '.js', GAME_GLOBAL, game, header=GAME_JS_HEADER, dumps=gameJs)
 
-        
-    print(df)
-    print(pm_df)
-    
-    try: df_master = df.join(pm_df)
-    except: df_master = df
-    
-    print(df_master)
-    df_master.to_csv('tmp/plusminus.csv')
-    '''
+    # Shared files: stylesheet, script and the gtpdd logo
+    shutil.copyfile(PAGE_CSS, os.path.join(ASSET_DIR, CSS_FILENAME))
+    shutil.copyfile(PAGE_JS, os.path.join(ASSET_DIR, JS_FILENAME))
+    gtpdd = publishAsset(GTPDD_LOGO, WEB_IMG_DIR)
 
-hoopsLineups('latech', -1, '')      
+    # The page sits a folder below the asset root, beside its data file
+    with open(base + '.html', 'w') as f:
+        f.write(fillPage(game, '../', os.path.basename(base) + '.js', '../' + gtpdd if gtpdd else None))
+    print(f"Wrote {base}.html")
+
+    # Link-preview image: a shot of the scoreboard and score tracker
+    if preview and screenshotPage(base + '.html', base + '.jpg', PREVIEW_SIZE):
+        print(f"Wrote {base}.jpg")
+    return base + '.html'
+
+
+def writeLatest(game):
+    # html/stats/hoops/lineups.html: the same page for the latest game, linking into the asset folder
+    root = ASSET_DIR_NAME + '/'
+    gtpdd = publishAsset(GTPDD_LOGO, WEB_IMG_DIR)
+    path = os.path.join(PAGE_DIR, PAGE_FILENAME)
+    with open(path, 'w') as f:
+        f.write(fillPage(game, root, root + game['href'][:-len('.html')] + '.js',
+                         root + gtpdd if gtpdd else None))
+    print(f"Wrote {path}")
+    return path
+
+
+####
+# MAIN
+####
+
+def printGame(game):
+    # Terminal summary: the final, then each team's minutes, points and +/-
+    print(f"\n{game['label']}  ({game['dateLabel']}, {len(game['periods'])} periods)")
+    for side in SIDES:
+        team = game['teams'][side]
+        print(f"  {team['name']} {team['score']}")
+        for p in team['players']:
+            m, s = divmod(p['secs'], 60)
+            print(f"    {'*' if p['starter'] else ' '} {p['name']:<24} {m:>2}:{s:02d}  "
+                  f"{p['pts']:>2} pts  {p['pm']:+d}")
+
+
+def hoopsLineups(season=None, gameNum=-1, allGames=False, refresh=False, preview=True):
+    # Builds the page for one game (or all of them) and points hoops/lineups.html at the latest
+    season = currentSeason() if season is None else season
+    games = completedGames(season, refresh)
+    # Before the season tips off, fall back to last season's games
+    if not games and season == currentSeason():
+        print(f"No {seasonSlug(season)} box scores yet; using {seasonSlug(season - 1)}.")
+        season -= 1
+        games = completedGames(season, refresh)
+    if not games:
+        raise SystemExit(f"No box scores found for {seasonSlug(season)}.")
+
+    picked = games if allGames else [games[gameNum]]
+    built = []
+    for event in picked:
+        game = gameRecord(season, event, boxScore(event, refresh))
+        printGame(game)
+        writeGame(game, preview)
+        built.append(game)
+
+    # The root page follows the newest game on file
+    manifest = readJsGlobal(writeManifest(), MANIFEST_GLOBAL)
+    newest = manifest['games'][manifest['years'][0]][0]['href']
+    latest = readJsGlobal(os.path.join(ASSET_DIR, newest[:-len('.html')] + '.js'), GAME_GLOBAL)
+    writeLatest(latest)
+    return built
+
+
+####
+# COMMAND LINE
+####
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Lineup tracker pages for Louisiana Tech men's basketball games.")
+    parser.add_argument('--season', type=int,
+                        help="Season by its starting year, e.g. 2025 for 2025-26 (default: current)")
+    parser.add_argument('--game', type=int, default=-1,
+                        help="Game index in the season's completed games; negatives count back (default: -1)")
+    parser.add_argument('--all', action='store_true', help="Build every completed game of the season")
+    parser.add_argument('--refresh', action='store_true', help="Refetch pages instead of using the cache")
+    parser.add_argument('--no-preview', action='store_true', help="Skip the link-preview screenshots")
+    args = parser.parse_args()
+
+    hoopsLineups(season=args.season, gameNum=args.game, allGames=args.all,
+                 refresh=args.refresh, preview=not args.no_preview)

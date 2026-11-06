@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>$title</title>
+$headLinks
+<link rel='stylesheet' href='$cssHref'>
+</head>
+<body data-root='$root' data-current='$current'>
+<main>
+<div class='pagehead'>
+<p class='eyebrow'>Louisiana Tech Men's Basketball</p>
+<h1>Lineup Tracker</h1>
+<!-- Which season and game the page shows -->
+<div class='pickers'>
+  <select id='hl-year' aria-label='Season'></select>
+  <select id='hl-game' aria-label='Game'></select>
+</div>
+</div>
+<noscript><p class='sub'>This page draws its scoreboard and charts in the browser, so it
+needs JavaScript on.</p></noscript>
+
+<!-- Scoreboard: the final, or the score at whatever moment the charts are pointing at -->
+<section class='card board'>
+<div id='hl-board' aria-live='polite'></div>
+<div class='flowstats' id='hl-flowstats'></div>
+</section>
+
+<!-- One lineup chart per team, Louisiana Tech first, each topped by its lead over the game -->
+<section class='card lineup'>
+<header class='cardhead team' id='hl-tech-head'></header>
+<div class='scroller' id='hl-tech'></div>
+</section>
+<section class='card lineup'>
+<header class='cardhead team' id='hl-other-head'></header>
+<div class='scroller' id='hl-other'></div>
+</section>
+
+<section class='card plusminus'>
+<header class='cardhead'><h2>Plus/Minus</h2>
+<p class='hint'>The score difference while each player was on the floor</p></header>
+<div class='pmgrid' id='hl-pm'></div>
+</section>
+
+<section class='card legend'>
+<h2>Key</h2>
+<ul>
+  <li><svg viewBox='0 0 30 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='30' height='18'/></svg>On the floor</li>
+  <li><svg viewBox='0 0 30 20' aria-hidden='true'><rect class='leg-track' x='0' y='1' width='30' height='18'/></svg>On the bench</li>
+  <li><svg viewBox='0 0 20 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='20' height='18'/><circle class='shot made' cx='10' cy='10' r='7.5'/><text class='shot-num made' x='10' y='10'>3</text></svg>Made shot (3 or 2)</li>
+  <li><svg viewBox='0 0 20 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='20' height='18'/><circle class='shot miss' cx='10' cy='10' r='7'/><text class='shot-num miss' x='10' y='10'>2</text></svg>Missed shot</li>
+  <li><svg viewBox='0 0 30 24' aria-hidden='true'><rect class='leg-bar' x='0' y='0' width='30' height='24'/><circle class='shot made' cx='11' cy='13' r='7.5'/><text class='andone' x='16' y='5'>+1</text><text class='shot-num made' x='11' y='13'>2</text></svg>And-one: free throw made (+1) or missed (+0)</li>
+  <li><svg viewBox='0 0 17 24' aria-hidden='true'><rect class='leg-bar' x='0' y='0' width='17' height='24'/><rect class='ft' x='2' y='1' width='13' height='22' rx='6.5'/><text class='ft-num' x='8.5' y='7'>2</text><line class='ft-bar' x1='5' x2='12' y1='12' y2='12'/><text class='ft-num' x='8.5' y='17.5'>3</text></svg>Free throws made over taken</li>
+  <li><svg viewBox='0 0 14 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='14' height='18'/><rect class='statline stat-REB' x='5.5' y='2' width='3' height='16'/></svg>Rebound</li>
+  <li><svg viewBox='0 0 14 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='14' height='18'/><rect class='statline stat-STL' x='5.5' y='2' width='3' height='16'/></svg>Steal</li>
+  <li><svg viewBox='0 0 14 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='14' height='18'/><rect class='statline stat-BLK' x='5.5' y='2' width='3' height='16'/></svg>Block</li>
+  <li><svg viewBox='0 0 14 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='14' height='18'/><rect class='statline stat-TO' x='5.5' y='2' width='3' height='16'/></svg>Turnover</li>
+  <li><svg viewBox='0 0 20 20' aria-hidden='true'><rect class='leg-bar' x='0' y='1' width='20' height='18'/><rect class='statline stat-PF' x='4.5' y='2' width='3' height='16'/><text class='foul-num' x='9' y='7'>2</text></svg>Foul (with its number)</li>
+</ul>
+</section>
+
+<footer><a class='gtpdd' href='$homeUrl'>$footerLogo</a></footer>
+</main>
+<div id='hl-tooltip' role='tooltip'></div>
+<script src='$manifestSrc'></script>
+<script src='$gameSrc'></script>
+<script src='$jsSrc'></script>
+</body>
+</html>
