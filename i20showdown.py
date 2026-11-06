@@ -126,7 +126,9 @@ SPORTS = [
 
 # Conference points entered by hand (the site lacks ULM's finish), by year and sport key, as in the example below
 CONFERENCE_RESULTS = {
-    # 2026: {'xc-men': {'winner': TECH, 'techFinish': '2nd', 'ulmFinish': '9th'}},
+     2026: {'xc-men': {'winner': ULM, 'techFinish': '9th', 'ulmFinish': '5th'},
+            'xc-women': {'winner': ULM, 'techFinish': '13th', 'ulmFinish': '8th'}}
+
 }
 
 
@@ -508,15 +510,6 @@ def badge(sport):
     return '<span class="badge">Split ½–½</span>' if sport['winner'] == 'Tie' else ''
 
 
-def seriesLine(sport):
-    # "Tech 1 – 1 ULM" under a head-to-head card's header, once a game has been played
-    if sport['kind'] != 'h2h' or not sport['tech'] + sport['ulm'] + sport['ties']:
-        return ''
-    ties = f'<span class="ties">{sport["ties"]} tied</span>' if sport['ties'] else ''
-    return (f'<p class="series"><span class="t">Tech {sport["tech"]}</span>'
-            f'<span class="dash">–</span><span class="u">{sport["ulm"]} ULM</span>{ties}</p>')
-
-
 ####
 # GAME TILES AND SPORT CARDS
 ####
@@ -541,8 +534,9 @@ def gameListHtml(sport):
         # The date, with the time on a smaller line under it when there is one
         when = escape(g['date']) + (f'<small>{escape(g["time"])}</small>' if g['time'] else '')
         if g['status'] in ('W', 'L', 'T'):
-            # A played game: a colored W/L/T pill and the score
-            result = f'<span class="pill {g["status"].lower()}">{g["status"]}</span> {escape(g["score"])}'
+            # A played game: a colored pill naming the winner, then the score
+            winner = {'W': 'Tech Won', 'L': 'ULM Won', 'T': 'Tie'}[g['status']]
+            result = f'<span class="pill {g["status"].lower()}">{winner}</span> {escape(g["score"])}'
             # Add notes like "(7 inn.)" under the score
             if g['note']:
                 result += f'<small>{escape(g["note"])}</small>'
@@ -611,7 +605,6 @@ def sportCardHtml(sport, exitNumber):
               </div>
               {badge(sport)}
             </header>
-            {seriesLine(sport)}
             <ul class="games">{items}</ul>
           </div>
         </article>'''
