@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Odds on who wins each Sun Belt division, from ESPN's FPI game projections.
+Odds on who wins each Sun Belt division and hosts the title game, from ESPN's FPI game projections.
 
 Simulates the rest of the conference schedule many times and settles every tied
-race with the Sun Belt's tie-breakers. Each run updates html/stats/fbSunBeltPredictor.html
-(stats.gtpdd.dog/fbSunBeltPredictor.html), which keeps every run of the season, with its
-files in html/stats/fbSunBeltPredictor/; re-running on the same day replaces that day's run.
+race (and title-game host) with the Sun Belt's tie-breakers. Each run updates html/stats/football/sunBeltPredictor.html
+(stats.gtpdd.dog/football/sunBeltPredictor.html), which keeps every run of the season, with its
+files in html/stats/football/sunBeltPredictor/; re-running on the same day replaces that day's run.
 The run history is kept in csv/fbSunBeltPredictorRuns.js; page templates live in
 lib/html/fbSunBeltPredictor/.
 
@@ -39,10 +39,12 @@ import requests
 from html import escape as html_escape
 from PIL import Image
 
-from lib.fbCommon import (LOGO_DIR, TEAM_COLORS_CSV, assetSlug, currentSeason, downloadLogo,
+from lib.fbCommon import (DEFAULT_TIMEZONE, LOGO_DIR, TEAM_COLORS_CSV, assetSlug, currentSeason, downloadLogo,
                           gameDateTime, getTeamInfo, loadTeamColorsCsv, previewMetaTags,
                           publishAsset, readJsGlobal, trimmedLogo,
                           writeJsGlobal)
+from lib.common import screenshotPage
+from statsIndex import writeStatsIndex
 
 ####
 # CONSTANTS
@@ -76,8 +78,10 @@ SITE_URL = "https://stats.gtpdd.dog"   # the published root of html/stats/
 TWITTER_HANDLE = "@gotechplsdntdie"
 
 HTML_DIR = "html/stats"                # shared by several gtpdd stat pages
-ASSET_DIR_NAME = 'fbSunBeltPredictor'  # this page's own files, grouped beside it
-ASSET_DIR = os.path.join(HTML_DIR, ASSET_DIR_NAME)
+SITE_SECTION = 'football'              # the page publishes under stats.gtpdd.dog/football/
+PAGE_DIR = os.path.join(HTML_DIR, SITE_SECTION)
+ASSET_DIR_NAME = 'sunBeltPredictor'    # this page's own files, grouped beside it
+ASSET_DIR = os.path.join(PAGE_DIR, ASSET_DIR_NAME)
 WEB_IMG_DIR = os.path.join(ASSET_DIR, 'img')
 GTPDD_LOGO = 'img/gtpdd_logo.png'      # the nav logo, published alongside the page
 CONF_LOGO_NAME = 'Sun Belt'            # the conference logo's name in the shared logo cache
@@ -85,7 +89,7 @@ CONF_LOGO_HEIGHT = 112                 # the title's conference logo, at 2x its 
 LOGO_HEIGHT = 56                       # published at 2x the height the table draws
 HERO_LOGO_HEIGHT = 240                 # the predicted-championship logos, at 2x their drawn height
 MATCHUPS = 5                           # most likely title-game matchups kept per run
-PAGE_FILENAME = 'fbSunBeltPredictor.html'
+PAGE_FILENAME = 'sunBeltPredictor.html'
 CSS_FILENAME = 'fbSunBeltPredictor.css'
 JS_FILENAME = 'fbSunBeltPredictor.js'
 STARBURST_FILENAME = 'starburst.svg'   # the matchup card's background, from the Sun Belt logo
@@ -117,6 +121,13 @@ PAGE_TEMPLATE = os.path.join(TEMPLATE_DIR, 'page.html')
 PAGE_CSS = os.path.join(TEMPLATE_DIR, CSS_FILENAME)
 PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
 PAGE_STARBURST = os.path.join(TEMPLATE_DIR, STARBURST_FILENAME)
+
+# The stats.gtpdd.dog index card: the page's championship card, screenshotted into an image beside the page
+CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
+CARD_HTML = 'out/fbSunBeltPredictorCard.html'  # the filled template, kept only for the screenshot
+CARD_FILENAME = 'card.jpg'
+CARD_SIZE = (1200, 630)                # the same shape as the link-preview cards
+DIVISION_ORDER = ['West', 'East']      # West on the left, as on the page
 
 
 ####
@@ -202,8 +213,9 @@ def conferenceGames(teams, season):
             games[str(event['id'])] = {
                 'gameID': str(event['id']),
                 'startDate': comp.get('date') or event.get('date'),
-                # TBD kickoffs sit at midnight Eastern, so read their day in Eastern time
-                'timezone': None if comp.get('timeValid') else 'America/New_York',
+                # TBD kickoffs sit at midnight Eastern, so read their day in Eastern time; a set kickoff
+                # gets its zone named, or one at midnight UTC (6 PM Central) would be read as TBD
+                'timezone': DEFAULT_TIMEZONE if comp.get('timeValid') else 'America/New_York',
                 'week': (event.get('week') or {}).get('number'),
                 'home': str(home['team']['id']),
                 'away': str(away['team']['id']),
@@ -378,9 +390,9 @@ class TieBreaker:
         self.lastGame = [max(s, key=lambda x: games[x[0]]['startDate'] or '')[0] if s else None
                          for s in self.schedule]
 
-    def load(self, homeWon, pct, rating, rng):
-        # Points the tie-breaker at one simulated season
-        self.homeWon, self.pct, self.rating, self.rng = homeWon, pct, rating, rng
+    def load(self, homeWon, pct, rating, coins):
+        # Points the tie-breaker at one simulated season; coins are its (division, host) coin tosses, each in [0, 1)
+        self.homeWon, self.pct, self.rating, self.coins = homeWon, pct, rating, coins
 
     def won(self, t, gi):
         # True if team t won game gi in this season
@@ -447,6 +459,25 @@ class TieBreaker:
         # The composite computer ranking, stood in for by FPI nudged by simulated results
         return self.best(group, [self.rating[t] for t in group])
 
+    def commonConference(self, group):
+        # Record against every conference opponent all the tied teams played, from either division
+        common = set.intersection(*[{opp for _, opp, _ in self.schedule[t]} for t in group]) - set(group)
+        if not common:
+            return group
+        return self.best(group, [self.pctVs(t, common) for t in group])
+
+    def host(self, champs):
+        # Picks which division champion hosts the title game: best conference record, then the host tie-breakers
+        top = max(self.pct[t] for t in champs)
+        group = [t for t in champs if self.pct[t] == top]
+        # Overall record vs. FBS (the step before the coin toss) is skipped; this only sees conference games
+        for step in (self.headToHead, self.cfpRanking, self.computerRankings, self.commonConference):
+            if len(group) == 1:
+                break
+            group = step(group)
+        # Still tied: the Commissioner's coin toss
+        return group[0] if len(group) == 1 else sorted(group)[int(self.coins[1] * len(group))]
+
     def canWin(self, group, t):
         # True unless a step settled by game results knocks team t out; rankings and coin tosses could go its way
         steps = [self.headToHead, self.divisionRecord, self.vsStandings, self.commonOpponents]
@@ -475,31 +506,33 @@ class TieBreaker:
             step = 0 if len(kept) == 2 and len(group) > 2 else step + 1
             group = kept
         # Still tied after every step: the Commissioner's coin toss
-        return group[self.rng.integers(len(group))], STEP_NAMES[-1]
+        return sorted(group)[int(self.coins[0] * len(group))], STEP_NAMES[-1]
 
 
-def canStillWin(breaker, teams, games, t, fixed):
-    # True if any results of the undecided games make team t division champion; fixed maps game index -> home won
+def canStillWin(breaker, teams, games, t, fixed, host=False):
+    # True if any results of the undecided games make team t division champion (with host, also title-game host); fixed maps game index -> home won
     G = len(games)
     div = teams[t]['division']
     rivals = {i for i, x in enumerate(teams) if x['division'] == div}
+    # Teams that may not finish ahead of t: its division, or with host every team, since a better other champion hosts
+    capped = set(range(len(teams))) if host else rivals
     decided = dict(fixed)
     # t wins every game still open to it: a title path with a loss there still works with a win
     for gi, g in enumerate(games):
         if gi not in decided and t in (g['h'], g['a']):
             decided[gi] = g['h'] == t
 
-    # Wins so far; t's total is now final and no rival may pass it
+    # Wins so far; t's total is now final and no capped team may pass it
     wins = np.zeros(len(teams), dtype=int)
     for gi, homeWon in decided.items():
         wins[games[gi]['h'] if homeWon else games[gi]['a']] += 1
     cap = wins[t]
-    if any(wins[r] > cap for r in rivals):
+    if any(wins[r] > cap for r in capped):
         return False
 
-    # Only games touching this division matter; tightest rivals first so dead ends show up early
-    free = [gi for gi, g in enumerate(games) if gi not in decided and (g['h'] in rivals or g['a'] in rivals)]
-    slack = lambda i: cap - wins[i] if i in rivals else 99
+    # Only games touching a capped team matter; tightest teams first so dead ends show up early
+    free = [gi for gi, g in enumerate(games) if gi not in decided and (g['h'] in capped or g['a'] in capped)]
+    slack = lambda i: cap - wins[i] if i in capped else 99
     free.sort(key=lambda gi: min(slack(games[gi]['h']), slack(games[gi]['a'])))
     homeWon = np.zeros(G, dtype=bool)
     for gi, hw in decided.items():
@@ -508,12 +541,12 @@ def canStillWin(breaker, teams, games, t, fixed):
     tried = [0]
 
     def search(i):
-        # Fill in game free[i] both ways, skipping any result that lifts a rival past t
+        # Fill in game free[i] both ways, skipping any result that lifts a capped team past t
         tried[0] += 1
         if tried[0] > ELIM_SEARCH_LIMIT:
             raise TimeoutError
         if i == len(free):
-            # Every result set: t wins unless a tie-breaker settled by results knocks it out
+            # Every result set: t wins unless a tie-breaker settled by results knocks it out; host ties could go either way
             group = [r for r in rivals if wins[r] == cap]
             breaker.load(homeWon, wins / np.maximum(played, 1), None, None)
             return breaker.canWin(group, t)
@@ -522,7 +555,7 @@ def canStillWin(breaker, teams, games, t, fixed):
         # Try the result that hands the win to the side with more room first
         for hw in sorted((True, False), key=lambda hw: -slack(g['h'] if hw else g['a'])):
             winner = g['h'] if hw else g['a']
-            if winner in rivals and wins[winner] + 1 > cap:
+            if winner in capped and wins[winner] + 1 > cap:
                 continue
             wins[winner] += 1
             homeWon[gi] = hw
@@ -535,7 +568,7 @@ def canStillWin(breaker, teams, games, t, fixed):
         return search(0)
     except TimeoutError:
         # Too many scenarios to rule out: only call a team eliminated when it's proven
-        print(f"  Elimination check for {teams[t]['name']} hit its limit; treating it as alive.")
+        print(f"  {'Host' if host else 'Elimination'} check for {teams[t]['name']} hit its limit; treating it as alive.")
         return True
 
 
@@ -543,27 +576,23 @@ def canStillWin(breaker, teams, games, t, fixed):
 # SIMULATION
 ####
 
-def simulate(teams, games, fpi, cfpRanks, sims=SIMS, seed=None):
-    # Plays out the season sims times; returns (champion index per sim and division, tie-break counts, outcomes)
-    rng = np.random.default_rng(seed)
-    T, G = len(teams), len(games)
+def seasonStats(teams, games, fpi, homeWon):
+    # Each simulated season's conference wins, winning percentage and computer rating, per team
+    T = len(teams)
     home = np.array([g['h'] for g in games])
     away = np.array([g['a'] for g in games])
     p = np.array([g['homeOdds'] for g in games])
     unplayed = np.array([g['source'] != 'final' for g in games])
 
-    # One row per simulated season, one column per game: True if the home team won
-    homeWon = rng.random((sims, G)) < p
-
     # Conference wins and games for every team in every season
-    wins = np.zeros((sims, T))
+    wins = np.zeros((len(homeWon), T))
     np.add.at(wins.T, home, homeWon.T)
     np.add.at(wins.T, away, ~homeWon.T)
     played = np.bincount(np.concatenate([home, away]), minlength=T)
     pct = wins / np.maximum(played, 1)
 
     # Wins in unplayed games above or below expectation move a team's computer ranking
-    remWins = np.zeros((sims, T))
+    remWins = np.zeros((len(homeWon), T))
     np.add.at(remWins.T, home[unplayed], homeWon[:, unplayed].T)
     np.add.at(remWins.T, away[unplayed], ~homeWon[:, unplayed].T)
     expected = np.zeros(T)
@@ -571,10 +600,12 @@ def simulate(teams, games, fpi, cfpRanks, sims=SIMS, seed=None):
     np.add.at(expected, away[unplayed], 1 - p[unplayed])
     rating = np.array([fpi.get(t['id'], (0.0, None))[0] for t in teams]) \
         + RESULT_WEIGHT * (remWins - expected)
+    return wins, pct, rating
 
-    breaker = TieBreaker(teams, games, cfpRanks)
-    divisions = sorted({t['division'] for t in teams})
-    champs = np.zeros((sims, len(divisions)), dtype=int)
+
+def crownChampions(teams, divisions, breaker, homeWon, pct, rating, coins):
+    # Each season's division champions, settling ties with the tie-breakers; returns (champions, tie-break step counts)
+    champs = np.zeros((len(homeWon), len(divisions)), dtype=int)
     steps = {d: {} for d in divisions}
     for di, div in enumerate(divisions):
         members = np.array([i for i, t in enumerate(teams) if t['division'] == div])
@@ -584,36 +615,90 @@ def simulate(teams, games, fpi, cfpRanks, sims=SIMS, seed=None):
         champs[:, di] = members[np.argmax(tied, axis=1)]
         # Settle every tied race with the tie-breakers
         for s in np.flatnonzero(tied.sum(axis=1) > 1):
-            breaker.load(homeWon[s], pct[s], rating[s], rng)
+            breaker.load(homeWon[s], pct[s], rating[s], coins[s])
             champ, how = breaker.champion(list(members[tied[s]]))
             champs[s, di] = champ
             steps[div][how] = steps[div].get(how, 0) + 1
-    return divisions, champs, steps, homeWon, wins
+    return champs, steps
 
 
-def gameSwings(teams, games, champs, homeWon):
-    # For each unplayed game, every team's title odds if the home team wins and if it loses
-    T = len(teams)
-    breaker = TieBreaker(teams, games, {})
+def crownHosts(breaker, homeWon, pct, rating, coins, champs):
+    # Each season's title-game host: the champion with the better conference record, ties to the host tie-breakers
+    champPct = np.take_along_axis(pct, champs, axis=1)
+    hosts = champs[np.arange(len(champs)), np.argmax(champPct, axis=1)]
+    # Champions tied on record go to the host tie-breakers
+    for s in np.flatnonzero((champPct == champPct.max(axis=1, keepdims=True)).sum(axis=1) > 1):
+        breaker.load(homeWon[s], pct[s], rating[s], coins[s])
+        hosts[s] = breaker.host(list(champs[s]))
+    return hosts
+
+
+def simulate(teams, games, fpi, cfpRanks, sims=SIMS, seed=None):
+    # Plays out the season sims times; returns champions, hosts, tie-break counts and the seasons behind them
+    rng = np.random.default_rng(seed)
+    p = np.array([g['homeOdds'] for g in games])
+
+    # One row per simulated season, one column per game: True if the home team won
+    homeWon = rng.random((sims, len(games))) < p
+    # Each season's (division, host) coin tosses, drawn up front so a replayed season tosses the same way
+    coins = rng.random((sims, 2))
+    wins, pct, rating = seasonStats(teams, games, fpi, homeWon)
+
+    breaker = TieBreaker(teams, games, cfpRanks)
+    divisions = sorted({t['division'] for t in teams})
+    champs, steps = crownChampions(teams, divisions, breaker, homeWon, pct, rating, coins)
+    hosts = crownHosts(breaker, homeWon, pct, rating, coins, champs)
+    return {'divisions': divisions, 'champs': champs, 'hosts': hosts, 'steps': steps,
+            'homeWon': homeWon, 'wins': wins, 'coins': coins}
+
+
+def gameSwings(teams, games, fpi, cfpRanks, sim, alive):
+    # For each unplayed game, every team's title and host odds if the home team wins and if it loses; alive is the teams not yet eliminated
+    divisions, champs, hosts, homeWon, coins = sim['divisions'], sim['champs'], sim['hosts'], sim['homeWon'], sim['coins']
+    breaker = TieBreaker(teams, games, cfpRanks)
+    exact = TieBreaker(teams, games, {})
     played = {gi: g['homeOdds'] == 1.0 for gi, g in enumerate(games) if g['source'] == 'final'}
     swings = []
+    # Teams with no live division rival have already clinched, so no single result clinches them again
+    clinched = {t for t in alive if not any(r != t and teams[r]['division'] == teams[t]['division'] for r in alive)}
+
+    def status(t, odds, fixed):
+        # 1 if a result knocks t out, 2 if it clinches t's division, 0 otherwise; only results the sims agree on get the exact check
+        if odds == 0 and not canStillWin(exact, teams, games, t, fixed):
+            return 1
+        if odds == 1 and t not in clinched and not any(canStillWin(exact, teams, games, r, fixed) for r in alive
+                                 if r != t and teams[r]['division'] == teams[t]['division']):
+            return 2
+        return 0
+
+    def forcedResults(gi, result):
+        # Replays every season with game gi forced to result, all else unchanged; returns (champions, hosts)
+        flip = homeWon[:, gi] != result
+        forced = homeWon[flip].copy()
+        forced[:, gi] = result
+        _, pct, rating = seasonStats(teams, games, fpi, forced)
+        # Seasons that already had this result keep their champions and host
+        outChamps, outHosts = champs.copy(), hosts.copy()
+        outChamps[flip], _ = crownChampions(teams, divisions, breaker, forced, pct, rating, coins[flip])
+        outHosts[flip] = crownHosts(breaker, forced, pct, rating, coins[flip], outChamps[flip])
+        return outChamps, outHosts
+
     for gi, g in enumerate(games):
         if g['source'] == 'final':
             continue
-        hw = homeWon[:, gi]
+        (homeChamps, homeHosts), (awayChamps, awayHosts) = forcedResults(gi, True), forcedResults(gi, False)
         moved = []
-        # Only report a split once both outcomes come up in the simulations
-        if hw.any() and (~hw).any():
-            for t in range(T):
-                won = (champs == t).any(axis=1)
-                ifHome, ifAway = won[hw].mean(), won[~hw].mean()
-                if abs(ifHome - ifAway) >= SWING_FLOOR:
-                    # A result no simulated season survived gets an exact check for elimination
-                    elim = [int(odds == 0 and not canStillWin(breaker, teams, games, t, {**played, gi: hw}))
-                            for odds, hw in ((ifHome, True), (ifAway, False))]
-                    moved.append([teams[t]['id'], round(float(ifHome), 4), round(float(ifAway), 4)] + elim)
-        # Biggest swings first
-        moved.sort(key=lambda m: -abs(m[1] - m[2]))
+        for t in alive:
+            ifHome = (homeChamps == t).any(axis=1).mean()
+            ifAway = (awayChamps == t).any(axis=1).mean()
+            hostIfHome, hostIfAway = (homeHosts == t).mean(), (awayHosts == t).mean()
+            states = [status(t, odds, {**played, gi: hw}) for odds, hw in ((ifHome, True), (ifAway, False))]
+            # Report big title or host swings, plus any result that knocks out or clinches a team, however small the move
+            if max(abs(ifHome - ifAway), abs(hostIfHome - hostIfAway)) >= SWING_FLOOR or any(states):
+                moved.append([teams[t]['id'], round(float(ifHome), 4), round(float(ifAway), 4)] + states
+                             + [round(float(hostIfHome), 4), round(float(hostIfAway), 4)])
+        # Biggest swings first, title or host
+        moved.sort(key=lambda m: -max(abs(m[1] - m[2]), abs(m[5] - m[6])))
         swings.append((g, moved))
     return swings
 
@@ -724,13 +809,14 @@ def writePreviewCard(png_path, dest):
 # RUN HISTORY
 ####
 
-def snapshot(teams, games, fpi, divisions, champs, steps, homeWon, wins, when, logos, colors):
-    # Packages one run (team odds, tie-break counts and remaining games) as the page reads it
+def snapshot(teams, games, fpi, cfpRanks, sim, when, logos, colors):
+    # Packages one run (team odds, host odds, tie-break counts and remaining games) as the page reads it
+    divisions, champs, hosts, steps, wins = sim['divisions'], sim['champs'], sim['hosts'], sim['steps'], sim['wins']
     sims = len(champs)
     breaker = TieBreaker(teams, games, {})
     played = {gi: g['homeOdds'] == 1.0 for gi, g in enumerate(games) if g['source'] == 'final'}
     teamRows = []
-    # One row per team: current conference record, projected wins and title odds
+    # One row per team: current conference record, projected wins, title odds and odds to host the title game
     for i, t in enumerate(teams):
         w = sum(1 for g in games if g['source'] == 'final'
                 and ((g['h'] == i and g['homeOdds'] == 1) or (g['a'] == i and g['homeOdds'] == 0)))
@@ -739,12 +825,16 @@ def snapshot(teams, games, fpi, divisions, champs, steps, homeWon, wins, when, l
         row = {'id': t['id'], 'name': t['name'], 'abbr': t['abbr'], 'division': t['division'],
                'record': f"{w}-{l}", 'expectedWins': round(float(wins[:, i].mean()), 2),
                'odds': round(float((champs == i).any(axis=1).mean()), 4),
+               'hostOdds': round(float((hosts == i).mean()), 4),
                'espnOdds': None if espnOdds is None else round(espnOdds, 4),
                'fpi': None if rating is None else round(rating, 1)}
         row.update(logos.get(t['id']) or {})
         # A team no simulated season crowned gets the exact check: out for good, or just a long shot
         if row['odds'] == 0 and not canStillWin(breaker, teams, games, i, played):
             row['eliminated'] = True
+        # Same for hosting: out of the title race, or no results leave it with the best record of the two champions
+        if row['hostOdds'] == 0 and (row.get('eliminated') or not canStillWin(breaker, teams, games, i, played, host=True)):
+            row['hostEliminated'] = True
         if colors[0].get(t['id']):
             row['color'] = colors[0][t['id']]
         teamRows.append(row)
@@ -764,7 +854,8 @@ def snapshot(teams, games, fpi, divisions, champs, steps, homeWon, wins, when, l
 
     # Remaining games with how each result moves the races
     remaining = []
-    for g, moved in gameSwings(teams, games, champs, homeWon):
+    alive = [i for i, row in enumerate(teamRows) if not row.get('eliminated')]
+    for g, moved in gameSwings(teams, games, fpi, cfpRanks, sim, alive):
         remaining.append({'date': gameDayText(g), 'home': teams[g['h']]['id'],
                           'away': teams[g['a']]['id'], 'homeOdds': g['homeOdds'],
                           'week': g.get('week'), 'source': g['source'], 'swing': moved})
@@ -837,8 +928,66 @@ def saveRun(season, run, path=None):
 # WEB PAGE
 ####
 
+def pctText(x, digits=1):
+    # The page's percent format: never rounds a live chance to 0% or 100%
+    s = f"{x * 100:.{digits}f}"
+    if x > 0 and float(s) == 0:
+        return f"<{1 / 10 ** digits:.{digits}f}%"
+    if x < 1 and float(s) == 100:
+        return f">{100 - 1 / 10 ** digits:.{digits}f}%"
+    return s + '%'
+
+
+def matchupHtml(run):
+    # The championship pairing as the page draws it: logo, name, title odds and host odds, West first
+    esc = lambda text: html_escape(str(text), quote=True)
+    teams = {t['id']: t for t in run['teams']}
+    # The most likely pairing; older runs without one fall back to each division's favorite
+    top = (run.get('matchups') or [None])[0]
+    if top:
+        ids = top['teams']
+    else:
+        ids = [max((t for t in run['teams'] if t['division'] == d),
+                   key=lambda t: (t['odds'], t['expectedWins']))['id'] for d in run['divisions']]
+    rank = lambda d: DIVISION_ORDER.index(d) if d in DIVISION_ORDER else 99
+    ids = sorted(ids, key=lambda i: rank(teams[i]['division']))
+
+    sides = []
+    for t in (teams[i] for i in ids):
+        logo = t.get('logoLarge') or t.get('logo')
+        # Logos load straight from the asset folder, since the card is rendered from out/
+        img = (f"<img src='{Path(ASSET_DIR, logo).resolve().as_uri()}' alt=''>"
+               if logo and os.path.isfile(os.path.join(ASSET_DIR, logo)) else '')
+        lines = [f"<div class='odds'>{esc(pctText(t['odds']))} to win the {esc(t['division'])}</div>"]
+        # Older runs predate host odds; a team proven out of hosting says so
+        if t.get('hostOdds') is not None:
+            lines.append("<div class='odds'>Can't host the title game</div>" if t.get('hostEliminated')
+                         else f"<div class='odds'>{esc(pctText(t['hostOdds']))} to host the title game</div>")
+        sides.append(f"<div class='side'>{img}<div class='name'>{esc(t['name'])}</div>{''.join(lines)}</div>")
+    return "\n<div class='vs'>vs</div>\n".join(sides)
+
+
+def writeIndexCard(run):
+    # Renders the index card image from the championship card; returns its filename, or None without Chrome
+    with open(CARD_TEMPLATE) as f:
+        template = Template(f.read())
+    page = template.substitute(
+        starburst=Path(PAGE_STARBURST).resolve().as_uri(),
+        pair=matchupHtml(run),
+    )
+    os.makedirs(os.path.dirname(CARD_HTML), exist_ok=True)
+    with open(CARD_HTML, 'w') as f:
+        f.write(page)
+    # The stats index falls back to the link-preview image when there's no card
+    dest = os.path.join(ASSET_DIR, CARD_FILENAME)
+    if screenshotPage(CARD_HTML, dest, size=CARD_SIZE, scale=PREVIEW_SCALE, query='') is None:
+        return None
+    print(f"Wrote {dest}")
+    return CARD_FILENAME
+
+
 def writeSite(season, run, figPath):
-    # Writes the page into html/stats/ and its files into html/stats/fbSunBeltPredictor/
+    # Writes the page into html/stats/football/ and its files into html/stats/football/sunBeltPredictor/
     os.makedirs(ASSET_DIR, exist_ok=True)
     shutil.copyfile(PAGE_CSS, os.path.join(ASSET_DIR, CSS_FILENAME))
     shutil.copyfile(PAGE_JS, os.path.join(ASSET_DIR, JS_FILENAME))
@@ -870,8 +1019,8 @@ def writeSite(season, run, figPath):
         favorites.append(f"{top['name']} {top['odds']:.0%} in the {div}")
     card_description = ("ESPN's FPI and the Sun Belt tie-breakers make it "
                         + ", ".join(favorites) + ". Odds for every team, run by run.")
-    page_url = f"{SITE_URL}/{PAGE_FILENAME}"
-    card_image = f"{SITE_URL}/{asset(PREVIEW_FILENAME)}"
+    page_url = f"{SITE_URL}/{SITE_SECTION}/{PAGE_FILENAME}"
+    card_image = f"{SITE_URL}/{SITE_SECTION}/{asset(PREVIEW_FILENAME)}"
 
     # Fill the page template, escaping plain text
     esc = lambda text: html_escape(str(text), quote=True)
@@ -891,7 +1040,7 @@ def writeSite(season, run, figPath):
         runsSrc=esc(asset(RUNS_FILENAME)),
         jsSrc=esc(asset(JS_FILENAME)),
     )
-    html_path = os.path.join(HTML_DIR, PAGE_FILENAME)
+    html_path = os.path.join(PAGE_DIR, PAGE_FILENAME)
     with open(html_path, 'w') as f:
         f.write(page)
     print(f"Wrote {html_path}")
@@ -901,6 +1050,10 @@ def writeSite(season, run, figPath):
     if renderPreview(html_path, preview_path) is None:
         writePreviewCard(figPath, preview_path)
     print(f"Wrote {preview_path}")
+
+    # Refresh this page's card on the stats.gtpdd.dog landing page, with its own card image
+    writeIndexCard(run)
+    writeStatsIndex()
     return html_path
 
 
@@ -940,21 +1093,21 @@ def fbSunBeltPredictor(year=None, html=True, sims=SIMS, cfp=None, seed=None):
                   + ('' if g['source'] == 'fpi' else ' (no FPI, held even)'))
 
     # Play out the rest of the season and package the run
-    divisions, champs, steps, homeWon, wins = simulate(teams, games, fpi, cfpRanks, sims, seed)
+    sim = simulate(teams, games, fpi, cfpRanks, sims, seed)
     logos = {t['id']: publishTeamLogo(t) for t in teams} if html else {}
     now = datetime.now()
     colors = divisionColors(teams)
-    run = snapshot(teams, games, fpi, divisions, champs, steps, homeWon, wins, now, logos, colors)
+    run = snapshot(teams, games, fpi, cfpRanks, sim, now, logos, colors)
 
-    # Print the odds, division by division
-    for div in divisions:
+    # Print the title and host odds, division by division
+    for div in run['divisions']:
         print(f"{div} ({run['tiebreaks'][div]['share']:.1%} of races needed a tie-breaker)")
         for t in sorted((t for t in run['teams'] if t['division'] == div), key=lambda t: -t['odds']):
             espn = '' if t['espnOdds'] is None else f"   ESPN {t['espnOdds']:.1%}"
-            print(f"  {t['name']:<22} {t['record']:>5}  {t['odds']:6.1%}{espn}")
+            print(f"  {t['name']:<22} {t['record']:>5}  {t['odds']:6.1%}  host {t['hostOdds']:6.1%}{espn}")
 
     # Posted PNG
-    drawChart(divisions, run['teams'], FIG_PATH, f"{now:%B} {now.day}, {now.year}")
+    drawChart(run['divisions'], run['teams'], FIG_PATH, f"{now:%B} {now.day}, {now.year}")
     print(f"Wrote {FIG_PATH}")
 
     # File this run and rebuild the page

@@ -130,8 +130,11 @@ footer .gtpdd img { display: block; width: 160px; height: auto; }
 .baseline { stroke: var(--axis); stroke-width: 1; }
 
 /* ------------------------------------------------------ division tables */
-.scroller table.standings { min-width: 420px; }
-.scroller table#sb-games { min-width: 900px; }
+.scroller table.standings { min-width: 500px; }
+/* Five columns share a half-width card, so headers wrap and cells pad tighter */
+table.standings th, table.standings td { padding: 7px 6px; }
+table.standings thead th { white-space: normal; vertical-align: bottom; line-height: 1.25; }
+.scroller table#sb-games { min-width: 780px; }
 /* Team names are row headers, but read as body text with the logo inline */
 th.team { white-space: nowrap; color: var(--text-primary); font-weight: 400; }
 th.team .teamlogo { display: inline-block; vertical-align: middle; height: 22px;
@@ -141,8 +144,8 @@ th.team .teamlogo { display: inline-block; vertical-align: middle; height: 22px;
   margin-right: 8px; vertical-align: middle; }
 tr.is-home td, tr.is-home th { font-weight: 600; }
 
-/* Title odds as a bar in its own cell: one hue, the number beside it */
-td.oddsbar { width: 40%; min-width: 130px; }
+/* Title and host odds as bars in their own cells: one hue, the number beside it */
+td.oddsbar { width: 28%; min-width: 104px; }
 .bar { display: flex; align-items: center; gap: 8px; }
 .bar .track { flex: 1; height: 10px; background: var(--grid); border-radius: 0 4px 4px 0; }
 .bar .fill { height: 100%; background: var(--page); border-radius: 0 4px 4px 0; }
@@ -166,23 +169,76 @@ tr.is-elim .teamlogo, tr.is-elim .swatch { filter: grayscale(1); opacity: 0.45; 
   font-variant-numeric: tabular-nums; }
 .scroller svg.flow { min-width: 460px; }
 
-/* What a game swings: one fixed-width cell per team it moves, so logos, winners
-   and percentages each form a column down the table */
-td.swing { width: 190px; font-size: 13px; color: var(--text-secondary); }
-.swing-item { display: flex; align-items: center; gap: 10px; }
-.swing-team { display: block; flex: 0 0 48px; height: 30px; width: 48px; object-fit: contain; }
-.outcomes { display: grid; gap: 3px; }
-.outcome { display: flex; align-items: center; gap: 5px; font-size: 13px;
+/* The team picker: every logo in one row per division, wrapping when narrow */
+.teampicker { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 32px;
+  padding: 6px 4px 14px; border-bottom: 1px solid var(--grid); }
+.pickgroup { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; }
+.pickgroup .divlabel { margin-right: 6px; color: var(--text-muted); font-size: 12px;
+  font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+button.teampick { display: flex; align-items: center; justify-content: center;
+  width: 54px; height: 46px; padding: 4px; border: 2px solid transparent; border-radius: 8px;
+  background: none; cursor: pointer; }
+button.teampick:hover { background: #f3f2ee; }
+button.teampick:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+/* The picked team is ringed in Sun Belt gold */
+button.teampick[aria-pressed='true'] { border-color: var(--gold); background: #fff8e6; }
+.pick-logo { display: block; height: 32px; width: auto; max-width: 44px; object-fit: contain; }
+/* Eliminated teams fade out of the row but stay clickable */
+button.teampick.is-elim .pick-logo { filter: grayscale(1); opacity: 0.35; }
+
+/* The picked team's panel: the games that move it, or why there are none */
+.impact-empty { margin: 0; padding: 16px 10px; color: var(--text-secondary); font-size: 14px; }
+/* An eliminated team: the standings' ELIMINATED bar, centered in the panel */
+.impact-elim { max-width: 420px; margin: 0 auto; padding: 22px 10px; }
+/* Both results in the width the matchup leaves, side by side */
+#sb-games th.impact-col { text-align: center; }
+#sb-games td.result { width: 60%; }
+.results { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+.outcome { display: flex; align-items: center; justify-content: center; gap: 18px;
   color: var(--text-secondary); font-variant-numeric: tabular-nums; }
-.outcome .winner { width: 74px; }
-.outcome .val { width: 34px; text-align: right; }
-/* Title-chance changes: gains green, losses red (both 5:1+ on white) */
-.outcome .val.up { color: #1a7f37; font-weight: 600; }
-.outcome .val.down { color: #c62828; font-weight: 600; }
-.outcome .val.elim { letter-spacing: 0.03em; }
-/* The matchup stays compact; leftover width goes to the swing columns */
+.outcome-who { display: flex; align-items: center; gap: 8px; min-width: 110px;
+  font-size: 13px; white-space: nowrap; }
+.outcome-logo { display: block; height: 26px; width: 36px; object-fit: contain; }
+/* Each change sits over its label */
+.stat { display: flex; flex-direction: column; align-items: center; min-width: 54px; }
+.stat .val { font-size: 17px; font-weight: 600; line-height: 1.2; }
+.stat .lbl { color: var(--text-muted); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; }
+/* Changes: gains green, losses red (both 5:1+ on white) */
+.stat .val.up { color: #1a7f37; }
+.stat .val.down { color: #c62828; }
+.stat .val.elim { font-size: 13px; letter-spacing: 0.05em; }
+/* The matchup stays compact; leftover width goes to the result columns */
 #sb-games td.mark, #sb-games th.mark { width: 92px; }
 #sb-games tbody th { width: 64px; }
+/* Narrower: the two results stack, one over the other, beside the matchup */
+@media (max-width: 860px) {
+  .scroller table#sb-games { min-width: 0; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+/* Phone width: each game is its date centered on top, then the matchup, then the stacked results */
+@media (max-width: 640px) {
+  #sb-games, #sb-games thead, #sb-games tbody { display: block; }
+  /* Only the 'Impact on' heading is kept; the matchup explains itself */
+  #sb-games thead tr { display: block; }
+  #sb-games thead th { display: none; }
+  #sb-games thead th.impact-col { display: block; }
+  #sb-games tbody tr { display: grid; grid-template-columns: 1fr 32px 1fr;
+    align-items: center; border-bottom: 1px solid var(--grid); }
+  #sb-games tbody tr:last-child { border-bottom: 0; }
+  #sb-games tbody th, #sb-games tbody td { width: auto; border-bottom: 0; }
+  /* The date gets its own centered line, and the '@' sits centered between the two teams */
+  #sb-games tbody th { grid-column: 1 / -1; padding-bottom: 0; text-align: center; }
+  #sb-games td.at { padding: 0; text-align: center; }
+  /* Each team fills its half, so both logos center under the date */
+  #sb-games td.mark { width: auto; }
+  #sb-games td.result { grid-column: 1 / -1; width: auto; padding-top: 0; }
+  /* Each division's logos fit one line, with its label above */
+  .pickgroup .divlabel { flex-basis: 100%; margin: 0; text-align: center; }
+  .pickgroup { gap: 2px; }
+  button.teampick { width: 40px; height: 38px; padding: 2px; }
+  .pick-logo { height: 24px; max-width: 32px; }
+}
 /* Each side's win odds, under its logo; the favorite's stands out */
 .odds { margin-top: 3px; font-size: 12px; color: var(--text-secondary);
   font-variant-numeric: tabular-nums; }
