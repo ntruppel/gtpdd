@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>gtpdd Stats preview</title>
+<!-- Rendered locally into the index's link-preview image, never published, so inline CSS is fine -->
+<!-- The page's own stylesheet, then overrides for 1200x630: the masthead on the left, the cards three over two on the right -->
+<link rel='stylesheet' href='$cssHref'>
+<style>
+html, body { width: 1200px; height: 630px; min-height: 0; overflow: hidden; }
+body { display: grid; grid-template-columns: 410px 1fr; align-items: center; }
+body::after { border-width: 12px; }
+/* Masthead: centered in the left column, no home link or filters */
+.masthead { padding: 0 0 0 24px; }
+.home, .filters { display: none; }
+.brand { margin: 0 0 4px; }
+.brand-logo { height: 136px; }
+.wordmark { height: 58px; margin-top: -33px; }
+/* Two even lines rather than one word left dangling */
+.tagline { margin: 6px 0 0; font-size: 23px; line-height: 1.3; text-wrap: balance; }
+/* Cards three over two, the second row centered */
+main { max-width: none; margin: 0; padding: 16px 44px 0 6px; }
+.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 38px 26px; }
+.card { width: 226px; padding: 6px 6px 0; }
+.card::before { width: 84px; height: 22px; top: -11px; }
+.card-body { margin: 6px -6px 0; padding: 2px 8px 8px 30px;
+  background-image:
+    linear-gradient(90deg, transparent 20px, rgba(214, 72, 72, 0.6) 20px 22px, transparent 22px),
+    repeating-linear-gradient(to bottom, transparent 0 19px, rgba(86, 132, 200, 0.35) 19px 20px); }
+.card-section { font-size: 9px; line-height: 20px; }
+.card-title { font-size: 19px; line-height: 20px; }
+/* A few notes in the corners and along the edges, clear of the masthead and cards */
+.note { display: none; }
+.n1, .n2, .n3, .n12, .n13, .n16, .n17 { display: block; }
+.n1  { top: 26px;  left: 4%; }
+.n16 { top: 26px;  left: 44%; }
+.n2  { top: 26px;  right: 3%; }
+.n17 { top: 500px; left: 4%; }
+.n3  { top: 552px; left: 15%; }
+.n12 { top: 566px; left: 41%; }
+.n13 { top: 556px; right: 4%; }
+</style>
+</head>
+<body>
+$notes
+<header class='masthead'>
+  <h1 class='brand'>$brand</h1>
+  <p class='tagline'>$tagline</p>
+</header>
+<main>
+<div class='cards'>
+$cards
+</div>
+</main>
+</body>
+</html>

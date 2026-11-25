@@ -6,8 +6,9 @@ Created on Wed Sep  1 15:41:33 2021
 
 Odds on where Louisiana Tech's record lands, from ESPN's FPI game projections.
 
-Each run makes the posted PNG and updates a page in html/fbRecordPredictor/ that
-keeps every run of the season, so the odds can be followed week to week. Re-running
+Each run makes the posted PNG and updates html/stats/football/recordPredictor.html
+(stats.gtpdd.dog), which keeps every run of the season, so the odds can be followed
+week to week; its files live in html/stats/football/recordPredictor/. Re-running
 on the same day replaces that day's run. The run history is kept in
 csv/fbRecordPredictorRuns.js; page templates live in lib/html/fbRecordPredictor/.
 
@@ -35,9 +36,11 @@ import requests
 from html import escape as html_escape
 from PIL import Image
 
+from lib.common import screenshotPage
 from lib.fbCommon import (LOGO_DIR, assetSlug, downloadLogo, gameDateTime, getTeamInfo,
                           previewMetaTags, publishAsset, readJsGlobal, trimmedLogo,
                           writeJsGlobal)
+from statsIndex import writeStatsIndex
 
 ####
 # CONSTANTS
@@ -52,19 +55,23 @@ ESPN_SUMMARY_URL = 'http://site.api.espn.com/apis/site/v2/sports/football/colleg
 
 # Site and file locations
 HOME_URL = "https://gtpdd.dog"
-SITE_URL = "https://recordpredictor.gtpdd.dog"  # the published root of html/fbRecordPredictor/
+SITE_URL = "https://stats.gtpdd.dog"   # the published root of html/stats/
 SITE_TITLE = "gtpdd's Record Predictor"
 TWITTER_HANDLE = "@gotechplsdntdie"
 
-HTML_DIR = "html/fbRecordPredictor"
-# html/fbRecordPredictor/ is the site root, so the page and everything it links to live there
-WEB_IMG_DIR = os.path.join(HTML_DIR, 'img')
-PAGE_TO_ROOT = ''
+HTML_DIR = "html/stats"                # shared by several gtpdd stat pages
+SITE_SECTION = 'football'              # the page publishes under stats.gtpdd.dog/football/
+PAGE_DIR = os.path.join(HTML_DIR, SITE_SECTION)
+ASSET_DIR_NAME = 'recordPredictor'     # this page's own files, grouped beside it
+ASSET_DIR = os.path.join(PAGE_DIR, ASSET_DIR_NAME)
+ASSET_URL = f"{SITE_URL}/{SITE_SECTION}/{ASSET_DIR_NAME}"
+PAGE_TO_ASSETS = f"{ASSET_DIR_NAME}/"  # from football/recordPredictor.html to the asset folder
+WEB_IMG_DIR = os.path.join(ASSET_DIR, 'img')
 GTPDD_LOGO = 'img/gtpdd_logo.png'      # the nav logo, published alongside the page
-WEB_LOGO_DIR = os.path.join(HTML_DIR, 'logo')
+WEB_LOGO_DIR = os.path.join(ASSET_DIR, 'logo')
 # Opponent logos are ESPN's standard (light-background) logos, shared with fbPlaychart's cache
 LOGO_HEIGHT = 56                       # published at 2x the height the table draws
-PAGE_FILENAME = 'index.html'
+PAGE_FILENAME = 'recordPredictor.html'
 CSS_FILENAME = 'fbRecordPredictor.css'
 JS_FILENAME = 'fbRecordPredictor.js'
 RUNS_FILENAME = 'runs.js'              # every run of every season, as a script
@@ -87,6 +94,13 @@ TEMPLATE_DIR = 'lib/html/fbRecordPredictor'
 PAGE_TEMPLATE = os.path.join(TEMPLATE_DIR, 'page.html')
 PAGE_CSS = os.path.join(TEMPLATE_DIR, CSS_FILENAME)
 PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
+
+# The stats.gtpdd.dog index card: an HTML template screenshotted into an image beside the page
+CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
+CARD_HTML = 'out/fbRecordPredictorCard.html'  # the filled template, kept only for the screenshot
+CARD_FILENAME = 'card.jpg'
+CARD_SIZE = (1200, 630)                # the same shape as the link-preview cards
+CARD_CHART_SIZE = (1060, 340)          # the chart's drawing area inside the card's white panel
 
 
 ####
@@ -152,7 +166,7 @@ def teamLogoUrl(team):
 
 
 def publishOpponentLogo(name, url):
-    # Caches an opponent's logo and publishes a table-sized copy; returns its page link or None
+    # Caches an opponent's logo and publishes a table-sized copy; returns its asset-folder link or None
     if not name or not url:
         return None
     slug = assetSlug(name)
@@ -378,7 +392,7 @@ def normalizeRun(run):
         g = dict(g)
         if 'logo' not in g and g.get('opponent'):
             link = 'logo/' + assetSlug(g['opponent']) + '.png'
-            if os.path.isfile(os.path.join(HTML_DIR, link)):
+            if os.path.isfile(os.path.join(ASSET_DIR, link)):
                 g['logo'] = link
         schedule.append(g)
     run['schedule'] = schedule
@@ -414,18 +428,84 @@ def saveRun(season, run, path=None):
 # WEB PAGE
 ####
 
+def oddsChartSvg(odds, size=CARD_CHART_SIZE):
+    # The page's Final Record Odds chart as an inline SVG: red bars short of a bowl, blue bars at or past it
+    W, H = size
+    n = len(odds) - 1
+    pad_x, plot_top, plot_bottom = 6, 62, H - 46
+    plot_h = plot_bottom - plot_top
+    band = (W - 2 * pad_x) / len(odds)
+    bar_w = min(58, band * 0.72)
+    top = max(odds) * 1.16 or 1
+    parts = []
+
+    # Bowl-eligibility divider, captioned on both sides like the page
+    if n >= BOWL_WINS:
+        bx, by = pad_x + band * BOWL_WINS, plot_top - 32
+        parts.append(f"<line class='baseline' x1='{bx:.1f}' x2='{bx:.1f}' y1='{plot_top - 18}' y2='{plot_bottom}'/>")
+        parts.append(f"<path d='M{bx - 7:.1f} {by - 6}l-9 6l9 6Z' fill='#6f6d68'/>")
+        parts.append(f"<text class='note-label' x='{bx - 22:.1f}' y='{by + 7}' text-anchor='end'>no bowl</text>")
+        parts.append(f"<path d='M{bx + 7:.1f} {by - 6}l9 6l-9 6Z' fill='#6f6d68'/>")
+        parts.append(f"<text class='note-label' x='{bx + 22:.1f}' y='{by + 7}'>bowl eligible</text>")
+    parts.append(f"<line class='baseline' x1='{pad_x}' x2='{W - pad_x}' y1='{plot_bottom}' y2='{plot_bottom}'/>")
+
+    for k, v in enumerate(odds):
+        cx = pad_x + band * (k + 0.5)
+        h = max(0.0, v / top * plot_h)
+        y = plot_bottom - h
+        # Bars rounded at the data end and square on the baseline, as on the page
+        if h > 0:
+            r = min(6, bar_w / 2, h)
+            x0 = cx - bar_w / 2
+            fill = 'var(--series-1)' if k >= BOWL_WINS else 'var(--series-2)'
+            parts.append(f"<path fill='{fill}' d='M{x0:.1f} {plot_bottom}V{y + r:.1f}"
+                         f"a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {-r:.1f}h{bar_w - 2 * r:.1f}"
+                         f"a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {r:.1f}V{plot_bottom}Z'/>")
+        # Value on the cap wherever there's a bar to caption, record label under the axis
+        if v >= 0.005:
+            parts.append(f"<text class='value-label' x='{cx:.1f}' y='{y - 10:.1f}' text-anchor='middle'>{v:.1%}</text>")
+        parts.append(f"<text class='axis-label' x='{cx:.1f}' y='{plot_bottom + 32}' text-anchor='middle'>{k}-{n - k}</text>")
+
+    return (f"<svg viewBox='0 0 {W} {H}' xmlns='http://www.w3.org/2000/svg' role='img' "
+            f"aria-label='Chance of each possible final record'>{''.join(parts)}</svg>")
+
+
+def writeIndexCard(run):
+    # Renders the index card image (bowl odds over the final record odds); returns its filename, or None without Chrome
+    with open(CARD_TEMPLATE) as f:
+        template = Template(f.read())
+    esc = lambda text: html_escape(str(text), quote=True)
+    # The run line names the run and the record going into it, like the page's Run picker
+    run_label = esc(run['label']) + (f"<br>{esc(run['record'])}" if run.get('record') else '')
+    page = template.substitute(
+        bowlOdds=esc(f"{run['bowlOdds']:.1%}"),
+        runLabel=run_label,
+        chart=oddsChartSvg(run['odds']),
+    )
+    os.makedirs(os.path.dirname(CARD_HTML), exist_ok=True)
+    with open(CARD_HTML, 'w') as f:
+        f.write(page)
+    # The stats index falls back to the link-preview image when there's no card
+    dest = os.path.join(ASSET_DIR, CARD_FILENAME)
+    if screenshotPage(CARD_HTML, dest, size=CARD_SIZE, query='') is None:
+        return None
+    print(f"Wrote {dest}")
+    return CARD_FILENAME
+
+
 def writeSite(season, run, figPath):
     # Writes the page, its CSS/JS and link-preview card; run data lives in runs.js, not the page
-    os.makedirs(HTML_DIR, exist_ok=True)
-    shutil.copyfile(PAGE_CSS, os.path.join(HTML_DIR, CSS_FILENAME))
-    shutil.copyfile(PAGE_JS, os.path.join(HTML_DIR, JS_FILENAME))
+    os.makedirs(ASSET_DIR, exist_ok=True)
+    os.makedirs(PAGE_DIR, exist_ok=True)
+    shutil.copyfile(PAGE_CSS, os.path.join(ASSET_DIR, CSS_FILENAME))
+    shutil.copyfile(PAGE_JS, os.path.join(ASSET_DIR, JS_FILENAME))
     # Publish the run history the page draws from
     if os.path.isfile(RUNS_PATH):
-        shutil.copyfile(RUNS_PATH, os.path.join(HTML_DIR, RUNS_FILENAME))
+        shutil.copyfile(RUNS_PATH, os.path.join(ASSET_DIR, RUNS_FILENAME))
 
-    preview = writePreviewCard(figPath, os.path.join(HTML_DIR, PREVIEW_FILENAME))
+    preview = writePreviewCard(figPath, os.path.join(ASSET_DIR, PREVIEW_FILENAME))
     # gtpdd logo for the nav button and the browser tab icon
-    gtpdd_href = publishAsset(GTPDD_LOGO, WEB_IMG_DIR, PAGE_TO_ROOT)
+    gtpdd_href = publishAsset(GTPDD_LOGO, WEB_IMG_DIR, PAGE_TO_ASSETS)
     logo_img = ("<img class='navlogo' src='" + html_escape(gtpdd_href, quote=True)
                 + "' alt='gtpdd'>") if gtpdd_href else ""
     icon = ("<link rel='icon' href='" + html_escape(gtpdd_href, quote=True) + "'>\n"
@@ -436,8 +516,8 @@ def writeSite(season, run, figPath):
     card_description = (
         f"ESPN's FPI gives Louisiana Tech a {run['bowlOdds']:.1%} shot at a bowl. "
         f"Odds on every possible {season} record, run by run since the season started.")
-    page_url = SITE_URL + '/'
-    card_image = f"{SITE_URL}/{preview}" if preview else None
+    page_url = f"{SITE_URL}/{SITE_SECTION}/{PAGE_FILENAME}"
+    card_image = f"{ASSET_URL}/{preview}" if preview else None
 
     # Fill the page template, escaping plain text
     esc = lambda text: html_escape(str(text), quote=True)
@@ -448,17 +528,22 @@ def writeSite(season, run, figPath):
         title=esc(card_title),
         headLinks=(previewMetaTags(card_title, card_description, page_url, card_image,
                                    twitter_handle=TWITTER_HANDLE) + icon).rstrip('\n'),
-        cssHref=esc(CSS_FILENAME),
+        cssHref=esc(PAGE_TO_ASSETS + CSS_FILENAME),
+        assetsHref=esc(PAGE_TO_ASSETS),
         homeUrl=esc(HOME_URL),
         logoImg=logo_img,
         siteTitle=esc(SITE_TITLE),
-        runsSrc=esc(RUNS_FILENAME),
-        jsSrc=esc(JS_FILENAME),
+        runsSrc=esc(PAGE_TO_ASSETS + RUNS_FILENAME),
+        jsSrc=esc(PAGE_TO_ASSETS + JS_FILENAME),
     )
-    html_path = os.path.join(HTML_DIR, PAGE_FILENAME)
+    html_path = os.path.join(PAGE_DIR, PAGE_FILENAME)
     with open(html_path, 'w') as f:
         f.write(page)
     print(f"Wrote {html_path}")
+
+    # Refresh this page's card on the stats.gtpdd.dog landing page, with its own card image
+    writeIndexCard(run)
+    writeStatsIndex()
     return html_path
 
 

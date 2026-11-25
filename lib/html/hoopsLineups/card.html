@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Lineup Tracker card</title>
+<!-- Rendered locally into the stats.gtpdd.dog index card image, never published, so inline CSS is fine -->
+<!-- The latest game's rotation: one bar per Tech player, filled while he was on the floor, with his points -->
+<style>
+:root {
+  --page: #003087; --surface-1: #ffffff; --text-primary: #0b0b0b; --text-secondary: #4b4a47;
+  --text-muted: #6f6d68; --axis: #b9b7b0; --track: #e6e8ec; --on-court: #003087;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+body { background: var(--page); padding: 24px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.card { height: 100%; background: var(--surface-1); border-radius: 18px; padding: 20px 32px 26px;
+  display: flex; flex-direction: column; color: var(--text-primary); }
+
+/* Scoreboard: away on the left, home on the right, as on the page; equal outer columns keep FINAL centered */
+.score { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 36px; }
+.side { display: flex; align-items: center; gap: 24px; }
+.side.away { justify-content: flex-end; }
+.side.home { justify-content: flex-start; }
+.side img { height: 66px; width: auto; max-width: 110px; object-fit: contain; }
+.pts { font-size: 54px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pts.lost { color: var(--text-muted); }
+.mid { text-align: center; color: var(--text-secondary); font-size: 21px; line-height: 1.25; }
+.mid .final { font-weight: 700; letter-spacing: 0.08em; color: #cb333b; }
+
+/* Rotation: a number column, the game's full length left to right, then a points column */
+.rotation { flex: 1; display: flex; flex-direction: column; margin-top: 14px; min-height: 0; }
+.periods { position: relative; height: 30px; margin-left: 84px; margin-right: 76px; }
+.periods .pts-head { left: auto; right: -76px; width: 76px; transform: none; text-align: right; }
+.periods span { position: absolute; transform: translateX(-50%); font-size: 20px; font-weight: 600;
+  color: var(--text-muted); }
+.rows { flex: 1; position: relative; display: flex; flex-direction: column; justify-content: space-evenly; }
+.row { display: flex; align-items: center; height: $rowHeight; }
+.row.gap { margin-top: $groupGap; }
+.num { width: 84px; flex: none; font-size: $numSize; font-weight: 700; color: var(--text-secondary);
+  font-variant-numeric: tabular-nums; }
+.lane { position: relative; flex: 1; height: 72%; background: var(--track); border-radius: 6px; overflow: hidden; }
+.player-pts { width: 76px; flex: none; text-align: right; font-size: $numSize; font-weight: 400;
+  color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.stint { position: absolute; top: 0; bottom: 0; background: var(--on-court); }
+/* Period breaks run through every row */
+.divider { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: #ffffff; }
+</style>
+</head>
+<body>
+<div class='card'>
+<div class='score'>
+$scoreboard
+</div>
+<div class='rotation'>
+<div class='periods'>$periodLabels<span class='pts-head'>PTS</span></div>
+<div class='rows'>
+$rows
+</div>
+</div>
+</div>
+</body>
+</html>

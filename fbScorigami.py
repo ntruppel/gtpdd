@@ -4,7 +4,9 @@ Louisiana Tech football scorigami: how often each final score has happened in
 school history, and whether the latest game's score is new.
 
 Combines the game history in csv/fbScorigamiGames.csv with this season's games from
-CFBD, writes the score table to html/fbScorigami/json.js, and uploads that file to S3.
+CFBD and writes the score table to html/stats/football/scorigami/json.js. The page is
+html/stats/football/scorigami.html (stats.gtpdd.dog); its template and hand-made files
+live in lib/html/fbScorigami/.
 
 Run from the repo root:
 
@@ -22,13 +24,55 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import cfbd
 import os
+import json
+import re
 from datetime import datetime
+from html import escape as html_escape
+from string import Template
 from dotenv import load_dotenv
 
-from lib.fbCommon import currentSeason
+from lib.common import copyMissingFiles, screenshotPage
+from lib.fbCommon import currentSeason, previewMetaTags
+from statsIndex import writeStatsIndex
 
 # Pull the CFBD API key and other settings from .env
 load_dotenv()
+
+
+####
+# CONSTANTS
+####
+
+# Site and file locations
+SITE_URL = "https://stats.gtpdd.dog"   # the published root of html/stats/
+TWITTER_HANDLE = "@gotechplsdntdie"
+HTML_DIR = "html/stats"                # shared by several gtpdd stat pages
+SITE_SECTION = 'football'              # the page publishes under stats.gtpdd.dog/football/
+PAGE_DIR = os.path.join(HTML_DIR, SITE_SECTION)
+PAGE_FILENAME = 'scorigami.html'
+ASSET_DIR_NAME = 'scorigami'           # this page's own files, grouped beside it
+ASSET_DIR = os.path.join(PAGE_DIR, ASSET_DIR_NAME)
+PAGE_TO_ASSETS = f"{ASSET_DIR_NAME}/"  # from football/scorigami.html to the asset folder
+DATA_JS = os.path.join(ASSET_DIR, 'json.js')  # the score table the page's script imports
+PREVIEW_FILENAME = 'preview.png'
+
+# Page skeleton and hand-made files (script, CSS, images) live in lib/html/fbScorigami/
+TEMPLATE_DIR = 'lib/html/fbScorigami'
+PAGE_TEMPLATE = os.path.join(TEMPLATE_DIR, 'page.html')
+STATIC_DIR = os.path.join(TEMPLATE_DIR, 'static')
+
+# The stats.gtpdd.dog index card: a zoom on the chart around the latest score, screenshotted beside the page
+CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
+CARD_HTML = 'out/fbScorigamiCard.html'  # the filled template, kept only for the screenshot
+CARD_FILENAME = 'card.jpg'
+CARD_SIZE = (1200, 630)                # the same shape as the link-preview cards
+CARD_SCALE = 2                         # shot at 2x and scaled down, for crisp text
+CHART_WIN_MAX, CHART_LOSS_MAX = 100, 57  # the chart's last column and row, as in script.js
+ZOOM_COLS, ZOOM_ROWS = 7, 3            # cells shown around the latest score; odd, so it can sit in the middle
+CAPTION_FONT_PX = 50                   # the verdict line's size, shrunk for lines longer than CAPTION_FIT_CHARS
+CAPTION_FIT_CHARS = 52                 # about how many characters fit across the card at full size
+# Scores the chart blacks out besides any losing score above the winning one: (winning, losing)
+IMPOSSIBLE_SCORES = {(1, 1), (1, 0), (2, 1), (3, 1), (4, 1), (5, 1), (7, 1)}
 
 
 ####
@@ -237,6 +281,148 @@ def checkIfScorigami(df, techScore, oppoScore):
 
 
 ####
+# INDEX CARD
+####
+
+def readScoreTable(path=DATA_JS):
+    # Reads the score table back out of json.js (a JSON string wrapped in a JS module)
+    with open(path) as f:
+        match = re.search(r"const json = '(.*)';", f.read(), re.S)
+    return json.loads(match.group(1).replace("\\'", "'"))['results'] if match else []
+
+
+def latestGame(results):
+    # The most recent game, from the newest 'Month DD, YYYY: Opponent' date: its score cell, result and opponent
+    best = None
+    for r in results:
+        for key in ('lastWin', 'lastLoss'):
+            if r.get(key):
+                date_text, _, opponent = r[key].partition(': ')
+                when = datetime.strptime(date_text, '%B %d, %Y')
+                if best is None or when > best['date']:
+                    best = {'date': when, 'win': r['winScore'], 'loss': r['lossScore'],
+                            'techWon': key == 'lastWin', 'opponent': opponent, 'numGames': r['numGames']}
+    return best
+
+
+def scorigamiCaption(game):
+    # 'Tech's 48-3 win over Arkansas State WAS a Scorigami', or 'was NOT' for a score that's happened before
+    esc = lambda text: html_escape(str(text), quote=True)
+    score = f"{game['win']}-{game['loss']}"
+    # Ties sit with the losses in the score table
+    if game['win'] == game['loss']:
+        result = f"tie with {esc(game['opponent'])}"
+    elif game['techWon']:
+        result = f"win over {esc(game['opponent'])}"
+    else:
+        result = f"loss to {esc(game['opponent'])}"
+    # The latest game is the only one with its score when it's a first
+    verdict = ("<strong class='yes'>WAS</strong>" if game['numGames'] == 1
+               else "was <strong class='no'>NOT</strong>")
+    return f"Tech's {score} {result} {verdict} a Scorigami"
+
+
+def cellColor(entry, win, loss):
+    # A cell's background, by the same rules as the chart's script.js
+    if loss > win or (win, loss) in IMPOSSIBLE_SCORES:
+        return 'black'
+    if not entry:
+        return None
+    if entry['lastWin']:
+        return 'midnightblue' if entry['lastLoss'] else 'dodgerblue'
+    # Only Tech losses by this score; a tie counts as both sides
+    return 'midnightblue' if win == loss else 'firebrick'
+
+
+def zoomGridHtml(results, center, cols=ZOOM_COLS, rows=ZOOM_ROWS):
+    # The cols x rows cells around center plus the chart's header row and column, as a table
+    win, loss = center
+    lookup = {(r['winScore'], r['lossScore']): r for r in results}
+    # Centered on the score, shifted inward only when it sits near the chart's edge
+    first_win = min(max(win - cols // 2, 0), CHART_WIN_MAX - (cols - 1))
+    first_loss = min(max(loss - rows // 2, 0), CHART_LOSS_MAX - (rows - 1))
+    wins = range(first_win, first_win + cols)
+    losses = range(first_loss, first_loss + rows)
+
+    # Header row: winning scores, zero-padded like the chart
+    rows = ["<thead><tr><th class='corner'></th>" + ''.join(f"<th>{w:02d}</th>" for w in wins) + "</tr></thead>"]
+    body = []
+    for l in losses:
+        cells = [f"<th>{l:02d}</th>"]
+        for w in wins:
+            entry = lookup.get((w, l))
+            color = cellColor(entry, w, l)
+            style = f" style='background:{color}'" if color else ''
+            cls = " class='latest'" if (w, l) == (win, loss) else ''
+            # Impossible scores show no count, like the chart's black cells
+            count = entry['numGames'] if entry and color != 'black' else ''
+            cells.append(f"<td{cls}{style}>{count}</td>")
+        body.append("<tr>" + ''.join(cells) + "</tr>")
+    rows.append("<tbody>" + ''.join(body) + "</tbody>")
+    return "<table>" + ''.join(rows) + "</table>"
+
+
+def writeIndexCard():
+    # Renders the index card image zoomed on the latest score; returns its filename, or None without data or Chrome
+    results = readScoreTable()
+    game = latestGame(results)
+    if game is None:
+        return None
+    center = (game['win'], game['loss'])
+    with open(CARD_TEMPLATE) as f:
+        template = Template(f.read())
+    os.makedirs(os.path.dirname(CARD_HTML), exist_ok=True)
+    with open(CARD_HTML, 'w') as f:
+        caption = scorigamiCaption(game)
+        # Shrink the caption for long opponent names so it stays on one line
+        chars = len(re.sub(r'<[^>]+>', '', caption))
+        size = min(CAPTION_FONT_PX, int(CAPTION_FONT_PX * CAPTION_FIT_CHARS / chars))
+        f.write(template.substitute(caption=caption, captionSize=size, grid=zoomGridHtml(results, center)))
+    # The stats index falls back to the link-preview image when there's no card
+    dest = os.path.join(ASSET_DIR, CARD_FILENAME)
+    if screenshotPage(CARD_HTML, dest, size=CARD_SIZE, scale=CARD_SCALE, query='') is None:
+        return None
+    print(f"Wrote {dest} (zoomed on {center[0]}-{center[1]})")
+    return CARD_FILENAME
+
+
+####
+# WEB PAGE
+####
+
+def writeSite(updated):
+    # Writes football/scorigami.html and restores any missing files in its asset folder
+    copyMissingFiles(STATIC_DIR, ASSET_DIR)
+    os.makedirs(PAGE_DIR, exist_ok=True)
+
+    # Link-preview tags, with the update date so the stats landing page card shows it
+    title = "Louisiana Tech Scorigami"
+    description = f"Every final score in Louisiana Tech football history. Updated {updated}."
+    page_url = f"{SITE_URL}/{SITE_SECTION}/{PAGE_FILENAME}"
+    card_image = f"{SITE_URL}/{SITE_SECTION}/{ASSET_DIR_NAME}/{PREVIEW_FILENAME}"
+    icon = f"<link rel='icon' href='{PAGE_TO_ASSETS}favicon.png'>\n"
+
+    # Fill the page template; substitute fails the run on an unfilled placeholder
+    with open(PAGE_TEMPLATE) as f:
+        template = Template(f.read())
+    page = template.substitute(
+        title=html_escape(title),
+        headLinks=(previewMetaTags(title, description, page_url, card_image,
+                                   twitter_handle=TWITTER_HANDLE) + icon).rstrip('\n'),
+        assets=html_escape(PAGE_TO_ASSETS, quote=True),
+    )
+    html_path = os.path.join(PAGE_DIR, PAGE_FILENAME)
+    with open(html_path, 'w') as f:
+        f.write(page)
+    print(f"Wrote {html_path}")
+
+    # Refresh this page's card on the stats.gtpdd.dog landing page, with its own card image
+    writeIndexCard()
+    writeStatsIndex()
+    return html_path
+
+
+####
 # MAIN
 ####
 
@@ -315,14 +501,13 @@ def fbScorigami(platform, year=None):
     jsonString += df_s.to_json(index=False, orient="records")
     dateString = datetime.today().strftime('%B %d, %Y')
     jsonString += ',"updated": "' + dateString + '"}' + "';\nexport default json;\n"
-    print(jsonString,  file=open('html/fbScorigami/json.js', 'w'))
+    os.makedirs(ASSET_DIR, exist_ok=True)
+    with open(DATA_JS, 'w') as f:
+        print(jsonString, file=f)
+    print(f"Wrote {DATA_JS}")
 
-    # Upload the data file to the site's S3 bucket
-    import boto3
-    s3 = boto3.resource("s3")
-    s3.meta.client.upload_file('html/fbScorigami/json.js', 'amazon-cloudfront-secure-static-site--s3bucketroot-zadkhrqvgyxq', 'json.js',
-    ExtraArgs={
-        'ContentType': 'application/javascript',})
+    # The page and its files; syncScript.sh stats publishes them with the rest of the site
+    writeSite(dateString)
 
     # Nothing to check until a game this season has finished
     if df2.empty:

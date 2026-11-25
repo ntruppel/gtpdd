@@ -6,8 +6,9 @@ home/away/neutral and the final score.
 
 The table's master copy is csv/fbTechLuckGames.js. Seasons already in it are left
 alone (1988-2019 were hand-collected), so only missing seasons, or seasons that have
-gained games, are pulled from CFBD. Each run publishes the table to the site as
-html/fbTechLuck/games.js and restores any missing site files from lib/html/fbTechLuck/.
+gained games, are pulled from CFBD. Each run publishes the table as
+html/stats/football/techLuck/games.js and restores any missing site files from
+lib/html/fbTechLuck/. The test starts at stats.gtpdd.dog/football/techLuck.html.
 
 Run from the repo root:
 
@@ -40,10 +41,13 @@ load_dotenv()
 
 TEAM = 'Louisiana Tech'
 GAMES_PATH = 'csv/fbTechLuckGames.js'   # tracked master copy of the game table
-SITE_DIR = 'html/fbTechLuck'
+SITE_DIR = 'html/stats/football/techLuck'  # the test's later pages and shared files
 GAMES_JS = os.path.join(SITE_DIR, 'games.js')  # the copy the site loads
-# Hand-made site files (pages, CSS, JS, icon), copied to the site when missing
+# Hand-made site files (later pages, CSS, JS, icon), copied to the site when missing
 STATIC_DIR = 'lib/html/fbTechLuck/static'
+# The start page, copied to stats.gtpdd.dog/football/techLuck.html when missing
+START_PAGE = 'lib/html/fbTechLuck/techLuck.html'
+START_PAGE_DIR = 'html/stats/football'
 JS_GLOBAL = 'TECH_LUCK_GAMES'
 FIRST_SEASON = 1988               # as far back as the hand-collected rows go
 
@@ -124,6 +128,12 @@ def publishSite(path=GAMES_PATH):
     if os.path.isfile(path):
         shutil.copyfile(path, GAMES_JS)
     copyMissingFiles(STATIC_DIR, SITE_DIR)
+    # The start page lives apart from its files, at football/techLuck.html
+    start_dest = os.path.join(START_PAGE_DIR, os.path.basename(START_PAGE))
+    if not os.path.exists(start_dest):
+        os.makedirs(START_PAGE_DIR, exist_ok=True)
+        shutil.copyfile(START_PAGE, start_dest)
+        print(f"Copied {START_PAGE} -> {start_dest}")
 
 
 ####

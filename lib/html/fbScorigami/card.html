@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Scorigami card</title>
+<!-- Rendered locally into the stats.gtpdd.dog index card image, never published, so inline CSS is fine -->
+<!-- Whether the latest game was a scorigami, over a 7x3 zoom on the chart around its score -->
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+body { background: floralwhite; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 22px; font-family: "Times New Roman", Times, serif; }
+/* The verdict line: WAS in the chart's win blue, NOT in its loss red */
+.caption { margin: 0; font-size: ${captionSize}px; font-weight: 400; color: black; white-space: nowrap; }
+.caption strong { font-weight: 700; }
+.caption .yes { color: dodgerblue; }
+.caption .no { color: firebrick; }
+table { border-collapse: collapse; table-layout: fixed; }
+th, td { border: 3px solid black; text-align: center; padding: 0; }
+/* Headers match the chart's light-gray first row and column */
+th { background: lightgray; color: black; font-size: 42px; font-weight: 700; }
+th.corner { width: 76px; height: 76px; }
+thead th { width: 132px; height: 76px; }
+tbody th { width: 76px; height: 132px; }
+td { width: 132px; height: 132px; font-size: 58px; color: white; }
+/* The latest score, outlined so it stands out at the center */
+td.latest { outline: 8px solid #ffd100; outline-offset: -10px; }
+</style>
+</head>
+<body>
+<p class='caption'>$caption</p>
+$grid
+</body>
+</html>

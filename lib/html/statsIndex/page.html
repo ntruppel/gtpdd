@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>$title</title>
+$headLinks
+<link rel='stylesheet' href='$cssHref'>
+</head>
+<body>
+<!-- The stats.gtpdd.dog blackboard: chalk math on the board, cards taped up like photos -->
+
+<!-- Chalk scribbles behind everything; decoration only, so screen readers skip it -->
+<div class='board-notes' aria-hidden='true'>
+  <p class='note n1 white'>P(bowl) = &Sigma; P(W &ge; 6)</p>
+  <p class='note n2 yellow'>W% = PF<sup>2.37</sup> / (PF<sup>2.37</sup> + PA<sup>2.37</sup>)</p>
+  <p class='note n3 blue'>E[W] = &Sigma; p<sub>i</sub></p>
+  <p class='note n4 pink'>eFG% = (FG + &frac12;&middot;3PM) / FGA</p>
+  <p class='note n5 white'>Poss &asymp; FGA &minus; OREB + TOV + 0.44&middot;FTA</p>
+  <p class='note n6 yellow'>E<sub>A</sub> = 1 / (1 + 10<sup>(R<sub>B</sub> &minus; R<sub>A</sub>)/400</sup>)</p>
+  <p class='note n7 blue'>P(k) = <sup>n</sup>C<sub>k</sub> p<sup>k</sup>(1&minus;p)<sup>n&minus;k</sup></p>
+  <p class='note n8 pink'>YPP = Yds &divide; Plays</p>
+  <p class='note n9 white'>&sigma; = &radic;(np(1&minus;p))</p>
+  <p class='note n10 yellow'>+/&minus; = PF &minus; PA <small>(on court)</small></p>
+  <p class='note n11 blue'>Pts / Drive = Pts &divide; Drives</p>
+  <p class='note n12 pink'>3rd &amp; 93 &rarr; :(</p>
+  <p class='note n13 yellow underline'>Go Dogs!</p>
+  <p class='note n14 white'>Success: 1st &ge; 50% &middot; 2nd &ge; 70% &middot; 3rd/4th = 100%</p>
+  <p class='note n15 pink'>Explosive: Rush &ge; 10, Pass &ge; 20</p>
+  <p class='note n16 yellow'>4th &amp; 1 &rarr; GO</p>
+  <p class='note n17 blue'>ORtg = 100 &middot; PTS / Poss</p>
+  <p class='note n18 white'>Net Rtg = ORtg &minus; DRtg</p>
+  <!-- A chalk play: the line, a QB and two routes, with the defense as X's; the filter roughs up the strokes -->
+  <svg class='note play' viewBox='0 0 240 170' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+    <defs>
+      <filter id='chalky' x='-5%' y='-5%' width='110%' height='110%'>
+        <feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' result='noise'/>
+        <feDisplacementMap in='SourceGraphic' in2='noise' scale='3'/>
+      </filter>
+    </defs>
+    <g class='chalk-white' stroke-width='3' filter='url(#chalky)'>
+      <circle cx='70' cy='120' r='9'/><circle cx='95' cy='120' r='9'/><circle cx='120' cy='120' r='9'/>
+      <circle cx='145' cy='120' r='9'/><circle cx='170' cy='120' r='9'/><circle cx='120' cy='150' r='9'/>
+      <circle cx='25' cy='122' r='9'/><circle cx='215' cy='122' r='9'/>
+      <path d='M25 112 C 25 70, 30 50, 60 40'/><path d='M52 34 L 60 40 L 51 46'/>
+      <path d='M215 112 L 215 60 L 175 30'/><path d='M178 40 L 175 30 L 185 29'/>
+    </g>
+    <g class='chalk-yellow' stroke-width='3' filter='url(#chalky)'>
+      <path d='M60 80 l12 12 M72 80 l-12 12'/><path d='M114 76 l12 12 M126 76 l-12 12'/>
+      <path d='M168 80 l12 12 M180 80 l-12 12'/><path d='M20 60 l12 12 M32 60 l-12 12'/>
+      <path d='M206 56 l12 12 M218 56 l-12 12'/>
+    </g>
+  </svg>
+  <!-- A pick-and-roll: half court, the ball handler dribbling off a screen, the screener rolling to the rim, X's on defense -->
+  <svg class='note play2' viewBox='0 0 240 240' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+    <g class='chalk-white' stroke-width='3' filter='url(#chalky)'>
+      <path d='M10 22 H230'/><path d='M104 30 H136'/><circle cx='120' cy='40' r='7'/>
+      <path d='M92 22 V108 H148 V22'/><path d='M92 108 A28 28 0 0 0 148 108'/>
+      <path d='M28 22 V60 A96 96 0 0 0 212 60 V22'/>
+    </g>
+    <g class='chalk-yellow' stroke-width='3' filter='url(#chalky)'>
+      <circle cx='204' cy='222' r='9'/><circle cx='160' cy='196' r='9'/>
+      <path d='M194 222 l-8 -7 l-6 8 l-8 -7 l-6 8 l-8 -7 l-6 8 l-8 -7 l-6 8 l-8 -7 l-6 8'/><path d='M118 214 L109 221 L119 226'/>
+      <path d='M174 184 L174 206'/>
+      <path d='M157 186 C 152 140, 140 92, 127 54'/><path d='M121 64 L127 54 L135 62'/>
+    </g>
+    <g class='chalk-pink' stroke-width='3' filter='url(#chalky)'>
+      <path d='M182 190 l12 12 M194 190 l-12 12'/><path d='M136 160 l12 12 M148 160 l-12 12'/>
+    </g>
+  </svg>
+</div>
+
+<header class='masthead'>
+  <a class='home' href='$homeUrl'><span aria-hidden='true'>&#8592;</span> Back to gtpdd.dog</a>
+  <h1 class='brand'>$brand</h1>
+  <p class='tagline'>$tagline</p>
+$filters
+</header>
+<main>
+<div class='cards'>
+$cards
+</div>
+</main>
+<script src='$jsSrc'></script>
+</body>
+</html>

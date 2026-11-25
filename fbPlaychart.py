@@ -5,11 +5,14 @@ Created on Wed Nov  2 18:06:08 2022
 @author: ntrup
 
 Every play of a Louisiana Tech game drawn on a football field, saved as a PNG and
-an interactive HTML page for playcharts.gtpdd.dog. Page templates live in
-lib/html/fbPlaychart/.
+an interactive HTML page. Each game gets a page at
+html/stats/football/playchart/<year>/<game>.html (stats.gtpdd.dog), and
+html/stats/football/playchart.html always shows the latest game. Page templates
+live in lib/html/fbPlaychart/.
 
 Run from the repo root:
 
+    python fbPlaychart.py                                       # the most recent finished game
     python fbPlaychart.py --year 2025 --week 4                  # from the cached CSV
     python fbPlaychart.py --year 2025 --week 4 --refresh-data   # re-pull from CFBD
 """
@@ -20,6 +23,7 @@ Run from the repo root:
 
 import json
 import os
+import pathlib
 import re
 import shutil
 from html import escape as html_escape
@@ -37,11 +41,12 @@ import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
 
-from lib.common import copyMissingFiles
-from lib.fbCommon import (LOGO_DIR, TEAM_COLORS_CSV, assetSlug, cfbdApi, downloadLogo,
-                          gameDateTime, getGames, kickoffText, loadColors, loadVenues,
+from lib.fbCommon import (LOGO_DIR, TEAM_COLORS_CSV, assetSlug, cfbdApi, currentSeason,
+                          downloadLogo, gameDateTime, getGames, kickoffText, loadColors, loadVenues,
                           loadYears, lookupEspnId, previewMetaTags, publishAsset,
                           teamColors, teamLogo, trimmedLogo, writeJsGlobal)
+from lib.common import screenshotPage
+from statsIndex import writeStatsIndex
 
 # Pull the CFBD API key and other settings from .env
 load_dotenv()
@@ -54,21 +59,27 @@ BACKGROUND_COLOR = "#d6e8cf"  # muted light green
 
 # Site, file and logo locations
 HOME_URL = "https://gtpdd.dog"
-SITE_URL = "https://playcharts.gtpdd.dog"  # the published root of html/fbPlaychart/
+SITE_URL = "https://stats.gtpdd.dog"    # the published root of html/stats/
 SITE_TITLE = "gtpdd's Football Playcharts"
 TWITTER_HANDLE = "@gotechplsdntdie"
 PREVIEW_DIR = 'previewImages'      # one link-preview card per page, beside the pages
 PREVIEW_WIDTH = 1200               # a summary_large_image card is 1200x600
-HTML_DIR = "html/fbPlaychart"
+HTML_DIR = "html/stats"                # shared by several gtpdd stat pages
+SITE_SECTION = 'football'              # the pages publish under stats.gtpdd.dog/football/
+PAGE_DIR = os.path.join(HTML_DIR, SITE_SECTION)
+PAGE_FILENAME = 'playchart.html'       # always the latest game
+ASSET_DIR_NAME = 'playchart'           # season folders and shared files, grouped beside the page
 PBP_DIR = "csv/fbPlaychartPBP"
 ESPN_CONF_LOGO_URL = "https://a.espncdn.com/i/teamlogos/ncaa_conf/500/{}.png"
 ESPN_CONFERENCE_IDS_CSV = "csv/espnConferenceIDs.csv"
 LOGO_DRAW_PX = 72                 # logos are shrunk to this before drawing
-# html/fbPlaychart/ is the site root, so everything a page links to must live under it
-SITE_DIR = HTML_DIR
+# Everything a page links to lives under the playchart folder
+SITE_DIR = os.path.join(PAGE_DIR, ASSET_DIR_NAME)
+SITE_DIR_URL = f"{SITE_URL}/{SITE_SECTION}/{ASSET_DIR_NAME}"
 WEB_LOGO_DIR = os.path.join(SITE_DIR, 'logo')
 WEB_IMG_DIR = os.path.join(SITE_DIR, 'img')
-PAGE_TO_ROOT = '../'              # pages sit at <root>/<year>/
+PAGE_TO_ROOT = '../'              # game pages sit at <playchart>/<year>/
+LATEST_TO_ROOT = ASSET_DIR_NAME + '/'  # the latest-game page sits beside <playchart>/
 GTPDD_LOGO = 'img/gtpdd_logo.png'  # the nav logo, published alongside the charts
 
 # Drive headers: logos sized by height, with a width cap so wordmarks don't run long
@@ -607,7 +618,7 @@ def readLogo(path, draw_px):
 
 
 def publishLogo(name, gray=False):
-    # Publishes a cached logo under the site root and returns its page-relative link
+    # Publishes a cached logo under the playchart folder and returns its folder-relative link
     src = os.path.join(LOGO_DIR, f"{name}.png")
     if not os.path.isfile(src):
         return None
@@ -623,7 +634,7 @@ def publishLogo(name, gray=False):
         img = PILImage.merge('RGBA', (*([img.convert('L')] * 3), img.split()[3]))
     os.makedirs(WEB_LOGO_DIR, exist_ok=True)
     img.save(os.path.join(WEB_LOGO_DIR, filename))
-    return PAGE_TO_ROOT + 'logo/' + filename
+    return 'logo/' + filename
 
 
 def writePreviewCard(png_path, html_dir, html_filename):
@@ -1155,8 +1166,6 @@ TEMPLATE_DIR = 'lib/html/fbPlaychart'
 PAGE_TEMPLATE = os.path.join(TEMPLATE_DIR, 'page.html')
 PAGE_CSS = os.path.join(TEMPLATE_DIR, CSS_FILENAME)
 PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
-# Hand-made site files (403/404 pages, robots.txt), copied to the site root when missing
-STATIC_DIR = os.path.join(TEMPLATE_DIR, 'static')
 
 
 def styleToAttributes(declarations):
@@ -1188,8 +1197,8 @@ def cspSafeSvg(svg):
     return svg
 
 
-def externalLogos(svg):
-    # Points each drawn logo at its published file instead of the embedded base64 copy, cutting page weight
+def externalLogos(svg, root):
+    # Points each drawn logo at its published file (under root) instead of the embedded base64 copy, cutting page weight
     def relink(match):
         # Relinks one <image> tag, undoing matplotlib's vertical flip
         tag, gid = match.group(0), match.group(1)
@@ -1200,7 +1209,7 @@ def externalLogos(svg):
         # Dropping the flip mirrors the box's y, so mirror y back
         tag = FLIP_TRANSFORM_RE.sub('', tag)
         tag = Y_ATTR_RE.sub(lambda m: ' y="{:.6g}"'.format(-float(m.group(1))), tag, count=1)
-        return LOGO_DATA_HREF_RE.sub(' xlink:href="{}"'.format(html_escape(href, quote=True)), tag)
+        return LOGO_DATA_HREF_RE.sub(' xlink:href="{}"'.format(html_escape(root + href, quote=True)), tag)
     return LOGO_IMAGE_RE.sub(relink, svg)
 
 
@@ -1251,8 +1260,16 @@ def gameEntry(filename):
 
 
 def htmlDir(year):
-    # Pages are grouped by season, e.g. 2025 -> 'html/fbPlaychart/2025'
-    return os.path.join(HTML_DIR, str(year))
+    # Pages are grouped by season, e.g. 2025 -> 'html/stats/football/playchart/2025'
+    return os.path.join(SITE_DIR, str(year))
+
+
+def latestWeek(year, team='Louisiana Tech'):
+    # Week of the team's most recent finished regular-season game (plays are pulled by regular-season week)
+    finished = [g for g in getGames(year, team, season_type='regular') if g.completed]
+    if not finished:
+        raise SystemExit(f"{team} hasn't finished a regular-season game in {year} yet.")
+    return finished[-1].week
 
 
 def findPbpCsv(year, week):
@@ -1286,8 +1303,212 @@ def writeManifest(base_dir, year, current_href=None):
     games = {str(y): loadGames(os.path.join(base_dir, str(y)),
                                current=current_href if y == year else None)
              for y in years}
-    return writeJsGlobal(os.path.join(base_dir, MANIFEST_FILENAME), 'GTPDD_PLAYCHARTS',
-                         {'years': years, 'games': games})
+    manifest = {'years': years, 'games': games}
+    writeJsGlobal(os.path.join(base_dir, MANIFEST_FILENAME), 'GTPDD_PLAYCHARTS', manifest)
+    return manifest
+
+
+def isLatestGame(manifest, year, href):
+    # True when (year, href) is the newest game on file, skipping seasons with no pages yet
+    for y in manifest['years']:
+        games = manifest['games'].get(str(y))
+        if games:
+            return y == year and games[-1]['href'] == href
+    return False
+
+
+####
+# INDEX CARD
+####
+
+# The stats.gtpdd.dog index card: the latest game's drive chart, screenshotted into an image beside the pages
+CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
+CARD_HTML = 'out/fbPlaychartCard.html'  # the filled template, kept only for the screenshot
+CARD_FILENAME = 'card.jpg'
+CARD_SIZE = (1200, 630)                # the same shape as the link-preview cards
+CARD_SCALE = 2                         # shot at 2x and scaled down, for crisp text
+CARD_FIELD_H = 526                     # the field's height under the 104px scoreboard
+CARD_PX_PER_YARD = 10                  # 120 yards end line to end line across the 1200px card
+CARD_ARROW_H = 14                      # a drive arrow's thickness at most
+CARD_HEAD_PX = 12                      # the arrowhead's length at most
+CARD_DIVIDER_ROWS = 1.4                # how many drive rows a halftime or overtime break takes up
+
+# Rows that hand the ball over rather than move it, so they set where a drive starts, not how far it went
+DRIVE_TRANSITION_TYPES = {'Kickoff', 'Onside Kickoff', 'Kickoff Return (Offense)', 'Touchback', 'Punt Return'}
+# Drive results by the type of the drive's last play: (label, is a score, where the arrow ends)
+DRIVE_RESULTS = {
+    'Rushing Touchdown': ('TD', True, 'goal'),
+    'Passing Touchdown': ('TD', True, 'goal'),
+    'Return Touchdown': ('Return TD', True, 'goal'),        # a kick return, credited to the returning team
+    'Punt Return Touchdown': ('Return TD', True, 'goal'),
+    'Kickoff Return Touchdown': ('Return TD', True, 'goal'),
+    'Field Goal Good': ('FG', True, 'spot'),
+    'Field Goal Missed': ('Missed FG', False, 'spot'),
+    'Blocked Field Goal': ('Blocked FG', False, 'spot'),
+    'FG Recovery (Opponent)': ('Blocked FG', False, 'spot'),
+    'Punt': ('Punt', False, 'spot'),
+    'Blocked Punt': ('Blocked Punt', False, 'spot'),
+    'Pass Interception Return': ('INT', False, 'spot'),
+    'Interception Return Touchdown': ('Pick-6', False, 'spot'),
+    'Fumble Recovery (Opponent)': ('Fumble', False, 'spot'),
+    'Fumble Return Touchdown': ('Fumble TD', False, 'spot'),
+    'Safety': ('Safety', False, 'own goal'),
+}
+
+
+def cardDrives(df, team):
+    # Splits the game into drives the same way the chart does, with each drive's start, end and result
+    drives, offense, last_overtime = [], None, 4
+    for row in df.itertuples():
+        if row.type in ('Timeout', 'End of Game', 'End of Half', 'End Period'):
+            continue
+        period = quarterOf(row.clock) or 0
+        # Each overtime period starts fresh, like the chart's overtime dividers
+        new_overtime = period > 4 and period > last_overtime
+        if new_overtime:
+            last_overtime = period
+        if row.offense != offense or row.type in KICKOFF_DRIVE_TYPES or new_overtime:
+            offense = row.offense
+            drives.append({'tech': offense == team, 'period': period, 'rows': []})
+        drives[-1]['rows'].append(row)
+
+    out = []
+    for d in drives:
+        # Tech drives toward x=100, the opponent toward x=0
+        direction, goal = (1, 100) if d['tech'] else (-1, 0)
+        plays = [r for r in d['rows'] if r.type not in DRIVE_TRANSITION_TYPES and pd.notna(r.start)]
+        # A drive that's only a kickoff before the clock ran out has nothing to draw
+        if not plays:
+            continue
+        # A penalty after the result (say, offsides on the extra point) doesn't change how the drive ended
+        last = plays[-1]
+        for r in reversed(plays):
+            if r.type in DRIVE_RESULTS:
+                last = r
+                break
+            if r.type != 'Penalty':
+                break
+        label, scored, where = DRIVE_RESULTS.get(last.type, ('', False, 'gain'))
+        if where == 'goal':
+            end = goal
+        elif where == 'own goal':
+            end = 100 - goal
+        elif where == 'spot':
+            end = last.start
+        else:
+            end = last.start + direction * (0 if pd.isna(last.gained) else last.gained)
+            # A drive that ends on a 4th down without a kick turned it over on downs
+            if pd.notna(last.down) and int(last.down) == 4:
+                label = 'Downs'
+        out.append({'tech': d['tech'], 'period': d['period'], 'start': float(plays[0].start),
+                    'end': float(min(max(end, 0), 100)), 'label': label, 'scored': scored})
+    return out
+
+
+def cardFieldSvg(drives, tech_color, oppo_color):
+    # The playchart's field with one arrow per drive, top to bottom in game order, and breaks at halftime and each overtime
+    W, H = 120 * CARD_PX_PER_YARD, CARD_FIELD_H
+    px = lambda yard: (yard + 10) * CARD_PX_PER_YARD
+    esc = lambda text: html_escape(str(text), quote=True)
+
+    # Where a break goes: before the first second-half drive, and before each overtime's first drive
+    breaks = {}
+    for i, d in enumerate(drives):
+        prev = drives[i - 1]['period'] if i else d['period']
+        if prev <= 2 < d['period']:
+            breaks[i] = 'HALF'
+        elif d['period'] > 4 and d['period'] != prev:
+            breaks[i] = overtimeLabel(d['period'])
+    pad = 16
+    pitch = (H - 2 * pad) / max(len(drives) + CARD_DIVIDER_ROWS * len(breaks), 1)
+    bar_h = min(CARD_ARROW_H, pitch * 0.55)
+
+    # End zones in each team's color, white yard lines every 10 with 0/50/100 heavier
+    parts = [f"<rect x='0' y='0' width='{px(0)}' height='{H}' fill='{esc(tech_color)}'/>",
+             f"<rect x='{px(100)}' y='0' width='{W - px(100)}' height='{H}' fill='{esc(oppo_color)}'/>"]
+    for yard in range(0, 101, 10):
+        width = 5 if yard in (0, 50, 100) else 2
+        parts.append(f"<line x1='{px(yard)}' x2='{px(yard)}' y1='0' y2='{H}' stroke='#ffffff' stroke-width='{width}'/>")
+
+    y = pad
+    for i, d in enumerate(drives):
+        # Halftime and overtime get a rule across the field with a boxed label, like the chart's dividers
+        if i in breaks:
+            mid = y + pitch * CARD_DIVIDER_ROWS / 2
+            parts.append(f"<line x1='0' x2='{W}' y1='{mid:.1f}' y2='{mid:.1f}' stroke='#000' stroke-width='3'/>")
+            parts.append(f"<rect x='{W / 2 - 34}' y='{mid - 13:.1f}' width='68' height='26' fill='{BACKGROUND_COLOR}' "
+                         f"stroke='#000' stroke-width='2'/>")
+            parts.append(f"<text class='divider-label' x='{W / 2}' y='{mid + 5:.1f}' text-anchor='middle'>{esc(breaks[i])}</text>")
+            y += pitch * CARD_DIVIDER_ROWS
+        cy = y + pitch / 2
+        x0, x1 = px(d['start']), px(d['end'])
+        color = esc(tech_color if d['tech'] else oppo_color)
+        sign = 1 if x1 >= x0 else -1
+        length = abs(x1 - x0)
+        half = bar_h / 2
+        if length < 2:
+            # No net yards: a dot where the drive started
+            parts.append(f"<circle cx='{x0:.1f}' cy='{cy:.1f}' r='{half + 1:.1f}' fill='{color}'/>")
+        else:
+            # Shaft then head, pointing the way the ball went
+            head = min(CARD_HEAD_PX, length)
+            neck = x1 - sign * head
+            parts.append(f"<polygon fill='{color}' points='{x0:.1f},{cy - half:.1f} {neck:.1f},{cy - half:.1f} "
+                         f"{neck:.1f},{cy - half - 4:.1f} {x1:.1f},{cy:.1f} {neck:.1f},{cy + half + 4:.1f} "
+                         f"{neck:.1f},{cy + half:.1f} {x0:.1f},{cy + half:.1f}'/>")
+        # The result just past the arrowhead (the way the arrow points, even on a drive that lost yards), bold for a score
+        if d['label']:
+            direction = sign if length >= 2 else (1 if d['tech'] else -1)
+            lx = x1 + direction * 8
+            anchor = 'start' if direction > 0 else 'end'
+            cls = 'result score-play' if d['scored'] else 'result'
+            parts.append(f"<text class='{cls}' x='{lx:.1f}' y='{cy + 6:.1f}' text-anchor='{anchor}'>{esc(d['label'])}</text>")
+        y += pitch
+    return f"<svg viewBox='0 0 {W} {H}' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'>{''.join(parts)}</svg>"
+
+
+def cardScoreboard(info, team, opponent, final, logo_files):
+    # Away on the left, home on the right: logo and score, with the loser's score grayed and FINAL between
+    tech_final, oppo_final = final if final else (None, None)
+    home = (info or {}).get('homeTeam')
+    tech_home = home == team or home is None
+    sides = {'tech': (logo_files.get('tech'), tech_final, oppo_final, team),
+             'oppo': (logo_files.get('oppo'), oppo_final, tech_final, opponent)}
+
+    def side(key, where):
+        # One team's half of the scoreboard; its logo sits on the outside edge, or its name without one
+        logo, pts, other, name = sides[key]
+        path = os.path.join(SITE_DIR, logo) if logo else None
+        mark = (f"<img src='{pathlib.Path(path).resolve().as_uri()}' alt=''>" if path and os.path.isfile(path)
+                else f"<div class='pts'>{html_escape(name)}</div>")
+        lost = ' lost' if pts is not None and other is not None and pts < other else ''
+        score = f"<div class='pts{lost}'>{'' if pts is None else pts}</div>"
+        inner = mark + score if where == 'away' else score + mark
+        return f"<div class='side {where}'>{inner}</div>"
+
+    kickoff = gameDateTime(info) if info else None
+    date_text = f"{kickoff:%b} {kickoff.day}" if kickoff else ''
+    mid = f"<div class='mid'><div class='final'>FINAL</div>{date_text}</div>"
+    away, home_key = ('oppo', 'tech') if tech_home else ('tech', 'oppo')
+    return side(away, 'away') + mid + side(home_key, 'home')
+
+
+def writeIndexCard(df, team, opponent, info, final, tech_color, oppo_color, logo_files):
+    # Renders the index card image from the game's drives; returns its filename, or None without Chrome
+    with open(CARD_TEMPLATE) as f:
+        template = Template(f.read())
+    os.makedirs(os.path.dirname(CARD_HTML), exist_ok=True)
+    with open(CARD_HTML, 'w') as f:
+        f.write(template.substitute(
+            fieldColor=BACKGROUND_COLOR,
+            scoreboard=cardScoreboard(info, team, opponent, final, logo_files),
+            field=cardFieldSvg(cardDrives(df, team), tech_color, oppo_color)))
+    # The stats index falls back to the link-preview image when there's no card
+    dest = os.path.join(SITE_DIR, CARD_FILENAME)
+    if screenshotPage(CARD_HTML, dest, size=CARD_SIZE, scale=CARD_SCALE, query='') is None:
+        return None
+    print(f"Wrote {dest}")
+    return CARD_FILENAME
 
 
 ####
@@ -1474,7 +1695,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
 
     # Every season's game list as a script the pages load (a strict CSP blocks fetching it)
     current_href = html_filename
-    writeManifest(HTML_DIR, year, current_href)
+    manifest = writeManifest(SITE_DIR, year, current_href)
     current_label = gameEntry(html_filename)['label']
     # Link-preview title and description; the date stays out of the short title
     kickoff = gameDateTime(info)
@@ -1482,41 +1703,57 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     date_text = f"{kickoff:%B} {kickoff.day}, {year}" if kickoff else f"Wk {week}, {year}"
     card_title = f"Playchart | {matchup}"
     card_description = f"Every play of {matchup}, {date_text}."
-    page_url = f"{SITE_URL}/{year}/{html_filename}"
-    card_image = f"{SITE_URL}/{year}/{PREVIEW_DIR}/{preview}" if preview else None
-    # gtpdd logo for the nav's "Back to home" button, published under the site root
-    gtpdd_href = publishAsset(GTPDD_LOGO, WEB_IMG_DIR, PAGE_TO_ROOT)
-    logo_img = ("<img class='navlogo' src='" + html_escape(gtpdd_href, quote=True) + "' alt='gtpdd'>"
-                if gtpdd_href else "")
+    page_url = f"{SITE_DIR_URL}/{year}/{html_filename}"
+    card_image = f"{SITE_DIR_URL}/{year}/{PREVIEW_DIR}/{preview}" if preview else None
+    # gtpdd logo for the nav's "Back to home" button, published under the playchart folder
+    gtpdd_href = publishAsset(GTPDD_LOGO, WEB_IMG_DIR)
     # Shared stylesheet and script sit next to the season folders, since a strict CSP won't run them inline
-    shutil.copyfile(PAGE_CSS, os.path.join(HTML_DIR, CSS_FILENAME))
-    shutil.copyfile(PAGE_JS, os.path.join(HTML_DIR, JS_FILENAME))
-    # Restore any hand-made site files missing from the site root, leaving existing ones alone
-    copyMissingFiles(STATIC_DIR, HTML_DIR)
+    shutil.copyfile(PAGE_CSS, os.path.join(SITE_DIR, CSS_FILENAME))
+    shutil.copyfile(PAGE_JS, os.path.join(SITE_DIR, JS_FILENAME))
 
     # Fill the page template, escaping plain text
     esc = lambda text: html_escape(str(text), quote=True)
     with open(PAGE_TEMPLATE) as f:
         template = Template(f.read())
-    # substitute, not safe_substitute: an unfilled placeholder fails the run instead of shipping
-    page = template.substitute(
-        title=esc(card_title),
-        metaTags=previewMetaTags(card_title, card_description, page_url, card_image,
-                                 twitter_handle=TWITTER_HANDLE).rstrip('\n'),
-        cssHref=esc(PAGE_TO_ROOT + CSS_FILENAME),
-        current=esc(current_href),
-        year=year,
-        homeUrl=esc(HOME_URL),
-        logoImg=logo_img,
-        siteTitle=esc(SITE_TITLE),
-        currentLabel=esc(current_label),
-        svg=cspSafeSvg(externalLogos(injectHoverText(svg, hover_texts))),
-        manifestSrc=esc(PAGE_TO_ROOT + MANIFEST_FILENAME),
-        jsSrc=esc(PAGE_TO_ROOT + JS_FILENAME),
-    )
+    meta_tags = previewMetaTags(card_title, card_description, page_url, card_image,
+                                twitter_handle=TWITTER_HANDLE).rstrip('\n')
+    svg = injectHoverText(svg, hover_texts)
+
+    def fillPage(root):
+        # The page with every shared-file link prefixed by root, the path from the page to the playchart folder
+        logo_img = ("<img class='navlogo' src='" + esc(root + gtpdd_href) + "' alt='gtpdd'>"
+                    if gtpdd_href else "")
+        # substitute, not safe_substitute: an unfilled placeholder fails the run instead of shipping
+        return template.substitute(
+            title=esc(card_title),
+            metaTags=meta_tags,
+            cssHref=esc(root + CSS_FILENAME),
+            root=esc(root),
+            current=esc(current_href),
+            year=year,
+            homeUrl=esc(HOME_URL),
+            logoImg=logo_img,
+            siteTitle=esc(SITE_TITLE),
+            currentLabel=esc(current_label),
+            svg=cspSafeSvg(externalLogos(svg, root)),
+            manifestSrc=esc(root + MANIFEST_FILENAME),
+            jsSrc=esc(root + JS_FILENAME),
+        )
+
+    # The game's own page, in its season folder
     with open(html_path, 'w') as f:
-        f.write(page)
+        f.write(fillPage(PAGE_TO_ROOT))
     print(f"Wrote {html_path}")
+
+    # The newest game also gets copied to football/playchart.html; older re-runs leave it alone
+    if isLatestGame(manifest, year, current_href):
+        latest_path = os.path.join(PAGE_DIR, PAGE_FILENAME)
+        with open(latest_path, 'w') as f:
+            f.write(fillPage(LATEST_TO_ROOT))
+        print(f"Wrote {latest_path}")
+        # Refresh this page's card on the stats.gtpdd.dog landing page, with its own card image
+        writeIndexCard(df, team, opponent, info, final, techColors['pass'], oppoColors['run'], logoFiles)
+        writeStatsIndex()
 
     print("Done.")
 
@@ -1530,10 +1767,17 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
         description="Generate the Louisiana Tech play chart (PNG + interactive HTML) for a game.")
-    parser.add_argument("--year", type=int, default=2026, help="Season year (default: 2025)")
-    parser.add_argument("--week", type=int, default=1, help="Week number (default: 1)")
+    parser.add_argument("--year", type=int, help="Season year (default: the current one)")
+    parser.add_argument("--week", type=int, help="Week number (default: the most recent finished game)")
     parser.add_argument("--refresh-data", action="store_true",
                         help="Re-fetch play-by-play from CFBD (otherwise read the cached CSV)")
     args = parser.parse_args()
 
-    fbPlaychart(year=args.year, week=args.week, refreshData=args.refresh_data)
+    # Fill in the current season and its latest finished week when they aren't given
+    year = args.year or currentSeason()
+    week = args.week if args.week is not None else latestWeek(year)
+    # A game that hasn't been cached yet has to be pulled from CFBD
+    refresh = args.refresh_data or findPbpCsv(year, week) is None
+    print(f"Charting {year} week {week}{' (pulling from CFBD)' if refresh else ''}...")
+
+    fbPlaychart(year=year, week=week, refreshData=refresh)
