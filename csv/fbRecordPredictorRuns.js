@@ -140,6 +140,120 @@ window.GTPDD_RECORD_RUNS = {
           {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.7, "source": "fpi", "logo": "logo/Arkansas_State.png"},
           {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.429, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
         ]
+      },
+      {
+        "date": "2026-10-22", "label": "Before Game 7", "dateLabel": "October 22, 2026", "record": "4-2",
+        "expectedWins": 7.989, "bowlOdds": 0.98662,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.00079, 0.01259, 0.07665, 0.22731, 0.34719, 0.26035, 0.07511, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 0.83, "source": "fpi", "logo": "logo/Old_Dominion.png"},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 0.565, "source": "fpi", "logo": "logo/South_Alabama.png"},
+          {"date": "Nov 6", "opponent": "Troy", "setting": "Away", "odds": 0.608, "source": "fpi", "logo": "logo/Troy.png"},
+          {"date": "Nov 13", "opponent": "Southern Miss", "setting": "Home", "odds": 0.831, "source": "fpi", "logo": "logo/Southern_Miss.png"},
+          {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.706, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.449, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
+      },
+      {
+        "date": "2026-10-29", "label": "Before Game 8", "dateLabel": "October 29, 2026", "record": "5-2",
+        "expectedWins": 8.364, "bowlOdds": 0.99731,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.0, 0.00269, 0.03379, 0.15668, 0.33829, 0.34073, 0.12781, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Old_Dominion.png", "pf": 26, "pa": 0},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 0.61, "source": "fpi", "logo": "logo/South_Alabama.png"},
+          {"date": "Nov 7", "opponent": "Troy", "setting": "Away", "odds": 0.691, "source": "fpi", "logo": "logo/Troy.png"},
+          {"date": "Nov 13", "opponent": "Southern Miss", "setting": "Home", "odds": 0.834, "source": "fpi", "logo": "logo/Southern_Miss.png"},
+          {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.733, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.496, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
+      },
+      {
+        "date": "2026-11-05", "label": "Before Game 9", "dateLabel": "November 5, 2026", "record": "6-2",
+        "expectedWins": 8.739, "bowlOdds": 1.0,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.00694, 0.07734, 0.28869, 0.42385, 0.20318, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Old_Dominion.png", "pf": 26, "pa": 0},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/South_Alabama.png", "pf": 35, "pa": 20},
+          {"date": "Nov 7", "opponent": "Troy", "setting": "Away", "odds": 0.655, "source": "fpi", "logo": "logo/Troy.png"},
+          {"date": "Nov 14", "opponent": "Southern Miss", "setting": "Home", "odds": 0.838, "source": "fpi", "logo": "logo/Southern_Miss.png"},
+          {"date": "Nov 20", "opponent": "Arkansas State", "setting": "Home", "odds": 0.757, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.489, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
+      },
+      {
+        "date": "2026-11-12", "label": "Before Game 10", "dateLabel": "November 12, 2026", "record": "7-2",
+        "expectedWins": 9.183, "bowlOdds": 1.0,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01073, 0.14182, 0.50117, 0.34628, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Old_Dominion.png", "pf": 26, "pa": 0},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/South_Alabama.png", "pf": 35, "pa": 20},
+          {"date": "Nov 7", "opponent": "Troy", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/Troy.png", "pf": 41, "pa": 17},
+          {"date": "Nov 14", "opponent": "Southern Miss", "setting": "Home", "odds": 0.885, "source": "fpi", "logo": "logo/Southern_Miss.png"},
+          {"date": "Nov 22", "opponent": "Arkansas State", "setting": "Home", "odds": 0.822, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 27", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.476, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
+      },
+      {
+        "date": "2026-11-20", "label": "Before Game 11", "dateLabel": "November 20, 2026", "record": "8-2",
+        "expectedWins": 9.35, "bowlOdds": 1.0,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.07535, 0.4993, 0.42535, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Old_Dominion.png", "pf": 26, "pa": 0},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/South_Alabama.png", "pf": 35, "pa": 20},
+          {"date": "Nov 7", "opponent": "Troy", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/Troy.png", "pf": 41, "pa": 17},
+          {"date": "Nov 14", "opponent": "Southern Miss", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Southern_Miss.png", "pf": 63, "pa": 31},
+          {"date": "Nov 22", "opponent": "Arkansas State", "setting": "Home", "odds": 0.849, "source": "fpi", "logo": "logo/Arkansas_State.png"},
+          {"date": "Nov 28", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.501, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
+      },
+      {
+        "date": "2026-11-25", "label": "Before Game 12", "dateLabel": "November 25, 2026", "record": "9-2",
+        "expectedWins": 9.484, "bowlOdds": 1.0,
+        "odds": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.516, 0.484, 0.0, 0.0],
+        "schedule": [
+          {"date": "Sep 5", "opponent": "Northwestern State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Northwestern_State.png", "pf": 80, "pa": 6},
+          {"date": "Sep 12", "opponent": "LSU", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/LSU.png", "pf": 14, "pa": 45},
+          {"date": "Sep 19", "opponent": "Baylor", "setting": "Away", "odds": 0.0, "source": "final", "logo": "logo/Baylor.png", "pf": 19, "pa": 36},
+          {"date": "Oct 3", "opponent": "Army", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Army.png", "pf": 31, "pa": 29},
+          {"date": "Oct 10", "opponent": "Louisiana", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Louisiana.png", "pf": 32, "pa": 31},
+          {"date": "Oct 18", "opponent": "UL Monroe", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/UL_Monroe.png", "pf": 24, "pa": 0},
+          {"date": "Oct 24", "opponent": "Old Dominion", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Old_Dominion.png", "pf": 26, "pa": 0},
+          {"date": "Oct 31", "opponent": "South Alabama", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/South_Alabama.png", "pf": 35, "pa": 20},
+          {"date": "Nov 7", "opponent": "Troy", "setting": "Away", "odds": 1.0, "source": "final", "logo": "logo/Troy.png", "pf": 41, "pa": 17},
+          {"date": "Nov 14", "opponent": "Southern Miss", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Southern_Miss.png", "pf": 63, "pa": 31},
+          {"date": "Nov 22", "opponent": "Arkansas State", "setting": "Home", "odds": 1.0, "source": "final", "logo": "logo/Arkansas_State.png", "pf": 48, "pa": 3},
+          {"date": "Nov 28", "opponent": "Georgia Southern", "setting": "Away", "odds": 0.484, "source": "fpi", "logo": "logo/Georgia_Southern.png"}
+        ]
       }
     ]
   }
