@@ -345,20 +345,6 @@ main { max-width: 1080px; margin: 0 auto; padding: 44px 16px 40px; }
 .sport.tech .badge { color: var(--tech); }
 .sport.ulm .badge { color: var(--ulm); }
 
-.series {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 16px;
-  padding: 10px 0 0;
-  border-top: 2px solid #fff;
-  font-weight: 800;
-  font-size: 1.05rem;
-}
-.series .dash, .series .ties { opacity: 0.8; }
-.series .ties { font-size: 0.8rem; font-weight: 600; }
-
 /* Events fill the rest of the sign, so signs in a row end at the same place */
 .games {
   flex: 1;
@@ -370,8 +356,6 @@ main { max-width: 1080px; margin: 0 auto; padding: 44px 16px 40px; }
   align-items: stretch;
   border-top: 2px solid #fff;
 }
-/* A header with a series line already has its rule above it */
-.series + .games { border-top: 0; }
 /* Each event reads like a destination: place name large, date and time smaller underneath */
 .game {
   flex: 1 1 0;
