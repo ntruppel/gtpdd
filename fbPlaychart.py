@@ -1380,14 +1380,7 @@ def cardDrives(df, team):
         # A drive that's only a kickoff before the clock ran out has nothing to draw
         if not plays:
             continue
-        # A penalty after the result (say, offsides on the extra point) doesn't change how the drive ended
         last = plays[-1]
-        for r in reversed(plays):
-            if r.type in DRIVE_RESULTS:
-                last = r
-                break
-            if r.type != 'Penalty':
-                break
         label, scored, where = DRIVE_RESULTS.get(last.type, ('', False, 'gain'))
         if where == 'goal':
             end = goal
@@ -1684,6 +1677,7 @@ def fbPlaychart(team='Louisiana Tech', techColorPath='lib/fbPlaychartColorsTech.
     fig.savefig(fig_path, bbox_inches='tight', pad_inches=0, dpi=200,
                 transparent=False, facecolor=BACKGROUND_COLOR)
     preview = writePreviewCard(fig_path, html_dir, html_filename)
+    os.remove(fig_path)
 
     # Also export an HTML version by embedding matplotlib's own SVG of the figure
     import io
