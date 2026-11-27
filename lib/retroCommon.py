@@ -107,6 +107,18 @@ def lerp(a, b, t):
     return tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
 
 
+def setMenuBlue(base):
+    # Rebuilds the navy menu palette around one base blue, e.g. Lady Techster Blue
+    global NAVY, NAVY_LIGHT, HILITE_TOP, HILITE_BOTTOM, HILITE_EDGE, STRIPE_TOP, STRIPE_BOTTOM
+    global MENU_BLUE
+    # Panels fade from the base color down to a darker shade of it
+    NAVY_LIGHT, NAVY = base, lerp(base, BLACK, 0.35)
+    HILITE_TOP, HILITE_BOTTOM, HILITE_EDGE = base, lerp(base, BLACK, 0.3), lerp(base, WHITE, 0.45)
+    STRIPE_TOP, STRIPE_BOTTOM = lerp(base, WHITE, 0.3), lerp(base, BLACK, 0.45)
+    # Text on the silver bars needs a darker shade to stay readable
+    MENU_BLUE = lerp(base, BLACK, 0.45)
+
+
 def gradient(draw, x, y, w, h, top, bottom, band=2):
     # Vertical gradient in 2px bands, like the limited palettes of the era
     for i in range(h):

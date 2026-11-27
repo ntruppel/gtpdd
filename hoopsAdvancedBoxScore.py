@@ -119,12 +119,12 @@ def currentSeason(today=None):
     return today.year if today.month >= 7 else today.year - 1
 
 
-def latestGame(season=None):
+def latestGame(season=None, scheduleUrl=ESPN_SCHEDULE_URL):
     # (ESPN id, season) of Tech's most recent finished game, looking back a season if needed
     season = season or currentSeason()
     for year in (season, season - 1):
         # ESPN names basketball seasons by the year they end
-        schedule = espnJson(ESPN_SCHEDULE_URL.format(ESPN_TEAM, year + 1))
+        schedule = espnJson(scheduleUrl.format(ESPN_TEAM, year + 1))
         done = [e for e in schedule.get('events', [])
                 if e['competitions'][0]['status']['type']['completed']]
         if done:
@@ -160,9 +160,9 @@ def teamColors(team):
     return hexColors(team.get('color'), team.get('alternateColor'))
 
 
-def gameInfo(gameId):
+def gameInfo(gameId, summaryUrl=ESPN_SUMMARY_URL):
     # Both teams' names, logos, scores and box stats, keyed 'tech'/'oppo', plus game details
-    summary = espnJson(ESPN_SUMMARY_URL.format(gameId))
+    summary = espnJson(summaryUrl.format(gameId))
     comp = summary['header']['competitions'][0]
 
     # Box score stats, logo and colors for each side
@@ -306,8 +306,8 @@ def seasonFactors(season):
     return values
 
 
-def loadBenchmarks(season, path=BENCHMARK_PATH):
-    # Mean and decile cut points per factor for a season, built from CollegeBasketballData once
+def loadBenchmarks(season, path=BENCHMARK_PATH, source=None, sourceName='CollegeBasketballData'):
+    # Mean and decile cut points per factor for a season, built once from source (CBBD by default)
     rows = []
     if os.path.isfile(path):
         with open(path, newline='') as f:
@@ -318,8 +318,8 @@ def loadBenchmarks(season, path=BENCHMARK_PATH):
         return bench
 
     # Not cached yet, so pull the whole season and work out each factor's deciles
-    print(f"Building {season}-{str(season + 1)[-2:]} benchmarks from CollegeBasketballData...")
-    values = seasonFactors(season)
+    print(f"Building {season}-{str(season + 1)[-2:]} benchmarks from {sourceName}...")
+    values = (source or seasonFactors)(season)
     fresh = []
     for factor in FACTORS:
         vals = values[factor['key']]
@@ -367,6 +367,8 @@ def drawCourt(draw, rng, top=FIELD_TOP):
 def teamLogo(team, box):
     # Pixel version of a team's ESPN logo, cached under its ESPN location name
     path = os.path.join(LOGO_DIR, f"{team['location']}.png")
+    # Wide logos like a script wordmark can ask for a bigger box via logoScale
+    box = round(box * team.get('logoScale', 1))
     return pixelLogo(path, team['logo'], team['location'], box)
 
 
@@ -383,7 +385,7 @@ def factorRows(factors, bench):
     return rows
 
 
-def buildGraphic(teams, order, neutral, when, status, factors, won, bench):
+def buildGraphic(teams, order, neutral, when, status, factors, won, bench, techName='TECH'):
     # Draws the whole screen at console resolution
     img, draw = newScreen()
 
@@ -405,7 +407,7 @@ def buildGraphic(teams, order, neutral, when, status, factors, won, bench):
     # Dialog box with how many factors Tech won
     count = 'ALL' if won == len(FACTORS) else str(won)
     drawDialog(draw, PANEL_X, DIALOG_Y, PANEL_W, DIALOG_H,
-               ('TECH WON', count, 'OF THE FOUR FACTORS'))
+               (f'{techName} WON', count, 'OF THE FOUR FACTORS'))
     return img
 
 
