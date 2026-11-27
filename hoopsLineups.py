@@ -108,7 +108,7 @@ PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
 
 # The stats.gtpdd.dog index card: the latest game's rotation, screenshotted into an image beside the page
 CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
-CARD_HTML = 'out/hoopsLineupsCard.html'  # the filled template, kept only for the screenshot
+CARD_HTML = 'out/html/hoopsLineupsCard.html'  # the filled template, kept only for the screenshot
 CARD_FILENAME = 'card.jpg'
 CARD_SIZE = (1200, 630)               # the same shape as the link-preview cards
 CARD_SCALE = 2                        # shot at 2x and scaled down, for crisp text

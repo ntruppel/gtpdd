@@ -14,9 +14,9 @@ The composite computer ranking is stood in for by FPI, nudged by simulated resul
 
 Run from the repo root:
 
-    python fbSunBeltPredictor.py                 # this season, PNG + page
+    python fbSunBeltPredictor.py                 # this season's page
     python fbSunBeltPredictor.py --cfp JMU=18    # a Sun Belt team in the CFP rankings
-    python fbSunBeltPredictor.py --no-html       # just the PNG
+    python fbSunBeltPredictor.py --no-html       # just print the odds
 """
 
 ####
@@ -33,7 +33,6 @@ from datetime import datetime
 from pathlib import Path
 from string import Template
 
-import matplotlib.pyplot as plt
 import numpy as np
 import requests
 from html import escape as html_escape
@@ -96,10 +95,8 @@ STARBURST_FILENAME = 'starburst.svg'   # the matchup card's background, from the
 RUNS_FILENAME = 'runs.js'              # every run of every season, as a script
 RUNS_PATH = 'csv/fbSunBeltPredictorRuns.js'  # tracked master copy of the run history, copied to the site
 JS_GLOBAL = 'GTPDD_SUNBELT_RUNS'
-FIG_PATH = 'out/fbSunBeltPredictor.png'
 PREVIEW_FILENAME = 'preview.jpg'
 PREVIEW_SIZE = (1200, 630)             # a summary_large_image card
-PREVIEW_BG = (255, 255, 255)           # behind the chart, when the preview falls back to it
 PREVIEW_SCALE = 2                      # the page is shot at 2x and scaled down, for crisp text
 PREVIEW_SHOT = 'out/fbSunBeltPredictorPreview.png'  # the raw browser screenshot
 # Chrome or Chromium, wherever this machine keeps it
@@ -124,7 +121,7 @@ PAGE_STARBURST = os.path.join(TEMPLATE_DIR, STARBURST_FILENAME)
 
 # The stats.gtpdd.dog index card: the page's championship card, screenshotted into an image beside the page
 CARD_TEMPLATE = os.path.join(TEMPLATE_DIR, 'card.html')
-CARD_HTML = 'out/fbSunBeltPredictorCard.html'  # the filled template, kept only for the screenshot
+CARD_HTML = 'out/html/fbSunBeltPredictorCard.html'  # the filled template, kept only for the screenshot
 CARD_FILENAME = 'card.jpg'
 CARD_SIZE = (1200, 630)                # the same shape as the link-preview cards
 DIVISION_ORDER = ['West', 'East']      # West on the left, as on the page
@@ -704,7 +701,7 @@ def gameSwings(teams, games, fpi, cfpRanks, sim, alive):
 
 
 ####
-# CHART & LABELS
+# LABELS & PREVIEW
 ####
 
 def gameDayText(game):
@@ -722,34 +719,6 @@ def runLabel(games):
     return f"Before Week {week}" if week else f"Before {gameDayText(upcoming[0])}"
 
 
-def drawChart(divisions, teamRows, figPath, datestring):
-    # Draws the posted PNG: one panel of title odds per division, Louisiana Tech in red
-    fig, axes = plt.subplots(1, len(divisions), figsize=(16, 8.4))
-    for ax, div in zip(np.atleast_1d(axes), divisions):
-        rows = sorted((r for r in teamRows if r['division'] == div), key=lambda r: r['odds'])
-        names = [r['name'] for r in rows]
-        odds = [r['odds'] for r in rows]
-        colors = ['#cb333b' if r['id'] == TEAM_ID else '#003087' for r in rows]
-        ax.barh(names, odds, color=colors, height=0.62)
-        # Odds at the end of each bar
-        for y, v in enumerate(odds):
-            ax.text(v + 0.012, y, f"{v:.1%}", va='center', fontsize=15, color='#0b0b0b')
-        # Same scale in both panels so bars compare across divisions
-        ax.set_xlim(0, 1.12)
-        ax.set_title(f"{div} Division", fontsize=24, fontweight='bold', loc='left')
-        ax.tick_params(axis='y', labelsize=16, length=0)
-        ax.set_xticks([])
-        for side in ('top', 'right', 'bottom'):
-            ax.spines[side].set_visible(False)
-    fig.suptitle("Sun Belt Division Title Odds", fontsize=36, fontweight='bold', x=0.02, ha='left')
-    fig.text(0.02, 0.9, f"Using ESPN's FPI | {datestring}", fontsize=18, color='#52514e')
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
-    os.makedirs(os.path.dirname(figPath) or '.', exist_ok=True)
-    fig.savefig(figPath, dpi=100, facecolor='white')
-    plt.close(fig)
-    return figPath
-
-
 def findBrowser():
     # Returns the path to a Chrome or Chromium binary, or None
     for name in BROWSERS:
@@ -763,7 +732,7 @@ def renderPreview(page_path, dest):
     # Screenshots the top of the page (logo through the championship card) as the link-preview image
     browser = findBrowser()
     if browser is None:
-        print("No Chrome or Chromium found; the preview falls back to the chart.")
+        print("No Chrome or Chromium found; the page gets no preview image.")
         return None
     W, H = PREVIEW_SIZE
     os.makedirs(os.path.dirname(PREVIEW_SHOT) or '.', exist_ok=True)
@@ -779,29 +748,12 @@ def renderPreview(page_path, dest):
             subprocess.run(cmd, check=True, timeout=60, capture_output=True)
             img = Image.open(PREVIEW_SHOT).convert('RGB')
         except Exception as e:
-            print(f"Could not screenshot the page ({type(e).__name__}: {e}); the preview falls back to the chart.")
+            print(f"Could not screenshot the page ({type(e).__name__}: {e}); the page gets no preview image.")
             return None
     # Back down to card size from the 2x shot
     img = img.resize(PREVIEW_SIZE, Image.LANCZOS)
     os.makedirs(os.path.dirname(dest) or '.', exist_ok=True)
     img.save(dest, quality=88, optimize=True)
-    return os.path.basename(dest)
-
-
-def writePreviewCard(png_path, dest):
-    # Fallback link-preview card: the whole chart centered on a white card
-    try:
-        img = Image.open(png_path).convert('RGB')
-    except Exception as e:
-        print(f"Could not read {png_path} ({type(e).__name__}: {e}); the page gets no preview image.")
-        return None
-    W, H = PREVIEW_SIZE
-    scale = min(W / img.width, H / img.height)
-    img = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
-    card = Image.new('RGB', PREVIEW_SIZE, PREVIEW_BG)
-    card.paste(img, ((W - img.width) // 2, (H - img.height) // 2))
-    os.makedirs(os.path.dirname(dest) or '.', exist_ok=True)
-    card.save(dest, quality=88, optimize=True)
     return os.path.basename(dest)
 
 
@@ -955,7 +907,7 @@ def matchupHtml(run):
     sides = []
     for t in (teams[i] for i in ids):
         logo = t.get('logoLarge') or t.get('logo')
-        # Logos load straight from the asset folder, since the card is rendered from out/
+        # Logos load straight from the asset folder, since the card is rendered from out/html/
         img = (f"<img src='{Path(ASSET_DIR, logo).resolve().as_uri()}' alt=''>"
                if logo and os.path.isfile(os.path.join(ASSET_DIR, logo)) else '')
         lines = [f"<div class='odds'>{esc(pctText(t['odds']))} to win the {esc(t['division'])}</div>"]
@@ -986,7 +938,7 @@ def writeIndexCard(run):
     return CARD_FILENAME
 
 
-def writeSite(season, run, figPath):
+def writeSite(season, run):
     # Writes the page into html/stats/football/ and its files into html/stats/football/sunBeltPredictor/
     os.makedirs(ASSET_DIR, exist_ok=True)
     shutil.copyfile(PAGE_CSS, os.path.join(ASSET_DIR, CSS_FILENAME))
@@ -1045,11 +997,10 @@ def writeSite(season, run, figPath):
         f.write(page)
     print(f"Wrote {html_path}")
 
-    # The link-preview image is a shot of the page just written, or the chart if no browser can take one
+    # The link-preview image is a shot of the page just written; skipped if no browser can take one
     preview_path = os.path.join(ASSET_DIR, PREVIEW_FILENAME)
-    if renderPreview(html_path, preview_path) is None:
-        writePreviewCard(figPath, preview_path)
-    print(f"Wrote {preview_path}")
+    if renderPreview(html_path, preview_path) is not None:
+        print(f"Wrote {preview_path}")
 
     # Refresh this page's card on the stats.gtpdd.dog landing page, with its own card image
     writeIndexCard(run)
@@ -1106,14 +1057,10 @@ def fbSunBeltPredictor(year=None, html=True, sims=SIMS, cfp=None, seed=None):
             espn = '' if t['espnOdds'] is None else f"   ESPN {t['espnOdds']:.1%}"
             print(f"  {t['name']:<22} {t['record']:>5}  {t['odds']:6.1%}  host {t['hostOdds']:6.1%}{espn}")
 
-    # Posted PNG
-    drawChart(run['divisions'], run['teams'], FIG_PATH, f"{now:%B} {now.day}, {now.year}")
-    print(f"Wrote {FIG_PATH}")
-
     # File this run and rebuild the page
     if html:
         saveRun(season, run)
-        writeSite(season, run, FIG_PATH)
+        writeSite(season, run)
     return run
 
 
@@ -1132,7 +1079,7 @@ if __name__ == "__main__":
         return abbr, int(rank)
 
     parser = argparse.ArgumentParser(
-        description="Odds on who wins each Sun Belt division, as a PNG and a page "
+        description="Odds on who wins each Sun Belt division, as a page "
                     "that keeps every run of the season.")
     parser.add_argument("--year", type=int,
                         help="Season to run (default: the current season)")
@@ -1142,7 +1089,7 @@ if __name__ == "__main__":
                         help="A Sun Belt team in the latest CFP rankings, as ABBR=RANK; repeatable")
     parser.add_argument("--seed", type=int, help="Random seed, for repeatable runs")
     parser.add_argument("--no-html", action="store_true",
-                        help="Only draw the PNG; leave the page and runs.js alone")
+                        help="Only print the odds; leave the page and runs.js alone")
     args = parser.parse_args()
 
     fbSunBeltPredictor(year=args.year, html=not args.no_html, sims=args.sims,

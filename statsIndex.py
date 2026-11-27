@@ -66,7 +66,7 @@ PAGE_JS = os.path.join(TEMPLATE_DIR, JS_FILENAME)
 
 # The link-preview image for sharing the index: the board with every card in one row, screenshotted
 PREVIEW_TEMPLATE = os.path.join(TEMPLATE_DIR, 'preview.html')
-PREVIEW_HTML = 'out/statsIndexPreview.html'  # the filled template, kept only for the screenshot
+PREVIEW_HTML = 'out/html/statsIndexPreview.html'  # the filled template, kept only for the screenshot
 PREVIEW_FILENAME = 'preview.jpg'
 PREVIEW_SIZE = (1200, 630)             # a summary_large_image card
 PREVIEW_SCALE = 2                      # shot at 2x and scaled down, for crisp text
@@ -237,7 +237,7 @@ def filterHtml(sections, selected):
 ####
 
 def fileUri(href):
-    # A link relative to html/stats/ (query string and all) as a file:// URL, for rendering from out/
+    # A link relative to html/stats/ (query string and all) as a file:// URL, for rendering from out/html/
     return pathlib.Path(HTML_DIR, href.split('?')[0]).resolve().as_uri()
 
 
